@@ -7,6 +7,8 @@ Suite Teardown    Terminate All Processes    kill=True
 Check resin-cli version
   CLI version is 4.0.3
 Create Application
-  Create application hello with device type raspberrypi2
+  Create application hello with device type nuc
+Push Application
+  Push git@github.com:resin-io-projects/alpine-barebone.git to application hello
 Delete Application
   Delete application hello
