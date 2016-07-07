@@ -6,7 +6,6 @@ Suite Teardown    Terminate All Processes    kill=True
 *** Test Cases ***
 Preparing test environment
   Set Suite Variable    ${application_name}    %{application_name}
-  Set Suite Variable    ${deployment}    %{deployment}
   Set Suite Variable    ${device_type}    %{device_type}
   Set Suite Variable    ${RESINRC_RESIN_URL}    %{RESINRC_RESIN_URL}
   Set Suite Variable    ${image}    %{image}
