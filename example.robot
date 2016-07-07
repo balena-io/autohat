@@ -4,11 +4,13 @@ Resource  resources/resincli.robot
 Suite Teardown    Terminate All Processes    kill=True
 
 *** Test Cases ***
-Check resin-cli version
-  CLI version is 4.0.3
+Prepare test environment
+  Set Suite Variable    ${application_name}    qemux8664Autohat
+Cleanup existing application
+  Force delete application ${application_name}
 Create Application
-  Create application hello with device type nuc
+  Create application ${application_name} with device type qemux86-64
 Push Application
-  Push git@github.com:resin-io-projects/alpine-barebone.git to application hello
+  Push https://github.com/resin-io-projects/alpine-barebone.git to application ${application_name}
 Delete Application
-  Delete application hello
+  Delete application ${application_name}

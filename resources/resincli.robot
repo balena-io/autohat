@@ -20,6 +20,9 @@ Delete application ${application_name}
     ${result} =  Run Process    resin app rm ${application_name} --yes    shell=yes
     Process ${result}
 
+Force delete application ${application_name}
+    Run Keyword And Ignore Error    Delete application ${application_name}
+
 Push ${git_url} to application ${application_name}
     Remove Directory    tmp    recursive=True
     Create Directory    tmp
