@@ -11,6 +11,15 @@ CLI version is ${version}
     Process ${result}
     Should Match    ${result.stdout}    ${version}
 
+Add new SSH key with name ${key_name}
+    ${result} =  Run Process    ssh-keygen -b 521 -t ecdsa -f /root/.ssh/id_ecdsa -N '' -y   shell=yes
+    Process ${result}
+    ${result} =  Run Process    resin keys |grep ${key_name} |cut -d ' ' -f 1   shell=yes
+    Log   all output: ${result.stdout}
+    Run Keyword If    '${result.stdout}' != 'NULL'    Run Process    resin key rm ${result.stdout} -y   shell=yes
+    ${result} =  Run Process    resin key add ${key_name} /root/.ssh/id_ecdsa.pub   shell=yes
+    Process ${result}
+
 Create application ${application_name} with device type ${device}
     ${result} =  Run Process    resin app create ${application_name} --type\=${device}   shell=yes
     Process ${result}
@@ -31,7 +40,7 @@ Push ${git_url} to application ${application_name}
     ${result} =  Run Process    resin whoami |sed '/USERNAME/!d' |sed 's/^.*USERNAME: //'   shell=yes   cwd=./tmp
     Process ${result}
     Set Environment Variable    RESINUSER    ${result.stdout}
-    ${result} =  Run Process    git remote add resin $RESINUSER@git.resin.io:$RESINUSER/${application_name}.git    shell=yes    cwd=./tmp/${application_name}
+    ${result} =  Run Process    git remote add resin $RESINUSER@git.${deployment}.io:$RESINUSER/${application_name}.git    shell=yes    cwd=./tmp/${application_name}
     Process ${result}
     ${result} =  Run Process    git push resin master    shell=yes    cwd=./tmp/${application_name}
     Process ${result}
