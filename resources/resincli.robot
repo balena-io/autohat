@@ -45,7 +45,7 @@ Push ${git_url} to application ${application_name}
     ${result} =  Run Process    resin whoami |sed '/USERNAME/!d' |sed 's/^.*USERNAME: //'   shell=yes   cwd=./tmp
     Process ${result}
     Set Environment Variable    RESINUSER    ${result.stdout}
-    ${result} =  Run Process    git remote add resin $RESINUSER@git.${deployment}.io:$RESINUSER/${application_name}.git    shell=yes    cwd=./tmp/${application_name}
+    ${result} =  Run Process    git remote add resin $RESINUSER@git.${RESINRC_RESIN_URL}:$RESINUSER/${application_name}.git    shell=yes    cwd=./tmp/${application_name}
     Process ${result}
     ${result} =  Run Process    git push resin master    shell=yes    cwd=./tmp/${application_name}
     Process ${result}
