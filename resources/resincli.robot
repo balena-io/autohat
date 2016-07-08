@@ -51,6 +51,14 @@ Push ${git_url} to application ${application_name}
     ${result} =  Run Process    git push resin master    shell=yes    cwd=./tmp/${application_name}
     Process ${result}
 
+Configure ${image} with ${application_name}
+    File Should Exist     ${image}  msg="Provided images file does not exist"
+    ${result} =  Run Process    resin device register ${application_name} | cut -d ' ' -f 4    shell=yes
+    Process ${result}
+    Set Suite Variable    ${device_uuid}    ${result.stdout}
+    ${result} =  Run Process    resin os configure ${image} ${device_uuid}    shell=yes
+    Process ${result}
+
 Process ${result}
     Log   all output: ${result.stdout}
     Log   all output: ${result.stderr}
