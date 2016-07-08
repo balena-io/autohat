@@ -64,6 +64,11 @@ Device ${device_uuid} is online
     Process ${result}
     Should Contain    ${result.stdout}    true
 
+Device ${device_uuid} log should contain ${value}
+    ${result} =  Run Process    resin logs ${device_uuid}    shell=yes
+    Process ${result}
+    Should Contain    ${result.stdout}    ${value}
+
 Process ${result}
     Log   all output: ${result.stdout}
     Log   all output: ${result.stderr}
