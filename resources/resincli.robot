@@ -14,6 +14,9 @@ CLI version is ${version}
 Resin login with email ${email} and password ${password}
     ${result} =  Run Process    resin login --credentials --email ${email} --password ${password}    shell=yes
     Process ${result}
+    ${result} =  Run Process    resin whoami |sed '/USERNAME/!d' |sed 's/^.*USERNAME: //'   shell=yes   cwd=./tmp
+    Process ${result}
+    Set Suite Variable    ${RESINUSER}    ${result.stdout}
 
 Add new SSH key with name ${key_name}
     Remove File    /root/.ssh/id_ecdsa
@@ -42,9 +45,7 @@ Push ${git_url} to application ${application_name}
     Create Directory    tmp
     ${result} =  Run Process    git clone ${git_url} ${application_name}   shell=yes    cwd=./tmp
     Process ${result}
-    ${result} =  Run Process    resin whoami |sed '/USERNAME/!d' |sed 's/^.*USERNAME: //'   shell=yes   cwd=./tmp
-    Process ${result}
-    Set Environment Variable    RESINUSER    ${result.stdout}
+    Set Environment Variable    RESINUSER    ${RESINUSER}
     ${result} =  Run Process    git remote add resin $RESINUSER@git.${RESINRC_RESIN_URL}:$RESINUSER/${application_name}.git    shell=yes    cwd=./tmp/${application_name}
     Process ${result}
     ${result} =  Run Process    git push resin master    shell=yes    cwd=./tmp/${application_name}
