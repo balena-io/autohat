@@ -24,5 +24,5 @@ The resources directory contains Robot Keyword helpers for ``resincli`` and hard
 
 * Execute the following to run a example test again the qemux86-64 image you just downloaded.
 
-    ``docker run -it --rm -v <path_to_repo>:/resin --privileged --env-file ./env.list autohat robot /resin/example.robot``
+    ``docker run -it --rm -v <path_to_repo>:/resin --privileged --env-file ./env.list autohat robot --exitonerror /resin/example.robot``
     
