@@ -53,12 +53,16 @@ Push ${git_url} to application ${application_name}
 
 Configure ${image} with ${application_name}
     File Should Exist     ${image}  msg="Provided images file does not exist"
-    ${result} =  Run Process    resin device register ${application_name} | cut -d ' ' -f 4    shell=yes
+    ${result_register} =  Run Process    resin device register ${application_name} | cut -d ' ' -f 4    shell=yes
+    Process ${result_register}
+    ${result} =  Run Process    resin os configure ${image} ${result_register.stdout}    shell=yes
     Process ${result}
-    Set Suite Variable    ${device_uuid}    ${result.stdout}
-    ${result} =  Run Process    resin os configure ${image} ${device_uuid}    shell=yes
+    Return From Keyword    ${result_register.stdout}
+
+Device ${device_uuid} is online
+    ${result} =  Run Process    resin device ${device_uuid} | grep ONLINE    shell=yes
     Process ${result}
-    Return From Keyword    ${device_uuid}
+    Should Contain    ${result.stdout}    true
 
 Process ${result}
     Log   all output: ${result.stdout}
