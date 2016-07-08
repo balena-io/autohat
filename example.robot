@@ -1,6 +1,7 @@
 *** Settings ***
-Documentation   Sample Resin device test cases
+Documentation   Sample Resin device test cases, requires KVM.
 Resource  resources/resincli.robot
+Resource  resources/qemux86-64.robot
 Suite Teardown    Terminate All Processes    kill=True
 
 *** Test Cases ***
@@ -22,5 +23,12 @@ Creating application
   Create application ${application_name} with device type ${device_type}
 Configuring image with application
   Configure ${image} with ${application_name}
+Running image
+  Run Keyword if  '${PREV_TEST_STATUS}'=='FAIL'  Fatal Error  msg="Skipping since configuring image failed."
+  ${handle} =    Run ${image} with 512 MB memory and 4 cpus
+  Set Suite Variable    ${device_handle}    ${handle}
 Pushing application
+  Run Keyword if  '${PREV_TEST_STATUS}'=='FAIL'  Fatal Error  msg="Skipping since running image failed."
   Push ${application_repo} to application ${application_name}
+Wait till Qemu is killed or 5 minutes
+  Wait For Process    handle=${device_handle}    timeout=600s    on_timeout=terminate

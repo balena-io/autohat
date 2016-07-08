@@ -58,6 +58,7 @@ Configure ${image} with ${application_name}
     Set Suite Variable    ${device_uuid}    ${result.stdout}
     ${result} =  Run Process    resin os configure ${image} ${device_uuid}    shell=yes
     Process ${result}
+    Return From Keyword    ${device_uuid}
 
 Process ${result}
     Log   all output: ${result.stdout}
