@@ -14,7 +14,7 @@ CLI version is ${version}
 Resin login with email ${email} and password ${password}
     ${result} =  Run Process    resin login --credentials --email ${email} --password ${password}    shell=yes
     Process ${result}
-    ${result} =  Run Process    resin whoami |sed '/USERNAME/!d' |sed 's/^.*USERNAME: //'   shell=yes   cwd=./tmp
+    ${result} =  Run Process    resin whoami |sed '/USERNAME/!d' |sed 's/^.*USERNAME: //'   shell=yes
     Process ${result}
     Set Suite Variable    ${RESINUSER}    ${result.stdout}
 
