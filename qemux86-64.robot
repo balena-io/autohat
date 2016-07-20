@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation   Sample Resin device test for qemux86-64 device, requires KVM - Please run with "--exitonerror"
+Documentation   Resin device test for qemux86-64 device, requires KVM - Please run with "--exitonerror"
 Resource  resources/resincli.robot
 Resource  resources/qemux86-64.robot
 Suite Teardown    Terminate All Processes    kill=True

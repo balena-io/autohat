@@ -24,5 +24,5 @@ The resources directory contains Robot Keyword helpers for ``resincli`` and hard
 
 * Execute the following to run a example test against the qemux86-64 image you just downloaded.
 
-    ``docker run -it --rm -v <path_to_repo>:/autohat --privileged --env-file ./env.list autohat robot --exitonerror /autohat/example.robot``
+    ``docker run -it --rm -v <path_to_repo>:/autohat --privileged --env-file ./env.list autohat robot --exitonerror /autohat/qemux86-64.robot``
     
