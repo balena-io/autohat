@@ -5,7 +5,7 @@ RUN apk update && apk add nodejs util-linux multipath-tools git openssh-client q
 	rm -rf /var/cache/apk/* && \
 	pip install --upgrade pip && \
 	pip install robotframework && \
-	npm install --global resin-cli
+	npm install --global resin-cli@^4.2.0
 
 ADD fixtures/ssh_config /root/.ssh/config
 
