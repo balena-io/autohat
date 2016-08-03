@@ -69,6 +69,17 @@ Device ${device_uuid} log should contain ${value}
     Process ${result}
     Should Contain    ${result.stdout}    ${value}
 
+Adding ENV variable ${variable_name} with value ${variable_value} to application ${application_name} 
+    ${result} =  Run Process    resin   env     add     ${variable_name}    ${variable_value}    -a  ${application_name}
+    Process ${result}
+
+Checking if ENV variable is present in application ${application_name} 
+    ${result_vars} =  Run Process    resin envs -a ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'   shell=yes
+    Process ${result_vars}
+    ${result} =  Run Process    echo "${result_vars.stdout}" | grep ${variable_name} | cut -d ' ' -f 3    shell=yes
+    Process ${result}
+    Should Match   ${result.stdout}   ${variable_value}
+    
 Process ${result}
     Log   all output: ${result.stdout}
     Log   all output: ${result.stderr}

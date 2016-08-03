@@ -12,6 +12,8 @@ Preparing test environment
   Set Suite Variable    ${image}    %{image}
   File Should Exist     ${image}  msg="Provided images file does not exist"
   Set Suite Variable    ${application_repo}    https://github.com/resin-io-projects/alpine-barebone.git
+  Set Suite Variable    ${variable_name}    name
+  Set Suite Variable    ${variable_value}   value
   Resin login with email %{email} and password %{password}
 Adding new SSH key
   Add new SSH key with name ${application_name}
@@ -31,5 +33,7 @@ Git pushing to application
   Push ${application_repo} to application ${application_name}
 Check if device is running the pushed application (Tries for 300 s)
   Wait Until Keyword Succeeds    30x    10s    Device ${device_uuid} log should contain Hello
+Check if test environment variable is set 
+  Application ${application_name} should contain variable ${variable_name} with value ${variable_value}
 #Wait till Qemu is killed or 10 minutes
 #  Wait For Process    handle=${device_qemu_handle}    timeout=600s    on_timeout=terminate
