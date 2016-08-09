@@ -31,5 +31,10 @@ Git pushing to application
   Push ${application_repo} to application ${application_name}
 Check if device is running the pushed application (Tries for 300 s)
   Wait Until Keyword Succeeds    30x    10s    Device ${device_uuid} log should contain Hello
+Check if test environment variable is present
+  Add ENV variable Hello with value World to application ${application_name}
+  Check if ENV variable Hello exists in application ${application_name}
+  Check if value of ENV variable is World in application ${application_name}
+  Remove ENV variable Hello from application ${application_name}
 #Wait till Qemu is killed or 10 minutes
 #  Wait For Process    handle=${device_qemu_handle}    timeout=600s    on_timeout=terminate
