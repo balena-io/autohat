@@ -8,6 +8,7 @@ Suite Teardown    Terminate All Processes    kill=True
 Preparing test environment
   Set Suite Variable    ${application_name}    %{application_name}
   Set Suite Variable    ${device_type}    %{device_type}
+  Set Suite Variable    ${os_version}   %{os_version}
   Set Suite Variable    ${RESINRC_RESIN_URL}    %{RESINRC_RESIN_URL}
   Set Suite Variable    ${image}    %{image}
   File Should Exist     ${image}  msg="Provided images file does not exist"
@@ -36,5 +37,7 @@ Check if test environment variable is present
   Check if ENV variable Hello exists in application ${application_name}
   Check if value of ENV variable is World in application ${application_name}
   Remove ENV variable Hello from application ${application_name}
+Verify if host OS version of the image is same through resin cli
+  Check if host OS version of device ${device_uuid} is ${os_version}
 #Wait till Qemu is killed or 10 minutes
 #  Wait For Process    handle=${device_qemu_handle}    timeout=600s    on_timeout=terminate
