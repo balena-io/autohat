@@ -69,6 +69,11 @@ Device ${device_uuid} log should contain ${value}
     Process ${result}
     Should Contain    ${result.stdout}    ${value}
 
+Check if host OS version of device ${device_uuid} is ${os_version}
+    ${result} =  Run Process    resin device ${device_uuid} | grep OS | rev | cut -d ' ' -f 1 | rev     shell=yes
+    Process ${result}
+    Should Contain    ${result.stdout}    ${os_version}
+
 Add ENV variable ${variable_name} with value ${variable_value} to application ${application_name} 
     ${result} =  Run Process    resin   env     add     ${variable_name}    ${variable_value}    -a  ${application_name}
     Process ${result}
