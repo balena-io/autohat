@@ -2,6 +2,7 @@
 Documentation   Resin device test for qemux86-64 device, requires KVM - Please run with "--exitonerror"
 Resource  resources/resincli.robot
 Resource  resources/qemux86-64.robot
+Resource  resources/resinos.robot
 Suite Teardown    Terminate All Processes    kill=True
 
 *** Test Cases ***
@@ -15,12 +16,23 @@ Preparing test environment
   Set Suite Variable    ${application_repo}    https://github.com/resin-io/autohat-ondevice.git
   Set Suite Variable    ${application_commit}  33149d7c87c493aa141a57608ad6697a979bb6be
   Resin login with email %{email} and password %{password}
+  Set Suite Variable    ${mount_destination}    /mnt
+  Set Suite Variable    ${host_os_partition}    2
+  Set Suite Variable    ${path_to_fingerprint}  ${mount_destination}/resin-root.fingerprint
 Adding new SSH key
   Add new SSH key with name ${application_name}
 Deleting application if it already exists
   Force delete application ${application_name}
 Creating application
   Create application ${application_name} with device type ${device_type}
+Check host OS fingerprint file
+  Set up loop device for "${image}"
+  Find the last loop device that was assigned
+  Set Suite Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
+  Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
+  Verify resin-root.fingerprint in "${path_to_fingerprint}"
+  Unmount "${mount_destination}"
+  Detach loop device "${path_to_loop}"
 Configuring image with application
   ${device_uuid} =    Configure ${image} with ${application_name}
   Set Suite Variable    ${device_uuid}    ${device_uuid}
