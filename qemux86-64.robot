@@ -12,7 +12,8 @@ Preparing test environment
   Set Suite Variable    ${RESINRC_RESIN_URL}    %{RESINRC_RESIN_URL}
   Set Suite Variable    ${image}    %{image}
   File Should Exist     ${image}  msg="Provided images file does not exist"
-  Set Suite Variable    ${application_repo}    https://github.com/resin-io-projects/alpine-barebone.git
+  Set Suite Variable    ${application_repo}    https://github.com/resin-io/autohat-ondevice.git
+  Set Suite Variable    ${application_commit}  33149d7c87c493aa141a57608ad6697a979bb6be
   Resin login with email %{email} and password %{password}
 Adding new SSH key
   Add new SSH key with name ${application_name}
@@ -29,7 +30,7 @@ Running image
 Checking if device comes online in 60s (Trying every 10s)
   Wait Until Keyword Succeeds    6x    10s    Device ${device_uuid} is online
 Git pushing to application
-  Push ${application_repo} to application ${application_name}
+  Push ${application_repo}:${application_commit} to application ${application_name}
 Check if device is running the pushed application (Tries for 300 s)
   Wait Until Keyword Succeeds    30x    10s    Device ${device_uuid} log should contain Hello
 Check if test environment variable is present

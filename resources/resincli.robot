@@ -40,7 +40,7 @@ Delete application ${application_name}
 Force delete application ${application_name}
     Run Keyword And Ignore Error    Delete application ${application_name}
 
-Push ${git_url} to application ${application_name}
+Push ${git_url}:${commit_hash} to application ${application_name}
     Remove Directory    tmp    recursive=True
     Create Directory    tmp
     ${result} =  Run Process    git clone ${git_url} ${application_name}   shell=yes    cwd=./tmp
@@ -48,7 +48,7 @@ Push ${git_url} to application ${application_name}
     Set Environment Variable    RESINUSER    ${RESINUSER}
     ${result} =  Run Process    git remote add resin $RESINUSER@git.${RESINRC_RESIN_URL}:$RESINUSER/${application_name}.git    shell=yes    cwd=./tmp/${application_name}
     Process ${result}
-    ${result} =  Run Process    git push resin master    shell=yes    cwd=./tmp/${application_name}
+    ${result} =  Run Process    git push resin ${commit_hash}:refs/heads/master    shell=yes    cwd=./tmp/${application_name}
     Process ${result}
 
 Configure ${image} with ${application_name}
