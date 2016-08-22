@@ -2,25 +2,45 @@
 Documentation   Resin device test for qemux86-64 device, requires KVM - Please run with "--exitonerror"
 Resource  resources/resincli.robot
 Resource  resources/qemux86-64.robot
+Resource  resources/resinos.robot
 Suite Teardown    Terminate All Processes    kill=True
 
 *** Test Cases ***
 Preparing test environment
   Set Suite Variable    ${application_name}    %{application_name}
   Set Suite Variable    ${device_type}    %{device_type}
-  Set Suite Variable    ${os_version}   %{os_version}
   Set Suite Variable    ${RESINRC_RESIN_URL}    %{RESINRC_RESIN_URL}
   Set Suite Variable    ${image}    %{image}
   File Should Exist     ${image}  msg="Provided images file does not exist"
   Set Suite Variable    ${application_repo}    https://github.com/resin-io/autohat-ondevice.git
   Set Suite Variable    ${application_commit}  33149d7c87c493aa141a57608ad6697a979bb6be
   Resin login with email %{email} and password %{password}
+  Set Suite Variable    ${mount_destination}    /mnt
+  Set Suite Variable    ${host_os_partition}    2
+  Set Suite Variable    ${path_to_fingerprint}  ${mount_destination}/resin-root.fingerprint
+  Set Suite Variable    ${path_to_os_version}   ${mount_destination}/etc/os-release
 Adding new SSH key
   Add new SSH key with name ${application_name}
 Deleting application if it already exists
   Force delete application ${application_name}
 Creating application
   Create application ${application_name} with device type ${device_type}
+Check host OS fingerprint file
+  Set up loop device for "${image}"
+  Find the last loop device that was assigned
+  Set Suite Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
+  Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
+  Verify resin-root.fingerprint in "${path_to_fingerprint}"
+  Unmount "${mount_destination}"
+  Detach "${path_to_loop}" loop device
+Get host OS version of the image
+  Set up loop device for "${image}"
+  Find the last loop device that was assigned
+  Set Suite Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
+  Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
+  Get the host OS version of the image
+  Unmount "${mount_destination}"
+  Detach "${path_to_loop}" loop device
 Configuring image with application
   ${device_uuid} =    Configure ${image} with ${application_name}
   Set Suite Variable    ${device_uuid}    ${device_uuid}
