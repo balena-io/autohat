@@ -50,7 +50,7 @@ Running image
 Checking if device comes online in 60s (Trying every 10s)
   Wait Until Keyword Succeeds    6x    10s    Device ${device_uuid} is online
 Git pushing to application
-  Push ${application_repo} to application ${application_name}
+  Push ${application_repo}:${application_commit} to application ${application_name}
 Check if device is running the pushed application (Tries for 300 s)
   Wait Until Keyword Succeeds    30x    10s    Device ${device_uuid} log should contain Hello
 Check if test environment variable is present
