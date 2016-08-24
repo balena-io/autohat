@@ -20,6 +20,7 @@ Preparing test environment
   Set Suite Variable    ${host_os_partition}    2
   Set Suite Variable    ${path_to_fingerprint}  ${mount_destination}/resin-root.fingerprint
   Set Suite Variable    ${path_to_os_version}   ${mount_destination}/etc/os-release
+  Set Suite Variable    @{backup_list}  /etc/shadow-     /etc/passwd-     /etc/group-   /etc/gshadow-
 Adding new SSH key
   Add new SSH key with name ${application_name}
 Deleting application if it already exists
@@ -49,6 +50,13 @@ Running image
   Set Suite Variable    ${device_qemu_handle}    ${handle}
 Checking if device comes online in 60s (Trying every 10s)
   Wait Until Keyword Succeeds    6x    10s    Device ${device_uuid} is online
+Check backup files 
+  ${LOOPDEVICE} =   Set up loop device for "${image}"
+  Set Suite Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
+  Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
+  Verify backup files 
+  Unmount "${mount_destination}"
+  Detach loop device "${path_to_loop}"
 Git pushing to application
   Push ${application_repo}:${application_commit} to application ${application_name}
 Check if device is running the pushed application (Tries for 300 s)
