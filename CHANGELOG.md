@@ -1,6 +1,7 @@
 Change log
 -----------
 
+* 	Add test case that verifies backup files [Horia]
 *   Add testcase for checking that loading a random kernel module works in a container [Tomás]
 * 	Add test case that gets the host OS version of the image [Horia]
 *	Add new test for checking if md5sum of the host OS changed compared to fingerprint file [Horia]
