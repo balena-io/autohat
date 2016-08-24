@@ -36,6 +36,10 @@ Get the host OS version of the image
     Process ${result}
     [Return]    ${result.stdout}
 
+Verify backup files
+    : FOR   ${backup_line}     IN  @{backup_list}
+    \   File Should Not Exist  ${mount_destination}${backup_line}  msg="Backup file ${backup_line} found on the rootfs." 
+    
 Unmount "${path}"
     ${result} =  Run Process    umount ${path}     shell=yes
     Process ${result}
