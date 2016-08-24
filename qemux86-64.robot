@@ -49,6 +49,14 @@ Running image
   Set Suite Variable    ${device_qemu_handle}    ${handle}
 Checking if device comes online in 60s (Trying every 10s)
   Wait Until Keyword Succeeds    6x    10s    Device ${device_uuid} is online
+Check that backup files are not found in the image 
+  ${LOOPDEVICE} =   Set up loop device for "${image}"
+  Set Suite Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
+  Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
+  Set Suite Variable    @{files_list}  /etc/shadow-     /etc/passwd-     /etc/group-   /etc/gshadow-
+  File list @{files_list} does not exist in ${mount_destination} 
+  Unmount "${mount_destination}"
+  Detach loop device "${path_to_loop}"
 Git pushing to application
   Push ${application_repo}:${application_commit} to application ${application_name}
 Check if device is running the pushed application (Tries for 300 s)
