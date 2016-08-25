@@ -9,7 +9,6 @@ Suite Teardown    Terminate All Processes    kill=True
 Preparing test environment
   Set Suite Variable    ${application_name}    %{application_name}
   Set Suite Variable    ${device_type}    %{device_type}
-  Set Suite Variable    ${os_version}   %{os_version}
   Set Suite Variable    ${RESINRC_RESIN_URL}    %{RESINRC_RESIN_URL}
   Set Suite Variable    ${image}    %{image}
   File Should Exist     ${image}  msg="Provided images file does not exist"
@@ -19,6 +18,7 @@ Preparing test environment
   Set Suite Variable    ${mount_destination}    /mnt
   Set Suite Variable    ${host_os_partition}    2
   Set Suite Variable    ${path_to_fingerprint}  ${mount_destination}/resin-root.fingerprint
+  Set Suite Variable    ${path_to_os_version}   ${mount_destination}/etc/os-release
 Adding new SSH key
   Add new SSH key with name ${application_name}
 Deleting application if it already exists
@@ -26,11 +26,18 @@ Deleting application if it already exists
 Creating application
   Create application ${application_name} with device type ${device_type}
 Check host OS fingerprint file
-  Set up loop device for "${image}"
-  Find the last loop device that was assigned
+  ${LOOPDEVICE} =   Set up loop device for "${image}"
   Set Suite Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
   Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
   Verify resin-root.fingerprint in "${path_to_fingerprint}"
+  Unmount "${mount_destination}"
+  Detach loop device "${path_to_loop}"
+Get host OS version of the image
+  ${LOOPDEVICE} =   Set up loop device for "${image}"
+  Set Suite Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
+  Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
+  ${return_os_version} =    Get the host OS version of the image
+  Set Suite Variable    ${os_version}   ${return_os_version}
   Unmount "${mount_destination}"
   Detach loop device "${path_to_loop}"
 Configuring image with application
