@@ -18,7 +18,7 @@ Resin login with email ${email} and password ${password}
     Process ${result}
     Set Suite Variable    ${RESINUSER}    ${result.stdout}
 
-Add new SSH key with name ${key_name}
+Add new SSH key with name "${key_name}"
     Remove File    /root/.ssh/id_ecdsa
     ${result} =  Run Process    ssh-keygen -b 521 -t ecdsa -f /root/.ssh/id_ecdsa -N ''    shell=yes
     Process ${result}
@@ -28,7 +28,7 @@ Add new SSH key with name ${key_name}
     ${result} =  Run Process    resin key add ${key_name} /root/.ssh/id_ecdsa.pub   shell=yes
     Process ${result}
 
-Create application ${application_name} with device type ${device}
+Create application "${application_name}" with device type "${device}"
     ${result} =  Run Process    resin app create ${application_name} --type\=${device}   shell=yes
     Process ${result}
     Should Match    ${result.stdout}    *Application created*
@@ -37,10 +37,10 @@ Delete application ${application_name}
     ${result} =  Run Process    resin app rm ${application_name} --yes    shell=yes
     Process ${result}
 
-Force delete application ${application_name}
+Force delete application "${application_name}"
     Run Keyword And Ignore Error    Delete application ${application_name}
 
-Push ${git_url}:${commit_hash} to application ${application_name}
+Push "${git_url}":"${commit_hash}" to application "${application_name}"
     Remove Directory    tmp    recursive=True
     Create Directory    tmp
     ${result} =  Run Process    git clone ${git_url} ${application_name}   shell=yes    cwd=./tmp
@@ -51,7 +51,7 @@ Push ${git_url}:${commit_hash} to application ${application_name}
     ${result} =  Run Process    git push resin ${commit_hash}:refs/heads/master    shell=yes    cwd=./tmp/${application_name}
     Process ${result}
 
-Configure ${image} with ${application_name}
+Configure "${image}" with "${application_name}"
     File Should Exist     ${image}  msg="Provided images file does not exist"
     ${result_register} =  Run Process    resin device register ${application_name} | cut -d ' ' -f 4    shell=yes
     Process ${result_register}
@@ -64,35 +64,35 @@ Device ${device_uuid} is online
     Process ${result}
     Should Contain    ${result.stdout}    true
 
-Device ${device_uuid} log should contain ${value}
+Device "${device_uuid}" log should contain "${value}"
     ${result} =  Run Process    resin logs ${device_uuid}    shell=yes
     Process ${result}
     Should Contain    ${result.stdout}    ${value}
 
-Check if host OS version of device ${device_uuid} is ${os_version}
+Check if host OS version of device "${device_uuid}" is "${os_version}"
     ${result} =  Run Process    resin device ${device_uuid} | grep OS | rev | cut -d ' ' -f 1 | rev     shell=yes
     Process ${result}
     Should Contain    ${result.stdout}    ${os_version}
 
-Add ENV variable ${variable_name} with value ${variable_value} to application ${application_name}
+Add ENV variable "${variable_name}" with value "${variable_value}" to application "${application_name}"
     ${result} =  Run Process    resin   env     add     ${variable_name}    ${variable_value}    -a  ${application_name}
     Process ${result}
 
-Check if ENV variable ${variable_name} exists in application ${application_name}
+Check if ENV variable "${variable_name}" exists in application "${application_name}"
     ${result_vars} =  Run Process    resin envs -a ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'   shell=yes
     Process ${result_vars}
     ${result_name} =  Run Process    echo "${result_vars.stdout}" | grep ${variable_name} | cut -d ' ' -f 2    shell=yes
     Process ${result_name}
     Should Contain    ${result_name.stdout}    ${variable_name}
 
-Check if value of ENV variable is ${variable_value} in application ${application_name}
+Check if value of ENV variable is "${variable_value}" in application "${application_name}"
     ${result_vars} =  Run Process    resin envs -a ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'   shell=yes
     Process ${result_vars}
     ${result_value} =  Run Process    echo "${result_vars.stdout}" | grep ${variable_value} | cut -d ' ' -f 3    shell=yes
     Process ${result_value}
     Should Contain    ${result_value.stdout}    ${variable_value}
 
-Remove ENV variable ${variable_name} from application ${application_name}
+Remove ENV variable "${variable_name}" from application "${application_name}"
     ${result_vars} =  Run Process    resin envs -a ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'   shell=yes
     Process ${result_vars}
     ${result_id} =  Run Process    echo "${result_vars.stdout}" | grep ${variable_name} | cut -d ' ' -f 1    shell=yes
@@ -100,7 +100,7 @@ Remove ENV variable ${variable_name} from application ${application_name}
     ${result} =  Run Process    resin env rm ${result_id.stdout} --yes     shell=yes
     Process ${result}
 
-Get public address of device ${device_uuid}
+Get public address of device "${device_uuid}"
   Run Process    resin device public-url enable ${device_uuid}    shell=yes
   ${result} =  Run Process    resin device public-url ${device_uuid}    shell=yes
   Process ${result}
