@@ -3,6 +3,7 @@ Documentation   Resin device test for qemux86-64 device, requires KVM - Please r
 Resource  resources/resincli.robot
 Resource  resources/qemux86-64.robot
 Resource  resources/resinos.robot
+Resource  resources/kernel.robot
 Suite Teardown    Terminate All Processes    kill=True
 
 *** Test Cases ***
@@ -13,7 +14,7 @@ Preparing test environment
   Set Suite Variable    ${image}    %{image}
   File Should Exist     ${image}  msg="Provided images file does not exist"
   Set Suite Variable    ${application_repo}    https://github.com/resin-io/autohat-ondevice.git
-  Set Suite Variable    ${application_commit}  33149d7c87c493aa141a57608ad6697a979bb6be
+  Set Suite Variable    ${application_commit}  dc610a169f4776b1e479d0aa6c5b3da4fdd113b6
   Resin login with email %{email} and password %{password}
   Set Suite Variable    ${mount_destination}    /mnt
   Set Suite Variable    ${host_os_partition}    2
@@ -52,6 +53,10 @@ Git pushing to application
   Push ${application_repo}:${application_commit} to application ${application_name}
 Check if device is running the pushed application (Tries for 300 s)
   Wait Until Keyword Succeeds    30x    10s    Device ${device_uuid} log should contain Hello
+Check if kernel module is loaded (Trying every 5s)
+  ${address} =    Get public address of device ${device_uuid}
+  Wait Until Keyword Succeeds    6x    5s    Load media kernel module to device through ${address}
+  Wait Until Keyword Succeeds    6x    5s    Check if media kernel module is loaded through ${address}
 Check if test environment variable is present
   Add ENV variable Hello with value World to application ${application_name}
   Check if ENV variable Hello exists in application ${application_name}

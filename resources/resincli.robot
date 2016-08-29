@@ -74,7 +74,7 @@ Check if host OS version of device ${device_uuid} is ${os_version}
     Process ${result}
     Should Contain    ${result.stdout}    ${os_version}
 
-Add ENV variable ${variable_name} with value ${variable_value} to application ${application_name} 
+Add ENV variable ${variable_name} with value ${variable_value} to application ${application_name}
     ${result} =  Run Process    resin   env     add     ${variable_name}    ${variable_value}    -a  ${application_name}
     Process ${result}
 
@@ -99,6 +99,12 @@ Remove ENV variable ${variable_name} from application ${application_name}
     Process ${result_id}
     ${result} =  Run Process    resin env rm ${result_id.stdout} --yes     shell=yes
     Process ${result}
+
+Get public address of device ${device_uuid}
+  Run Process    resin device public-url enable ${device_uuid}    shell=yes
+  ${result} =  Run Process    resin device public-url ${device_uuid}    shell=yes
+  Process ${result}
+  Return From Keyword    ${result.stdout}
 
 Process ${result}
     Log   all output: ${result.stdout}
