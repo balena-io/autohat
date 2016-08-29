@@ -36,7 +36,7 @@ Get the host OS version of the image
     Process ${result}
     [Return]    ${result.stdout}
 
-File list @{files_list} does not exist in ${mount_destination}
+File list "@{files_list}" does not exist in "${mount_destination}"
     : FOR   ${files_line}     IN  @{files_list}
     \   File Should Not Exist  ${mount_destination}${files_line}  msg="Backup file ${files_line} found on the rootfs that should not exist." 
     

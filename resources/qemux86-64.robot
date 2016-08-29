@@ -6,7 +6,7 @@ Library   OperatingSystem
 *** Variables ***
 
 *** Keywords ***
-Run ${image} with ${memory} MB memory and ${cpus} cpus
+Run "${image}" with "${memory}" MB memory and "${cpus}" cpus
     Set Test Variable    \${memory}    ${memory}
     Set Test Variable    \${cpus}    ${cpus}
     ${result} =  Run Process    egrep -c '(vmx|svm)' /proc/cpuinfo    shell=yes
