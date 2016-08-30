@@ -37,7 +37,7 @@ Get host OS version of the image
   ${LOOPDEVICE} =   Set up loop device for "${image}"
   Set Test Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
   Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
-  ${return_os_version} =    Get the host OS version of the image
+  ${return_os_version} =    Obtain host OS version of the "${image}"
   Set Suite Variable    ${os_version}   ${return_os_version}
   Unmount "${mount_destination}"
   Detach loop device "${path_to_loop}"
