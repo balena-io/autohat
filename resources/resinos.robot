@@ -31,7 +31,7 @@ Verify resin-root.fingerprint in "${path}"
     \   ${md5sum} =  Run Process    md5sum ${mount_destination}/${Second} | awk '{print $1}'     shell=yes
     \   Should Contain     ${First}   ${md5sum.stdout}    msg=${mount_destination}${Second} has MD5=${md5sum.stdout} when it should be ${First})
 
-Get the host OS version of the image
+Obtain host OS version of the "${image}"
     ${result} =  Run Process    cat ${path_to_os_version} | grep VERSION | head -1 | cut -d '"' -f 2    shell=yes
     Process ${result}
     [Return]    ${result.stdout}
