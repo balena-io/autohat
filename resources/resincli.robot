@@ -55,7 +55,7 @@ Configure "${image}" with "${application_name}"
     File Should Exist     ${image}  msg="Provided images file does not exist"
     ${result_register} =  Run Process    resin device register ${application_name} | cut -d ' ' -f 4    shell=yes
     Process ${result_register}
-    ${result} =  Run Process    resin os configure ${image} ${result_register.stdout}    shell=yes
+    ${result} =  Run Process    echo -ne '\n' | resin os configure ${image} ${result_register.stdout}    shell=yes
     Process ${result}
     Return From Keyword    ${result_register.stdout}
 
