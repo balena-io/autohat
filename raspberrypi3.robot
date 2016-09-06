@@ -47,7 +47,7 @@ Configuring image with application
   ${device_uuid} =    Configure "${image}" with "${application_name}"
   Set Suite Variable    ${device_uuid}    ${device_uuid}
 Running image
-  ${result} =  Run Process    etcher --drive ${rig_sd_card} --yes ${image}  shell=yes
+  ${result} =  Run Process    etcher --drive $(realpath ${rig_sd_card}) --yes ${image}  shell=yes
   Process ${result}
   Enable DUT
 Checking if device comes online in 60s (Trying every 10s)
