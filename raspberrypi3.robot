@@ -4,7 +4,7 @@ Resource  resources/resincli.robot
 Resource  resources/resinos.robot
 Resource  resources/kernel.robot
 Library   libraries/RigControl.py    device_id=%{rig_device_id}
-Suite Teardown    Terminate All Processes    kill=True
+Suite Teardown    Disable DUT
 
 *** Test Cases ***
 Preparing test environment
