@@ -1,6 +1,8 @@
 Change log
 -----------
 
+* 	Switch to using the nuc-node as the base for the Dockerfile [Praneeth]
+* 	Add support for Autohat Rig and add example RaspberryPi3 test file [Praneeth]
 * 	Upgrade Resin CLI used to 4.5.0 [Praneeth]
 * 	Add test case that verifies backup files [Horia]
 * 	Add testcase for checking that loading a random kernel module works in a container [Tomás]

@@ -1,11 +1,14 @@
-FROM resin/amd64-alpine:3.4
+FROM resin/nuc-node:5.7
 
-# Install Python, PIP, RobotFramework, Nodejs and Resin-cli
-RUN apk update && apk add nodejs util-linux multipath-tools git openssh-client qemu-system-i386 qemu-system-x86_64 bash udev py-pip && \
-	rm -rf /var/cache/apk/* && \
-	pip install --upgrade pip && \
-	pip install robotframework requests robotframework-requests && \
-	npm install --global resin-cli@^4.5.0
+# Install PIP, Robot Framework, Resin-cli and Etcher-cli
+RUN apt-get update && apt-get install -y qemu-system-x86 qemu-kvm libftdi-dev python-pip && \
+    rm -rf /var/lib/apt/lists/* && \
+    pip install --upgrade pip && \
+	pip install robotframework requests robotframework-requests pylibftdi && \
+	npm install --global resin-cli@^4.5.0 && \
+    git clone --depth 1  --branch v1.0.0-beta.13 https://github.com/resin-io/etcher.git && cd /etcher && \
+    npm install && npm prune --production && \
+    ln -sf /etcher/bin/etcher /usr/local/bin/etcher
 
 ADD fixtures/ssh_config /root/.ssh/config
 

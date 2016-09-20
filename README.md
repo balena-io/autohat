@@ -7,22 +7,44 @@ The resources directory contains Robot Keyword helpers for ``resincli`` and hard
 
 ### Instructions for running the example:
 
+#### Running with QEMU device type
+
 * Clone this repo and change your directory to it.
+
 * Build the autohat container by running the following command:
 
   ``docker build -t autohat .``
-  
+
 * Build a resin-qemux86-64 image from [https://github.com/resin-os/resin-qemu/](https://github.com/resin-os/resin-qemu/)
 
 * Alternatively you can also download a uninitialized qemux86-64 image from resin by executing:
 
   ``resin os download qemux86-64 -o resin.img``
-  
+
 * Create a `env.list` with all the environment variables needed to run the tests - Please check `env.list.example` for a sample environment file.
-  
+
 * Load the KVM module
 
 * Execute the following to run a example test against the qemux86-64 image you just downloaded.
 
     ``docker run -it --rm -v <path_to_repo>:/autohat -v /dev/:/dev2 --privileged --env-file ./env.list autohat robot --exitonerror /autohat/qemux86-64.robot``
-    
+
+#### Running with Autohat test rig on connected hardware (Example - Raspberry Pi 3)
+
+* Clone this repo and change your directory to it.
+
+* Build the autohat container by running the following command:
+
+  ``docker build -t autohat .``
+
+* Build the device specific resin image or download a uninitialized image from resin by executing:
+
+  ``resin os download raspberrypi3 -o resin.img``
+
+* Create a `env.list` with all the environment variables needed to run the tests - Please check `env.list.example` for a sample environment file.
+
+	* Please make sure that the ``rig_device_id``, ``rig_sd_card`` match your rig's FTDI serial, the SD card path respectively
+
+* Execute the following to run a example test against the raspberrypi3 image you just downloaded.
+
+    ``docker run -it --rm -v <path_to_repo>:/autohat -v /dev/:/dev2 --privileged --env-file ./env.list autohat robot --exitonerror /autohat/raspberrypi3.robot``
