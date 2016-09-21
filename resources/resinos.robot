@@ -40,6 +40,30 @@ File list "@{files_list}" does not exist in "${mount_destination}"
     : FOR   ${files_line}     IN  @{files_list}
     \   File Should Not Exist  ${mount_destination}${files_line}  msg="Backup file ${files_line} found on the rootfs that should not exist." 
     
+Enable getty service on "${image}" for "${device_type}"
+    ${result} =  Run Process    git clone ${serial-it_repo}    shell=yes    cwd=/tmp-enable_getty_service
+    Process ${result}
+    ${result} =  Run Process    ./serial-it.sh --root-mountpoint ${mount_destination} -b ${device_type}     shell=yes   cwd=/tmp-enable_getty_service/serial-it
+    Process ${result}
+
+Check if service "${service}" is running using socket "${socket}"
+    ${result} =  Run Process    echo "send root\nsend systemctl status ${service}" > minicom_script.sh    shell=yes    cwd=/tmp-enable_getty_service
+    Process ${result}
+    Run Process    minicom -D unix\#console.sock -S /tmp-enable_getty_service/minicom_script.sh -C /tmp-enable_getty_service/minicom_output.txt    shell=yes   cwd=/tmp    timeout=1s
+    File Should Not Be Empty    /tmp-enable_getty_service/minicom_output.txt
+    ${result} =  Run Process    cat /tmp-enable_getty_service/minicom_output.txt | grep Active | cut -d ' ' -f 5    shell=yes
+    Should Contain    ${result.stdout}    active
+    Process ${result}
+
+#Run minicom "${script}" and output to "${output}"
+#    Run Process    minicom -D unix\#console.sock -S ${script} -C ${output}    shell=yes   cwd=/tmp    timeout=1s
+#    File Should Not Be Empty    ${output}
+
+#Check if service is active from "${output}"
+#    ${result} =  Run Process    cat ${output} | grep Active | cut -d ' ' -f 5    shell=yes
+#    Should Contain    ${result.stdout}    active
+#    Process ${result}
+
 Unmount "${path}"
     ${result} =  Run Process    umount ${path}     shell=yes
     Process ${result}

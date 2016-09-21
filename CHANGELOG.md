@@ -1,6 +1,7 @@
 Change log
 -----------
 
+* 	Add test case to verify if resin-info service is active [Horia]
 * 	Switch to using the nuc-node as the base for the Dockerfile [Praneeth]
 * 	Add support for Autohat Rig and add example RaspberryPi3 test file [Praneeth]
 * 	Upgrade Resin CLI used to 4.5.0 [Praneeth]
