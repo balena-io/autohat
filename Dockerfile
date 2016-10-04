@@ -6,7 +6,6 @@ RUN apt-get update && apt-get install -y qemu-system-x86 qemu-kvm minicom libftd
     pip install --upgrade pip && \
     pip install robotframework requests robotframework-requests pylibftdi && \
     npm install --global resin-cli@^5.0.0 && \
-    mkdir tmp-enable_getty_service && \
     git clone --depth 1  --branch v1.0.0-beta.13 https://github.com/resin-io/etcher.git && cd /etcher && \
     npm install && npm prune --production && \
     ln -sf /etcher/bin/etcher /usr/local/bin/etcher
