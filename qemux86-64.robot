@@ -15,6 +15,7 @@ Preparing test environment
   File Should Exist     ${image}  msg="Provided images file does not exist"
   Set Suite Variable    ${application_repo}    https://github.com/resin-io/autohat-ondevice.git
   Set Suite Variable    ${application_commit}  dc610a169f4776b1e479d0aa6c5b3da4fdd113b6
+  Set Suite Variable    ${serial-it_repo}      https://github.com/resin-os/serial-it.git
   Resin login with email %{email} and password %{password}
   Set Suite Variable    ${mount_destination}    /mnt
   Set Suite Variable    ${host_os_partition}    2
@@ -31,16 +32,23 @@ Check host OS fingerprint file
   Set Test Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
   Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
   Verify resin-root.fingerprint in "${path_to_fingerprint}"
-  Unmount "${mount_destination}"
-  Detach loop device "${path_to_loop}"
+  [Teardown]    Run Keywords    Unmount "${mount_destination}"
+  ...           AND             Detach loop device "${path_to_loop}"
 Get host OS version of the image
   ${LOOPDEVICE} =   Set up loop device for "${image}"
   Set Test Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
   Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
   ${return_os_version} =    Get the host OS version of the image
   Set Suite Variable    ${os_version}   ${return_os_version}
-  Unmount "${mount_destination}"
-  Detach loop device "${path_to_loop}"
+  [Teardown]    Run Keywords    Unmount "${mount_destination}"
+  ...           AND             Detach loop device "${path_to_loop}"
+Enable getty service on the image 
+  ${LOOPDEVICE} =   Set up loop device for "${image}"
+  Set Test Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
+  Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
+  Enable getty service on "${image}" for "${device_type}"
+  [Teardown]    Run Keywords    Unmount "${mount_destination}"
+  ...           AND             Detach loop device "${path_to_loop}"
 Configuring image with application
   ${device_uuid} =    Configure "${image}" with "${application_name}"
   Set Suite Variable    ${device_uuid}    ${device_uuid}
@@ -49,14 +57,16 @@ Running image
   Set Suite Variable    ${device_qemu_handle}    ${handle}
 Checking if device comes online in 60s (Trying every 10s)
   Wait Until Keyword Succeeds    6x    10s    Device ${device_uuid} is online
+Verify if resin-info@tty1.service is active
+  Check if service "resin-info@tty1.service" is running using socket "/tmp/console.sock"
 Check that backup files are not found in the image 
   ${LOOPDEVICE} =   Set up loop device for "${image}"
   Set Test Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
   Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
   Set Test Variable    @{files_list}  /etc/shadow-     /etc/passwd-     /etc/group-   /etc/gshadow-
   File list "@{files_list}" does not exist in "${mount_destination}" 
-  Unmount "${mount_destination}"
-  Detach loop device "${path_to_loop}"
+  [Teardown]    Run Keywords    Unmount "${mount_destination}"
+  ...           AND             Detach loop device "${path_to_loop}"
 Git pushing to application
   Push "${application_repo}":"${application_commit}" to application "${application_name}"
 Check if device is running the pushed application (Tries for 300 s)

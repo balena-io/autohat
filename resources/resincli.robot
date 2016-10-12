@@ -109,4 +109,4 @@ Get public address of device "${device_uuid}"
 Process ${result}
     Log   all output: ${result.stdout}
     Log   all output: ${result.stderr}
-    Should Be Equal As Integers    ${result.rc}    0    msg="Command exited with error"    values=False
+    Should Be Equal As Integers    ${result.rc}    0    msg="Command exited with error: ${result.stderr}"    values=False

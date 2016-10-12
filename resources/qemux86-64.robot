@@ -14,9 +14,9 @@ Run "${image}" with "${memory}" MB memory and "${cpus}" cpus
     Run Keyword And Return If    '${result.stdout}' != '0'    Run image with KVM enabled
 
 Run image with KVM enabled
-    ${handle} =  Start Process    qemu-system-x86_64 -drive file\=${image},media\=disk,cache\=none,format\=raw -net nic,model\=virtio -net user -m ${memory} -nographic -machine type\=pc,accel\=kvm -smp ${cpus}    shell=yes
+    ${handle} =  Start Process    qemu-system-x86_64 -drive file\=${image},media\=disk,cache\=none,format\=raw -net nic,model\=virtio -net user -m ${memory} -nographic -machine type\=pc,accel\=kvm -smp ${cpus} -chardev socket,id\=serial0,path\=/tmp/console.sock,server,nowait -serial chardev:serial0    shell=yes
     Return From Keyword    ${handle}
 
 Run image with KVM disabled
-    ${handle} =  Start Process    qemu-system-x86_64 -drive file\=${image},media\=disk,cache\=none,format\=raw -net nic,model\=virtio -net user -m ${memory} -nographic -machine type\=pc -smp ${cpus}    shell=yes
+    ${handle} =  Start Process    qemu-system-x86_64 -drive file\=${image},media\=disk,cache\=none,format\=raw -net nic,model\=virtio -net user -m ${memory} -nographic -machine type\=pc -smp ${cpus} -chardev socket,id\=serial0,path\=/tmp/console.sock,server,nowait -serial chardev:serial0    shell=yes
     Return From Keyword    ${handle}
