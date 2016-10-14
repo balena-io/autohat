@@ -1,6 +1,7 @@
 Change log
 -----------
 
+* 	Ensure that resin sync works [Horia]
 * 	Add test case to verify if resin-info service is active [Horia]
 * 	Switch to using the nuc-node as the base for the Dockerfile [Praneeth]
 * 	Add support for Autohat Rig and add example RaspberryPi3 test file [Praneeth]

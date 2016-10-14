@@ -101,10 +101,16 @@ Remove ENV variable "${variable_name}" from application "${application_name}"
     Process ${result}
 
 Get public address of device "${device_uuid}"
-  Run Process    resin device public-url enable ${device_uuid}    shell=yes
-  ${result} =  Run Process    resin device public-url ${device_uuid}    shell=yes
-  Process ${result}
-  Return From Keyword    ${result.stdout}
+    Run Process    resin device public-url enable ${device_uuid}    shell=yes
+    ${result} =  Run Process    resin device public-url ${device_uuid}    shell=yes
+    Process ${result}
+    Return From Keyword    ${result.stdout}
+  
+Syncronize "${device_uuid}" to return "${message}" 
+    ${result} =  Run Process    sed -i '3i echo \"${message}\"' start.sh     shell=yes     cwd=./tmp/${application_name}
+    Process ${result}
+    ${result} =  Run Process    resin sync ${device_uuid} -s . -d /usr/src/app    shell=yes    cwd=./tmp/${application_name}
+    Process ${result}
 
 Process ${result}
     Log   all output: ${result.stdout}
