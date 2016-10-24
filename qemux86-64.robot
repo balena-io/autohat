@@ -14,7 +14,7 @@ Preparing test environment
   Set Suite Variable    ${image}    %{image}
   File Should Exist     ${image}  msg="Provided images file does not exist"
   Set Suite Variable    ${application_repo}    https://github.com/resin-io/autohat-ondevice.git
-  Set Suite Variable    ${application_commit}  dc610a169f4776b1e479d0aa6c5b3da4fdd113b6
+  Set Suite Variable    ${application_commit}  232e26aad374b2afd19c5608663545c2430e2b15 
   Set Suite Variable    ${serial-it_repo}      https://github.com/resin-os/serial-it.git
   Resin login with email %{email} and password %{password}
   Set Suite Variable    ${mount_destination}    /mnt
@@ -75,6 +75,9 @@ Check if kernel module is loaded (Trying every 5s)
   ${address} =    Get public address of device "${device_uuid}"
   Wait Until Keyword Succeeds    6x    5s    Load "media" kernel module to device through "${address}"
   Wait Until Keyword Succeeds    6x    5s    Check if "media" kernel module is loaded through "${address}"
+Ensure resin sync works
+  Syncronize "${device_uuid}" to return "Hello Resin Sync!"
+  Device "${device_uuid}" log should contain "Hello Resin Sync!"
 Check if test environment variable is present
   Add ENV variable "Hello" with value "World" to application "${application_name}"
   Check if ENV variable "Hello" exists in application "${application_name}"
