@@ -20,9 +20,15 @@ Mount "${path}" on "${mount_destination}"
     ${result} =  Run Process    mount ${path} ${mount_destination}      shell=yes
     Process ${result}
 
-Verify resin-root.fingerprint in "${path}"
-    File Should Exist   ${path}     msg=Couldn't find resin-root.fingerprint file in ${mount_destination}
-    ${content} =  Get File  ${path}
+Check host OS fingerprint file in "${image}"
+    ${LOOPDEVICE} =   Set up loop device for "${image}"
+    ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
+    Set Test Variable    ${mount_destination}    /tmp/${random}
+    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resin-root.fingerprint
+    Create Directory    ${mount_destination}
+    Mount "/dev2/loop${LOOPDEVICE}p2" on "${mount_destination}"
+    File Should Exist   ${fingerprint_file}     msg=Couldn't find resin-root.fingerprint file in ${mount_destination}
+    ${content} =  Get File  ${fingerprint_file}
     @{lines} =  Split To Lines  ${content}
     : FOR   ${line}     IN  @{lines}
     \   @{words} =  Split String    ${line}     ${SPACE}
@@ -30,6 +36,9 @@ Verify resin-root.fingerprint in "${path}"
     \   ${Second} =  Get From List  ${words}    2
     \   ${md5sum} =  Run Process    md5sum ${mount_destination}/${Second} | awk '{print $1}'     shell=yes
     \   Should Contain     ${First}   ${md5sum.stdout}    msg=${mount_destination}${Second} has MD5=${md5sum.stdout} when it should be ${First}
+    [Teardown]    Run Keywords    Unmount "${mount_destination}"
+    ...           AND             Remove Directory    ${mount_destination}    recursive=True
+    ...           AND             Detach loop device "/dev2/loop${LOOPDEVICE}"
 
 Get the host OS version of the image
     ${result} =  Run Process    cat ${path_to_os_version} | grep VERSION | head -1 | cut -d '"' -f 2    shell=yes
