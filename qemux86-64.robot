@@ -48,9 +48,8 @@ Check if device is running the pushed application (Tries for 300 s)
   Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Hello"
 Check if kernel module loading works
   Check if kernel module loading works on "${device_uuid}"
-Ensure resin sync works
-  Syncronize "${device_uuid}" to return "Hello Resin Sync!"
-  Device "${device_uuid}" log should contain "Hello Resin Sync!"
+Check if resin sync works
+  Check if resin sync works on "${device_uuid}"
 Check if test environment variable is present
   Add ENV variable "Hello" with value "World" to application "${application_name}"
   Check if ENV variable "Hello" exists in application "${application_name}"

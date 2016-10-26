@@ -112,6 +112,10 @@ Syncronize "${device_uuid}" to return "${message}"
     ${result} =  Run Process    resin sync ${device_uuid} -s . -d /usr/src/app    shell=yes    cwd=./tmp/${application_name}
     Process ${result}
 
+Check if resin sync works on "${device_uuid}"
+    Syncronize "${device_uuid}" to return "Hello Resin Sync!"
+    Device "${device_uuid}" log should contain "Hello Resin Sync!"
+
 Process ${result}
     Log   all output: ${result.stdout}
     Log   all output: ${result.stderr}
