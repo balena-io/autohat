@@ -41,13 +41,13 @@ Checking if device comes online in 60s (Trying every 10s)
 Verify if resin-info@tty1.service is active
   Check if service "resin-info@tty1.service" is running using socket "unix\#/tmp/console.sock"
 Check that backup files are not found in the image
-  Check that backup files are not found in the ${image}
+  Check that backup files are not found in the "${image}"
 Git pushing to application
   Push "${application_repo}":"${application_commit}" to application "${application_name}"
 Check if device is running the pushed application (Tries for 300 s)
   Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Hello"
 Check if kernel module loading works properly
-  Check if kernel module loading works properly on ${device_uuid}
+  Check if kernel module loading works properly on "${device_uuid}"
 Ensure resin sync works
   Syncronize "${device_uuid}" to return "Hello Resin Sync!"
   Device "${device_uuid}" log should contain "Hello Resin Sync!"

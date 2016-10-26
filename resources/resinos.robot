@@ -83,7 +83,7 @@ Check if service "${service}" is running using socket "${socket}"
     Should Contain    ${result.stdout}    active
     Process ${result}
 
-Check that backup files are not found in the ${image}
+Check that backup files are not found in the "${image}"
     ${LOOPDEVICE} =   Set up loop device for "${image}"
     ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
@@ -95,7 +95,7 @@ Check that backup files are not found in the ${image}
     ...           AND             Remove Directory    ${mount_destination}    recursive=True
     ...           AND             Detach loop device "/dev2/loop${LOOPDEVICE}"
 
-Check if kernel module loading works properly on ${device_uuid}
+Check if kernel module loading works properly on "${device_uuid}"
     ${address} =    Get public address of device "${device_uuid}"
     Wait Until Keyword Succeeds    6x    5s    Load "media" kernel module to device through "${address}"
     Wait Until Keyword Succeeds    6x    5s    Check if "media" kernel module is loaded through "${address}"
