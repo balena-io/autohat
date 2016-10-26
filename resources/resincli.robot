@@ -116,6 +116,13 @@ Check if resin sync works on "${device_uuid}"
     Syncronize "${device_uuid}" to return "Hello Resin Sync!"
     Device "${device_uuid}" log should contain "Hello Resin Sync!"
 
+Check if setting environment variables works on "${application_name}"
+    ${random} =   Evaluate    random.randint(0, 10000)    modules=random
+    Add ENV variable "autohat${random}" with value "RandomValue" to application "${application_name}"
+    Check if ENV variable "autohat${random}" exists in application "${application_name}"
+    Check if value of ENV variable is "RandomValue" in application "${application_name}"
+    Remove ENV variable "autohat${random}" from application "${application_name}"
+
 Process ${result}
     Log   all output: ${result.stdout}
     Log   all output: ${result.stderr}

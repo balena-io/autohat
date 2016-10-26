@@ -49,10 +49,7 @@ Check if kernel module loading works
   Check if kernel module loading works on "${device_uuid}"
 Check if resin sync works
   Check if resin sync works on "${device_uuid}"
-Check if test environment variable is present
-  Add ENV variable "Hello" with value "World" to application "${application_name}"
-  Check if ENV variable "Hello" exists in application "${application_name}"
-  Check if value of ENV variable is "World" in application "${application_name}"
-  Remove ENV variable "Hello" from application "${application_name}"
+Check if setting environment variable works
+  Check if setting environment variables works on "${application_name}"
 Verify if host OS version of the image is same through resin cli
   Check if host OS version of device "${device_uuid}" is "${os_version}"
