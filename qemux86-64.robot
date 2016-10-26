@@ -19,7 +19,6 @@ Preparing test environment
   Resin login with email %{email} and password %{password}
   Set Suite Variable    ${mount_destination}    /mnt
   Set Suite Variable    ${host_os_partition}    2
-  Set Suite Variable    ${path_to_os_version}   ${mount_destination}/etc/os-release
 Adding new SSH key
   Add new SSH key with name "${application_name}"
 Deleting application if it already exists
@@ -29,13 +28,8 @@ Creating application
 Check host OS fingerprint file
   Check host OS fingerprint file in "${image}"
 Get host OS version of the image
-  ${LOOPDEVICE} =   Set up loop device for "${image}"
-  Set Test Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
-  Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
-  ${return_os_version} =    Get the host OS version of the image
+  ${return_os_version} =    Get host OS version of "${image}"
   Set Suite Variable    ${os_version}   ${return_os_version}
-  [Teardown]    Run Keywords    Unmount "${mount_destination}"
-  ...           AND             Detach loop device "${path_to_loop}"
 Enable getty service on the image
   ${LOOPDEVICE} =   Set up loop device for "${image}"
   Set Test Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}

@@ -40,16 +40,25 @@ Check host OS fingerprint file in "${image}"
     ...           AND             Remove Directory    ${mount_destination}    recursive=True
     ...           AND             Detach loop device "/dev2/loop${LOOPDEVICE}"
 
-Get the host OS version of the image
+Get host OS version of "${image}"
+    ${LOOPDEVICE} =   Set up loop device for "${image}"
+    ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
+    Set Test Variable    ${mount_destination}    /tmp/${random}
+    Set Test Variable    ${path_to_os_version}   ${mount_destination}/etc/os-release
+    Create Directory    ${mount_destination}
+    Mount "/dev2/loop${LOOPDEVICE}p2" on "${mount_destination}"
     ${result} =  Run Process    cat ${path_to_os_version} | grep VERSION | head -1 | cut -d '"' -f 2    shell=yes
     Process ${result}
     Should Not Be Empty     ${result.stdout}    msg="Could not get OS version from ${path_to_os_version}"
     [Return]    ${result.stdout}
+    [Teardown]    Run Keywords    Unmount "${mount_destination}"
+    ...           AND             Remove Directory    ${mount_destination}    recursive=True
+    ...           AND             Detach loop device "/dev2/loop${LOOPDEVICE}"
 
 File list "@{files_list}" does not exist in "${mount_destination}"
     : FOR   ${files_line}     IN  @{files_list}
     \   File Should Not Exist  ${mount_destination}${files_line}  msg="Backup file ${files_line} found on the rootfs that should not exist."
-    
+
 Enable getty service on "${image}" for "${device_type}"
     ${result} =  Run Process    git clone ${serial-it_repo} /tmp/enable_getty_service    shell=yes
     Process ${result}

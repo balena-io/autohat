@@ -18,7 +18,6 @@ Preparing test environment
   Resin login with email %{email} and password %{password}
   Set Suite Variable    ${mount_destination}    /mnt
   Set Suite Variable    ${host_os_partition}    2
-  Set Suite Variable    ${path_to_os_version}   ${mount_destination}/etc/os-release
   Set Suite Variable    ${rig_sd_card}    %{rig_sd_card}
   Disable DUT
 Adding new SSH key
@@ -30,13 +29,8 @@ Creating application
 Check host OS fingerprint file
   Check host OS fingerprint file in "${image}"
 Get host OS version of the image
-  ${LOOPDEVICE} =   Set up loop device for "${image}"
-  Set Test Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
-  Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
-  ${return_os_version} =    Get the host OS version of the image
+  ${return_os_version} =    Get host OS version of "${image}"
   Set Suite Variable    ${os_version}   ${return_os_version}
-  Unmount "${mount_destination}"
-  Detach loop device "${path_to_loop}"
 Configuring image with application
   ${device_uuid} =    Configure "${image}" with "${application_name}"
   Set Suite Variable    ${device_uuid}    ${device_uuid}
