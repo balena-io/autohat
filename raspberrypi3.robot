@@ -15,7 +15,7 @@ Preparing test environment
   File Should Exist     ${image}  msg="Provided images file does not exist"
   Set Suite Variable    ${application_repo}    https://github.com/resin-io/autohat-ondevice.git
   Set Suite Variable    ${application_commit}  e1f709a7bd1d4018acd1d6a69bef0a0b82f55085
-  Resin login with email %{email} and password %{password}
+  Resin login with email "%{email}" and password "%{password}"
   Set Suite Variable    ${rig_sd_card}    %{rig_sd_card}
   Disable DUT
 Adding new SSH key
@@ -37,7 +37,7 @@ Running image
   Process ${result}
   Enable DUT
 Checking if device comes online in 60s (Trying every 10s)
-  Wait Until Keyword Succeeds    6x    10s    Device ${device_uuid} is online
+  Wait Until Keyword Succeeds    6x    10s    Device "${device_uuid}" is online
 Check that backup files are not found in the image
   Check that backup files are not found in the "${image}"
 Git pushing to application

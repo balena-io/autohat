@@ -15,7 +15,7 @@ Preparing test environment
   File Should Exist     ${image}  msg="Provided images file does not exist"
   Set Suite Variable    ${application_repo}    https://github.com/resin-io/autohat-ondevice.git
   Set Suite Variable    ${application_commit}  232e26aad374b2afd19c5608663545c2430e2b15
-  Resin login with email %{email} and password %{password}
+  Resin login with email "%{email}" and password "%{password}"
 Adding new SSH key
   Add new SSH key with name "${application_name}"
 Deleting application if it already exists
@@ -36,7 +36,7 @@ Running image
   ${handle} =    Run "${image}" with "512" MB memory "4" cpus and "/tmp/console.sock" serial port
   Set Suite Variable    ${device_qemu_handle}    ${handle}
 Checking if device comes online in 60s (Trying every 10s)
-  Wait Until Keyword Succeeds    6x    10s    Device ${device_uuid} is online
+  Wait Until Keyword Succeeds    6x    10s    Device "${device_uuid}" is online
 Verify if resin-info@tty1.service is active
   Check if service "resin-info@tty1.service" is running using socket "unix\#/tmp/console.sock"
 Check that backup files are not found in the image

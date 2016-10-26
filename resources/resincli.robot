@@ -6,12 +6,12 @@ Library   OperatingSystem
 *** Variables ***
 
 *** Keywords ***
-CLI version is ${version}
+CLI version is "${version}"
     ${result} =  Run Process    resin version    shell=yes
     Process ${result}
     Should Match    ${result.stdout}    ${version}
 
-Resin login with email ${email} and password ${password}
+Resin login with email "${email}" and password "${password}"
     ${result} =  Run Process    resin login --credentials --email ${email} --password ${password}    shell=yes
     Process ${result}
     ${result} =  Run Process    resin whoami |sed '/USERNAME/!d' |sed 's/^.*USERNAME: //'   shell=yes
@@ -33,12 +33,12 @@ Create application "${application_name}" with device type "${device}"
     Process ${result}
     Should Match    ${result.stdout}    *Application created*
 
-Delete application ${application_name}
+Delete application "${application_name}"
     ${result} =  Run Process    resin app rm ${application_name} --yes    shell=yes
     Process ${result}
 
 Force delete application "${application_name}"
-    Run Keyword And Ignore Error    Delete application ${application_name}
+    Run Keyword And Ignore Error    Delete application "${application_name}"
 
 Push "${git_url}":"${commit_hash}" to application "${application_name}"
     Remove Directory    tmp    recursive=True
@@ -59,7 +59,7 @@ Configure "${image}" with "${application_name}"
     Process ${result}
     Return From Keyword    ${result_register.stdout}
 
-Device ${device_uuid} is online
+Device "${device_uuid}" is online
     ${result} =  Run Process    resin device ${device_uuid} | grep ONLINE    shell=yes
     Process ${result}
     Should Contain    ${result.stdout}    true
