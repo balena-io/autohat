@@ -71,6 +71,7 @@ Enable getty service on "${image}" for "${device_type}"
     ${result} =  Run Process    ./serial-it.sh --root-mountpoint ${mount_destination} -b ${device_type}     shell=yes   cwd=/tmp/enable_getty_service
     Process ${result}
     [Teardown]    Run Keywords    Unmount "${mount_destination}"
+    ...           AND             Remove Directory    ${mount_destination}    recursive=True
     ...           AND             Detach loop device "/dev2/loop${LOOPDEVICE}"
 
 Check if service "${service}" is running using socket "${socket}"
@@ -81,6 +82,18 @@ Check if service "${service}" is running using socket "${socket}"
     ${result} =  Run Process    cat /tmp/enable_getty_service/minicom_output.txt | grep Active | cut -d ' ' -f 5    shell=yes
     Should Contain    ${result.stdout}    active
     Process ${result}
+
+Check that backup files are not found in the ${image}
+    ${LOOPDEVICE} =   Set up loop device for "${image}"
+    ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
+    Set Test Variable    ${mount_destination}    /tmp/${random}
+    Create Directory    ${mount_destination}
+    Mount "/dev2/loop${LOOPDEVICE}p2" on "${mount_destination}"
+    Set Test Variable    @{files_list}  /etc/shadow-     /etc/passwd-     /etc/group-   /etc/gshadow-
+    File list "@{files_list}" does not exist in "${mount_destination}"
+    [Teardown]    Run Keywords    Unmount "${mount_destination}"
+    ...           AND             Remove Directory    ${mount_destination}    recursive=True
+    ...           AND             Detach loop device "/dev2/loop${LOOPDEVICE}"
 
 Unmount "${path}"
     ${result} =  Run Process    umount ${path}     shell=yes

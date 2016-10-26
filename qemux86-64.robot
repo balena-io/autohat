@@ -17,8 +17,6 @@ Preparing test environment
   Set Suite Variable    ${application_commit}  232e26aad374b2afd19c5608663545c2430e2b15
   Set Suite Variable    ${serial-it_repo}      https://github.com/resin-os/serial-it.git
   Resin login with email %{email} and password %{password}
-  Set Suite Variable    ${mount_destination}    /mnt
-  Set Suite Variable    ${host_os_partition}    2
 Adding new SSH key
   Add new SSH key with name "${application_name}"
 Deleting application if it already exists
@@ -43,13 +41,7 @@ Checking if device comes online in 60s (Trying every 10s)
 Verify if resin-info@tty1.service is active
   Check if service "resin-info@tty1.service" is running using socket "unix\#/tmp/console.sock"
 Check that backup files are not found in the image
-  ${LOOPDEVICE} =   Set up loop device for "${image}"
-  Set Test Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
-  Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
-  Set Test Variable    @{files_list}  /etc/shadow-     /etc/passwd-     /etc/group-   /etc/gshadow-
-  File list "@{files_list}" does not exist in "${mount_destination}"
-  [Teardown]    Run Keywords    Unmount "${mount_destination}"
-  ...           AND             Detach loop device "${path_to_loop}"
+  Check that backup files are not found in the ${image}
 Git pushing to application
   Push "${application_repo}":"${application_commit}" to application "${application_name}"
 Check if device is running the pushed application (Tries for 300 s)

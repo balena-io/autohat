@@ -16,8 +16,6 @@ Preparing test environment
   Set Suite Variable    ${application_repo}    https://github.com/resin-io/autohat-ondevice.git
   Set Suite Variable    ${application_commit}  e1f709a7bd1d4018acd1d6a69bef0a0b82f55085
   Resin login with email %{email} and password %{password}
-  Set Suite Variable    ${mount_destination}    /mnt
-  Set Suite Variable    ${host_os_partition}    2
   Set Suite Variable    ${rig_sd_card}    %{rig_sd_card}
   Disable DUT
 Adding new SSH key
@@ -41,13 +39,7 @@ Running image
 Checking if device comes online in 60s (Trying every 10s)
   Wait Until Keyword Succeeds    6x    10s    Device ${device_uuid} is online
 Check that backup files are not found in the image
-  ${LOOPDEVICE} =   Set up loop device for "${image}"
-  Set Test Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
-  Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
-  Set Test Variable    @{files_list}  /etc/shadow-     /etc/passwd-     /etc/group-   /etc/gshadow-
-  File list "@{files_list}" does not exist in "${mount_destination}"
-  Unmount "${mount_destination}"
-  Detach loop device "${path_to_loop}"
+  Check that backup files are not found in the ${image}
 Git pushing to application
   Push "${application_repo}":"${application_commit}" to application "${application_name}"
 Check if device is running the pushed application (Tries for 300 s)
