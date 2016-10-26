@@ -46,10 +46,8 @@ Git pushing to application
   Push "${application_repo}":"${application_commit}" to application "${application_name}"
 Check if device is running the pushed application (Tries for 300 s)
   Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Hello"
-Check if kernel module is loaded (Trying every 5s)
-  ${address} =    Get public address of device "${device_uuid}"
-  Wait Until Keyword Succeeds    6x    5s    Load "media" kernel module to device through "${address}"
-  Wait Until Keyword Succeeds    6x    5s    Check if "media" kernel module is loaded through "${address}"
+Check if kernel module loading works properly
+  Check if kernel module loading works properly on ${device_uuid}
 Ensure resin sync works
   Syncronize "${device_uuid}" to return "Hello Resin Sync!"
   Device "${device_uuid}" log should contain "Hello Resin Sync!"
