@@ -106,14 +106,14 @@ Get public address of device "${device_uuid}"
     Process ${result}
     Return From Keyword    ${result.stdout}
 
-Syncronize "${device_uuid}" to return "${message}"
+Synchronize "${device_uuid}" to return "${message}"
     ${result} =  Run Process    sed -i '3i echo \"${message}\"' start.sh     shell=yes     cwd=./tmp/${application_name}
     Process ${result}
     ${result} =  Run Process    resin sync ${device_uuid} -s . -d /usr/src/app    shell=yes    cwd=./tmp/${application_name}
     Process ${result}
 
 Check if resin sync works on "${device_uuid}"
-    Syncronize "${device_uuid}" to return "Hello Resin Sync!"
+    Synchronize "${device_uuid}" to return "Hello Resin Sync!"
     Device "${device_uuid}" log should contain "Hello Resin Sync!"
 
 Check if setting environment variables works on "${application_name}"
