@@ -60,10 +60,18 @@ File list "@{files_list}" does not exist in "${mount_destination}"
     \   File Should Not Exist  ${mount_destination}${files_line}  msg="Backup file ${files_line} found on the rootfs that should not exist."
 
 Enable getty service on "${image}" for "${device_type}"
-    ${result} =  Run Process    git clone ${serial-it_repo} /tmp/enable_getty_service    shell=yes
+    ${LOOPDEVICE} =   Set up loop device for "${image}"
+    ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
+    Set Test Variable    ${mount_destination}    /tmp/${random}
+    Create Directory    ${mount_destination}
+    Mount "/dev2/loop${LOOPDEVICE}p2" on "${mount_destination}"
+    Remove Directory    /tmp/enable_getty_service    recursive=True
+    ${result} =  Run Process    git clone https://github.com/resin-os/serial-it.git /tmp/enable_getty_service    shell=yes
     Process ${result}
     ${result} =  Run Process    ./serial-it.sh --root-mountpoint ${mount_destination} -b ${device_type}     shell=yes   cwd=/tmp/enable_getty_service
     Process ${result}
+    [Teardown]    Run Keywords    Unmount "${mount_destination}"
+    ...           AND             Detach loop device "/dev2/loop${LOOPDEVICE}"
 
 Check if service "${service}" is running using socket "/tmp/console.sock"
     ${result} =  Run Process    echo "send root\nsend systemctl status ${service}" > minicom_script.sh    shell=yes    cwd=/tmp/enable_getty_service

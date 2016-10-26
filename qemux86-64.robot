@@ -31,12 +31,7 @@ Get host OS version of the image
   ${return_os_version} =    Get host OS version of "${image}"
   Set Suite Variable    ${os_version}   ${return_os_version}
 Enable getty service on the image
-  ${LOOPDEVICE} =   Set up loop device for "${image}"
-  Set Test Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
-  Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
   Enable getty service on "${image}" for "${device_type}"
-  [Teardown]    Run Keywords    Unmount "${mount_destination}"
-  ...           AND             Detach loop device "${path_to_loop}"
 Configuring image with application
   ${device_uuid} =    Configure "${image}" with "${application_name}"
   Set Suite Variable    ${device_uuid}    ${device_uuid}
