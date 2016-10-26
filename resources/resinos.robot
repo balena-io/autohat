@@ -73,10 +73,10 @@ Enable getty service on "${image}" for "${device_type}"
     [Teardown]    Run Keywords    Unmount "${mount_destination}"
     ...           AND             Detach loop device "/dev2/loop${LOOPDEVICE}"
 
-Check if service "${service}" is running using socket "/tmp/console.sock"
+Check if service "${service}" is running using socket "${socket}"
     ${result} =  Run Process    echo "send root\nsend systemctl status ${service}" > minicom_script.sh    shell=yes    cwd=/tmp/enable_getty_service
     Process ${result}
-    Run Process    minicom -D unix\#console.sock -S /tmp/enable_getty_service/minicom_script.sh -C /tmp/enable_getty_service/minicom_output.txt    shell=yes   cwd=/tmp    timeout=1s
+    Run Process    minicom -D ${socket} -S /tmp/enable_getty_service/minicom_script.sh -C /tmp/enable_getty_service/minicom_output.txt    shell=yes   cwd=/tmp    timeout=1s
     File Should Not Be Empty    /tmp/enable_getty_service/minicom_output.txt
     ${result} =  Run Process    cat /tmp/enable_getty_service/minicom_output.txt | grep Active | cut -d ' ' -f 5    shell=yes
     Should Contain    ${result.stdout}    active

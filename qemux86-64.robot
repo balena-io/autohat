@@ -36,12 +36,12 @@ Configuring image with application
   ${device_uuid} =    Configure "${image}" with "${application_name}"
   Set Suite Variable    ${device_uuid}    ${device_uuid}
 Running image
-  ${handle} =    Run "${image}" with "512" MB memory and "4" cpus
+  ${handle} =    Run "${image}" with "512" MB memory "4" cpus and "/tmp/console.sock" serial port
   Set Suite Variable    ${device_qemu_handle}    ${handle}
 Checking if device comes online in 60s (Trying every 10s)
   Wait Until Keyword Succeeds    6x    10s    Device ${device_uuid} is online
 Verify if resin-info@tty1.service is active
-  Check if service "resin-info@tty1.service" is running using socket "/tmp/console.sock"
+  Check if service "resin-info@tty1.service" is running using socket "unix\#/tmp/console.sock"
 Check that backup files are not found in the image
   ${LOOPDEVICE} =   Set up loop device for "${image}"
   Set Test Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
