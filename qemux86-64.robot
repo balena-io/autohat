@@ -15,7 +15,6 @@ Preparing test environment
   File Should Exist     ${image}  msg="Provided images file does not exist"
   Set Suite Variable    ${application_repo}    https://github.com/resin-io/autohat-ondevice.git
   Set Suite Variable    ${application_commit}  232e26aad374b2afd19c5608663545c2430e2b15
-  Set Suite Variable    ${serial-it_repo}      https://github.com/resin-os/serial-it.git
   Resin login with email %{email} and password %{password}
 Adding new SSH key
   Add new SSH key with name "${application_name}"
@@ -57,5 +56,3 @@ Check if test environment variable is present
   Remove ENV variable "Hello" from application "${application_name}"
 Verify if host OS version of the image is same through resin cli
   Check if host OS version of device "${device_uuid}" is "${os_version}"
-#Wait till Qemu is killed or 10 minutes
-#  Wait For Process    handle=${device_qemu_handle}    timeout=600s    on_timeout=terminate
