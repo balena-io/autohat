@@ -105,8 +105,8 @@ Get public address of device "${device_uuid}"
     ${result} =  Run Process    resin device public-url ${device_uuid}    shell=yes
     Process ${result}
     Return From Keyword    ${result.stdout}
-  
-Syncronize "${device_uuid}" to return "${message}" 
+
+Syncronize "${device_uuid}" to return "${message}"
     ${result} =  Run Process    sed -i '3i echo \"${message}\"' start.sh     shell=yes     cwd=./tmp/${application_name}
     Process ${result}
     ${result} =  Run Process    resin sync ${device_uuid} -s . -d /usr/src/app    shell=yes    cwd=./tmp/${application_name}

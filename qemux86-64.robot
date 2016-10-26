@@ -14,7 +14,7 @@ Preparing test environment
   Set Suite Variable    ${image}    %{image}
   File Should Exist     ${image}  msg="Provided images file does not exist"
   Set Suite Variable    ${application_repo}    https://github.com/resin-io/autohat-ondevice.git
-  Set Suite Variable    ${application_commit}  232e26aad374b2afd19c5608663545c2430e2b15 
+  Set Suite Variable    ${application_commit}  232e26aad374b2afd19c5608663545c2430e2b15
   Set Suite Variable    ${serial-it_repo}      https://github.com/resin-os/serial-it.git
   Resin login with email %{email} and password %{password}
   Set Suite Variable    ${mount_destination}    /mnt
@@ -36,7 +36,7 @@ Get host OS version of the image
   Set Suite Variable    ${os_version}   ${return_os_version}
   [Teardown]    Run Keywords    Unmount "${mount_destination}"
   ...           AND             Detach loop device "${path_to_loop}"
-Enable getty service on the image 
+Enable getty service on the image
   ${LOOPDEVICE} =   Set up loop device for "${image}"
   Set Test Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
   Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
@@ -53,12 +53,12 @@ Checking if device comes online in 60s (Trying every 10s)
   Wait Until Keyword Succeeds    6x    10s    Device ${device_uuid} is online
 Verify if resin-info@tty1.service is active
   Check if service "resin-info@tty1.service" is running using socket "/tmp/console.sock"
-Check that backup files are not found in the image 
+Check that backup files are not found in the image
   ${LOOPDEVICE} =   Set up loop device for "${image}"
   Set Test Variable    ${path_to_loop}    /dev2/loop${LOOPDEVICE}
   Mount "${path_to_loop}p${host_os_partition}" on "${mount_destination}"
   Set Test Variable    @{files_list}  /etc/shadow-     /etc/passwd-     /etc/group-   /etc/gshadow-
-  File list "@{files_list}" does not exist in "${mount_destination}" 
+  File list "@{files_list}" does not exist in "${mount_destination}"
   [Teardown]    Run Keywords    Unmount "${mount_destination}"
   ...           AND             Detach loop device "${path_to_loop}"
 Git pushing to application

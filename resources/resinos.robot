@@ -48,7 +48,7 @@ Get the host OS version of the image
 
 File list "@{files_list}" does not exist in "${mount_destination}"
     : FOR   ${files_line}     IN  @{files_list}
-    \   File Should Not Exist  ${mount_destination}${files_line}  msg="Backup file ${files_line} found on the rootfs that should not exist." 
+    \   File Should Not Exist  ${mount_destination}${files_line}  msg="Backup file ${files_line} found on the rootfs that should not exist."
     
 Enable getty service on "${image}" for "${device_type}"
     ${result} =  Run Process    git clone ${serial-it_repo} /tmp/enable_getty_service    shell=yes
