@@ -1,6 +1,7 @@
 Change log
 -----------
 
+* 	Re-Organize tests so that they are self contained and the Test Suites have minimal overhead [Praneeth]  
 * 	Ensure that resin sync works [Horia]
 * 	Add test case to verify if resin-info service is active [Horia]
 * 	Switch to using the nuc-node as the base for the Dockerfile [Praneeth]
