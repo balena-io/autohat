@@ -6,12 +6,12 @@ Library   OperatingSystem
 *** Variables ***
 
 *** Keywords ***
-CLI version is ${version}
+CLI version is "${version}"
     ${result} =  Run Process    resin version    shell=yes
     Process ${result}
     Should Match    ${result.stdout}    ${version}
 
-Resin login with email ${email} and password ${password}
+Resin login with email "${email}" and password "${password}"
     ${result} =  Run Process    resin login --credentials --email ${email} --password ${password}    shell=yes
     Process ${result}
     ${result} =  Run Process    resin whoami |sed '/USERNAME/!d' |sed 's/^.*USERNAME: //'   shell=yes
@@ -33,12 +33,12 @@ Create application "${application_name}" with device type "${device}"
     Process ${result}
     Should Match    ${result.stdout}    *Application created*
 
-Delete application ${application_name}
+Delete application "${application_name}"
     ${result} =  Run Process    resin app rm ${application_name} --yes    shell=yes
     Process ${result}
 
 Force delete application "${application_name}"
-    Run Keyword And Ignore Error    Delete application ${application_name}
+    Run Keyword And Ignore Error    Delete application "${application_name}"
 
 Push "${git_url}":"${commit_hash}" to application "${application_name}"
     Remove Directory    tmp    recursive=True
@@ -59,7 +59,7 @@ Configure "${image}" with "${application_name}"
     Process ${result}
     Return From Keyword    ${result_register.stdout}
 
-Device ${device_uuid} is online
+Device "${device_uuid}" is online
     ${result} =  Run Process    resin device ${device_uuid} | grep ONLINE    shell=yes
     Process ${result}
     Should Contain    ${result.stdout}    true
@@ -105,12 +105,23 @@ Get public address of device "${device_uuid}"
     ${result} =  Run Process    resin device public-url ${device_uuid}    shell=yes
     Process ${result}
     Return From Keyword    ${result.stdout}
-  
-Syncronize "${device_uuid}" to return "${message}" 
+
+Synchronize "${device_uuid}" to return "${message}"
     ${result} =  Run Process    sed -i '3i echo \"${message}\"' start.sh     shell=yes     cwd=./tmp/${application_name}
     Process ${result}
     ${result} =  Run Process    resin sync ${device_uuid} -s . -d /usr/src/app    shell=yes    cwd=./tmp/${application_name}
     Process ${result}
+
+Check if resin sync works on "${device_uuid}"
+    Synchronize "${device_uuid}" to return "Hello Resin Sync!"
+    Device "${device_uuid}" log should contain "Hello Resin Sync!"
+
+Check if setting environment variables works on "${application_name}"
+    ${random} =   Evaluate    random.randint(0, 10000)    modules=random
+    Add ENV variable "autohat${random}" with value "RandomValue" to application "${application_name}"
+    Check if ENV variable "autohat${random}" exists in application "${application_name}"
+    Check if value of ENV variable is "RandomValue" in application "${application_name}"
+    Remove ENV variable "autohat${random}" from application "${application_name}"
 
 Process ${result}
     Log   all output: ${result.stdout}
