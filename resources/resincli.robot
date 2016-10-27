@@ -41,14 +41,13 @@ Force delete application "${application_name}"
     Run Keyword And Ignore Error    Delete application "${application_name}"
 
 Push "${git_url}":"${commit_hash}" to application "${application_name}"
-    Remove Directory    tmp    recursive=True
-    Create Directory    tmp
-    ${result} =  Run Process    git clone ${git_url} ${application_name}   shell=yes    cwd=./tmp
+    Remove Directory    /tmp/${application_name}    recursive=True
+    ${result} =  Run Process    git clone ${git_url} /tmp/${application_name}    shell=yes
     Process ${result}
     Set Environment Variable    RESINUSER    ${RESINUSER}
-    ${result} =  Run Process    git remote add resin $RESINUSER@git.${RESINRC_RESIN_URL}:$RESINUSER/${application_name}.git    shell=yes    cwd=./tmp/${application_name}
+    ${result} =  Run Process    git remote add resin $RESINUSER@git.${RESINRC_RESIN_URL}:$RESINUSER/${application_name}.git    shell=yes    cwd=/tmp/${application_name}
     Process ${result}
-    ${result} =  Run Process    git push resin ${commit_hash}:refs/heads/master    shell=yes    cwd=./tmp/${application_name}
+    ${result} =  Run Process    git push resin ${commit_hash}:refs/heads/master    shell=yes    cwd=/tmp/${application_name}
     Process ${result}
 
 Configure "${image}" with "${application_name}"
@@ -107,9 +106,9 @@ Get public address of device "${device_uuid}"
     Return From Keyword    ${result.stdout}
 
 Synchronize "${device_uuid}" to return "${message}"
-    ${result} =  Run Process    sed -i '3i echo \"${message}\"' start.sh     shell=yes     cwd=./tmp/${application_name}
+    ${result} =  Run Process    sed -i '3i echo \"${message}\"' start.sh     shell=yes     cwd=/tmp/${application_name}
     Process ${result}
-    ${result} =  Run Process    resin sync ${device_uuid} -s . -d /usr/src/app    shell=yes    cwd=./tmp/${application_name}
+    ${result} =  Run Process    resin sync ${device_uuid} -s . -d /usr/src/app    shell=yes    cwd=/tmp/${application_name}
     Process ${result}
 
 Check if resin sync works on "${device_uuid}"
