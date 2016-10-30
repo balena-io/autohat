@@ -40,14 +40,20 @@ Delete application "${application_name}"
 Force delete application "${application_name}"
     Run Keyword And Ignore Error    Delete application "${application_name}"
 
-Push "${git_url}":"${commit_hash}" to application "${application_name}"
-    Remove Directory    /tmp/${application_name}    recursive=True
-    ${result} =  Run Process    git clone ${git_url} /tmp/${application_name}    shell=yes
+Git clone "${git_url}" "${directory}"
+    Remove Directory    ${directory}    recursive=True
+    ${result} =  Run Process    git clone ${git_url} ${directory}    shell=yes
     Process ${result}
+
+Git checkout "${commit_hash}" "${directory}"
+    ${result} =  Run Process    git checkout ${commit_hash}    shell=yes    cwd=${directory}
+    Process ${result}
+
+Git push "${directory}" to application "${application_name}"
     Set Environment Variable    RESINUSER    ${RESINUSER}
-    ${result} =  Run Process    git remote add resin $RESINUSER@git.${RESINRC_RESIN_URL}:$RESINUSER/${application_name}.git    shell=yes    cwd=/tmp/${application_name}
+    ${result} =  Run Process    git remote add resin $RESINUSER@git.${RESINRC_RESIN_URL}:$RESINUSER/${application_name}.git    shell=yes    cwd=${directory}
     Process ${result}
-    ${result} =  Run Process    git push resin ${commit_hash}:refs/heads/master    shell=yes    cwd=/tmp/${application_name}
+    ${result} =  Run Process    git push resin master    shell=yes    cwd=${directory}
     Process ${result}
 
 Configure "${image}" with "${application_name}"
@@ -67,6 +73,11 @@ Device "${device_uuid}" log should contain "${value}"
     ${result} =  Run Process    resin logs ${device_uuid}    shell=yes
     Process ${result}
     Should Contain    ${result.stdout}    ${value}
+
+Device "${device_uuid}" log should not contain "${value}"
+    ${result} =  Run Process    resin logs ${device_uuid}    shell=yes
+    Process ${result}
+    Should Not Contain    ${result.stdout}    ${value}
 
 Check if host OS version of device "${device_uuid}" is "${os_version}"
     ${result} =  Run Process    resin device ${device_uuid} | grep OS | rev | cut -d ' ' -f 1 | rev     shell=yes
@@ -112,6 +123,28 @@ Check if setting environment variables works on "${application_name}"
     Add ENV variable "autohat${random}" with value "RandomValue" to application "${application_name}"
     Check if ENV variable "autohat${random}" with value "RandomValue" exists in application "${application_name}"
     Remove ENV variable "autohat${random}" from application "${application_name}"
+
+Check enabling supervisor delta on "${application_name}"
+    Add ENV variable "RESIN_SUPERVISOR_DELTA" with value "1" to application "${application_name}"
+    Device "${device_uuid}" log should not contain "Killing application"
+    ${random} =  Evaluate    random.randint(0, sys.maxint)    modules=random, sys
+    Git clone "${application_repo}" "/tmp/${random}"
+    Add console output "Grettings World!" to "/tmp/${random}"
+    Git push "/tmp/${random}" to application "${application_name}"
+    Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Grettings World!"
+    Check if ENV variable "RESIN_SUPERVISOR_DELTA" with value "1" exists in application "${application_name}"
+    Remove ENV variable "RESIN_SUPERVISOR_DELTA" from application "${application_name}"
+    [Teardown]    Run Keyword    Remove Directory    /tmp/${random}    recursive=True
+
+Add console output "${message}" to "${directory}"
+    ${result} =  Run Process    git config --global user.email "%{email}"    shell=yes    cwd=${directory}
+    Process ${result}
+    ${result} =  Run Process    sed -i '3i echo \"${message}\"' start.sh    shell=yes    cwd=${directory}
+    Process ${result}
+    ${result} =  Run Process    git add .    shell=yes    cwd=${directory}
+    Process ${result}
+    ${result} =  Run Process    git commit -m "Console message added"    shell=yes    cwd=${directory}
+    Process ${result}
 
 Process ${result}
     Log   all output: ${result.stdout}

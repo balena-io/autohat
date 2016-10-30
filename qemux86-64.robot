@@ -42,11 +42,15 @@ Checking if device comes online in 60s (Trying every 10s)
 Verify if resin-info@tty1.service is active
   Check if service "resin-info@tty1.service" is running using socket "unix\#/tmp/console.sock"
 Git pushing to application
-  Push "${application_repo}":"${application_commit}" to application "${application_name}"
+  Git clone "${application_repo}" "/tmp/${application_name}"
+  Git checkout "${application_commit}" "/tmp/${application_name}"
+  Git push "/tmp/${application_name}" to application "${application_name}"
 Check if device is running the pushed application (Tries for 300 s)
   Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Hello"
 Check if kernel module loading works
   Check if kernel module loading works on "${device_uuid}"
+Check delta to a running supervisor
+  Check enabling supervisor delta on "${application_name}"
 Check if resin sync works
   Check if resin sync works on "${device_uuid}"
 Check if setting environment variable works
