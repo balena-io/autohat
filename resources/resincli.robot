@@ -69,6 +69,11 @@ Device "${device_uuid}" is online
     Process ${result}
     Should Contain    ${result.stdout}    true
 
+Device "${device_uuid}" is offline
+    ${result} =  Run Process    resin device ${device_uuid} | grep ONLINE    shell=yes
+    Process ${result}
+    Should Contain    ${result.stdout}    false
+
 Device "${device_uuid}" log should contain "${value}"
     ${result} =  Run Process    resin logs ${device_uuid}    shell=yes
     Process ${result}
