@@ -58,6 +58,7 @@ Check if setting environment variable works
 Verify if host OS version of the image is same through resin cli
   Check if host OS version of device "${device_uuid}" is "${os_version}"
 Wait till Qemu is killed or 30 seconds
+  Shutdown resin device "${device_uuid}"
   Wait For Process    handle=${device_qemu_handle}    timeout=30s    on_timeout=terminate
 Check that backup files are not found in the image
   Check that backup files are not found in the "${image}"

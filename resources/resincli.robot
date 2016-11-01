@@ -146,6 +146,10 @@ Add console output "${message}" to "${directory}"
     ${result} =  Run Process    git commit -m "Console message added"    shell=yes    cwd=${directory}
     Process ${result}
 
+Shutdown resin device "${device_uuid}"
+    ${result} =  Run Process    resin device shutdown ${device_uuid}    shell=yes
+    Process ${result}
+
 Process ${result}
     Log   all output: ${result.stdout}
     Log   all output: ${result.stderr}
