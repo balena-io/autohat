@@ -16,12 +16,14 @@ Preparing test environment
   Set Suite Variable    ${application_repo}    https://github.com/resin-io/autohat-ondevice.git
   Set Suite Variable    ${application_commit}  232e26aad374b2afd19c5608663545c2430e2b15
   Resin login with email "%{email}" and password "%{password}"
+  ${create_application} =    Get Environment Variable    CREATE_APPLICATION    default=True
+  Set Suite Variable    ${create_application}    ${create_application}
 Adding new SSH key
   Add new SSH key with name "${application_name}"
 Deleting application if it already exists
-  Force delete application "${application_name}"
+  Run Keyword If    '${create_application}' == 'True'    Force delete application "${application_name}"
 Creating application
-  Create application "${application_name}" with device type "${device_type}"
+  Run Keyword If    '${create_application}' == 'True'    Create application "${application_name}" with device type "${device_type}"
 Check host OS fingerprint file
   Check host OS fingerprint file in "${image}"
 Get host OS version of the image
