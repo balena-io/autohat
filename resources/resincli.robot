@@ -40,15 +40,20 @@ Delete application "${application_name}"
 Force delete application "${application_name}"
     Run Keyword And Ignore Error    Delete application "${application_name}"
 
-Push "${git_url}":"${commit_hash}" to application "${application_name}"
-    Remove Directory    tmp    recursive=True
-    Create Directory    tmp
-    ${result} =  Run Process    git clone ${git_url} ${application_name}   shell=yes    cwd=./tmp
+Git clone "${git_url}" "${directory}"
+    Remove Directory    ${directory}    recursive=True
+    ${result} =  Run Process    git clone ${git_url} ${directory}    shell=yes
     Process ${result}
+
+Git checkout "${commit_hash}" "${directory}"
+    ${result} =  Run Process    git checkout ${commit_hash}    shell=yes    cwd=${directory}
+    Process ${result}
+
+Git push "${directory}" to application "${application_name}"
     Set Environment Variable    RESINUSER    ${RESINUSER}
-    ${result} =  Run Process    git remote add resin $RESINUSER@git.${RESINRC_RESIN_URL}:$RESINUSER/${application_name}.git    shell=yes    cwd=./tmp/${application_name}
+    ${result} =  Run Process    git remote add resin $RESINUSER@git.${RESINRC_RESIN_URL}:$RESINUSER/${application_name}.git    shell=yes    cwd=${directory}
     Process ${result}
-    ${result} =  Run Process    git push resin ${commit_hash}:refs/heads/master    shell=yes    cwd=./tmp/${application_name}
+    ${result} =  Run Process    git push resin master    shell=yes    cwd=${directory}
     Process ${result}
 
 Configure "${image}" with "${application_name}"
@@ -64,10 +69,20 @@ Device "${device_uuid}" is online
     Process ${result}
     Should Contain    ${result.stdout}    true
 
+Device "${device_uuid}" is offline
+    ${result} =  Run Process    resin device ${device_uuid} | grep ONLINE    shell=yes
+    Process ${result}
+    Should Contain    ${result.stdout}    false
+
 Device "${device_uuid}" log should contain "${value}"
     ${result} =  Run Process    resin logs ${device_uuid}    shell=yes
     Process ${result}
     Should Contain    ${result.stdout}    ${value}
+
+Device "${device_uuid}" log should not contain "${value}"
+    ${result} =  Run Process    resin logs ${device_uuid}    shell=yes
+    Process ${result}
+    Should Not Contain    ${result.stdout}    ${value}
 
 Check if host OS version of device "${device_uuid}" is "${os_version}"
     ${result} =  Run Process    resin device ${device_uuid} | grep OS | rev | cut -d ' ' -f 1 | rev     shell=yes
@@ -75,25 +90,17 @@ Check if host OS version of device "${device_uuid}" is "${os_version}"
     Should Contain    ${result.stdout}    ${os_version}
 
 Add ENV variable "${variable_name}" with value "${variable_value}" to application "${application_name}"
-    ${result} =  Run Process    resin   env     add     ${variable_name}    ${variable_value}    -a  ${application_name}
+    ${result} =  Run Process    resin env add ${variable_name} ${variable_value} -a ${application_name}    shell=yes
     Process ${result}
 
-Check if ENV variable "${variable_name}" exists in application "${application_name}"
-    ${result_vars} =  Run Process    resin envs -a ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'   shell=yes
-    Process ${result_vars}
-    ${result_name} =  Run Process    echo "${result_vars.stdout}" | grep ${variable_name} | cut -d ' ' -f 2    shell=yes
-    Process ${result_name}
-    Should Contain    ${result_name.stdout}    ${variable_name}
-
-Check if value of ENV variable is "${variable_value}" in application "${application_name}"
-    ${result_vars} =  Run Process    resin envs -a ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'   shell=yes
-    Process ${result_vars}
-    ${result_value} =  Run Process    echo "${result_vars.stdout}" | grep ${variable_value} | cut -d ' ' -f 3    shell=yes
-    Process ${result_value}
-    Should Contain    ${result_value.stdout}    ${variable_value}
+Check if ENV variable "${variable_name}" with value "${variable_value}" exists in application "${application_name}"
+    ${result_env} =  Run Process    resin envs -a ${application_name} --verbose | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
+    Process ${result_env}
+    ${result} =  Run Process    echo "${result_env.stdout}" | grep ${variable_name} | grep " ${variable_value}"    shell=yes
+    Process ${result}
 
 Remove ENV variable "${variable_name}" from application "${application_name}"
-    ${result_vars} =  Run Process    resin envs -a ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'   shell=yes
+    ${result_vars} =  Run Process    resin envs -a ${application_name} --verbose | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'   shell=yes
     Process ${result_vars}
     ${result_id} =  Run Process    echo "${result_vars.stdout}" | grep ${variable_name} | cut -d ' ' -f 1    shell=yes
     Process ${result_id}
@@ -107,9 +114,9 @@ Get public address of device "${device_uuid}"
     Return From Keyword    ${result.stdout}
 
 Synchronize "${device_uuid}" to return "${message}"
-    ${result} =  Run Process    sed -i '3i echo \"${message}\"' start.sh     shell=yes     cwd=./tmp/${application_name}
+    ${result} =  Run Process    sed -i '3i echo \"${message}\"' start.sh     shell=yes     cwd=/tmp/${application_name}
     Process ${result}
-    ${result} =  Run Process    resin sync ${device_uuid} -s . -d /usr/src/app    shell=yes    cwd=./tmp/${application_name}
+    ${result} =  Run Process    resin sync ${device_uuid} -s . -d /usr/src/app    shell=yes    cwd=/tmp/${application_name}
     Process ${result}
 
 Check if resin sync works on "${device_uuid}"
@@ -119,9 +126,34 @@ Check if resin sync works on "${device_uuid}"
 Check if setting environment variables works on "${application_name}"
     ${random} =   Evaluate    random.randint(0, 10000)    modules=random
     Add ENV variable "autohat${random}" with value "RandomValue" to application "${application_name}"
-    Check if ENV variable "autohat${random}" exists in application "${application_name}"
-    Check if value of ENV variable is "RandomValue" in application "${application_name}"
+    Check if ENV variable "autohat${random}" with value "RandomValue" exists in application "${application_name}"
     Remove ENV variable "autohat${random}" from application "${application_name}"
+
+Check enabling supervisor delta on "${application_name}"
+    Add ENV variable "RESIN_SUPERVISOR_DELTA" with value "1" to application "${application_name}"
+    Device "${device_uuid}" log should not contain "Killing application"
+    ${random} =  Evaluate    random.randint(0, sys.maxint)    modules=random, sys
+    Git clone "${application_repo}" "/tmp/${random}"
+    Add console output "Grettings World!" to "/tmp/${random}"
+    Git push "/tmp/${random}" to application "${application_name}"
+    Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Grettings World!"
+    Check if ENV variable "RESIN_SUPERVISOR_DELTA" with value "1" exists in application "${application_name}"
+    Remove ENV variable "RESIN_SUPERVISOR_DELTA" from application "${application_name}"
+    [Teardown]    Run Keyword    Remove Directory    /tmp/${random}    recursive=True
+
+Add console output "${message}" to "${directory}"
+    ${result} =  Run Process    git config --global user.email "%{email}"    shell=yes    cwd=${directory}
+    Process ${result}
+    ${result} =  Run Process    sed -i '3i echo \"${message}\"' start.sh    shell=yes    cwd=${directory}
+    Process ${result}
+    ${result} =  Run Process    git add .    shell=yes    cwd=${directory}
+    Process ${result}
+    ${result} =  Run Process    git commit -m "Console message added"    shell=yes    cwd=${directory}
+    Process ${result}
+
+Shutdown resin device "${device_uuid}"
+    ${result} =  Run Process    resin device shutdown ${device_uuid}    shell=yes
+    Process ${result}
 
 Process ${result}
     Log   all output: ${result.stdout}
