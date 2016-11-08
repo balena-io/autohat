@@ -1,4 +1,4 @@
-FROM resin/nuc-node:5.7
+FROM resin/nuc-node:6
 
 # Install PIP, Robot Framework, Resin-cli and Etcher-cli
 RUN apt-get update && apt-get install -y qemu-system-x86 rsync qemu-kvm minicom libftdi-dev python-pip && \
