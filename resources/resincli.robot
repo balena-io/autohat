@@ -6,11 +6,6 @@ Library   OperatingSystem
 *** Variables ***
 
 *** Keywords ***
-CLI version is "${version}"
-    ${result} =  Run Process    resin version    shell=yes
-    Process ${result}
-    Should Match    ${result.stdout}    ${version}
-
 Resin login with email "${email}" and password "${password}"
     ${result} =  Run Process    resin login --credentials --email ${email} --password ${password}    shell=yes    timeout=30sec
     Process ${result}
