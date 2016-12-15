@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    This resource provides access to qemux86_64 specific Keywords.
+Documentation    This resource provides access to QEMU specific Keywords.
 Library   Process
 Library   OperatingSystem
 
