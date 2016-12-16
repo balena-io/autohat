@@ -15,9 +15,11 @@ The resources directory contains Robot Keyword helpers for ``resincli`` and hard
 
   ``docker build -t autohat .``
 
-* Build a resin-qemux86-64 image from [https://github.com/resin-os/resin-qemu/](https://github.com/resin-os/resin-qemu/)
+* Build a resin-qemux86 or resin-qemux86-64 image from [https://github.com/resin-os/resin-qemu/](https://github.com/resin-os/resin-qemu/)
 
-* Alternatively you can also download a uninitialized qemux86-64 image from resin by executing:
+* Alternatively you can also download an uninitialized resin-qemux86 or resin-qemux86-64 image from resin by executing:
+
+  ``resin os download qemux86 -o resin.img`` or
 
   ``resin os download qemux86-64 -o resin.img``
 
@@ -25,9 +27,9 @@ The resources directory contains Robot Keyword helpers for ``resincli`` and hard
 
 * Load the KVM module
 
-* Execute the following to run a example test against the qemux86-64 image you just downloaded.
+* Execute the following to run an example test against the resin-qemux86 or resin-qemux86-64 image you just downloaded.
 
-    ``docker run -it --rm -v <path_to_repo>:/autohat -v /dev/:/dev2 --privileged --env-file ./env.list autohat robot --exitonerror /autohat/qemux86-64.robot``
+    ``docker run -it --rm -v <path_to_repo>:/autohat -v /dev/:/dev2 --privileged --env-file ./env.list autohat robot --exitonerror /autohat/qemu.robot``
 
 #### Running with Autohat test rig on connected hardware (Example - Raspberry Pi 3)
 
@@ -37,7 +39,7 @@ The resources directory contains Robot Keyword helpers for ``resincli`` and hard
 
   ``docker build -t autohat .``
 
-* Build the device specific resin image or download a uninitialized image from resin by executing:
+* Build the device specific resin image or download an uninitialized image from resin by executing:
 
   ``resin os download raspberrypi3 -o resin.img``
 
@@ -45,6 +47,6 @@ The resources directory contains Robot Keyword helpers for ``resincli`` and hard
 
 	* Please make sure that the ``rig_device_id``, ``rig_sd_card`` match your rig's FTDI serial, the SD card path respectively
 
-* Execute the following to run a example test against the raspberrypi3 image you just downloaded.
+* Execute the following to run an example test against the raspberrypi3 image you just downloaded.
 
     ``docker run -it --rm -v <path_to_repo>:/autohat -v /dev/:/dev2 --privileged --env-file ./env.list autohat robot --exitonerror /autohat/raspberrypi3.robot``
