@@ -1,6 +1,7 @@
 Change log
 -----------
 
+* 	Disable resin sync and resin delta tests from example QEMU and RaspberryPi test cases until they are fixed in Resin 2.0 [Praneeth]
 * 	Pin version of Base image in Dockerfile and python libraries installed with pip [Praneeth]
 * 	Unify instuctions for QEMU 64bit and 32bit images [Horia]
 * 	Test case to verify delta to a running supervisor [Horia]

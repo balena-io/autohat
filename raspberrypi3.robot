@@ -52,10 +52,10 @@ Check if device is running the pushed application (Tries for 300 s)
   Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Hello"
 Check if kernel module loading works
   Check if kernel module loading works on "${device_uuid}"
-Check delta to a running supervisor
-  Check enabling supervisor delta on "${application_name}"
-Check if resin sync works
-  Check if resin sync works on "${device_uuid}"
+#Check delta to a running supervisor
+#  Check enabling supervisor delta on "${application_name}"
+#Check if resin sync works
+#  Check if resin sync works on "${device_uuid}"
 Check if setting environment variable works
   Check if setting environment variables works on "${application_name}"
 Verify if host OS version of the image is same through resin cli
