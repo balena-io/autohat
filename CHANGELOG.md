@@ -1,6 +1,7 @@
 Change log
 -----------
 
+* 	Pin version of Base image in Dockerfile and python libraries installed with pip [Praneeth]
 * 	Unify instuctions for QEMU 64bit and 32bit images [Horia]
 * 	Test case to verify delta to a running supervisor [Horia]
 * 	Add CREATE_APPLICATION to enable/disable application tests in qemux86-64.robot, this will allow for easier integration with tests that dont need application creation. [Praneeth]
