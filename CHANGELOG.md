@@ -1,12 +1,13 @@
 Change log
 -----------
 
+* 	Fixing keyword that did not push the correct commit [Horia]
 * 	Fixing tests to fail properly if environment variables are not provided [Horia]
 * 	Disable resin sync and resin delta tests from example QEMU and RaspberryPi test cases until they are fixed in Resin 2.0 [Praneeth]
 * 	Pin version of Base image in Dockerfile and python libraries installed with pip [Praneeth]
 * 	Unify instuctions for QEMU 64bit and 32bit images [Horia]
 * 	Test case to verify delta to a running supervisor [Horia]
-* 	Add CREATE_APPLICATION to enable/disable application tests in qemux86-64.robot, this will allow for easier integration with tests that dont need application creation. [Praneeth]
+* 	Add CREATE_APPLICATION to enable/disable application tests in qemux86-64.robot, this will allow for easier integration with tests that dont need application creation [Praneeth]
 * 	Re-Organize tests so that they are self contained and the Test Suites have minimal overhead [Praneeth]  
 * 	Ensure that resin sync works [Horia]
 * 	Add test case to verify if resin-info service is active [Horia]
