@@ -53,7 +53,7 @@ Git push "${directory}" to application "${application_name}"
     Set Environment Variable    RESINUSER    ${RESINUSER}
     ${result} =  Run Process    git remote add resin $RESINUSER@git.${RESINRC_RESIN_URL}:$RESINUSER/${application_name}.git    shell=yes    cwd=${directory}
     Process ${result}
-    ${result} =  Run Process    git push resin master    shell=yes    cwd=${directory}
+    ${result} =  Run Process    git push resin HEAD:refs/heads/master    shell=yes    cwd=${directory}
     Process ${result}
 
 Configure "${image}" with "${application_name}"
