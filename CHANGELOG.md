@@ -1,6 +1,7 @@
 Change log
 -----------
 
+* 	Fixing keyword that verifies delta to a running supervisor [Horia]
 * 	Fixing keyword that did not push the correct commit [Horia]
 * 	Fixing tests to fail properly if environment variables are not provided [Horia]
 * 	Disable resin sync and resin delta tests from example QEMU and RaspberryPi test cases until they are fixed in Resin 2.0 [Praneeth]
