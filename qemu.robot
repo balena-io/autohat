@@ -4,6 +4,7 @@ Resource  resources/resincli.robot
 Resource  resources/qemu.robot
 Resource  resources/resinos.robot
 Resource  resources/kernel.robot
+Test Timeout  30 minutes
 Suite Teardown    Run Keywords    Terminate All Processes    kill=True
 ...               AND             Remove Files    /tmp/resin*.img    /tmp/autohat.*.stdout    /tmp/autohat.*.stderr
 
@@ -49,6 +50,8 @@ Git pushing to application
   Git push "/tmp/${application_name}" to application "${application_name}"
 Checking if device is running the pushed application (Tries for 300 s)
   Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Hello"
+Checking that the device does not return the resin-vpn IP address
+  Check that "${device_uuid}" does not return "resin-vpn" IP address through API using socket "unix\#/tmp/console.sock"
 Providing a device to the application with delta already enabled
   Run "${image}" on "${application_name}" with delta already enabled
 Checking if kernel module loading works
