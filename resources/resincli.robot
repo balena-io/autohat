@@ -7,32 +7,32 @@ Library   OperatingSystem
 
 *** Keywords ***
 Resin login with email "${email}" and password "${password}"
-    ${result} =  Run Buffered Process    resin login --credentials --email ${email} --password ${password}    shell=yes    timeout=30sec
+    ${result} =  Run Process    resin login --credentials --email ${email} --password ${password}    shell=yes    timeout=30sec
     Process ${result}
-    ${result} =  Run Buffered Process    resin whoami |sed '/USERNAME/!d' |sed 's/^.*USERNAME: //'   shell=yes
+    ${result} =  Run Process    resin whoami |sed '/USERNAME/!d' |sed 's/^.*USERNAME: //'   shell=yes
     Process ${result}
     Set Suite Variable    ${RESINUSER}    ${result.stdout}
 
 Add new SSH key with name "${key_name}"
     Remove File    /root/.ssh/id_ecdsa
-    ${result} =  Run Buffered Process    ssh-keygen -b 521 -t ecdsa -f /root/.ssh/id_ecdsa -N ''    shell=yes
+    ${result} =  Run Process    ssh-keygen -b 521 -t ecdsa -f /root/.ssh/id_ecdsa -N ''    shell=yes
     Process ${result}
-    ${word_count} =  Run Buffered Process    resin keys |grep -w ${key_name} |cut -d ' ' -f 1 | wc -l    shell=yes
+    ${word_count} =  Run Process    resin keys |grep -w ${key_name} |cut -d ' ' -f 1 | wc -l    shell=yes
     Process ${word_count}
     :FOR    ${i}    IN RANGE    ${word_count.stdout}
-    \    ${result} =  Run Buffered Process    resin keys |grep -w ${key_name} |cut -d ' ' -f 1 | head -1    shell=yes
+    \    ${result} =  Run Process    resin keys |grep -w ${key_name} |cut -d ' ' -f 1 | head -1    shell=yes
     \    Log   all output: ${result.stdout}
-    \    Run Buffered Process    resin key rm ${result.stdout} -y    shell=yes
-    ${result} =  Run Buffered Process    resin key add ${key_name} /root/.ssh/id_ecdsa.pub   shell=yes
+    \    Run Process    resin key rm ${result.stdout} -y    shell=yes
+    ${result} =  Run Process    resin key add ${key_name} /root/.ssh/id_ecdsa.pub   shell=yes
     Process ${result}
 
 Create application "${application_name}" with device type "${device}"
-    ${result} =  Run Buffered Process    resin app create ${application_name} --type\=${device}   shell=yes
+    ${result} =  Run Process    resin app create ${application_name} --type\=${device}    shell=yes
     Process ${result}
     Should Match    ${result.stdout}    *Application created*
 
 Delete application "${application_name}"
-    ${result} =  Run Buffered Process    resin app rm ${application_name} --yes    shell=yes
+    ${result} =  Run Process    resin app rm ${application_name} --yes    shell=yes
     Process ${result}
 
 Force delete application "${application_name}"
@@ -40,37 +40,55 @@ Force delete application "${application_name}"
 
 Git clone "${git_url}" "${directory}"
     Remove Directory    ${directory}    recursive=True
-    ${result} =  Run Buffered Process    git clone ${git_url} ${directory}    shell=yes
+    ${result} =  Run Process    git clone ${git_url} ${directory}    shell=yes
     Process ${result}
 
 Git checkout "${commit_hash}" "${directory}"
-    ${result} =  Run Buffered Process    git checkout ${commit_hash}    shell=yes    cwd=${directory}
+    ${result} =  Run Process    git checkout ${commit_hash}    shell=yes    cwd=${directory}
     Process ${result}
 
 Git push "${directory}" to application "${application_name}"
     Set Environment Variable    RESINUSER    ${RESINUSER}
-    ${result} =  Run Buffered Process    git remote add resin $RESINUSER@git.${RESINRC_RESIN_URL}:$RESINUSER/${application_name}.git    shell=yes    cwd=${directory}
+    ${result} =  Run Process    git remote add resin $RESINUSER@git.${RESINRC_RESIN_URL}:$RESINUSER/${application_name}.git    shell=yes    cwd=${directory}
     Process ${result}
     ${result} =  Run Buffered Process    git push resin HEAD:refs/heads/master    shell=yes    cwd=${directory}
     Process ${result}
 
 Configure "${image}" with "${application_name}"
     File Should Exist     ${image}  msg="Provided images file does not exist"
-    ${result_register} =  Run Buffered Process    resin device register ${application_name} | cut -d ' ' -f 4    shell=yes
+    ${result_register} =  Run Process    resin device register ${application_name} | cut -d ' ' -f 4    shell=yes
     Process ${result_register}
-    ${result} =  Run Buffered Process    echo -ne '\n' | resin os configure ${image} ${result_register.stdout}    shell=yes
+    ${result} =  Run Process    echo -ne '\n' | resin os configure ${image} ${result_register.stdout}    shell=yes
     Process ${result}
     Return From Keyword    ${result_register.stdout}
 
-Device "${device_uuid}" is online
-    ${result} =  Run Buffered Process    resin device ${device_uuid} | grep ONLINE    shell=yes
+Get "${device_info}" of device "${device_uuid}"
+    [Documentation]    Available values for argument ${device_info} are:
+    ...                ID, DEVICE TYPE, STATUS, IS ONLINE, IP ADDRESS, APPLICATION NAME, UUID, COMMIT,
+    ...                SUPERVISOR VERSION, IS WEB ACCESSIBLE, OS VERSION
+    @{list} =  Create List    ID    DEVICE TYPE    STATUS    IS ONLINE    IP ADDRESS    APPLICATION NAME    UUID    COMMIT    SUPERVISOR VERSION    IS WEB ACCESSIBLE    OS VERSION
+    Should Contain    ${list}    ${device_info}
+    ${result} =  Run Keyword If    '${device_info}' == 'OS VERSION'    Run Process    resin device ${device_uuid} | sed -n -e 's/^.*Resin OS //p' | cut -d ' ' -f 1     shell=yes
+    ...    ELSE
+    ...    Run Process    resin device ${device_uuid} | grep -w "${device_info}" | cut -d ':' -f 2 | sed 's/ //g'    shell=yes
+   Process ${result}
+   [Return]    ${result.stdout}
+
+Get "${application_info}" from application "${application_name}"
+    [Documentation]    Available values for argument ${application_info} are:
+    ...                ID, APP_NAME, DEVICE_TYPE, ONLINE_DEVICES, DEVICES_LENGTH
+    &{dictionary} =  Create Dictionary    ID=1    APP_NAME=2    DEVICE_TYPE=3    ONLINE_DEVICES=4    DEVICES_LENGTH=5
+    ${result} =  Run Process    resin apps | grep -w "${application_name}" | awk '{print $${dictionary.${application_info}}}'    shell=yes
     Process ${result}
-    Should Contain    ${result.stdout}    true
+    [Return]    ${result.stdout}
+
+Device "${device_uuid}" is online
+    ${result} =  Get "IS ONLINE" of device "${device_uuid}"
+    Should Contain    ${result}    true
 
 Device "${device_uuid}" is offline
-    ${result} =  Run Buffered Process    resin device ${device_uuid} | grep ONLINE    shell=yes
-    Process ${result}
-    Should Contain    ${result.stdout}    false
+    ${result} =  Get "IS ONLINE" of device "${device_uuid}"
+    Should Contain    ${result}    false
 
 Device "${device_uuid}" log should contain "${value}"
     ${result} =  Run Buffered Process    resin logs ${device_uuid}    shell=yes
@@ -83,26 +101,25 @@ Device "${device_uuid}" log should not contain "${value}"
     Should Not Contain    ${result.stdout}    ${value}
 
 Check if host OS version of device "${device_uuid}" is "${os_version}"
-    ${result} =  Run Buffered Process    resin device ${device_uuid} | sed -n -e 's/^.*Resin OS //p' | cut -d ' ' -f 1     shell=yes
-    Process ${result}
-    Should Contain    ${result.stdout}    ${os_version}
+    ${result} =  Get "OS VERSION" of device "${device_uuid}"
+    Should Contain    ${result}    ${os_version}
 
 Add ENV variable "${variable_name}" with value "${variable_value}" to application "${application_name}"
-    ${result} =  Run Buffered Process    resin env add ${variable_name} ${variable_value} -a ${application_name}    shell=yes
+    ${result} =  Run Process    resin env add ${variable_name} ${variable_value} -a ${application_name}    shell=yes
     Process ${result}
 
 Check if ENV variable "${variable_name}" with value "${variable_value}" exists in application "${application_name}"
-    ${result_env} =  Run Buffered Process    resin envs -a ${application_name} --verbose | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
+    ${result_env} =  Run Process    resin envs -a ${application_name} --verbose | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
     Process ${result_env}
-    ${result} =  Run Buffered Process    echo "${result_env.stdout}" | grep ${variable_name} | grep " ${variable_value}"    shell=yes
+    ${result} =  Run Process    echo "${result_env.stdout}" | grep ${variable_name} | grep " ${variable_value}"    shell=yes
     Process ${result}
 
 Remove ENV variable "${variable_name}" from application "${application_name}"
-    ${result_vars} =  Run Buffered Process    resin envs -a ${application_name} --verbose | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'   shell=yes
+    ${result_vars} =  Run Process    resin envs -a ${application_name} --verbose | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'   shell=yes
     Process ${result_vars}
-    ${result_id} =  Run Buffered Process    echo "${result_vars.stdout}" | grep ${variable_name} | cut -d ' ' -f 1    shell=yes
+    ${result_id} =  Run Process    echo "${result_vars.stdout}" | grep ${variable_name} | cut -d ' ' -f 1    shell=yes
     Process ${result_id}
-    ${result} =  Run Buffered Process    resin env rm ${result_id.stdout} --yes     shell=yes
+    ${result} =  Run Process    resin env rm ${result_id.stdout} --yes     shell=yes
     Process ${result}
 
 "${item}" public URL for device "${device_uuid}"
@@ -110,9 +127,9 @@ Remove ENV variable "${variable_name}" from application "${application_name}"
     ...                enable, disable, status, get
     @{list} =  Create List    enable    disable    status    get
     Should Contain    ${list}    ${item}
-    ${result} =  Run Keyword If    '${item}' == 'get'    Run Buffered Process    resin device public-url ${device_uuid}    shell=yes
+    ${result} =  Run Keyword If    '${item}' == 'get'    Run Process    resin device public-url ${device_uuid}    shell=yes
     ...    ELSE
-    ...    Run Buffered Process    resin device public-url ${item} ${device_uuid}    shell=yes
+    ...    Run Process    resin device public-url ${item} ${device_uuid}    shell=yes
     Process ${result}
     [Return]    ${result.stdout}
 
@@ -149,19 +166,24 @@ Check enabling supervisor delta on "${application_name}"
     [Teardown]    Run Keyword    Remove Directory    /tmp/${random}    recursive=True
 
 Add console output "${message}" to "${directory}"
-    ${result} =  Run Buffered Process    git config --global user.email "%{email}"    shell=yes    cwd=${directory}
+    ${result} =  Run Process    git config --global user.email "%{email}"    shell=yes    cwd=${directory}
     Process ${result}
-    ${result} =  Run Buffered Process    sed -ie 's/Hello World!/${message}/g' start.sh    shell=yes    cwd=${directory}
+    ${result} =  Run Process    sed -ie 's/Hello World!/${message}/g' start.sh    shell=yes    cwd=${directory}
     Process ${result}
-    ${result} =  Run Buffered Process    git add .    shell=yes    cwd=${directory}
+    ${result} =  Run Process    git add .    shell=yes    cwd=${directory}
     Process ${result}
-    ${result} =  Run Buffered Process    git commit -m "Console message added: ${message}"    shell=yes    cwd=${directory}
+    ${result} =  Run Process    git commit -m "Console message added: ${message}"    shell=yes    cwd=${directory}
     Process ${result}
 
 Get the last git commit from "${directory}"
     ${result} =  Run Buffered Process    git log | grep commit | head -1 | cut -d ' ' -f 2    shell=yes    cwd=${directory}
     Process ${result}
     [Return]    ${result.stdout}
+
+Check that "${device_uuid}" does not return "${interface}" IP address through API using socket "${socket}"
+    ${ip_address} =    Get "${interface}" IP address using socket "${socket}"
+    ${ip_address_device} =    Get "IP ADDRESS" of device "${device_uuid}"
+    Should Not Contain    ${ip_address_device}    ${ip_address}    msg=Device ${device_uuid} is returning the ${interface} IP address
 
 Shutdown resin device "${device_uuid}"
     ${result} =  Run Buffered Process    resin device shutdown ${device_uuid}    shell=yes
@@ -170,7 +192,7 @@ Shutdown resin device "${device_uuid}"
 Run Buffered Process
     [Arguments]    ${command}    ${shell}    ${cwd}=${EXECDIR}    ${timeout}=30min
     ${random} =  Evaluate    random.randint(0, sys.maxint)    modules=random, sys
-    ${result} =  Run Process    ${command}    shell=${shell}    cwd=${cwd}    stdout=/tmp/autohat.${random}.stdout    stderr=/tmp/autohat.${random}.stderr
+    ${result} =  Run Process    ${command}    shell=${shell}    cwd=${cwd}    timeout=${timeout}    stdout=/tmp/autohat.${random}.stdout    stderr=/tmp/autohat.${random}.stderr
     [Return]    ${result}
 
 Process ${result}
