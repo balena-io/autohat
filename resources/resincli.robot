@@ -134,7 +134,10 @@ Check enabling supervisor delta on "${application_name}"
     Device "${device_uuid}" log should not contain "Killing application"
     ${random} =  Evaluate    random.randint(0, sys.maxint)    modules=random, sys
     Git clone "${application_repo}" "/tmp/${random}"
+    Git checkout "${application_commit}" "/tmp/${random}"
     Add console output "Grettings World!" to "/tmp/${random}"
+    ${last_commit} =    Get the last git commit from "/tmp/${random}"
+    Git checkout "${last_commit}" "/tmp/${random}"
     Git push "/tmp/${random}" to application "${application_name}"
     Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Grettings World!"
     Check if ENV variable "RESIN_SUPERVISOR_DELTA" with value "1" exists in application "${application_name}"
@@ -144,12 +147,17 @@ Check enabling supervisor delta on "${application_name}"
 Add console output "${message}" to "${directory}"
     ${result} =  Run Process    git config --global user.email "%{email}"    shell=yes    cwd=${directory}
     Process ${result}
-    ${result} =  Run Process    sed -i '3i echo \"${message}\"' start.sh    shell=yes    cwd=${directory}
+    ${result} =  Run Process    sed -i '6i echo \"${message}\"' start.sh    shell=yes    cwd=${directory}
     Process ${result}
     ${result} =  Run Process    git add .    shell=yes    cwd=${directory}
     Process ${result}
     ${result} =  Run Process    git commit -m "Console message added"    shell=yes    cwd=${directory}
     Process ${result}
+
+Get the last git commit from "${directory}"
+    ${result} =  Run Process    git log | grep commit | head -1 | cut -d ' ' -f 2    shell=yes    cwd=${directory}
+    Process ${result}
+    [Return]    ${result.stdout}
 
 Shutdown resin device "${device_uuid}"
     ${result} =  Run Process    resin device shutdown ${device_uuid}    shell=yes
