@@ -25,6 +25,8 @@ The resources directory contains Robot Keyword helpers for ``resincli`` and hard
 
 * Create a `env.list` with all the environment variables needed to run the tests - Please check `env.list.example` for a sample environment file.
 
+    * **WARNING!** The application name given needs to be unique as the test suite will delete and recreate any existing application and key of the same name in the settings.
+
 * Load the KVM module
 
 * Execute the following to run an example test against the resin-qemux86 or resin-qemux86-64 image you just downloaded.
@@ -46,6 +48,8 @@ The resources directory contains Robot Keyword helpers for ``resincli`` and hard
 * Create a `env.list` with all the environment variables needed to run the tests - Please check `env.list.example` for a sample environment file.
 
 	* Please make sure that the ``rig_device_id``, ``rig_sd_card`` match your rig's FTDI serial, the SD card path respectively
+
+    * **WARNING!** The application name given needs to be unique as the test suite will delete and recreate any existing application and key of the same name in the settings.
 
 * Execute the following to run an example test against the raspberrypi3 image you just downloaded.
 
