@@ -1,6 +1,7 @@
 Change log
 -----------
 
+* 	Bump etcher to v1.0.0-beta.18 [Praneeth]
 * 	Fixing keyword that verifies delta to a running supervisor [Horia]
 * 	Fixing keyword that did not push the correct commit [Horia]
 * 	Fixing tests to fail properly if environment variables are not provided [Horia]
