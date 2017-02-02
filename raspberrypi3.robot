@@ -14,7 +14,7 @@ Preparing test environment
   Set Suite Variable    ${image}    %{image}
   File Should Exist     ${image}  msg="Provided images file does not exist"
   Set Suite Variable    ${application_repo}    https://github.com/resin-io/autohat-ondevice.git
-  Set Suite Variable    ${application_commit}  232e26aad374b2afd19c5608663545c2430e2b15
+  Set Suite Variable    ${application_commit}  430cbe53d5582a03a503357e7cfde90d3aa8aee2
   Resin login with email "%{email}" and password "%{password}"
   Set Suite Variable    ${rig_sd_card}    %{rig_sd_card}
   ${create_application} =    Get Environment Variable    CREATE_APPLICATION    default=True
