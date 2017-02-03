@@ -1,0 +1,3 @@
+SUBSYSTEM=="block", ATTRS{idVendor}=="0451", ATTRS{idProduct}=="8142", SYMLINK+="disk_%s{serial}%n"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0451", ATTRS{idProduct}=="8142", SYMLINK+="ttyUSB_%s{serial}"
+

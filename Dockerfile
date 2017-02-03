@@ -12,6 +12,8 @@ RUN apt-get update && apt-get install -y qemu-system-x86 rsync qemu-kvm minicom 
 
 ADD fixtures/ssh_config /root/.ssh/config
 
+ADD udev_rules/autohat.rules /etc/udev/rules.d/
+
 RUN chmod 400 /root/.ssh/*
 
 CMD ['/bin/bash']
