@@ -54,6 +54,13 @@ Git push "${directory}" to application "${application_name}"
     ${result} =  Run Process    git push resin HEAD:refs/heads/master    shell=yes    cwd=${directory}
     Process ${result}
 
+Git push force "${directory}" to application "${application_name}"
+    Set Environment Variable    RESINUSER    ${RESINUSER}
+    ${result} =  Run Process    git remote add resin $RESINUSER@git.${RESINRC_RESIN_URL}:$RESINUSER/${application_name}.git    shell=yes    cwd=${directory}
+    Process ${result}
+    ${result} =  Run Process    git push resin HEAD:refs/heads/master -f    shell=yes    cwd=${directory}
+    Process ${result}
+
 Configure "${image}" with "${application_name}"
     File Should Exist     ${image}  msg="Provided images file does not exist"
     ${result_register} =  Run Process    resin device register ${application_name} | cut -d ' ' -f 4    shell=yes
@@ -142,14 +149,37 @@ Check enabling supervisor delta on "${application_name}"
     Remove ENV variable "RESIN_SUPERVISOR_DELTA" from application "${application_name}"
     [Teardown]    Run Keyword    Remove Directory    /tmp/${random}    recursive=True
 
+Test update strategy "${update_strategy}" to application "${application_name}"
+    Add ENV variable "RESIN_SUPERVISOR_UPDATE_STRATEGY" with value "${update_strategy}" to application "${application_name}"
+    Check if ENV variable "RESIN_SUPERVISOR_UPDATE_STRATEGY" with value "${update_strategy}" exists in application "${application_name}"
+    ${random} =  Evaluate    random.randint(0, sys.maxint)    modules=random, sys
+    Git clone "${application_repo}" "/tmp/${random}"
+    Git checkout "${application_commit}" "/tmp/${random}"
+    Add console output "Update strategy: ${update_strategy}" to "/tmp/${random}"
+    ${last_commit} =    Get the last git commit from "/tmp/${random}"
+    Git checkout "${last_commit}" "/tmp/${random}"
+    Run Keyword If    '${update_strategy}' == 'hand-over'    Run command "killall python" on device using socket "unix\#/tmp/console.sock"
+    Run Keyword If    '${update_strategy}' == 'hand-over'    Add ENV variable "RESIN_SUPERVISOR_HANDOVER_TIMEOUT" with value "600" to application "${application_name}"
+    Run Keyword If    '${update_strategy}' == 'hand-over'    Check if ENV variable "RESIN_SUPERVISOR_HANDOVER_TIMEOUT" with value "600" exists in application "${application_name}"
+    Git push force "/tmp/${random}" to application "${application_name}"
+    Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Update strategy: ${update_strategy}"
+    ${result} =  Run Keyword If    '${update_strategy}' == 'hand-over'    Run Process    resin logs ${device_uuid} | grep -B30 "Killing application" -s | tail -30 | grep -A30 "Updating config" | awk -F '\\)\ ' '{print $2'} > test_file_${update_strategy}    shell=yes    cwd=/tmp
+    ...    ELSE    Run Process    resin logs ${device_uuid} | grep -B30 "Started application" -s | tail -30 | grep -A30 "Updating" | awk -F '\\)\ ' '{print $2'} > test_file_${update_strategy}    shell=yes    cwd=/tmp
+    Process ${result}
+    ${result} =  Run Process    python    /autohat/libraries/FileComparator.py    /autohat/libraries/template_${update_strategy}    /tmp/test_file_${update_strategy}    shell=yes
+    Process ${result}
+    [Teardown]    Run Keywords    Remove Directory    /tmp/${random}    recursive=True
+    ...           AND             Remove ENV variable "RESIN_SUPERVISOR_UPDATE_STRATEGY" from application "${application_name}"
+    ...           AND             Run Keyword If    '${update_strategy}' == 'hand-over'    Remove ENV variable "RESIN_SUPERVISOR_HANDOVER_TIMEOUT" from application "${application_name}"
+
 Add console output "${message}" to "${directory}"
     ${result} =  Run Process    git config --global user.email "%{email}"    shell=yes    cwd=${directory}
     Process ${result}
-    ${result} =  Run Process    sed -i '6i echo \"${message}\"' start.sh    shell=yes    cwd=${directory}
+    ${result} =  Run Process    sed -ie 's/Hello World!/${message}/g' start.sh    shell=yes    cwd=${directory}
     Process ${result}
     ${result} =  Run Process    git add .    shell=yes    cwd=${directory}
     Process ${result}
-    ${result} =  Run Process    git commit -m "Console message added"    shell=yes    cwd=${directory}
+    ${result} =  Run Process    git commit -m "Console message added: ${message}"    shell=yes    cwd=${directory}
     Process ${result}
 
 Get the last git commit from "${directory}"
