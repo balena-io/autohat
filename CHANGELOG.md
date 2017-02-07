@@ -1,6 +1,7 @@
 Change log
 -----------
 
+* 	Add test case that checks the update strategies of Resin Supervisor [Horia]
 * 	Test case that provides a device to the application that already has delta enabled [Horia]
 * 	Fixing keyword that fails if duplicate names are found in resin keys. Also, adding disclaimer as warning [Horia]
 * 	Changing resin-cli version to v.5.2.4 [Horia]
