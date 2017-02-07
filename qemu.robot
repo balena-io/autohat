@@ -49,6 +49,11 @@ Git pushing to application
   Git push "/tmp/${application_name}" to application "${application_name}"
 Checking if device is running the pushed application (Tries for 300 s)
   Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Hello"
+Checking update strategies
+  Test update strategy "kill-then-download" to application "${application_name}"
+  Test update strategy "download-then-kill" to application "${application_name}"
+  Test update strategy "delete-then-download" to application "${application_name}"
+  Test update strategy "hand-over" to application "${application_name}"
 Providing a device to the application with delta already enabled
   Run "${image}" on "${application_name}" with delta already enabled
 Checking if kernel module loading works
