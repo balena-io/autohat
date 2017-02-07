@@ -86,6 +86,13 @@ Check if service "${service}" is running using socket "${socket}"
     Should Contain    ${result.stdout}    active
     Process ${result}
 
+Run command "${command}" on device using socket "${socket}"
+    ${result} =  Run Process    echo "send root\nsend ${command}" > minicom_script.sh    shell=yes    cwd=/tmp/enable_getty_service
+    Process ${result}
+    Run Process    minicom -D ${socket} -S /tmp/enable_getty_service/minicom_script.sh -C /tmp/enable_getty_service/minicom_output.txt    shell=yes   cwd=/tmp    timeout=1s
+    File Should Not Be Empty    /tmp/enable_getty_service/minicom_output.txt
+    Process ${result}
+
 Check that backup files are not found in the "${image}"
     ${LOOPDEVICE} =   Set up loop device for "${image}"
     ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
