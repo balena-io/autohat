@@ -1,0 +1,17 @@
+Killing application '(?P<old_app_name>.+)'\n
+(.*\n)*
+Application exited '(?P=old_app_name)'\n
+(.*\n)*
+Killed application '(?P=old_app_name)'\n
+(.*\n)*
+Downloading application '(?P<new_app_name>.+)'\n
+(.*\n)*
+Downloaded application '(?P=new_app_name)'\n
+(.*\n)*
+Installing application '(?P=new_app_name)'\n
+(.*\n)*
+Installed application '(?P=new_app_name)'\n
+(.*\n)*
+Starting application '(?P=new_app_name)'\n
+(.*\n)*
+Started application '(?P=new_app_name)'
