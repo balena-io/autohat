@@ -1,7 +1,6 @@
 """
 RigControl - A simple interface to control AutoHat device testing rig.
 """
-from pylibftdi.util import Bus
 from pylibftdi import BitBangDevice
 
 
@@ -9,17 +8,12 @@ class RigControl(object):
     """Simple class to provide direct access to FTDI GPIOs on the rig
        Everything is active towards the Device Under Test (DUT) when LOW.
     """
-    sd_select = Bus(0)  # DUT connected to sdcard on LOW
-    usb_select = Bus(3)  # USB on DUT side connected on LOW
-    power_select = Bus(4)  # DUT Powered on when LOW
-    d0 = Bus(0)
-    d1 = Bus(1)
-    d2 = Bus(2)
-    d3 = Bus(3)
-    d4 = Bus(4)
-    d5 = Bus(5)
-    d6 = Bus(6)
-    d7 = Bus(7)
+
+    sd_select = 0  # DUT connected to sdcard on LOW
+    patch_select = 1 # Workaround for patched SD power
+    usb_select = 3  # USB on DUT side connected on LOW
+    power_select = 4  # DUT Powered on when LOW
+
     __version__ = '0.1'
 
     def __init__(self, **kwargs):
@@ -33,9 +27,10 @@ class RigControl(object):
             Connects SD card to Device Under Test (DUT)
             Powers ON the DUT
         """
-        self.usb_select = 0
-        self.sd_select = 0
-        self.power_select = 0
+        self.clear_pin(self.sd_select)
+        self.clear_pin(self.usb_select)
+        self.set_pin(self.patch_select)
+        self.clear_pin(self.power_select)
 
     def disable_dut(self):
         """ Powers OFF the DUT
@@ -43,6 +38,27 @@ class RigControl(object):
             Connects the HOST to the USB located away from DUT
             (SDcard reader present on this USB)
         """
-        self.power_select = 1
-        self.sd_select = 1
-        self.usb_select = 1
+        self.set_pin(self.power_select)
+        self.clear_pin(self.patch_select)
+        self.set_pin(self.sd_select)
+        self.set_pin(self.usb_select)
+
+    def set_pin(self, pin):
+        """ Sets the pin selected (High,5v)
+        """
+        self.device.port |= (1 << int(pin))
+
+    def clear_pin(self, pin):
+        """ Clears the pin selected (Low,0v)
+        """
+        self.device.port &= ~(1 << int(pin))
+
+    def set_output(self, pin):
+        """ Sets the pin selected as an output
+        """
+        self.device.direction |= (1 << int(pin))
+
+    def set_input(self,pin):
+        """ Sets the pin selected as an input
+        """
+        self.device.direction &= ~(1 << int(pin))
