@@ -9,12 +9,11 @@ Library   Collections
 
 *** Keywords ***
 Set up loop device for "${path_to_image}"
-    ${result} =  Run Process    losetup -f -P ${path_to_image}    shell=yes
+    ${result} =  Run Process    losetup --show --find --partscan ${path_to_image}    shell=yes
     Process ${result}
-    ${result_loop} =  Run Process    lsblk | grep 7: | tail -1 | awk -F: '{ print $2 }' | cut -d ' ' -f 1    shell=yes
-    Process ${result_loop}
-    Should Not Be Empty     ${result_loop.stdout}   msg="Couldn't find the loop device"
-    [Return]    ${result_loop.stdout}
+    Should Not Be Empty     ${result.stdout}   msg="Couldn't find the loop device"
+    ${LOOPDEVICE} =  Replace String    ${result.stdout}   dev   dev2
+    [Return]    ${LOOPDEVICE}
 
 Mount "${path}" on "${mount_destination}"
     ${result} =  Run Process    mount ${path} ${mount_destination}      shell=yes
@@ -26,7 +25,7 @@ Check host OS fingerprint file in "${image}"
     Set Test Variable    ${mount_destination}    /tmp/${random}
     Set Test Variable    ${fingerprint_file}    ${mount_destination}/resin-root.fingerprint
     Create Directory    ${mount_destination}
-    Mount "/dev2/loop${LOOPDEVICE}p2" on "${mount_destination}"
+    Mount "${LOOPDEVICE}p2" on "${mount_destination}"
     File Should Exist   ${fingerprint_file}     msg=Couldn't find resin-root.fingerprint file in ${mount_destination}
     ${content} =  Get File  ${fingerprint_file}
     @{lines} =  Split To Lines  ${content}
@@ -38,7 +37,7 @@ Check host OS fingerprint file in "${image}"
     \   Should Contain     ${First}   ${md5sum.stdout}    msg=${mount_destination}${Second} has MD5=${md5sum.stdout} when it should be ${First}
     [Teardown]    Run Keywords    Unmount "${mount_destination}"
     ...           AND             Remove Directory    ${mount_destination}    recursive=True
-    ...           AND             Detach loop device "/dev2/loop${LOOPDEVICE}"
+    ...           AND             Detach loop device "${LOOPDEVICE}"
 
 Get host OS version of "${image}"
     ${LOOPDEVICE} =   Set up loop device for "${image}"
@@ -46,14 +45,14 @@ Get host OS version of "${image}"
     Set Test Variable    ${mount_destination}    /tmp/${random}
     Set Test Variable    ${path_to_os_version}   ${mount_destination}/etc/os-release
     Create Directory    ${mount_destination}
-    Mount "/dev2/loop${LOOPDEVICE}p2" on "${mount_destination}"
+    Mount "${LOOPDEVICE}p2" on "${mount_destination}"
     ${result} =  Run Process    cat ${path_to_os_version} | grep VERSION | head -1 | cut -d '"' -f 2    shell=yes
     Process ${result}
     Should Not Be Empty     ${result.stdout}    msg="Could not get OS version from ${path_to_os_version}"
     [Return]    ${result.stdout}
     [Teardown]    Run Keywords    Unmount "${mount_destination}"
     ...           AND             Remove Directory    ${mount_destination}    recursive=True
-    ...           AND             Detach loop device "/dev2/loop${LOOPDEVICE}"
+    ...           AND             Detach loop device "${LOOPDEVICE}"
 
 File list "@{files_list}" does not exist in "${mount_destination}"
     : FOR   ${files_line}     IN  @{files_list}
@@ -64,7 +63,7 @@ Enable getty service on "${image}" for "${device_type}"
     ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
     Create Directory    ${mount_destination}
-    Mount "/dev2/loop${LOOPDEVICE}p2" on "${mount_destination}"
+    Mount "${LOOPDEVICE}p2" on "${mount_destination}"
     Remove Directory    /tmp/enable_getty_service    recursive=True
     ${result} =  Run Process    git clone https://github.com/resin-os/serial-it.git /tmp/enable_getty_service    shell=yes
     Process ${result}
@@ -72,7 +71,7 @@ Enable getty service on "${image}" for "${device_type}"
     Process ${result}
     [Teardown]    Run Keywords    Unmount "${mount_destination}"
     ...           AND             Remove Directory    ${mount_destination}    recursive=True
-    ...           AND             Detach loop device "/dev2/loop${LOOPDEVICE}"
+    ...           AND             Detach loop device "${LOOPDEVICE}"
 
 Check if service "${service}" is running using socket "${socket}"
     ${result} =  Run Process    echo "send root\nsend systemctl status ${service}" > minicom_script.sh    shell=yes    cwd=/tmp/enable_getty_service
@@ -88,12 +87,12 @@ Check that backup files are not found in the "${image}"
     ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
     Create Directory    ${mount_destination}
-    Mount "/dev2/loop${LOOPDEVICE}p2" on "${mount_destination}"
+    Mount "${LOOPDEVICE}p2" on "${mount_destination}"
     Set Test Variable    @{files_list}  /etc/shadow-     /etc/passwd-     /etc/group-   /etc/gshadow-
     File list "@{files_list}" does not exist in "${mount_destination}"
     [Teardown]    Run Keywords    Unmount "${mount_destination}"
     ...           AND             Remove Directory    ${mount_destination}    recursive=True
-    ...           AND             Detach loop device "/dev2/loop${LOOPDEVICE}"
+    ...           AND             Detach loop device "${LOOPDEVICE}"
 
 Check if kernel module loading works on "${device_uuid}"
     ${address} =    Get public address of device "${device_uuid}"

@@ -1,0 +1,13 @@
+[Unit]
+Description=Mount devtmpfs on /dev2
+DefaultDependencies=no
+Before=umount.target
+Conflicts=umount.target
+
+[Mount]
+What=none
+Where=/dev2
+Type=devtmpfs
+
+[Install]
+WantedBy=multi-user.target

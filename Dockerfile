@@ -14,6 +14,10 @@ ADD fixtures/ssh_config /root/.ssh/config
 
 ADD udev_rules/autohat.rules /etc/udev/rules.d/
 
+ADD services/dev2.mount /etc/systemd/system/
+
+RUN systemctl enable dev2.mount
+
 RUN chmod 400 /root/.ssh/*
 
 CMD ['/bin/bash']
