@@ -1,6 +1,7 @@
 Change log
 -----------
 
+* 	Modify losetup process in resinos.robot to prevent race conditions and add devtmpfs mounts when run with systemd [Praneeth]
 * 	Modify RigControl Library to include support for the patch [Praneeth]
 * 	Add udevd rules for enabling sd card reader symlink by board serial number [Praneeth]
 * 	Bump etcher to v1.0.0-beta.18 [Praneeth]
