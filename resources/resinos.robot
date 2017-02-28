@@ -23,10 +23,10 @@ Check host OS fingerprint file in "${image}"
     ${LOOPDEVICE} =   Set up loop device for "${image}"
     ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
-    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resin-root.fingerprint
+    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resinos.fingerprint
     Create Directory    ${mount_destination}
     Mount "${LOOPDEVICE}p2" on "${mount_destination}"
-    File Should Exist   ${fingerprint_file}     msg=Couldn't find resin-root.fingerprint file in ${mount_destination}
+    File Should Exist   ${fingerprint_file}     msg=Couldn't find resinos.fingerprint file in ${mount_destination}
     ${content} =  Get File  ${fingerprint_file}
     @{lines} =  Split To Lines  ${content}
     : FOR   ${line}     IN  @{lines}

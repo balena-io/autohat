@@ -1,6 +1,7 @@
 Change log
 -----------
 
+* 	Various fixes due to changes in operating system [Andrei]
 * 	Rewrite test cases to keep consistency of its names [Horia]
 * 	Modify losetup process in resinos.robot to prevent race conditions and add devtmpfs mounts when run with systemd [Praneeth]
 * 	Modify RigControl Library to include support for the patch [Praneeth]
