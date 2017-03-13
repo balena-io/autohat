@@ -23,7 +23,11 @@ Check host OS fingerprint file in "${image}"
     ${LOOPDEVICE} =   Set up loop device for "${image}"
     ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
-    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resinos.fingerprint
+    ${host_os_version} =   Get host OS version of "${image}"
+    @{host_os_dict} =   Split String    ${host_os_version}    .
+    ${host_os_major} =   Get From List    ${host_os_dict}    0
+    Run Keyword If    '${host_os_major}' == '1'    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resin-root.fingerprint
+    Run Keyword If    '${host_os_major}' == '2'    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resinos.fingerprint
     Create Directory    ${mount_destination}
     Mount "${LOOPDEVICE}p2" on "${mount_destination}"
     File Should Exist   ${fingerprint_file}     msg=Couldn't find resinos.fingerprint file in ${mount_destination}
