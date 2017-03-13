@@ -1,6 +1,7 @@
 Change log
 -----------
 
+* 	Fix Host OS Fingerprint test to work with both Resin OS 1.0 and 2.0 [Praneeth]
 * 	Various fixes due to changes in operating system [Andrei]
 * 	Rewrite test cases to keep consistency of its names [Horia]
 * 	Modify losetup process in resinos.robot to prevent race conditions and add devtmpfs mounts when run with systemd [Praneeth]
