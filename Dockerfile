@@ -4,7 +4,7 @@ FROM resin/nuc-node:6-20161215
 RUN apt-get update && apt-get install -y qemu-system-x86 rsync qemu-kvm minicom libftdi-dev python-pip && \
     rm -rf /var/lib/apt/lists/* && \
     pip install --upgrade pip && \
-    pip install robotframework==3.0 requests==2.4.3 robotframework-requests==0.4.5 pylibftdi==0.15.0 && \
+    pip install robotframework==3.0.2 requests==2.4.3 robotframework-requests==0.4.5 pylibftdi==0.15.0 && \
     npm install --global resin-cli@5.7.1 && \
     git clone --depth 1  --branch v1.0.0-beta.18 https://github.com/resin-io/etcher.git && cd /etcher && \
     npm install --production && \
