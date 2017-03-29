@@ -4,7 +4,8 @@ Resource  resources/resincli.robot
 Resource  resources/qemu.robot
 Resource  resources/resinos.robot
 Resource  resources/kernel.robot
-Suite Teardown    Terminate All Processes    kill=True
+Suite Teardown    Run Keywords    Terminate All Processes    kill=True
+...               AND             Remove Files    /tmp/resin*.img
 
 *** Test Cases ***
 Preparing test environment
@@ -48,6 +49,8 @@ Git pushing to application
   Git push "/tmp/${application_name}" to application "${application_name}"
 Checking if device is running the pushed application (Tries for 300 s)
   Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Hello"
+Providing a device to the application with delta already enabled
+  Run "${image}" on "${application_name}" with delta already enabled
 Checking if kernel module loading works
   Check if kernel module loading works on "${device_uuid}"
 #Checking delta to a running supervisor

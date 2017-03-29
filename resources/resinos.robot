@@ -103,6 +103,18 @@ Check if kernel module loading works on "${device_uuid}"
     Wait Until Keyword Succeeds    6x    5s    Load "media" kernel module to device through "${address}"
     Wait Until Keyword Succeeds    6x    5s    Check if "media" kernel module is loaded through "${address}"
 
+Run "${image}" on "${application_name}" with delta already enabled
+    Add ENV variable "RESIN_SUPERVISOR_DELTA" with value "1" to application "${application_name}"
+    ${tmp_device_uuid} =    Configure "${image}" with "${application_name}"
+    ${handle} =    Run "${image}" with "512" MB memory "2" cpus and "/tmp/console.sock" serial port
+    Wait Until Keyword Succeeds    6x    10s    Device "${tmp_device_uuid}" is online
+    Wait Until Keyword Succeeds    30x    10s    Device "${tmp_device_uuid}" log should contain "Hello"
+    Check if ENV variable "RESIN_SUPERVISOR_DELTA" with value "1" exists in application "${application_name}"
+    Remove ENV variable "RESIN_SUPERVISOR_DELTA" from application "${application_name}"
+    Shutdown resin device "${tmp_device_uuid}"
+    Wait Until Keyword Succeeds    6x    3s    Device "${tmp_device_uuid}" is offline
+    Wait For Process    handle=${handle}    timeout=30s    on_timeout=terminate
+
 Unmount "${path}"
     ${result} =  Run Process    umount ${path}     shell=yes
     Process ${result}
