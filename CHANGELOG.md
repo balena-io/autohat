@@ -1,6 +1,7 @@
 Change log
 -----------
 
+* 	Fixing keyword that fails if duplicate names are found in resin keys. Also, adding disclaimer as warning [Horia]
 * 	Changing resin-cli version to v.5.2.4 [Horia]
 * 	Fix Host OS Fingerprint test to work with both Resin OS 1.0 and 2.0 [Praneeth]
 * 	Various fixes due to changes in operating system [Andrei]
