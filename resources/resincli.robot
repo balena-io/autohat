@@ -83,7 +83,7 @@ Device "${device_uuid}" log should not contain "${value}"
     Should Not Contain    ${result.stdout}    ${value}
 
 Check if host OS version of device "${device_uuid}" is "${os_version}"
-    ${result} =  Run Process    resin device ${device_uuid} | grep OS | rev | cut -d ' ' -f 1 | rev     shell=yes
+    ${result} =  Run Process    resin device ${device_uuid} | sed -n -e 's/^.*Resin OS //p' | cut -d ' ' -f 1     shell=yes
     Process ${result}
     Should Contain    ${result.stdout}    ${os_version}
 

@@ -1,6 +1,7 @@
 Change log
 -----------
 
+* 	Fix Host OS version to be agnostic to keywords appened after the OS version [Praneeth]
 * 	Test case that provides a device to the application that already has delta enabled [Horia]
 * 	Fixing keyword that fails if duplicate names are found in resin keys. Also, adding disclaimer as warning [Horia]
 * 	Changing resin-cli version to v.5.2.4 [Horia]
