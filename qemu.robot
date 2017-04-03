@@ -17,7 +17,7 @@ Preparing test environment
   Set Suite Variable    ${image}    %{image}
   File Should Exist     ${image}  msg="Provided images file does not exist"
   Set Suite Variable    ${application_repo}    https://github.com/resin-io/autohat-ondevice.git
-  Set Suite Variable    ${application_commit}  430cbe53d5582a03a503357e7cfde90d3aa8aee2
+  Set Suite Variable    ${application_commit}  370cc57e4dbd1fa5fcfd9b8faa599d0c717ea8ea
   Resin login with email "%{email}" and password "%{password}"
   ${create_application} =    Get Environment Variable    CREATE_APPLICATION    default=True
   Set Suite Variable    ${create_application}    ${create_application}
@@ -47,13 +47,15 @@ Checking if device comes online in 60s (Trying every 10s)
 Git pushing to application
   Git clone "${application_repo}" "/tmp/${application_name}"
   Git checkout "${application_commit}" "/tmp/${application_name}"
-  Git push "/tmp/${application_name}" to application "${application_name}"
+  Git push "/tmp/${application_name}" to application "${application_name}" ""
 Checking if device is running the pushed application (Tries for 300 s)
   Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Hello"
 Checking that the device does not return the resin-vpn IP address
   Check that "${device_uuid}" does not return "resin-vpn" IP address through API using socket "unix\#/tmp/console.sock"
 Providing a device to the application with delta already enabled
   Run "${image}" on "${application_name}" with delta already enabled
+Checking API endpoints of resin-supervisor
+  Check API endpoints of resin-supervisor
 Checking if kernel module loading works
   Check if kernel module loading works on "${device_uuid}"
 #Checking delta to a running supervisor
