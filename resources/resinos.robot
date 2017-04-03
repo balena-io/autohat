@@ -100,6 +100,16 @@ Check that backup files are not found in the "${image}"
     ...           AND             Remove Directory    ${mount_destination}    recursive=True
     ...           AND             Detach loop device "${LOOPDEVICE}"
 
+Run command "${command}" on device using socket "${socket}"
+    ${result} =  Run Process    echo "send root\nsend ${command}" > minicom_script_command.sh    shell=yes    cwd=/tmp/enable_getty_service
+    Process ${result}
+    Run Process    minicom -D ${socket} -S /tmp/enable_getty_service/minicom_script_command.sh -C /tmp/enable_getty_service/minicom_output_command.txt    shell=yes   cwd=/tmp    timeout=1s
+    ${result} =  Run Process    cat /tmp/enable_getty_service/minicom_output_command.txt    shell=yes
+    Process ${result}
+    Should Contain    ${result.stdout}    ${command}
+    [Return]    ${result.stdout}
+    [Teardown]    Run Keyword    Remove files    /tmp/enable_getty_service/minicom_script_command.sh    /tmp/enable_getty_service/minicom_output_command.txt
+
 Check if kernel module loading works on "${device_uuid}"
     "enable" public URL for device "${device_uuid}"
     ${result} =  "status" public URL for device "${device_uuid}"
