@@ -41,8 +41,6 @@ Running image
   Set Suite Variable    ${device_qemu_handle}    ${handle}
 Checking if device comes online in 60s (Trying every 10s)
   Wait Until Keyword Succeeds    6x    10s    Device "${device_uuid}" is online
-Checking if resin-info@tty1.service is active
-  Check if service "resin-info@tty1.service" is running using socket "unix\#/tmp/console.sock"
 Git pushing to application
   Git clone "${application_repo}" "/tmp/${application_name}"
   Git checkout "${application_commit}" "/tmp/${application_name}"
