@@ -79,13 +79,14 @@ Enable getty service on "${image}" for "${device_type}"
     ...           AND             Detach loop device "${LOOPDEVICE}"
 
 Check if service "${service}" is running using socket "${socket}"
-    ${result} =  Run Process    echo "send root\nsend systemctl status ${service}" > minicom_script.sh    shell=yes    cwd=/tmp/enable_getty_service
+    ${result} =  Run Process    echo "send root\nsend systemctl status ${service}" > minicom_script_service.sh    shell=yes    cwd=/tmp/enable_getty_service
     Process ${result}
-    Run Process    minicom -D ${socket} -S /tmp/enable_getty_service/minicom_script.sh -C /tmp/enable_getty_service/minicom_output.txt    shell=yes   cwd=/tmp    timeout=1s
-    File Should Not Be Empty    /tmp/enable_getty_service/minicom_output.txt
-    ${result} =  Run Process    cat /tmp/enable_getty_service/minicom_output.txt | grep Active | cut -d ' ' -f 5    shell=yes
-    Should Contain    ${result.stdout}    active
+    Run Process    minicom -D ${socket} -S /tmp/enable_getty_service/minicom_script_service.sh -C /tmp/enable_getty_service/minicom_output_service.txt    shell=yes   cwd=/tmp    timeout=1s
+    ${result} =  Run Process    cat /tmp/enable_getty_service/minicom_output_service.txt    shell=yes
     Process ${result}
+    Should Contain    ${result.stdout}    ${service}    msg=Could not get status of "${service}"
+    Should Contain    ${result.stdout}    Active: active (running)    msg="${service}" is not active
+    [Teardown]    Run Keyword    Remove Files    /tmp/enable_getty_service/minicom_script_service.sh    /tmp/enable_getty_service/minicom_output_service.txt
 
 Check that backup files are not found in the "${image}"
     ${LOOPDEVICE} =   Set up loop device for "${image}"
