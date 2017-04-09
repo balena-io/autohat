@@ -1,6 +1,7 @@
 Change log
 -----------
 
+*	Fix keyword for not checking correctly if a service was active [Horia]
 *	Test case that verifies the OS fingerprint file on resin-boot partition [Horia]
 *	Remove test for resin-info service starting [Will]
 * 	Fix Host OS version to be agnostic to keywords appened after the OS version [Praneeth]
