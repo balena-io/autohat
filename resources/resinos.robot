@@ -19,7 +19,8 @@ Mount "${path}" on "${mount_destination}"
     ${result} =  Run Process    mount ${path} ${mount_destination}      shell=yes
     Process ${result}
 
-Check host OS fingerprint file in "${image}"
+Check host OS fingerprint file in "${image}" on "${partition}" partition
+    &{dict} =  Create Dictionary    boot=1    rootA=2
     ${LOOPDEVICE} =   Set up loop device for "${image}"
     ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
@@ -29,7 +30,7 @@ Check host OS fingerprint file in "${image}"
     Run Keyword If    '${host_os_major}' == '1'    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resin-root.fingerprint
     Run Keyword If    '${host_os_major}' == '2'    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resinos.fingerprint
     Create Directory    ${mount_destination}
-    Mount "${LOOPDEVICE}p2" on "${mount_destination}"
+    Mount "${LOOPDEVICE}p${dict.${partition}}" on "${mount_destination}"
     File Should Exist   ${fingerprint_file}     msg=Couldn't find resinos.fingerprint file in ${mount_destination}
     ${content} =  Get File  ${fingerprint_file}
     @{lines} =  Split To Lines  ${content}
