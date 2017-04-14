@@ -1,6 +1,7 @@
 Change log
 -----------
 
+*	Test case that verifies the OS fingerprint file on resin-boot partition [Horia]
 *	Remove test for resin-info service starting [Will]
 * 	Fix Host OS version to be agnostic to keywords appened after the OS version [Praneeth]
 * 	Test case that provides a device to the application that already has delta enabled [Horia]
