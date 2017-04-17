@@ -101,9 +101,13 @@ Check that backup files are not found in the "${image}"
     ...           AND             Detach loop device "${LOOPDEVICE}"
 
 Check if kernel module loading works on "${device_uuid}"
-    ${address} =    Get public address of device "${device_uuid}"
+    "enable" public URL for device "${device_uuid}"
+    ${result} =  "status" public URL for device "${device_uuid}"
+    Should Contain    ${result}    true
+    ${address} =  "get" public URL for device "${device_uuid}"
     Wait Until Keyword Succeeds    6x    5s    Load "media" kernel module to device through "${address}"
     Wait Until Keyword Succeeds    6x    5s    Check if "media" kernel module is loaded through "${address}"
+    [Teardown]    Run Keyword    "disable" public URL for device "${device_uuid}"
 
 Run "${image}" on "${application_name}" with delta already enabled
     Add ENV variable "RESIN_SUPERVISOR_DELTA" with value "1" to application "${application_name}"
