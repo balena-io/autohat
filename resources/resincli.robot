@@ -105,21 +105,27 @@ Remove ENV variable "${variable_name}" from application "${application_name}"
     ${result} =  Run Process    resin env rm ${result_id.stdout} --yes     shell=yes
     Process ${result}
 
-Get public address of device "${device_uuid}"
-    Run Process    resin device public-url enable ${device_uuid}    shell=yes
-    ${result} =  Run Process    resin device public-url ${device_uuid}    shell=yes
+"${item}" public URL for device "${device_uuid}"
+    [Documentation]    Available items for argument ${item} are:
+    ...                enable, disable, status, get
+    @{list} =  Create List    enable    disable    status    get
+    Should Contain    ${list}    ${item}
+    ${result} =  Run Keyword If    '${item}' == 'get'    Run Process    resin device public-url ${device_uuid}    shell=yes
+    ...    ELSE
+    ...    Run Process    resin device public-url ${item} ${device_uuid}    shell=yes
     Process ${result}
-    Return From Keyword    ${result.stdout}
-
-Synchronize "${device_uuid}" to return "${message}"
-    ${result} =  Run Process    sed -i '3i echo \"${message}\"' start.sh     shell=yes     cwd=/tmp/${application_name}
-    Process ${result}
-    ${result} =  Run Process    resin sync ${device_uuid} -s . -d /usr/src/app    shell=yes    cwd=/tmp/${application_name}
-    Process ${result}
+    [Return]    ${result.stdout}
 
 Check if resin sync works on "${device_uuid}"
-    Synchronize "${device_uuid}" to return "Hello Resin Sync!"
-    Device "${device_uuid}" log should contain "Hello Resin Sync!"
+    ${random} =  Evaluate    random.randint(0, sys.maxint)    modules=random, sys
+    Git clone "${application_repo}" "/tmp/${random}"
+    Git checkout "${application_commit}" "/tmp/${random}"
+    Add console output "Hello Resin Sync!" to "/tmp/${random}"
+    ${result} =  Run Process    resin sync ${device_uuid} -s . -d /usr/src/app    shell=yes    cwd=/tmp/${random}
+    Process ${result}
+    Should Contain    ${result.stdout}    resin sync completed successfully!
+    Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Hello Resin Sync!"
+    [Teardown]    Run Keyword    Remove Directory    /tmp/${random}    recursive=True
 
 Check if setting environment variables works on "${application_name}"
     ${random} =   Evaluate    random.randint(0, 10000)    modules=random
@@ -145,11 +151,11 @@ Check enabling supervisor delta on "${application_name}"
 Add console output "${message}" to "${directory}"
     ${result} =  Run Process    git config --global user.email "%{email}"    shell=yes    cwd=${directory}
     Process ${result}
-    ${result} =  Run Process    sed -i '6i echo \"${message}\"' start.sh    shell=yes    cwd=${directory}
+    ${result} =  Run Process    sed -ie 's/Hello World!/${message}/g' start.sh    shell=yes    cwd=${directory}
     Process ${result}
     ${result} =  Run Process    git add .    shell=yes    cwd=${directory}
     Process ${result}
-    ${result} =  Run Process    git commit -m "Console message added"    shell=yes    cwd=${directory}
+    ${result} =  Run Process    git commit -m "Console message added: ${message}"    shell=yes    cwd=${directory}
     Process ${result}
 
 Get the last git commit from "${directory}"

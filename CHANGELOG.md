@@ -1,6 +1,7 @@
 Change log
 -----------
 
+*	Enable resin sync test from example QEMU and RaspberryPi test cases because it was fixed in Resin 2.0 [Horia]
 *	Fix keyword for not checking correctly if a service was active [Horia]
 *	Test case that verifies the OS fingerprint file on resin-boot partition [Horia]
 *	Remove test for resin-info service starting [Will]
