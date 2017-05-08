@@ -5,7 +5,7 @@ Resource  resources/qemu.robot
 Resource  resources/resinos.robot
 Resource  resources/kernel.robot
 Suite Teardown    Run Keywords    Terminate All Processes    kill=True
-...               AND             Remove Files    /tmp/resin*.img
+...               AND             Remove Files    /tmp/resin*.img    /tmp/autohat.*.stdout    /tmp/autohat.*.stderr
 
 *** Test Cases ***
 Preparing test environment
