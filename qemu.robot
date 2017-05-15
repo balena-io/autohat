@@ -61,6 +61,13 @@ Checking if setting environment variable works
   Check if setting environment variables works on "${application_name}"
 Checking if host OS version of the image is same through resin cli
   Check if host OS version of device "${device_uuid}" is "${os_version}"
+Checking if online / offline toggle is being reflected properly
+  Shutdown resin device "${device_uuid}"
+  Wait Until Keyword Succeeds    6x    5s    Device "${device_uuid}" is offline
+  Wait For Process    handle=${device_qemu_handle}    timeout=30s    on_timeout=terminate
+  ${handle} =    Run "${image}" with "512" MB memory "4" cpus and "/tmp/console.sock" serial port
+  Set Suite Variable    ${device_qemu_handle}    ${handle}
+  Wait Until Keyword Succeeds    6x    10s    Device "${device_uuid}" is online
 Waiting till Qemu is killed or 30 seconds
   Shutdown resin device "${device_uuid}"
   Wait Until Keyword Succeeds    6x    5s    Device "${device_uuid}" is offline
