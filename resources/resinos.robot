@@ -20,26 +20,26 @@ Mount "${path}" on "${mount_destination}"
     Process ${result}
 
 Check host OS fingerprint file in "${image}" on "${partition}" partition
-    &{dict} =  Create Dictionary    boot=1    rootA=2
+    [Documentation]    Available items for argument ${partition} are: boot, root
+    &{dict} =  Create Dictionary    boot=1    root=2
     ${LOOPDEVICE} =   Set up loop device for "${image}"
     ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
     ${host_os_version} =   Get host OS version of "${image}"
     @{host_os_dict} =   Split String    ${host_os_version}    .
     ${host_os_major} =   Get From List    ${host_os_dict}    0
-    Run Keyword If    '${host_os_major}' == '1'    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resin-root.fingerprint
+    Run Keyword If    '${host_os_major}' == '1'    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resin-${partition}.fingerprint
     Run Keyword If    '${host_os_major}' == '2'    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resinos.fingerprint
     Create Directory    ${mount_destination}
     Mount "${LOOPDEVICE}p${dict.${partition}}" on "${mount_destination}"
-    File Should Exist   ${fingerprint_file}     msg=Couldn't find resinos.fingerprint file in ${mount_destination}
+    File Should Exist   ${fingerprint_file}     msg=Couldn't find ${fingerprint_file} in ${mount_destination}
     ${content} =  Get File  ${fingerprint_file}
     @{lines} =  Split To Lines  ${content}
     : FOR   ${line}     IN  @{lines}
-    \   @{words} =  Split String    ${line}     ${SPACE}
-    \   ${First} =  Get From List   ${words}    0
-    \   ${Second} =  Get From List  ${words}    2
-    \   ${md5sum} =  Run Buffered Process    md5sum ${mount_destination}/${Second} | awk '{print $1}'     shell=yes
-    \   Should Contain     ${First}   ${md5sum.stdout}    msg=${mount_destination}${Second} has MD5=${md5sum.stdout} when it should be ${First}
+    \   ${first} =  Fetch From Left    ${line}    ${SPACE}
+    \   ${second} =  Fetch From Right    ${line}    ${SPACE}
+    \   ${md5sum} =  Run Buffered Process    md5sum ${mount_destination}${second} | awk '{print $1}'     shell=yes
+    \   Should Contain     ${first}   ${md5sum.stdout}    msg=${mount_destination}${second} has MD5=${md5sum.stdout} when it should be ${first}
     [Teardown]    Run Keywords    Unmount "${mount_destination}"
     ...           AND             Remove Directory    ${mount_destination}    recursive=True
     ...           AND             Detach loop device "${LOOPDEVICE}"

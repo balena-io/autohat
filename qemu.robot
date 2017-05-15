@@ -28,8 +28,8 @@ Creating application
   Run Keyword If    '${create_application}' == 'True'    Create application "${application_name}" with device type "${device_type}"
 Checking host OS fingerprint file on resin-boot partition
   Check host OS fingerprint file in "${image}" on "boot" partition
-Checking host OS fingerprint file on resin-rootA partition
-  Check host OS fingerprint file in "${image}" on "rootA" partition
+Checking host OS fingerprint file on resin-root partition
+  Check host OS fingerprint file in "${image}" on "root" partition
 Getting host OS version of the image
   ${return_os_version} =    Get host OS version of "${image}"
   Set Suite Variable    ${os_version}   ${return_os_version}
