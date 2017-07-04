@@ -27,13 +27,13 @@ Deleting application if it already exists
   Run Keyword If    '${create_application}' == 'True'    Force delete application "${application_name}"
 Creating application
   Run Keyword If    '${create_application}' == 'True'    Create application "${application_name}" with device type "${device_type}"
-Checking host OS fingerprint file on resin-boot partition
-  Check host OS fingerprint file in "${image}" on "boot" partition
-Checking host OS fingerprint file on resin-root partition
-  Check host OS fingerprint file in "${image}" on "root" partition
-Getting host OS version of the image
-  ${return_os_version} =    Get host OS version of "${image}"
-  Set Suite Variable    ${os_version}   ${return_os_version}
+#   Checking host OS fingerprint file on resin-boot partition
+#     Check host OS fingerprint file in "${image}" on "boot" partition
+#   Checking host OS fingerprint file on resin-root partition
+#     Check host OS fingerprint file in "${image}" on "root" partition
+#   Getting host OS version of the image
+#     ${return_os_version} =    Get host OS version of "${image}"
+#     Set Suite Variable    ${os_version}   ${return_os_version}
 Enabling getty service on the image
   Enable getty service on "${image}" for "${device_type}"
 Configuring image with application
@@ -55,17 +55,19 @@ Checking that the device does not return the resin-vpn IP address
 Providing a device to the application with delta already enabled
   Run "${image}" on "${application_name}" with delta already enabled
 Checking API endpoints of resin-supervisor
-  Check API endpoints of resin-supervisor
-Checking if kernel module loading works
-  Check if kernel module loading works on "${device_uuid}"
+  Identify device "10565674e65b612be144d3819dd17e16805f2dc053bef19a83c637414e7993"
+  Check if device "10565674e65b612be144d3819dd17e16805f2dc053bef19a83c637414e7993" reboots
+#  Check API endpoints of resin-supervisor
+#   Checking if kernel module loading works
+#     Check if kernel module loading works on "${device_uuid}"
 #Checking delta to a running supervisor
 #  Check enabling supervisor delta on "${application_name}"
 Checking if resin sync works
   Check if resin sync works on "${device_uuid}"
-Checking if setting environment variable works
-  Check if setting environment variables works on "${application_name}"
-Checking if host OS version of the image is same through resin cli
-  Check if host OS version of device "${device_uuid}" is "${os_version}"
+#   Checking if setting environment variable works
+#     Check if setting environment variables works on "${application_name}"
+#   Checking if host OS version of the image is same through resin cli
+#     Check if host OS version of device "${device_uuid}" is "${os_version}"
 Waiting till Qemu is killed or 30 seconds
   Shutdown resin device "${device_uuid}"
   Wait Until Keyword Succeeds    6x    5s    Device "${device_uuid}" is offline
