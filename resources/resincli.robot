@@ -115,6 +115,14 @@ Device "${device_uuid}" log should not contain "${item}"
     Process ${result}
     Should Not Contain    ${result.stdout}    ${item}
 
+Identify device "${device_uuid}"
+    ${result} =  Run Process    resin device identify ${device_uuid}    shell=yes
+    Process ${result}
+
+Reboot device "${device_uuid}"
+    ${result} =  Run Process    resin device reboot ${device_uuid}    shell=yes
+    Process ${result}
+
 Check if host OS version of device "${device_uuid}" is "${os_version}"
     ${result} =  Get "OS VERSION" of device "${device_uuid}"
     Should Contain    ${result}    ${os_version}
@@ -213,8 +221,8 @@ Check API endpoints of resin-supervisor
     ${deviceId} =    Get "ID" from device "${device_uuid}"
     ${token} =    Get authentication token
     Ping "${deviceId}" from application "${appId}" using "${token}" via the API proxy
-    Blink "${deviceId}" from application "${appId}" using "${token}" via the API proxy
-    Reboot "${deviceId}" from application "${appId}" using "${token}" via the API proxy
+    Identify device "${device_uuid}"
+    Check if device "${device_uuid}" reboots
     Purge data of "${deviceId}" from application "${appId}" using "${token}" via the API proxy
     Restart container's application of "${deviceId}" from application "${appId}" using "${token}" via the API proxy
     Regenarate supervisor API key of "${deviceId}" from application "${appId}" using "${token}" via the API proxy
@@ -234,16 +242,9 @@ Ping "${deviceId}" from application "${appId}" using "${token}" via the API prox
     Process ${result}
     Should Contain    ${result.stdout}    OK
 
-Blink "${deviceId}" from application "${appId}" using "${token}" via the API proxy
-    ${result} =  Run Buffered Process    curl -X POST --header "Content-Type:application/json" --header "Authorization: Bearer ${token}" --data '{"deviceId": ${deviceId}, "appId": ${appId}}' "https://api.${RESINRC_RESIN_URL}/supervisor/v1/blink"    shell=yes
-    Process ${result}
-    Should Contain    ${result.stdout}    OK
-
-Reboot "${deviceId}" from application "${appId}" using "${token}" via the API proxy
-    ${result} =  Run Buffered Process    curl -X POST --header "Content-Type:application/json" --header "Authorization: Bearer ${token}" --data '{"deviceId": ${deviceId}, "appId": ${appId}}' "https://api.${RESINRC_RESIN_URL}/supervisor/v1/reboot"    shell=yes
-    Process ${result}
-    Should Contain    ${result.stdout}    OK
-    Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Rebooting"
+Check if device "${device_uuid}" reboots
+    Reboot device "${device_uuid}"
+    Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" is offline
     Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" is online
 
 Purge data of "${deviceId}" from application "${appId}" using "${token}" via the API proxy
