@@ -1,6 +1,7 @@
 Change log
 -----------
 
+* 	Add test case to check that the device does not return the resin-vpn IP address [Horia]
 *	Fix keyword that checks fingerprint file to work with 1.X resin image version [Horia]
 *	Change Run Process to Run Buffered Process that logs stdout and stdin to a file instead of a PIPE [Praneeth]
 *	Enable resin sync test from example QEMU and RaspberryPi test cases because it was fixed in Resin 2.0 [Horia]
