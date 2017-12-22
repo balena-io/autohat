@@ -25,15 +25,21 @@ Check host OS fingerprint file in "${image}" on "${partition}" partition
     ${LOOPDEVICE} =   Set up loop device for "${image}"
     ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
-    ${host_os_version} =   Get host OS version of "${image}"
-    @{host_os_dict} =   Split String    ${host_os_version}    .
-    ${host_os_major} =   Get From List    ${host_os_dict}    0
-    Run Keyword If    '${host_os_major}' == '1'    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resin-${partition}.fingerprint
-    Run Keyword If    '${host_os_major}' == '2'    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resinos.fingerprint
+    Run Keyword If    '${partition}' == 'boot'    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resinos.fingerprint
     Create Directory    ${mount_destination}
     Mount "${LOOPDEVICE}p${dict.${partition}}" on "${mount_destination}"
+    ${path_to_fingerprint_p2} =    Run Keyword If    '${partition}' == 'root'    Run Process    find ${mount_destination} -name "resinos.fingerprint"    shell=yes
+    ${fingerprint_p2} =    Run Keyword If    '${partition}' == 'root'    Get Line    ${path_to_fingerprint_p2.stdout}    0
+    ${fingerprint_p2_resin-boot} =    Run Keyword If    '${partition}' == 'root'    Get Line    ${path_to_fingerprint_p2.stdout}    1
+    Run Keyword If    '${partition}' == 'root'    Should Contain    ${fingerprint_p2}    resinos.fingerprint
+    Run Keyword If    '${partition}' == 'root'    Set Test Variable    ${fingerprint_file}    ${fingerprint_p2}
+    Run Keyword If    '${partition}' == 'root'    Should Contain    ${fingerprint_p2_resin-boot}    resin-boot/resinos.fingerprint
+    Run Keyword If    '${partition}' == 'root'    File Should Exist    ${fingerprint_p2_resin-boot}   msg=Couldn't find ${fingerprint_p2_resin-boot}
+    ${content_fingerprint_p2_resin-boot} =    Run Keyword If    '${partition}' == 'root'    Get File    ${fingerprint_p2_resin-boot}
     File Should Exist   ${fingerprint_file}     msg=Couldn't find ${fingerprint_file} in ${mount_destination}
     ${content} =  Get File  ${fingerprint_file}
+    Run Keyword If    '${partition}' == 'boot'    Set Global Variable    ${fingerprint_content_partition1}    ${content}
+    Run Keyword If    '${partition}' == 'root'    Should Contain    ${fingerprint_content_partition1}    ${content_fingerprint_p2_resin-boot}
     @{lines} =  Split To Lines  ${content}
     : FOR   ${line}     IN  @{lines}
     \   ${first} =  Fetch From Left    ${line}    ${SPACE}
@@ -48,9 +54,11 @@ Get host OS version of "${image}"
     ${LOOPDEVICE} =   Set up loop device for "${image}"
     ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
-    Set Test Variable    ${path_to_os_version}   ${mount_destination}/etc/os-release
     Create Directory    ${mount_destination}
     Mount "${LOOPDEVICE}p2" on "${mount_destination}"
+    ${find_path_to_os_version} =  Run Process    find ${mount_destination} -name "os-release"    shell=yes
+    Process ${find_path_to_os_version}
+    Set Test Variable    ${path_to_os_version}   ${find_path_to_os_version.stdout}
     ${result} =  Run Process    cat ${path_to_os_version} | grep VERSION | head -1 | cut -d '"' -f 2    shell=yes
     Process ${result}
     Should Not Be Empty     ${result.stdout}    msg="Could not get OS version from ${path_to_os_version}"
@@ -69,10 +77,13 @@ Enable getty service on "${image}" for "${device_type}"
     Set Test Variable    ${mount_destination}    /tmp/${random}
     Create Directory    ${mount_destination}
     Mount "${LOOPDEVICE}p2" on "${mount_destination}"
+    ${path_to_home} =    Run Process    find ${mount_destination} -name "home"    shell=yes
+    Process ${path_to_home}
+    ${mount_destination_to_home}    ${mount_destination_to_home_last}=    Split String From Right    ${path_to_home.stdout}    /    1
     Remove Directory    /tmp/enable_getty_service    recursive=True
     ${result} =  Run Process    git clone https://github.com/resin-os/serial-it.git /tmp/enable_getty_service    shell=yes
     Process ${result}
-    ${result} =  Run Process    ./serial-it.sh --root-mountpoint ${mount_destination} -b ${device_type}    shell=yes    cwd=/tmp/enable_getty_service
+    ${result} =  Run Process    ./serial-it.sh --root-mountpoint ${mount_destination_to_home} -b ${device_type}    shell=yes    cwd=/tmp/enable_getty_service
     Process ${result}
     [Teardown]    Run Keywords    Unmount "${mount_destination}"
     ...           AND             Remove Directory    ${mount_destination}    recursive=True
