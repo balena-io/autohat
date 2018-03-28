@@ -53,7 +53,7 @@ Get host OS version of "${image}"
     ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
     Create Directory    ${mount_destination}
-    Mount "${LOOPDEVICE}p2" on "${mount_destination}"
+    Mount "${LOOPDEVICE}p1" on "${mount_destination}"
     ${find_path_to_os_version} =  Run Process    find ${mount_destination} -name "os-release"    shell=yes
     Process ${find_path_to_os_version}
     Set Test Variable    ${path_to_os_version}   ${find_path_to_os_version.stdout}
