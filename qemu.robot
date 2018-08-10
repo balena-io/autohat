@@ -50,8 +50,8 @@ Git pushing to application
   Git push "/tmp/${application_name}" to application "${application_name}"
 Checking if device is running the pushed application (Tries for 1200 s)
   Wait Until Keyword Succeeds    60x    20s    Device "${device_uuid}" log should contain "Hello"
-Checking that the device does not return the resin-vpn IP address
-  Check that "${device_uuid}" does not return "resin-vpn" IP address through API using socket "unix\#/tmp/console.sock"
+#Checking that the device does not return the resin-vpn IP address
+#  Check that "${device_uuid}" does not return "resin-vpn" IP address through API using socket "unix\#/tmp/console.sock"
 Providing a device to the application with delta already enabled
   Run "${image}" on "${application_name}" with delta already enabled
 Checking if kernel module loading works
