@@ -1,6 +1,11 @@
 Change log
 -----------
 
+## v0.0.2 - 2018-09-26
+
+* Versionbot: Add versionbot files and config [Giovanni Garufi]
+* Initial resinci config [Horia Delicoti]
+
 ## v0.0.1
 
 * 	Fix keywords due to changes after balena implementation [Horia]
