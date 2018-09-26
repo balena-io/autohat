@@ -1,6 +1,8 @@
 Change log
 -----------
 
+## v0.0.1
+
 * 	Fix keywords due to changes after balena implementation [Horia]
 * 	Add test case to check that the device does not return the resin-vpn IP address [Horia]
 *	Fix keyword that checks fingerprint file to work with 1.X resin image version [Horia]
