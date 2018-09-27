@@ -119,7 +119,7 @@ Check if kernel module loading works on "${device_uuid}"
     [Teardown]    Run Keyword    "disable" public URL for device "${device_uuid}"
 
 Run "${image}" on "${application_name}" with delta already enabled
-    ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys 
+    ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
     Add ENV variable "RESIN_SUPERVISOR_DELTA" with value "1" to application "${application_name}"
     ${tmp_device_uuid} =    Configure "${image}" with "${application_name}"
     ${handle} =    Run "${image}" with "512" MB memory "2" cpus and "/tmp/console${random}.sock" serial port
@@ -135,7 +135,7 @@ Run "${image}" on "${application_name}" with delta already enabled
 Get "${interface}" IP address using socket "${socket}"
     ${result} =  Run Process    echo "send root\nsend root\nsend ifconfig ${interface}" > minicom_script_${interface}.sh    shell=yes    cwd=/tmp/enable_getty_service
     Process ${result}
-    Run Process    minicom -D ${socket} -S enable_getty_service/minicom_script_${interface}.sh -C enable_getty_service/minicom_output_${interface}.txt    shell=yes    cwd=/tmp    timeout=1s
+    Run Process    minicom -D ${socket} -S enable_getty_service/minicom_script_${interface}.sh -C enable_getty_service/minicom_output_${interface}.txt    shell=yes    cwd=/tmp    timeout=10s
     ${result} =  Run Process    cat /tmp/enable_getty_service/minicom_output_${interface}.txt    shell=yes
     Process ${result}
     Should Not Contain    ${result.stdout}    ${interface}: error fetching interface    msg=Could not get "${interface}" IP address
