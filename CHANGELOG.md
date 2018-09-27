@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.0.3 - 2018-09-26
+
+* Increase timeout of minicom script [Horia Delicoti]
+
 ## v0.0.2 - 2018-09-26
 
 * Versionbot: Add versionbot files and config [Giovanni Garufi]
