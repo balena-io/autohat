@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.0.4 - 2018-10-17
+
+* Bump resin-cli to 7.10.6 [Kostas Lekkas]
+
 ## v0.0.3 - 2018-09-26
 
 * Increase timeout of minicom script [Horia Delicoti]
