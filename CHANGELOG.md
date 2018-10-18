@@ -1,6 +1,11 @@
 Change log
 -----------
 
+## v0.0.5 - 2018-10-18
+
+* Resincli.robot: Fix version test after balenaOS rename [Andrei Gherzan]
+* Add RESINRC_PROXY_URL [Kostas Lekkas]
+
 ## v0.0.4 - 2018-10-17
 
 * Bump resin-cli to 7.10.6 [Kostas Lekkas]
