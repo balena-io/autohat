@@ -14,6 +14,7 @@ Preparing test environment
   Should Not Be Empty   ${application_name}    msg=application_name variable cannot be blank
   Set Suite Variable    ${device_type}    %{device_type}
   Set Suite Variable    ${RESINRC_RESIN_URL}    %{RESINRC_RESIN_URL}
+  Set Suite Variable    ${RESINRC_PROXY_URL}    %{RESINRC_PROXY_URL}
   Set Suite Variable    ${image}    %{image}
   File Should Exist     ${image}  msg="Provided images file does not exist"
   Set Suite Variable    ${application_repo}    https://github.com/resin-io/autohat-ondevice.git
