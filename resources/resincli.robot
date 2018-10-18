@@ -68,7 +68,7 @@ Get "${device_info}" of device "${device_uuid}"
     ...                SUPERVISOR VERSION, IS WEB ACCESSIBLE, OS VERSION
     @{list} =  Create List    ID    DEVICE TYPE    STATUS    IS ONLINE    IP ADDRESS    APPLICATION NAME    UUID    COMMIT    SUPERVISOR VERSION    IS WEB ACCESSIBLE    OS VERSION
     Should Contain    ${list}    ${device_info}
-    ${result} =  Run Keyword If    '${device_info}' == 'OS VERSION'    Run Process    resin device ${device_uuid} | sed -n -e 's/^.*Resin OS //p' | cut -d ' ' -f 1     shell=yes
+    ${result} =  Run Keyword If    '${device_info}' == 'OS VERSION'    Run Process    resin device ${device_uuid} | sed -n -E -e 's/^.*(Resin OS|balenaOS) //p' | cut -d ' ' -f 1    shell=yes
     ...    ELSE
     ...    Run Process    resin device ${device_uuid} | grep -w "${device_info}" | cut -d ':' -f 2 | sed 's/ //g'    shell=yes
    Process ${result}
