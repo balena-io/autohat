@@ -133,7 +133,7 @@ Run "${image}" on "${application_name}" with delta already enabled
     [Teardown]    Run Process    rm /tmp/console${random}.sock    shell=yes
 
 Get "${interface}" IP address using socket "${socket}"
-    ${result} =  Run Process    echo "send root\nsend root\nsend ifconfig ${interface}" > minicom_script_${interface}.sh    shell=yes    cwd=/tmp/enable_getty_service
+    ${result} =  Run Process    echo "send root\nexpect \"#\"\nsend ifconfig ${interface}" > minicom_script_${interface}.sh    shell=yes    cwd=/tmp/enable_getty_service
     Process ${result}
     Run Process    minicom -D ${socket} -S enable_getty_service/minicom_script_${interface}.sh -C enable_getty_service/minicom_output_${interface}.txt    shell=yes    cwd=/tmp    timeout=10s
     ${result} =  Run Process    cat /tmp/enable_getty_service/minicom_output_${interface}.txt    shell=yes
