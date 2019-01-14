@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.0.6 - 2019-01-14
+
+* R/resinos.robot: Fix minicom command not send twice root command * get rid of the garbage in the output by waiting for the prompt [Horia Delicoti]
+
 ## v0.0.5 - 2018-10-18
 
 * Resincli.robot: Fix version test after balenaOS rename [Andrei Gherzan]
