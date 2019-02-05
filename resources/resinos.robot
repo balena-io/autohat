@@ -125,8 +125,8 @@ Run "${image}" on "${application_name}" with delta already enabled
     ${handle} =    Run "${image}" with "512" MB memory "2" cpus and "/tmp/console${random}.sock" serial port
     Wait Until Keyword Succeeds    12x    5s    Device "${tmp_device_uuid}" is online
     Wait Until Keyword Succeeds    60x    30s    Device "${tmp_device_uuid}" log should contain "Hello"
-    Check if ENV variable "RESIN_SUPERVISOR_DELTA" with value "1" exists in application "${application_name}"
-    Remove ENV variable "RESIN_SUPERVISOR_DELTA" from application "${application_name}"
+    Check if "CONFIG" variable "RESIN_SUPERVISOR_DELTA" with value "1" exists in application "${application_name}"
+    Add ENV variable "RESIN_SUPERVISOR_DELTA" with value "0" to application "${application_name}"
     Shutdown resin device "${tmp_device_uuid}"
     Wait Until Keyword Succeeds    12x    5s    Device "${tmp_device_uuid}" is offline
     Wait For Process    handle=${handle}    timeout=30s    on_timeout=terminate
