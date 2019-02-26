@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.0.7 - 2019-02-26
+
+* Bump resin-cli to balena-cli@9.12.6 * Add functionality to check or remove configuration variables * r/resinos.robot: Modified test to disable RESIN_SUPERVISOR_DELTA rather than removing the configuration variable. [Horia Delicoti]
+
 ## v0.0.6 - 2019-01-14
 
 * R/resinos.robot: Fix minicom command not send twice root command * get rid of the garbage in the output by waiting for the prompt [Horia Delicoti]
