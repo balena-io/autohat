@@ -3,4 +3,5 @@ docker:
   builds:
     - dockerfile: Dockerfile
       path: .
-      publish: false
+      publish: true
+      docker_repo: balena/autohat
