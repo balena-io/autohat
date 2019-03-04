@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.0.8 - 2019-03-04
+
+* Ci: Publish to balena/autohat docker repo [Michael Angelos Simos]
+
 ## v0.0.7 - 2019-02-26
 
 * Bump resin-cli to balena-cli@9.12.6 * Add functionality to check or remove configuration variables * r/resinos.robot: Modified test to disable RESIN_SUPERVISOR_DELTA rather than removing the configuration variable. [Horia Delicoti]
