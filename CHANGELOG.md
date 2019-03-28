@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.0.9 - 2019-03-27
+
+* Bump dockerfile base from jessie to stretch [Zubair Lutfullah Kakakhel]
+
 ## v0.0.8 - 2019-03-04
 
 * Ci: Publish to balena/autohat docker repo [Michael Angelos Simos]
