@@ -1,9 +1,8 @@
-FROM resin/nuc-node:6-20161215
+FROM balenalib/intel-nuc-node:6-stretch-build-20190127
 
 # Install PIP, Robot Framework, Resin-cli and Etcher-cli
-RUN apt-get update && apt-get install -y qemu-system-x86 rsync qemu-kvm minicom libftdi-dev python-pip && \
+RUN apt-get update && apt-get install -y qemu-system-x86 rsync qemu-kvm minicom libftdi-dev python-pip python-setuptools python-wheel systemd && \
     rm -rf /var/lib/apt/lists/* && \
-    pip install --upgrade pip && \
     pip install robotframework==3.0 requests==2.4.3 robotframework-requests==0.4.5 pylibftdi==0.15.0 && \
     npm install --global balena-cli@9.12.6 && \
     git clone --depth 1  --branch v1.0.0-beta.18 https://github.com/resin-io/etcher.git && cd /etcher && \
