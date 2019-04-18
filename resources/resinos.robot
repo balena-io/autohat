@@ -97,6 +97,14 @@ Check if service "${service}" is running using socket "${socket}"
     Should Contain    ${result.stdout}    Active: active (running)    msg="${service}" is not active
     [Teardown]    Run Keyword    Remove Files    /tmp/enable_getty_service/minicom_script_service.sh    /tmp/enable_getty_service/minicom_output_service.txt
 
+Get "${service}" logs using socket "${socket}"
+    ${result} =  Run Process    echo "send root\nexpect \"#\"\nsend ${service}" > minicom_script_service.sh    shell=yes    cwd=/tmp/enable_getty_service
+    Process ${result}
+    Run Buffered Process    minicom -D ${socket} -S /tmp/enable_getty_service/minicom_script_service.sh -C /tmp/enable_getty_service/minicom_output_service.txt    shell=yes    cwd=/tmp    timeout=10s
+    ${result} =  Run Buffered Process    cat /tmp/enable_getty_service/minicom_output_service.txt    shell=yes
+    Process ${result}
+    [Teardown]    Run Keyword    Remove Files    /tmp/enable_getty_service/minicom_script_service.sh    /tmp/enable_getty_service/minicom_output_service.txt
+
 Check that backup files are not found in the "${image}"
     ${LOOPDEVICE} =   Set up loop device for "${image}"
     ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
