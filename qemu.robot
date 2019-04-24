@@ -5,7 +5,8 @@ Resource  resources/qemu.robot
 Resource  resources/resinos.robot
 Resource  resources/kernel.robot
 Test Timeout  30 minutes
-Suite Teardown    Run Keywords    Terminate All Processes    kill=True
+Suite Teardown    Run Keywords    Get "journalctl --no-pager" logs using socket "unix\#/tmp/console.sock"
+...               AND             Terminate All Processes    kill=True
 ...               AND             Remove Files    /tmp/resin*.img    /tmp/autohat.*.stdout    /tmp/autohat.*.stderr
 
 *** Test Cases ***
@@ -66,6 +67,7 @@ Checking if setting environment variable works
 Checking if host OS version of the image is same through resin cli
   Check if host OS version of device "${device_uuid}" is "${os_version}"
 Waiting till Qemu is killed or 30 seconds
+  Get "journalctl --no-pager" logs using socket "unix\#/tmp/console.sock"
   Shutdown resin device "${device_uuid}"
   Wait Until Keyword Succeeds    6x    5s    Device "${device_uuid}" is offline
   Wait For Process    handle=${device_qemu_handle}    timeout=30s    on_timeout=terminate
