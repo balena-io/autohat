@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.0.10 - 2019-04-24
+
+* Get journal logs from device [Horia Delicoti]
+
 ## v0.0.9 - 2019-03-27
 
 * Bump dockerfile base from jessie to stretch [Zubair Lutfullah Kakakhel]
