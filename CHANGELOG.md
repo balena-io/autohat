@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.0.11 - 2019-09-26
+
+* Dockerfile: bump node, cli and etcher versions [Zubair Lutfullah Kakakhel]
+
 ## v0.0.10 - 2019-04-24
 
 * Get journal logs from device [Horia Delicoti]
