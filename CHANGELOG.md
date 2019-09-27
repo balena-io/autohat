@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.0.12 - 2019-09-27
+
+* Dockerfile: Revert to v10.17.6 [Zubair Lutfullah Kakakhel]
+
 ## v0.0.11 - 2019-09-26
 
 * Dockerfile: bump node, cli and etcher versions [Zubair Lutfullah Kakakhel]
