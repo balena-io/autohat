@@ -44,8 +44,8 @@ Configuring image with application
 Running image
   ${handle} =    Run "${image}" with "512" MB memory "4" cpus and "/tmp/console.sock" serial port
   Set Suite Variable    ${device_qemu_handle}    ${handle}
-Checking if device comes online in 60s (Trying every 10s)
-  Wait Until Keyword Succeeds    6x    10s    Device "${device_uuid}" is online
+Checking if device comes online in 120s (Trying every 10s)
+  Wait Until Keyword Succeeds    12x    10s    Device "${device_uuid}" is online
 Git pushing to application
   Git clone "${application_repo}" "/tmp/${application_name}"
   Git checkout "${application_commit}" "/tmp/${application_name}"
