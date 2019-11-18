@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.0.13 - 2019-11-18
+
+* Add DEBUG on balena sync test [Michael Angelos Simos]
+
 ## v0.0.12 - 2019-09-27
 
 * Dockerfile: Revert to v10.17.6 [Zubair Lutfullah Kakakhel]
