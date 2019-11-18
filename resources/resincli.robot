@@ -148,7 +148,7 @@ Check if resin sync works on "${device_uuid}"
     Git clone "${application_repo}" "/tmp/${random}"
     Git checkout "${application_commit}" "/tmp/${random}"
     Add console output "Hello Resin Sync!" to "/tmp/${random}"
-    ${result} =  Run Buffered Process    balena sync ${device_uuid} -s . -d /usr/src/app    shell=yes    cwd=/tmp/${random}
+    ${result} =  Run Buffered Process    DEBUG=* balena sync ${device_uuid} -s . -d /usr/src/app    shell=yes    cwd=/tmp/${random}
     Process ${result}
     Should Contain    ${result.stdout}    balena sync completed successfully!
     Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Hello Resin Sync!"
