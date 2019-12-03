@@ -4,7 +4,7 @@ FROM balenalib/intel-nuc-node:10.16.3-stretch-build-20190920
 RUN apt-get update && apt-get install -y qemu-system-x86 rsync qemu-kvm minicom libftdi-dev python-pip python-setuptools python-wheel systemd && \
     rm -rf /var/lib/apt/lists/* && \
     pip install robotframework==3.0 requests==2.4.3 robotframework-requests==0.4.5 pylibftdi==0.15.0 && \
-    npm install --global balena-cli@10.17.6 && \
+    npm install --global balena-cli@latest && \
     git clone --depth 1  --branch v1.5.57 https://github.com/resin-io/etcher.git && cd /etcher && \
     npm install --production && \
     ln -sf /etcher/bin/etcher /usr/local/bin/etcher
