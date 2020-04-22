@@ -22,8 +22,8 @@ Mount "${path}" on "${mount_destination}"
 Check host OS fingerprint file in "${image}" on "${partition}" partition
     [Documentation]    Available items for argument ${partition} are: boot, root
     &{dict} =  Create Dictionary    boot=1    root=2
-    ${LOOPDEVICE} =   Set up loop device for "${image}"
-    ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
+    ${LOOPDEVICE} =  Set up loop device for "${image}"
+    ${random} =  Evaluate    random.randint(0, sys.maxint)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
     Run Keyword If    '${partition}' == 'boot'    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resinos.fingerprint
     Create Directory    ${mount_destination}
