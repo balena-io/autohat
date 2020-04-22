@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.1.0 - 2020-04-22
+
+* Upgrade e2e tests scaffold [ab77]
+
 ## v0.0.13 - 2019-11-18
 
 * Add DEBUG on balena sync test [Michael Angelos Simos]
