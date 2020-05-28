@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.1.1 - 2020-05-28
+
+* Qemu.robot: Increase online check to 240 seconds [Florin Sarbu]
+
 ## v0.1.0 - 2020-04-22
 
 * Upgrade e2e tests scaffold [ab77]
