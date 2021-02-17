@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.1.2 - 2021-02-17
+
+* Qemu: build qemu-5.2.0 from source [Kyle Harding]
+
 ## v0.1.1 - 2020-05-28
 
 * Qemu.robot: Increase online check to 240 seconds [Florin Sarbu]
