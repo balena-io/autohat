@@ -7,7 +7,7 @@ build-docker-image: Dockerfile
 test: build-docker-image
 	@echo '[Info] Starting tests inside container...'
 	@docker run -it --rm --name ${DOCKER_IMAGE} \
-		-v /home/horia/sandbox/autohat/:/autohat \
+		-v $(PWD):/autohat \
 		-v /dev/:/dev2 --privileged \
 		--env-file ./env.list \
 		$(DOCKER_IMAGE) \
