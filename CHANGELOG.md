@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.1.4 - 2021-04-13
+
+* Empty commit to rebuild/publish docker image [ab77]
+
 ## v0.1.3 - 2021-04-13
 
 * Implement retries when mounting loop device(s) [ab77]
