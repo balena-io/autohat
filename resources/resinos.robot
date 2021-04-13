@@ -22,7 +22,7 @@ Mount "${path}" on "${mount_destination}"
 Check host OS fingerprint file in "${image}" on "${partition}" partition
     [Documentation]    Available items for argument ${partition} are: boot, root
     &{dict} =  Create Dictionary    boot=1    root=2
-    ${LOOPDEVICE} =  Set up loop device for "${image}"
+    ${LOOPDEVICE} =  Wait Until Keyword Succeeds    6x    5s    Set up loop device for "${image}"
     ${random} =  Evaluate    random.randint(0, sys.maxint)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
     Run Keyword If    '${partition}' == 'boot'    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resinos.fingerprint
@@ -49,7 +49,7 @@ Check host OS fingerprint file in "${image}" on "${partition}" partition
     ...           AND             Detach loop device "${LOOPDEVICE}"
 
 Get host OS version of "${image}"
-    ${LOOPDEVICE} =   Set up loop device for "${image}"
+    ${LOOPDEVICE} =  Wait Until Keyword Succeeds    6x    5s    Set up loop device for "${image}"
     ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
     Create Directory    ${mount_destination}
@@ -70,7 +70,7 @@ File list "@{files_list}" does not exist in "${mount_destination}"
     \   File Should Not Exist  ${mount_destination}${files_line}  msg="Backup file ${files_line} found on the rootfs that should not exist."
 
 Enable getty service on "${image}" for "${device_type}"
-    ${LOOPDEVICE} =   Set up loop device for "${image}"
+    ${LOOPDEVICE} =  Wait Until Keyword Succeeds    6x    5s    Set up loop device for "${image}"
     ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
     Create Directory    ${mount_destination}
@@ -106,7 +106,7 @@ Get "${service}" logs using socket "${socket}"
     [Teardown]    Run Keyword    Remove Files    /tmp/enable_getty_service/minicom_script_service.sh    /tmp/enable_getty_service/minicom_output_service.txt
 
 Check that backup files are not found in the "${image}"
-    ${LOOPDEVICE} =   Set up loop device for "${image}"
+    ${LOOPDEVICE} =  Wait Until Keyword Succeeds    6x    5s    Set up loop device for "${image}"
     ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
     Create Directory    ${mount_destination}
@@ -131,12 +131,12 @@ Run "${image}" on "${application_name}" with delta already enabled
     Add ENV variable "RESIN_SUPERVISOR_DELTA" with value "1" to application "${application_name}"
     ${tmp_device_uuid} =    Configure "${image}" with "${application_name}"
     ${handle} =    Run "${image}" with "512" MB memory "2" cpus and "/tmp/console${random}.sock" serial port
-    Wait Until Keyword Succeeds    12x    5s    Device "${tmp_device_uuid}" is online
+    Wait Until Keyword Succeeds    36x    5s    Device "${tmp_device_uuid}" is online
     Wait Until Keyword Succeeds    60x    30s    Device "${tmp_device_uuid}" log should contain "Hello"
     Check if "CONFIG" variable "RESIN_SUPERVISOR_DELTA" with value "1" exists in application "${application_name}"
     Add ENV variable "RESIN_SUPERVISOR_DELTA" with value "0" to application "${application_name}"
     Shutdown resin device "${tmp_device_uuid}"
-    Wait Until Keyword Succeeds    12x    5s    Device "${tmp_device_uuid}" is offline
+    Wait Until Keyword Succeeds    36x    5s    Device "${tmp_device_uuid}" is offline
     Wait For Process    handle=${handle}    timeout=30s    on_timeout=terminate
     [Teardown]    Run Process    rm /tmp/console${random}.sock    shell=yes
 
