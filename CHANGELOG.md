@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.1.3 - 2021-04-13
+
+* Implement retries when mounting loop device(s) [ab77]
+
 ## v0.1.2 - 2021-02-17
 
 * Qemu: build qemu-5.2.0 from source [Kyle Harding]
