@@ -5,6 +5,11 @@ Change log
 
 * Empty commit to rebuild/publish docker image [ab77]
 
+# v0.1.5
+## (2021-04-14)
+
+* Add repo.yml to force Docker checks [ab77]
+
 ## v0.1.3 - 2021-04-13
 
 * Implement retries when mounting loop device(s) [ab77]
