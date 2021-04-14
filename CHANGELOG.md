@@ -5,6 +5,11 @@ Change log
 
 * Empty commit to rebuild/publish docker image [ab77]
 
+# v0.1.6
+## (2021-04-14)
+
+* Rebuild/empty [ab77]
+
 # v0.1.5
 ## (2021-04-14)
 
