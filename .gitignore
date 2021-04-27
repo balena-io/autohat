@@ -1,5 +1,7 @@
-log.html
-output.xml
-report.html
 env.list
-resin.img
+e2e.robot
+**/logs/*
+**/*.img
+**/*.zip
+**/*.xml
+**/*.html
