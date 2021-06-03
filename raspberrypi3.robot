@@ -56,6 +56,8 @@ Checking if kernel module loading works
 #  Check enabling supervisor delta on "${application_name}"
 Checking if resin sync works
   Check if resin sync works on "${device_uuid}"
+Checking if SSH works
+  Check if SSH works on "${device_uuid}"
 Checking if setting environment variable works
   Check if setting environment variables works on "${application_name}"
 Checking if host OS version of the image is same through resin cli

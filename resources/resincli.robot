@@ -154,6 +154,11 @@ Check if resin sync works on "${device_uuid}"
     Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Hello Resin Sync!"
     [Teardown]    Run Keyword    Remove Directory    /tmp/${random}    recursive=True
 
+Check if SSH works on "${device_uuid}"
+    ${result} =  Run Buffered Process    DEBUG=* echo "exit;" | balena ssh ${device_uuid}    shell=yes
+    Process ${result}
+    Should Contain    ${result.stdout}    Welcome to balenaOS
+
 Check if setting environment variables works on "${application_name}"
     ${random} =   Evaluate    random.randint(0, 10000)    modules=random
     Add ENV variable "autohat${random}" with value "RandomValue" to application "${application_name}"
