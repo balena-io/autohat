@@ -143,17 +143,6 @@ Remove "${option}" variable "${variable_name}" from application "${application_n
     Process ${result}
     [Return]    ${result.stdout}
 
-Check if resin sync works on "${device_uuid}"
-    ${random} =  Evaluate    random.randint(0, sys.maxint)    modules=random, sys
-    Git clone "${application_repo}" "/tmp/${random}"
-    Git checkout "${application_commit}" "/tmp/${random}"
-    Add console output "Hello Resin Sync!" to "/tmp/${random}"
-    ${result} =  Run Buffered Process    DEBUG=* balena sync ${device_uuid} -s . -d /usr/src/app    shell=yes    cwd=/tmp/${random}
-    Process ${result}
-    Should Contain    ${result.stdout}    balena sync completed successfully!
-    Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Hello Resin Sync!"
-    [Teardown]    Run Keyword    Remove Directory    /tmp/${random}    recursive=True
-
 Check if SSH works on "${device_uuid}"
     ${result} =  Run Buffered Process    DEBUG=* echo "exit;" | balena ssh ${device_uuid}    shell=yes
     Process ${result}
