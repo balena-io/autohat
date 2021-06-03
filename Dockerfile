@@ -1,7 +1,7 @@
 # build balena-cli
 FROM balenalib/intel-nuc-node:10-stretch-build AS cli-build
 
-ARG BALENA_CLI_VERSION=10.17.6
+ARG BALENA_CLI_VERSION=12.44.17
 
 WORKDIR /opt
 
@@ -27,7 +27,7 @@ COPY requirements.txt .
 
 # https://github.com/nodejs/node/issues/19348
 RUN pip install -r requirements.txt \
-    && npm install --global balena-cli@${BALENA_CLI_VERSION}
+    && npm install --global balena-cli@${BALENA_CLI_VERSION} --unsafe-perm
 
 
 # build QEMU

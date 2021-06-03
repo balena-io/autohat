@@ -23,7 +23,7 @@ Add new SSH key with name "${key_name}"
     \    ${result} =  Run Process    balena keys |grep -w ${key_name} |cut -d ' ' -f 1 | head -1    shell=yes
     \    Log   all output: ${result.stdout}
     \    Run Process    balena key rm ${result.stdout} -y    shell=yes
-    ${result} =  Run Process    balena key add ${key_name} /root/.ssh/id_ecdsa.pub   shell=yes
+    ${result} =  Run Process    cat /root/.ssh/id_ecdsa.pub | balena key add test    shell=yes    timeout=60sec
     Process ${result}
 
 Create application "${application_name}" with device type "${device}"
