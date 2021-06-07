@@ -5,6 +5,14 @@ Change log
 
 * Empty commit to rebuild/publish docker image [ab77]
 
+# v0.2.0
+## (2021-06-03)
+
+* Use the standalone balena-cli installation [Thodoris Greasidis]
+* Update balena-cli to v12.44.17 [Thodoris Greasidis]
+* Drop legacy resin sync test [Thodoris Greasidis]
+* Add balena ssh test [Thodoris Greasidis]
+
 # v0.1.8
 ## (2021-04-27)
 
