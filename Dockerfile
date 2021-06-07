@@ -1,7 +1,7 @@
 # build balena-cli
 FROM balenalib/intel-nuc-node:10-stretch-build AS cli-build
 
-ARG BALENA_CLI_VERSION=10.17.6
+ARG BALENA_CLI_VERSION=12.44.17
 
 WORKDIR /opt
 
@@ -15,6 +15,7 @@ RUN install_packages \
     python-pip \
     python-setuptools \
     python-wheel \
+    unzip \
     systemd
 
 ENV VIRTUAL_ENV=/opt/venv
@@ -27,7 +28,9 @@ COPY requirements.txt .
 
 # https://github.com/nodejs/node/issues/19348
 RUN pip install -r requirements.txt \
-    && npm install --global balena-cli@${BALENA_CLI_VERSION}
+    && wget -q "https://github.com/balena-io/balena-cli/releases/download/v${BALENA_CLI_VERSION}/balena-cli-v${BALENA_CLI_VERSION}-linux-x64-standalone.zip" \
+    && unzip -q "balena-cli-v${BALENA_CLI_VERSION}-linux-x64-standalone.zip" \
+    && rm -rf "balena-cli-v${BALENA_CLI_VERSION}-linux-x64-standalone.zip"
 
 
 # build QEMU
@@ -73,6 +76,9 @@ RUN install_packages \
     libglib2.0-0 \
     libfdt1 \
     zlib1g
+
+COPY --from=cli-build /opt/balena-cli /opt/balena-cli
+ENV PATH="/opt/balena-cli:${PATH}"
 
 COPY --from=cli-build /opt/venv /opt/venv
 

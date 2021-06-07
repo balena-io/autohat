@@ -23,7 +23,7 @@ Add new SSH key with name "${key_name}"
     \    ${result} =  Run Process    balena keys |grep -w ${key_name} |cut -d ' ' -f 1 | head -1    shell=yes
     \    Log   all output: ${result.stdout}
     \    Run Process    balena key rm ${result.stdout} -y    shell=yes
-    ${result} =  Run Process    balena key add ${key_name} /root/.ssh/id_ecdsa.pub   shell=yes
+    ${result} =  Run Process    cat /root/.ssh/id_ecdsa.pub | balena key add test    shell=yes    timeout=60sec
     Process ${result}
 
 Create application "${application_name}" with device type "${device}"
@@ -143,16 +143,10 @@ Remove "${option}" variable "${variable_name}" from application "${application_n
     Process ${result}
     [Return]    ${result.stdout}
 
-Check if resin sync works on "${device_uuid}"
-    ${random} =  Evaluate    random.randint(0, sys.maxint)    modules=random, sys
-    Git clone "${application_repo}" "/tmp/${random}"
-    Git checkout "${application_commit}" "/tmp/${random}"
-    Add console output "Hello Resin Sync!" to "/tmp/${random}"
-    ${result} =  Run Buffered Process    DEBUG=* balena sync ${device_uuid} -s . -d /usr/src/app    shell=yes    cwd=/tmp/${random}
+Check if SSH works on "${device_uuid}"
+    ${result} =  Run Buffered Process    DEBUG=* echo "exit;" | balena ssh ${device_uuid}    shell=yes
     Process ${result}
-    Should Contain    ${result.stdout}    balena sync completed successfully!
-    Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Hello Resin Sync!"
-    [Teardown]    Run Keyword    Remove Directory    /tmp/${random}    recursive=True
+    Should Contain    ${result.stdout}    Welcome to balenaOS
 
 Check if setting environment variables works on "${application_name}"
     ${random} =   Evaluate    random.randint(0, 10000)    modules=random
