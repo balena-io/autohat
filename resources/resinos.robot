@@ -23,7 +23,7 @@ Check host OS fingerprint file in "${image}" on "${partition}" partition
     [Documentation]    Available items for argument ${partition} are: boot, root
     &{dict} =  Create Dictionary    boot=1    root=2
     ${LOOPDEVICE} =  Wait Until Keyword Succeeds    6x    5s    Set up loop device for "${image}"
-    ${random} =  Evaluate    random.randint(0, sys.maxint)    modules=random, sys
+    ${random} =  Evaluate    random.randint(0, sys.maxsize)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
     Run Keyword If    '${partition}' == 'boot'    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resinos.fingerprint
     Create Directory    ${mount_destination}
@@ -39,18 +39,19 @@ Check host OS fingerprint file in "${image}" on "${partition}" partition
     Run Keyword If    '${partition}' == 'boot'    Set Global Variable    ${fingerprint_content_partition1}    ${content}
     Run Keyword If    '${partition}' == 'root'    Should Contain    ${fingerprint_content_partition1}    ${content_fingerprint_p2_resin-boot}
     @{lines} =  Split To Lines  ${content}
-    : FOR   ${line}     IN  @{lines}
-    \   ${first} =  Fetch From Left    ${line}    ${SPACE}
-    \   ${second} =  Fetch From Right    ${line}    ${SPACE}
-    \   ${md5sum} =  Run Process    md5sum ${mount_destination}${second} | awk '{print $1}'    shell=yes
-    \   Should Contain     ${first}   ${md5sum.stdout}    msg=${mount_destination}${second} has MD5=${md5sum.stdout} when it should be ${first}
+    FOR   ${line}     IN  @{lines}
+        ${first} =  Fetch From Left    ${line}    ${SPACE}
+        ${second} =  Fetch From Right    ${line}    ${SPACE}
+        ${md5sum} =  Run Process    md5sum ${mount_destination}${second} | awk '{print $1}'    shell=yes
+        Should Contain     ${first}   ${md5sum.stdout}    msg=${mount_destination}${second} has MD5=${md5sum.stdout} when it should be ${first}
+    END
     [Teardown]    Run Keywords    Unmount "${mount_destination}"
     ...           AND             Remove Directory    ${mount_destination}    recursive=True
     ...           AND             Detach loop device "${LOOPDEVICE}"
 
 Get host OS version of "${image}"
     ${LOOPDEVICE} =  Wait Until Keyword Succeeds    6x    5s    Set up loop device for "${image}"
-    ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
+    ${random} =   Evaluate    random.randint(0, sys.maxsize)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
     Create Directory    ${mount_destination}
     Mount "${LOOPDEVICE}p1" on "${mount_destination}"
@@ -66,12 +67,13 @@ Get host OS version of "${image}"
     ...           AND             Detach loop device "${LOOPDEVICE}"
 
 File list "@{files_list}" does not exist in "${mount_destination}"
-    : FOR   ${files_line}     IN  @{files_list}
-    \   File Should Not Exist  ${mount_destination}${files_line}  msg="Backup file ${files_line} found on the rootfs that should not exist."
+    FOR   ${files_line}     IN  @{files_list}
+        File Should Not Exist  ${mount_destination}${files_line}  msg="Backup file ${files_line} found on the rootfs that should not exist."
+    END
 
 Enable getty service on "${image}" for "${device_type}"
     ${LOOPDEVICE} =  Wait Until Keyword Succeeds    6x    5s    Set up loop device for "${image}"
-    ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
+    ${random} =   Evaluate    random.randint(0, sys.maxsize)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
     Create Directory    ${mount_destination}
     Mount "${LOOPDEVICE}p2" on "${mount_destination}"
@@ -107,7 +109,7 @@ Get "${service}" logs using socket "${socket}"
 
 Check that backup files are not found in the "${image}"
     ${LOOPDEVICE} =  Wait Until Keyword Succeeds    6x    5s    Set up loop device for "${image}"
-    ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
+    ${random} =   Evaluate    random.randint(0, sys.maxsize)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
     Create Directory    ${mount_destination}
     Mount "${LOOPDEVICE}p2" on "${mount_destination}"
@@ -127,7 +129,7 @@ Check if kernel module loading works on "${device_uuid}"
     [Teardown]    Run Keyword    "disable" public URL for device "${device_uuid}"
 
 Run "${image}" on "${application_name}" with delta already enabled
-    ${random} =   Evaluate    random.randint(0, sys.maxint)    modules=random, sys
+    ${random} =   Evaluate    random.randint(0, sys.maxsize)    modules=random, sys
     Add ENV variable "RESIN_SUPERVISOR_DELTA" with value "1" to application "${application_name}"
     ${tmp_device_uuid} =    Configure "${image}" with "${application_name}"
     ${handle} =    Run "${image}" with "512" MB memory "2" cpus and "/tmp/console${random}.sock" serial port

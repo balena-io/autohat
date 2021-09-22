@@ -9,6 +9,8 @@ Suite Teardown    Disable DUT
 
 *** Test Cases ***
 Preparing test environment
+  Set Suite Variable    ${requests_verify}    %{requests_verify}
+  Set Suite Variable    ${proxy_ssh_port}    %{proxy_ssh_port}
   Set Suite Variable    ${application_name}    %{application_name}
   Set Suite Variable    ${device_type}    %{device_type}
   Set Suite Variable    ${RESINRC_RESIN_URL}    %{RESINRC_RESIN_URL}

@@ -1,67 +1,60 @@
-# build balena-cli
-FROM balenalib/intel-nuc-node:10-stretch-build AS cli-build
+# --- build balena-cli
+ARG ARCH=amd64
 
-ARG BALENA_CLI_VERSION=12.44.17
+FROM balenalib/${ARCH}-node:16-bullseye-build AS cli-build
+
+ARG BALENA_CLI_VERSION=12.48.15
 
 WORKDIR /opt
 
-RUN install_packages \
-    build-essential \
-    flex \
-    bison \
-    rsync \
-    minicom \
-    libftdi-dev \
-    python-pip \
-    python-setuptools \
-    python-wheel \
-    unzip \
-    systemd
+RUN install_packages unzip
 
-ENV VIRTUAL_ENV=/opt/venv
-
-RUN pip install virtualenv && python -m virtualenv $VIRTUAL_ENV
-
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
-COPY requirements.txt .
-
-# https://github.com/nodejs/node/issues/19348
-RUN pip install -r requirements.txt \
-    && wget -q "https://github.com/balena-io/balena-cli/releases/download/v${BALENA_CLI_VERSION}/balena-cli-v${BALENA_CLI_VERSION}-linux-x64-standalone.zip" \
+RUN wget -q "https://github.com/balena-io/balena-cli/releases/download/v${BALENA_CLI_VERSION}/balena-cli-v${BALENA_CLI_VERSION}-linux-x64-standalone.zip" \
     && unzip -q "balena-cli-v${BALENA_CLI_VERSION}-linux-x64-standalone.zip" \
     && rm -rf "balena-cli-v${BALENA_CLI_VERSION}-linux-x64-standalone.zip"
 
 
-# build QEMU
-FROM balenalib/intel-nuc-python:3.6-stretch-build AS qemu-build
+# --- build QEMU and Python venv
+ARG ARCH=amd64
 
-ARG QEMU_VERSION=5.2.0
+FROM balenalib/${ARCH}-python:3.8-bullseye-build AS qemu-build
+
+ARG QEMU_VERSION=6.1.0
+
+WORKDIR /opt
+
+ENV VIRTUAL_ENV=/opt/venv
 
 RUN install_packages \
-    ninja-build \
-    libglib2.0-dev \
     libfdt-dev \
+    libglib2.0-dev \
     libpixman-1-dev \
-    zlib1g-dev \
-    valgrind \
-    xfslibs-dev
+    ninja-build \
+    zlib1g-dev
+
+RUN python3 -m venv ${VIRTUAL_ENV}
+
+ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
+
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
 
 RUN wget -q https://download.qemu.org/qemu-${QEMU_VERSION}.tar.xz \
-    && echo "cb18d889b628fbe637672b0326789d9b0e3b8027e0445b936537c78549df17bc  qemu-${QEMU_VERSION}.tar.xz" | sha256sum -c - \
+    && echo "eebc089db3414bbeedf1e464beda0a7515aad30f73261abc246c9b27503a3c96  qemu-${QEMU_VERSION}.tar.xz" | sha256sum -c - \
     && tar -xf qemu-${QEMU_VERSION}.tar.xz && cd qemu-${QEMU_VERSION} \
     && ./configure --target-list=x86_64-softmmu && make -j"$(nproc)" \
     && make install
 
 
-# runtime
-FROM balenalib/intel-nuc-node:10-stretch-run
+# --- runtime
+ARG ARCH=amd64
+
+FROM balenalib/${ARCH}-python:3.8-bullseye-run
 
 ENV VIRTUAL_ENV=/opt/venv
 
-ENV PATH="$VIRTUAL_ENV/bin:/usr/local/bin:$PATH"
-
-ENV PYTHONHOME=$VIRTUAL_ENV
+ENV PATH="${VIRTUAL_ENV}/bin:/usr/local/bin:${PATH}"
 
 RUN install_packages \
     git \
@@ -80,12 +73,8 @@ RUN install_packages \
 COPY --from=cli-build /opt/balena-cli /opt/balena-cli
 ENV PATH="/opt/balena-cli:${PATH}"
 
-COPY --from=cli-build /opt/venv /opt/venv
-
-COPY --from=cli-build /usr/lib/python2.7 /usr/lib/python2.7
-
-COPY --from=cli-build /usr/local /usr/local
-
+COPY --from=qemu-build /opt/venv /opt/venv
+COPY --from=qemu-build /usr/lib/python3.8 /usr/lib/python3.8
 COPY --from=qemu-build /usr/local /usr/local
 
 ADD fixtures/ssh_config /root/.ssh/config

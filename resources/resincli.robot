@@ -19,10 +19,11 @@ Add new SSH key with name "${key_name}"
     Process ${result}
     ${word_count} =  Run Process    balena keys |grep -w ${key_name} |cut -d ' ' -f 1 | wc -l    shell=yes
     Process ${word_count}
-    :FOR    ${i}    IN RANGE    ${word_count.stdout}
-    \    ${result} =  Run Process    balena keys |grep -w ${key_name} |cut -d ' ' -f 1 | head -1    shell=yes
-    \    Log   all output: ${result.stdout}
-    \    Run Process    balena key rm ${result.stdout} -y    shell=yes
+    FOR    ${i}    IN RANGE    ${word_count.stdout}
+        ${result} =  Run Process    balena keys |grep -w ${key_name} |cut -d ' ' -f 1 | head -1    shell=yes
+        Log   all output: ${result.stdout}
+        Run Process    balena key rm ${result.stdout} -y    shell=yes
+    END
     ${result} =  Run Process    cat /root/.ssh/id_ecdsa.pub | balena key add test    shell=yes    timeout=60sec
     Process ${result}
 
@@ -144,7 +145,7 @@ Remove "${option}" variable "${variable_name}" from application "${application_n
     [Return]    ${result.stdout}
 
 Check if SSH works on "${device_uuid}"
-    ${result} =  Run Buffered Process    DEBUG=* echo "exit;" | balena ssh ${device_uuid}    shell=yes
+    ${result} =  Run Buffered Process    DEBUG=* echo "exit;" | balena ssh ${device_uuid} --port ${proxy_ssh_port}    shell=yes
     Process ${result}
     Should Contain    ${result.stdout}    Welcome to balenaOS
 
@@ -157,7 +158,7 @@ Check if setting environment variables works on "${application_name}"
 Check enabling supervisor delta on "${application_name}"
     Add ENV variable "RESIN_SUPERVISOR_DELTA" with value "1" to application "${application_name}"
     Device "${device_uuid}" log should not contain "Killing application"
-    ${random} =  Evaluate    random.randint(0, sys.maxint)    modules=random, sys
+    ${random} =  Evaluate    random.randint(0, sys.maxsize)    modules=random, sys
     Git clone "${application_repo}" "/tmp/${random}"
     Git checkout "${application_commit}" "/tmp/${random}"
     Add console output "Grettings World!" to "/tmp/${random}"
@@ -195,7 +196,7 @@ Shutdown resin device "${device_uuid}"
 
 Run Buffered Process
     [Arguments]    ${command}    ${shell}    ${cwd}=${EXECDIR}    ${timeout}=30min
-    ${random} =  Evaluate    random.randint(0, sys.maxint)    modules=random, sys
+    ${random} =  Evaluate    random.randint(0, sys.maxsize)    modules=random, sys
     ${result} =  Run Process    ${command}    shell=${shell}    cwd=${cwd}    timeout=${timeout}    stdout=/tmp/autohat.${random}.stdout    stderr=/tmp/autohat.${random}.stderr
     [Return]    ${result}
 

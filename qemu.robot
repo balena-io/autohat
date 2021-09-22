@@ -11,6 +11,8 @@ Suite Teardown    Run Keywords    Get "journalctl --no-pager" logs using socket 
 
 *** Test Cases ***
 Preparing test environment
+  Set Suite Variable    ${requests_verify}    %{requests_verify}
+  Set Suite Variable    ${proxy_ssh_port}    %{proxy_ssh_port}
   Set Suite Variable    ${application_name}    %{application_name}
   Should Not Be Empty   ${application_name}    msg=application_name variable cannot be blank
   Set Suite Variable    ${device_type}    %{device_type}
