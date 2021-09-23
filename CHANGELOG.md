@@ -5,6 +5,11 @@ Change log
 
 * Empty commit to rebuild/publish docker image [ab77]
 
+# v0.2.1
+## (2021-09-23)
+
+* Add proxy port environment variable [ab77]
+
 # v0.2.0
 ## (2021-06-03)
 
