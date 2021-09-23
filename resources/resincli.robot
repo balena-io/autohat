@@ -101,6 +101,8 @@ Device "${device_uuid}" log should not contain "${value}"
     Should Not Contain    ${result.stdout}    ${value}
 
 Check if host OS version of device "${device_uuid}" is "${os_version}"
+    ${result} =  Run Process    balena device ${device_uuid}    shell=yes
+    Log To Console    ${result.stdout}
     ${result} =  Get "OS VERSION" of device "${device_uuid}"
     Should Contain    ${result}    ${os_version}
 
