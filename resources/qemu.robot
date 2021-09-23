@@ -11,7 +11,7 @@ Run "${image}" with "${memory}" MB memory "${cpus}" cpus and "${serial_port_path
     Set Test Variable    ${cpus}    ${cpus}
     Set Test Variable    ${serial_port_path}    ${serial_port_path}
     Set Test Variable    ${image}    ${image}
-    ${random} =  Evaluate    random.randint(0,sys.maxint)    modules=random, sys
+    ${random} =  Evaluate    random.randint(0,sys.maxsize)    modules=random, sys
     ${result} =  Run Buffered Process    cp ${image} /tmp/resin${random}.img    shell=yes
     Process ${result}
     Set Test Variable    ${image_copy}    /tmp/resin${random}.img
