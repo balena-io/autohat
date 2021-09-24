@@ -5,6 +5,11 @@ Change log
 
 * Empty commit to rebuild/publish docker image [ab77]
 
+# v0.2.2
+## (2021-09-24)
+
+* Remove redundant test [ab77]
+
 # v0.2.1
 ## (2021-09-23)
 
