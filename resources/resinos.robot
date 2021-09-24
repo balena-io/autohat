@@ -128,20 +128,6 @@ Check if kernel module loading works on "${device_uuid}"
     Wait Until Keyword Succeeds    6x    5s    Check if "media" kernel module is loaded through "${address}"
     [Teardown]    Run Keyword    "disable" public URL for device "${device_uuid}"
 
-Run "${image}" on "${application_name}" with delta already enabled
-    ${random} =   Evaluate    random.randint(0, sys.maxsize)    modules=random, sys
-    Add ENV variable "RESIN_SUPERVISOR_DELTA" with value "1" to application "${application_name}"
-    ${tmp_device_uuid} =    Configure "${image}" with "${application_name}"
-    ${handle} =    Run "${image}" with "512" MB memory "2" cpus and "/tmp/console${random}.sock" serial port
-    Wait Until Keyword Succeeds    36x    5s    Device "${tmp_device_uuid}" is online
-    Wait Until Keyword Succeeds    60x    30s    Device "${tmp_device_uuid}" log should contain "Hello"
-    Check if "CONFIG" variable "RESIN_SUPERVISOR_DELTA" with value "1" exists in application "${application_name}"
-    Add ENV variable "RESIN_SUPERVISOR_DELTA" with value "0" to application "${application_name}"
-    Shutdown resin device "${tmp_device_uuid}"
-    Wait Until Keyword Succeeds    36x    5s    Device "${tmp_device_uuid}" is offline
-    Wait For Process    handle=${handle}    timeout=30s    on_timeout=terminate
-    [Teardown]    Run Process    rm /tmp/console${random}.sock    shell=yes
-
 Get "${interface}" IP address using socket "${socket}"
     ${result} =  Run Process    echo "send root\nexpect \"#\"\nsend ifconfig ${interface}" > minicom_script_${interface}.sh    shell=yes    cwd=/tmp/enable_getty_service
     Process ${result}
