@@ -5,6 +5,12 @@ Change log
 
 * Empty commit to rebuild/publish docker image [ab77]
 
+# v0.2.3
+## (2021-10-15)
+
+* Track latest python3 [ab77]
+* fixing python3.8 lib to generic python3 [fisehara]
+
 # v0.2.2
 ## (2021-09-24)
 
