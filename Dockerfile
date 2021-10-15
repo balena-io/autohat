@@ -3,7 +3,7 @@ ARG ARCH=amd64
 
 FROM balenalib/${ARCH}-node:16-bullseye-build AS cli-build
 
-ARG BALENA_CLI_VERSION=12.48.15
+ARG BALENA_CLI_VERSION=12.50.2
 
 WORKDIR /opt
 
@@ -17,7 +17,7 @@ RUN wget -q "https://github.com/balena-io/balena-cli/releases/download/v${BALENA
 # --- build QEMU and Python venv
 ARG ARCH=amd64
 
-FROM balenalib/${ARCH}-python:3.8-bullseye-build AS qemu-build
+FROM balenalib/${ARCH}-python:3-bullseye-build AS qemu-build
 
 ARG QEMU_VERSION=6.1.0
 
@@ -50,7 +50,7 @@ RUN wget -q https://download.qemu.org/qemu-${QEMU_VERSION}.tar.xz \
 # --- runtime
 ARG ARCH=amd64
 
-FROM balenalib/${ARCH}-python:3.8-bullseye-run
+FROM balenalib/${ARCH}-python:3-bullseye-run
 
 ENV VIRTUAL_ENV=/opt/venv
 
