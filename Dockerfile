@@ -74,7 +74,7 @@ COPY --from=cli-build /opt/balena-cli /opt/balena-cli
 ENV PATH="/opt/balena-cli:${PATH}"
 
 COPY --from=qemu-build /opt/venv /opt/venv
-COPY --from=qemu-build /usr/lib/python3.8 /usr/lib/python3.8
+COPY --from=qemu-build /usr/lib/python3 /usr/lib/python3
 COPY --from=qemu-build /usr/local /usr/local
 
 ADD fixtures/ssh_config /root/.ssh/config
