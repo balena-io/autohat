@@ -25,13 +25,13 @@ Check host OS fingerprint file in "${image}" on "${partition}" partition
     ${LOOPDEVICE} =  Wait Until Keyword Succeeds    6x    5s    Set up loop device for "${image}"
     ${random} =  Evaluate    random.randint(0, sys.maxsize)    modules=random, sys
     Set Test Variable    ${mount_destination}    /tmp/${random}
-    Run Keyword If    '${partition}' == 'boot'    Set Test Variable    ${fingerprint_file}    ${mount_destination}/resinos.fingerprint
+    Run Keyword If    '${partition}' == 'boot'    Set Test Variable    ${fingerprint_file}    ${mount_destination}/*.fingerprint
     Create Directory    ${mount_destination}
     Mount "${LOOPDEVICE}p${dict.${partition}}" on "${mount_destination}"
     ${path_to_home_p2} =    Run Keyword If    '${partition}' == 'root'    Run Process    find ${mount_destination} -name "home"    shell=yes
     ${path_to_fingerprint_p2}    ${last} =    Run Keyword If    '${partition}' == 'root'    Split String From Right    ${path_to_home_p2.stdout}    /    1
-    Run Keyword If    '${partition}' == 'root'    Set Test Variable   ${fingerprint_p2_resin-boot}    ${path_to_fingerprint_p2}/resin-boot/resinos.fingerprint
-    Run Keyword If    '${partition}' == 'root'    Set Test Variable    ${fingerprint_file}    ${path_to_fingerprint_p2}/resinos.fingerprint
+    Run Keyword If    '${partition}' == 'root'    Set Test Variable   ${fingerprint_p2_resin-boot}    ${path_to_fingerprint_p2}/resin-boot/*.fingerprint
+    Run Keyword If    '${partition}' == 'root'    Set Test Variable    ${fingerprint_file}    ${path_to_fingerprint_p2}/*.fingerprint
     Run Keyword If    '${partition}' == 'root'    File Should Exist    ${fingerprint_p2_resin-boot}   msg=Couldn't find ${fingerprint_p2_resin-boot}
     ${content_fingerprint_p2_resin-boot} =    Run Keyword If    '${partition}' == 'root'    Get File    ${fingerprint_p2_resin-boot}
     File Should Exist   ${fingerprint_file}     msg=Couldn't find ${fingerprint_file} in ${mount_destination}
