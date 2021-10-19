@@ -5,6 +5,12 @@ Change log
 
 * Empty commit to rebuild/publish docker image [ab77]
 
+# v0.2.4
+## (2021-10-19)
+
+* check for filename instead of using wildcard [rcooke-warwick]
+* update fingerprint file path [rcooke-warwick]
+
 # v0.2.3
 ## (2021-10-15)
 
