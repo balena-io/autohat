@@ -5,6 +5,12 @@ Change log
 
 * Empty commit to rebuild/publish docker image [ab77]
 
+# v0.2.5
+## (2021-10-21)
+
+* resinos.robot: Replace media module with mc [Alex Gonzalez]
+* qemu.robot: Adjust qemu launch options to use an ahci drive [Alex Gonzalez]
+
 # v0.2.4
 ## (2021-10-19)
 
