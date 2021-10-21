@@ -128,8 +128,8 @@ Check if kernel module loading works on "${device_uuid}"
     ${result} =  "status" public URL for device "${device_uuid}"
     Should Contain    ${result}    true
     ${address} =  "get" public URL for device "${device_uuid}"
-    Wait Until Keyword Succeeds    6x    5s    Load "media" kernel module to device through "${address}"
-    Wait Until Keyword Succeeds    6x    5s    Check if "media" kernel module is loaded through "${address}"
+    Wait Until Keyword Succeeds    6x    5s    Load "mc" kernel module to device through "${address}"
+    Wait Until Keyword Succeeds    6x    5s    Check if "mc" kernel module is loaded through "${address}"
     [Teardown]    Run Keyword    "disable" public URL for device "${device_uuid}"
 
 Get "${interface}" IP address using socket "${socket}"
