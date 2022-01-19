@@ -3,7 +3,7 @@ ARG ARCH=amd64
 
 FROM balenalib/${ARCH}-node:16-bullseye-build AS cli-build
 
-ARG BALENA_CLI_VERSION=12.50.2
+ARG BALENA_CLI_VERSION=13.1.8
 
 WORKDIR /opt
 
@@ -19,7 +19,7 @@ ARG ARCH=amd64
 
 FROM balenalib/${ARCH}-python:3-bullseye-build AS qemu-build
 
-ARG QEMU_VERSION=6.1.0
+ARG QEMU_VERSION=6.2.0
 
 WORKDIR /opt
 
@@ -41,7 +41,7 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 RUN wget -q https://download.qemu.org/qemu-${QEMU_VERSION}.tar.xz \
-    && echo "eebc089db3414bbeedf1e464beda0a7515aad30f73261abc246c9b27503a3c96  qemu-${QEMU_VERSION}.tar.xz" | sha256sum -c - \
+    && echo "68e15d8e45ac56326e0b9a4afa8b49a3dfe8aba3488221d098c84698bca65b45  qemu-${QEMU_VERSION}.tar.xz" | sha256sum -c - \
     && tar -xf qemu-${QEMU_VERSION}.tar.xz && cd qemu-${QEMU_VERSION} \
     && ./configure --target-list=x86_64-softmmu && make -j"$(nproc)" \
     && make install
@@ -76,6 +76,10 @@ ENV PATH="/opt/balena-cli:${PATH}"
 COPY --from=qemu-build /opt/venv /opt/venv
 COPY --from=qemu-build /usr/lib/python3 /usr/lib/python3
 COPY --from=qemu-build /usr/local /usr/local
+
+COPY *.robot /opt
+
+COPY resources/* /opt/resources/
 
 ADD fixtures/ssh_config /root/.ssh/config
 
