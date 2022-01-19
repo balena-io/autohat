@@ -5,6 +5,11 @@ Change log
 
 * Empty commit to rebuild/publish docker image [ab77]
 
+# v0.2.7
+## (2022-01-19)
+
+* Update balena-cli parameters [ab77]
+
 # v0.2.6
 ## (2022-01-19)
 
