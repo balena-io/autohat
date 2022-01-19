@@ -5,6 +5,11 @@ Change log
 
 * Empty commit to rebuild/publish docker image [ab77]
 
+# v0.2.8
+## (2022-01-19)
+
+* Resolve fleet slug for git push [ab77]
+
 # v0.2.7
 ## (2022-01-19)
 
