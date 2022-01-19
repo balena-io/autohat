@@ -106,16 +106,16 @@ Check if host OS version of device "${device_uuid}" is "${os_version}"
     Should Contain    ${result}    ${os_version}
 
 Add ENV variable "${variable_name}" with value "${variable_value}" to application "${application_name}"
-    ${result} =  Run Process    balena env add ${variable_name} ${variable_value} -a ${application_name}    shell=yes
+    ${result} =  Run Process    balena env add ${variable_name} ${variable_value} -f ${application_name}    shell=yes
     Process ${result}
 
 Check if "${option}" variable "${variable_name}" with value "${variable_value}" exists in application "${application_name}"
     [Documentation]    Available values for argument ${option} are: ENV, CONFIG
     @{list} =  Create List    ENV    CONFIG
     Should Contain    ${list}    ${option}
-    ${result_env} =  Run Keyword If    '${option}' == 'ENV'    Run Process    balena envs -a ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
+    ${result_env} =  Run Keyword If    '${option}' == 'ENV'    Run Process    balena envs -f ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
     ...    ELSE
-    ...    Run Process    balena envs --config -a ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
+    ...    Run Process    balena envs --config -f ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
     Process ${result_env}
     ${result} =  Run Process    echo "${result_env.stdout}" | grep ${variable_name} | grep " ${variable_value}"    shell=yes
     Process ${result}
@@ -124,9 +124,9 @@ Remove "${option}" variable "${variable_name}" from application "${application_n
     [Documentation]    Available values for argument ${option} are: ENV, CONFIG
     @{list} =  Create List    ENV    CONFIG
     Should Contain    ${list}    ${option}
-    ${result_vars} =  Run Keyword If    '${option}' == 'ENV'    Run Process    balena envs -a ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
+    ${result_vars} =  Run Keyword If    '${option}' == 'ENV'    Run Process    balena envs -f ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
     ...    ELSE
-    ...    Run Process    balena envs --config -a ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'   shell=yes
+    ...    Run Process    balena envs --config -f ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'   shell=yes
     Process ${result_vars}
     ${result_id} =  Run Process    echo "${result_vars.stdout}" | grep ${variable_name} | cut -d ' ' -f 1    shell=yes
     Process ${result_id}
