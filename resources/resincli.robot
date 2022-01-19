@@ -12,6 +12,9 @@ Resin login with email "${email}" and password "${password}"
     ${result} =  Run Process    balena whoami |sed '/USERNAME/!d' |sed 's/^.*USERNAME: //'   shell=yes
     Process ${result}
     Set Suite Variable    ${RESINUSER}    ${result.stdout}
+    ${result} =  Run Process    balena fleet ${application_name} | grep ^SLUG: | cut -c14-   shell=yes
+    Process ${result}
+    Set Suite Variable    ${FLEET}    ${result.stdout}
 
 Add new SSH key with name "${key_name}"
     Remove File    /root/.ssh/id_ecdsa
@@ -50,7 +53,7 @@ Git checkout "${commit_hash}" "${directory}"
 
 Git push "${directory}" to application "${application_name}"
     Set Environment Variable    RESINUSER    ${RESINUSER}
-    ${result} =  Run Process    git remote add balena $RESINUSER@git.${RESINRC_RESIN_URL}:$RESINUSER/${application_name}.git    shell=yes    cwd=${directory}
+    ${result} =  Run Process    git remote add balena $RESINUSER@git.${RESINRC_RESIN_URL}:${FLEET}.git    shell=yes    cwd=${directory}
     Process ${result}
     ${result} =  Run Buffered Process    git push balena HEAD:refs/heads/master    shell=yes    cwd=${directory}
     Process ${result}
