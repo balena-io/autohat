@@ -56,6 +56,7 @@ The resources directory contains Robot Keyword helpers for ``resincli`` and hard
     ``docker run -it --rm -v <path_to_repo>:/autohat -v /dev/:/dev2 --privileged --env-file ./env.list autohat robot --exitonerror /autohat/raspberrypi3.robot``
 
 ### Troubleshooting
+> Ctrl-A-X to exit QEMU monitor
 
     docker exec -ti {{id-or-name-of-running-autohat-container}} bash
 
