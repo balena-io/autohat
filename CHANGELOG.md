@@ -5,6 +5,11 @@ Change log
 
 * Empty commit to rebuild/publish docker image [ab77]
 
+# v0.2.9
+## (2022-01-25)
+
+* Port forward to host [ab77]
+
 # v0.2.8
 ## (2022-01-19)
 
