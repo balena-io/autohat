@@ -20,9 +20,9 @@ Run "${image}" with "${memory}" MB memory "${cpus}" cpus and "${serial_port_path
     Run Keyword And Return If    '${result.stdout}' != '0'    Run image with KVM enabled
 
 Run image with KVM enabled
-    ${handle} =  Start Process    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image_copy},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device ide-hd,drive\=disk,bus\=ahci.0 -net nic,model\=virtio -net user -m ${memory} -nographic -machine type\=pc,accel\=kvm -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server,nowait -serial chardev:serial0    shell=yes
+    ${handle} =  Start Process    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image_copy},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device ide-hd,drive\=disk,bus\=ahci.0 -net nic,model\=virtio -net \"user,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=pc,accel\=kvm -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server,nowait -serial chardev:serial0    shell=yes
     Return From Keyword    ${handle}
 
 Run image with KVM disabled
-    ${handle} =  Start Process    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image_copy},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device ide-hd,drive\=disk,bus\=ahci.0 -net nic,model\=virtio -net user -m ${memory} -nographic -machine type\=pc -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server,nowait -serial chardev:serial0    shell=yes
+    ${handle} =  Start Process    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image_copy},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device ide-hd,drive\=disk,bus\=ahci.0 -net nic,model\=virtio -net \"user,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=pc -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server,nowait -serial chardev:serial0    shell=yes
     Return From Keyword    ${handle}
