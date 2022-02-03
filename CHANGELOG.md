@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.3.0 - 2022-02-02
+
+* Force public DNS resolution for QEMU guest VMs [ab77]
+
 ## v0.1.4 - 2021-04-13
 
 * Empty commit to rebuild/publish docker image [ab77]
