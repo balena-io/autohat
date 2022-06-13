@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.3.4 - 2022-06-13
+
+* Update balenalib/amd64-node from 16 to 18 [Renovate Bot]
+
 ## v0.3.3 - 2022-06-13
 
 * Update requests from 2.26.0 to 2.28.0 [Renovate Bot]
