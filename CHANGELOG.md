@@ -1,6 +1,11 @@
 Change log
 -----------
 
+## v0.3.1 - 2022-06-13
+
+* Update robotframework from 4.0 to 4.1.3 [Renovate Bot]
+* Update pylibftdi from 0.19.0 to 0.20.0 [Renovate Bot]
+
 ## v0.3.0 - 2022-02-02
 
 * Force public DNS resolution for QEMU guest VMs [ab77]
