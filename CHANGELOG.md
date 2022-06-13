@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.3.5 - 2022-06-13
+
+* Update robotframework from 4.1.3 to 5.0.1 [Renovate Bot]
+
 ## v0.3.4 - 2022-06-13
 
 * Update balenalib/amd64-node from 16 to 18 [Renovate Bot]
