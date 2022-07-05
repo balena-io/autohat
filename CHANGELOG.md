@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.3.6 - 2022-06-29
+
+* Update requests from 2.28.0 to 2.28.1 [Renovate Bot]
+
 ## v0.3.5 - 2022-06-13
 
 * Update robotframework from 4.1.3 to 5.0.1 [Renovate Bot]
