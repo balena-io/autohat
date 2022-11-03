@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.4.1 - 2022-11-03
+
+* Update dependency robotframework to 6.0.1 [Renovate Bot]
+
 ## v0.4.0 - 2022-10-26
 
 * Update dependency robotframework to 6.0 [Renovate Bot]
