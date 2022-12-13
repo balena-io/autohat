@@ -1,7 +1,0 @@
----
-docker:
-  builds:
-    - dockerfile: Dockerfile
-      path: .
-      publish: true
-      docker_repo: balena/autohat
