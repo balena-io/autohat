@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.4.2 - 2022-12-13
+
+* Migrate to Flowzone [ab77]
+
 ## v0.4.1 - 2022-11-03
 
 * Update dependency robotframework to 6.0.1 [Renovate Bot]

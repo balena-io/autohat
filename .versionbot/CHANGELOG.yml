@@ -1,0 +1,2089 @@
+- commits:
+    - subject: Migrate to Flowzone
+      hash: b19621bfddcd6ea3e23609b40affb8b949aee0a5
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: ab77
+  version: 0.4.2
+  title: ""
+  date: 2022-12-13T00:39:56.682Z
+- version: 0.4.1
+  date: 2022-11-03T17:43:00Z
+  commits:
+    - hash: 213cd1bfe6088020ed4905e24d18cf2df582576b
+      author: Renovate Bot
+      footers:
+        change-type: patch
+      subject: Update dependency robotframework to 6.0.1
+      body: |-
+        Update robotframework to 6.0.1
+        Update robotframework from 6.0 to 6.0.1
+- version: 0.4.0
+- date: 2022-10-28T01:06:53Z
+- commits:
+    - hash: c20ecbc366ab9c83ec66da4567e448e123194f02
+- commits:
+    - author: Renovate Bot
+- commits:
+    - footers:
+        change-type: minor
+- commits:
+    - subject: Update dependency robotframework to 6.0
+- commits:
+    - body: |-
+        Update robotframework to 6.0
+        Update robotframework from 5.0.1 to 6.0
+- version: 0.3.7
+- date: 2022-10-26T23:29:27Z
+- commits:
+    - hash: 55cbd537c33645d66a8353849cbe1b63b62a037d
+- commits:
+    - author: Renovate Bot
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Update dependency robotframework-requests to 0.9.4
+- commits:
+    - body: |-
+        Update robotframework-requests to 0.9.4
+        Update robotframework-requests from 0.9.3 to 0.9.4
+- version: 0.3.6
+- date: 2022-07-05T23:39:21Z
+- commits:
+    - hash: 1932ecff6aa7d27bf289e7529012263ef6521c0f
+- commits:
+    - author: Renovate Bot
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Update requests from 2.28.0 to 2.28.1
+- commits:
+    - body: null
+- version: 0.3.5
+- date: 2022-06-13T21:08:05Z
+- commits:
+    - hash: 28ce617240d93bc688afcfaa75d8b5903f1776f1
+- commits:
+    - author: Renovate Bot
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Update robotframework from 4.1.3 to 5.0.1
+- commits:
+    - body: null
+- commits:
+    - hash: 6c73cf830238a967c5350f401698ff6e061a5af4
+- commits:
+    - author: Anton Belodedenko
+- commits:
+    - subject: Merge branch 'master' into renovate/robotframework-5.x
+- commits:
+    - body: null
+- commits:
+    - hash: 6002ded710b4ee103c30ca725ecacbead74ec69b
+- commits:
+    - author: Anton Belodedenko
+- commits:
+    - subject: Merge branch 'master' into renovate/robotframework-5.x
+- commits:
+    - body: null
+- version: 0.3.4
+- date: 2022-06-13T19:45:23Z
+- commits:
+    - hash: 7855068f41599aef693fa21864902b3a6c793de2
+- commits:
+    - author: Renovate Bot
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Update balenalib/amd64-node from 16 to 18
+- commits:
+    - body: null
+- commits:
+    - hash: db7b4d659c6aa9228281b3b9a504abe3b5582fd2
+- commits:
+    - author: Anton Belodedenko
+- commits:
+    - subject: Merge branch 'master' into renovate/balenalib-amd64-node-18.x
+- commits:
+    - body: null
+- commits:
+    - hash: 7ab247f6ff53ebe65294d9ac569d983470b19a95
+- commits:
+    - author: Anton Belodedenko
+- commits:
+    - subject: Merge branch 'master' into renovate/balenalib-amd64-node-18.x
+- commits:
+    - body: null
+- version: 0.3.3
+- date: 2022-06-13T18:49:12Z
+- commits:
+    - hash: c701345022a700c482bbf3c8082fb2fc6d129d22
+- commits:
+    - author: Renovate Bot
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Update requests from 2.26.0 to 2.28.0
+- commits:
+    - body: null
+- version: 0.3.2
+- date: 2022-06-13T17:54:19Z
+- commits:
+    - hash: 977efef5557daf2f6e893f4022cbfcd0d93f20ec
+- commits:
+    - author: Renovate Bot
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Update robotframework-requests from 0.9.2 to 0.9.3
+- commits:
+    - body: null
+- version: 0.3.1
+- date: 2022-06-13T16:58:36Z
+- commits:
+    - hash: 281e2f3a9e3da761ecc0cafac1376115d3bf68cb
+- commits:
+    - author: Renovate Bot
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Update robotframework from 4.0 to 4.1.3
+- commits:
+    - body: null
+- commits:
+    - hash: 704323cf5112877a446646f4eff182291df6ac09
+- commits:
+    - author: Renovate Bot
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Update pylibftdi from 0.19.0 to 0.20.0
+- commits:
+    - body: null
+- version: 0.3.0
+- date: 2022-02-03T22:00:29Z
+- commits:
+    - hash: a04423687470110799a104eb995621bea2d23a2d
+- commits:
+    - author: ab77
+- commits:
+    - footers:
+        change-type: minor
+- commits:
+    - subject: Force public DNS resolution for QEMU guest VMs
+- commits:
+    - body: |-
+        * forces QEMU guests to use external DNS directly
+        instead of local Docker bridge DNS
+        * avoids having to use more complicated TAP networking
+        * See, https://wiki.qemu.org/Documentation/Networking
+        https://unix.stackexchange.com/a/614603/78029
+        https://stackoverflow.com/a/41747522/1559300
+- version: 0.2.9
+- date: 2022-01-25T00:27:38Z
+- commits:
+    - hash: cb2a1785ad24cbb90102b28ac67a5d57f66a19eb
+- commits:
+    - author: ab77
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Port forward to host
+- commits:
+    - body: "* map ports 80 and 443 on guest's virtual IP 10.0.2.100 to host's Docker
+        network alias \"haproxy\""
+- version: 0.2.8
+- date: 2022-01-19T04:27:57Z
+- commits:
+    - hash: abab28181343c86a0111db0976140cf5cef5ba3c
+- commits:
+    - author: ab77
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Resolve fleet slug for git push
+- commits:
+    - body: null
+- version: 0.2.7
+- date: 2022-01-19T02:47:03Z
+- commits:
+    - hash: de2f0fb1959ca07461402dc890cf2151def04a27
+- commits:
+    - author: ab77
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Update balena-cli parameters
+- commits:
+    - body: "* app => fleet"
+- version: 0.2.6
+- date: 2022-01-19T01:37:24Z
+- commits:
+    - hash: 374bd494d348466666bcf4f064f17af417677907
+- commits:
+    - author: ab77
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Add resources and test plans
+- commits:
+    - body: |-
+        * bump qemu
+        * bump balena-cli
+- version: 0.2.5
+- date: 2021-10-21T17:58:33Z
+- commits:
+    - hash: 618177088be22f92462f62f2e6130b71d2b421f6
+- commits:
+    - author: Alex Gonzalez
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+- commits:
+    - subject: "qemu.robot: Adjust qemu launch options to use an ahci drive"
+- commits:
+    - body: Newer balenaOS images require an ahci drive instead of ide.
+- commits:
+    - hash: 147cda3cca81379910af63a18511971a145e71a8
+- commits:
+    - author: Alex Gonzalez
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+- commits:
+    - subject: "resinos.robot: Replace media module with mc"
+- commits:
+    - body: >-
+        The media module has been renamed in:
+
+        https://github.com/torvalds/linux/commit/c612e54fca55d9380c1378eaa623d74ed89b62db
+- version: 0.2.4
+- date: 2021-10-19T15:33:40Z
+- commits:
+    - hash: 49c5968879e7220ee3f265c5ddd37868f64cf465
+- commits:
+    - author: rcooke-warwick
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Ryan Cooke <ryan@balena.io>
+- commits:
+    - subject: update fingerprint file path
+- commits:
+    - body: null
+- commits:
+    - hash: 30f8f8d08173d96e7f2e7f14fd138f2c0c1833d0
+- commits:
+    - author: rcooke-warwick
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Ryan Cooke <ryan@balena.io>
+- commits:
+    - subject: check for filename instead of using wildcard
+- commits:
+    - body: null
+- version: 0.2.3
+- date: 2021-10-15T22:53:40Z
+- commits:
+    - hash: 61dfd4d33c42baf267fe082f037fd24f21826977
+- commits:
+    - author: fisehara
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: fisehara <harald@balena.io>
+- commits:
+    - subject: fixing python3.8 lib to generic python3
+- commits:
+    - body: null
+- commits:
+    - hash: a7c1e791573bd45bed1cbf553508d89b4f8bc514
+- commits:
+    - author: ab77
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Track latest python3
+- commits:
+    - body: null
+- version: 0.2.2
+- date: 2021-09-24T17:22:44Z
+- commits:
+    - hash: 7a467bcfe7c28943fd4e24e450437985c4b11515
+- commits:
+    - author: ab77
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Remove redundant test
+- commits:
+    - body: null
+- version: 0.2.1
+- date: 2021-09-23T21:27:22Z
+- commits:
+    - hash: 602d1905b732829c6b5aabcbab7e54d62d1d125b
+- commits:
+    - author: ab77
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Add proxy port environment variable
+- commits:
+    - body: |-
+        * allows to be used in bobs
+        * upgrade to debian:bullseye
+        * upgrade QEMU to v6.1.0
+        * upgrade Python to 3.8
+        * upgrade dependencies
+        * upgrade robotframework to v4
+        * upgrade balena-cli
+        * upgrade nodejs v16
+- version: 0.2.0
+- date: 2021-06-07T16:04:48Z
+- commits:
+    - hash: 1f2a7f33aad6f9d2cfa3152ee0f718d281f78dc0
+- commits:
+    - author: Thodoris Greasidis
+- commits:
+    - footers:
+        change-type: minor
+- commits:
+    - footers:
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+- commits:
+    - subject: Add balena ssh test
+- commits:
+    - body: null
+- commits:
+    - hash: b455261aa80776a7e40a56963f26432838e19aa6
+- commits:
+    - author: Thodoris Greasidis
+- commits:
+    - footers:
+        change-type: minor
+- commits:
+    - footers:
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+- commits:
+    - subject: Drop legacy resin sync test
+- commits:
+    - body: null
+- commits:
+    - hash: 9ff04a353cd7438014f8bb4b67266be4f00d3640
+- commits:
+    - author: Thodoris Greasidis
+- commits:
+    - footers:
+        change-type: minor
+- commits:
+    - footers:
+        see: https://www.flowdock.com/app/rulemotion/r-product/threads/A6-bJBldfUFnhG9vixTz-DLz9iB
+- commits:
+    - footers:
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+- commits:
+    - subject: Update balena-cli to v12.44.17
+- commits:
+    - body: |-
+        For some reason oclif `balena key add` didn't like
+        reading the file by name.
+- commits:
+    - hash: 81aba9b500d579835537da9c50c6b0c8f9308487
+- commits:
+    - author: Thodoris Greasidis
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Use the standalone balena-cli installation
+- commits:
+    - body: null
+- version: 0.1.8
+- date: 2021-04-27T19:30:13Z
+- commits:
+    - hash: 2ea00e8a44602c9d113c6cdb426180e40b380627
+- commits:
+    - author: ab77
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Test/empty
+- commits:
+    - body: null
+- version: 0.1.7
+- date: 2021-04-27T17:26:33Z
+- commits:
+    - hash: 3d0ffa2ab0c302b10c24ddf231403d96c2f1e620
+- commits:
+    - author: ab77
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Exclude logs and images
+- commits:
+    - body: null
+- version: 0.1.6
+- date: 2021-04-14T16:23:20Z
+- commits:
+    - hash: a08f410688f236d661cdd1fc8ecf3c5f073bb649
+- commits:
+    - author: ab77
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Rebuild/empty
+- commits:
+    - body: null
+- version: 0.1.5
+- date: 2021-04-14T15:32:51Z
+- commits:
+    - hash: 4d300e966405489281be6d3c1a326df5991e5f57
+- commits:
+    - author: ab77
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Add repo.yml to force Docker checks
+- commits:
+    - body: null
+- version: 0.1.4
+- date: 2021-04-13T17:46:12Z
+- commits:
+    - hash: 31b944f1c30e259284c7d372c893ae320c8fb6ad
+- commits:
+    - author: ab77
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Empty commit to rebuild/publish docker image
+- commits:
+    - body: "* failed in:
+        https://ci.balena-dev.com/teams/main/pipelines/github-events-balena-io/\
+        jobs/publish/builds/2219"
+- version: 0.1.3
+- date: 2021-04-13T17:01:55Z
+- commits:
+    - hash: daa23e2e45b01f93803ce289466974c98d32e708
+- commits:
+    - author: ab77
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Implement retries when mounting loop device(s)
+- commits:
+    - body: "* increase QEMU image start-up timeouts"
+- version: 0.1.2
+- date: 2021-02-17T15:37:33Z
+- commits:
+    - hash: 6cd2895fdb2e6c4e95da96a6d7e028a3b9b41e8f
+- commits:
+    - author: Kyle Harding
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Kyle Harding <kyle@balena.io>
+- commits:
+    - subject: "qemu: build qemu-5.2.0 from source"
+- commits:
+    - body: |-
+        QEMU 5.2.0 is much faster than v4 and is being rolled out across
+        other balena projects. In this case we are still building QEMU
+        from source as we need the system utilities for x86-64 and not
+        for arm-static emulation.
+- commits:
+    - hash: e1fdf88215d8bb8348bbce3560afd459716f7dc4
+- commits:
+    - author: Kyle Harding
+- commits:
+    - footers:
+        signed-off-by: Kyle Harding <kyle@balena.io>
+- commits:
+    - subject: "Makefile: remove hardcoded path to workspace"
+- commits:
+    - body: null
+- version: 0.1.1
+- date: 2020-05-28T13:15:30Z
+- commits:
+    - hash: 0a0d6533b3b30b816a4748fb279d0b2dc2996f8c
+- commits:
+    - author: Florin Sarbu
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Florin Sarbu <florin@balena.io>
+- commits:
+    - subject: "qemu.robot: Increase online check to 240 seconds"
+- commits:
+    - body: |-
+        From time to time it looks like 120 seconds is not enough so let's
+        raise this to 240 seconds.
+- version: 0.1.0
+- date: 2020-04-22T20:21:17Z
+- commits:
+    - hash: 067f58783abaadbebfe9ea43c8af244db9c6f78e
+- commits:
+    - author: ab77
+- commits:
+    - footers:
+        change-type: minor
+- commits:
+    - footers:
+        signed-off-by: ab77 <anton@balena.io>
+- commits:
+    - subject: Upgrade e2e tests scaffold
+- commits:
+    - body: |-
+        * bump balena base image version
+        * add multistage builds
+        * build QEMU 4.2.0 (dynamic linking)
+        * refactor Dockerfile
+        * add Python virtualenv
+        * remove defunct Etcher cli reference (RPi3.robot)
+- version: 0.0.13
+- date: 2019-11-18T15:00:09Z
+- commits:
+    - hash: e199550aab3819728931fda9c5cbc3d91076f4fb
+- commits:
+    - author: Michael Angelos Simos
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Michael Angelos Simos <michalis@balena.io>
+- commits:
+    - subject: Add DEBUG on balena sync test
+- commits:
+    - body: null
+- version: 0.0.12
+- date: 2019-09-27T10:01:57Z
+- commits:
+    - hash: 460d2775deadb36782abfba76d0b9b8473063237
+- commits:
+    - author: Zubair Lutfullah Kakakhel
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Zubair Lutfullah Kakakhel <zubair@balena.io>
+- commits:
+    - subject: "Dockerfile: Revert to v10.17.6"
+- commits:
+    - body: |-
+        v11 deprecated balena sync in favour of balena push.
+        Until we update the test to use balena push, lets use v10.17.6 instead.
+- commits:
+    - hash: f0fe5ffc6897a441006963acf1bed13f5c59d7ad
+- commits:
+    - author: Zubair Lutfullah Kakakhel
+- commits:
+    - footers:
+        signed-off-by: Zubair Lutfullah Kakakhel <zubair@balena.io>
+- commits:
+    - subject: "qemu.robot: Increase online check to 120 seconds"
+- commits:
+    - body: |-
+        In an ideal world, 60 seconds should be long enough for a device to
+        boot and show online.
+        But in practice, qemu can be slow to boot depending on the cpu load.
+        Increase this timeout to 120 seconds.
+- version: 0.0.11
+- date: 2019-09-26T14:54:28Z
+- commits:
+    - hash: 11fed7c0bbfa5d334c70fbbdfb24dfa5f113bfbd
+- commits:
+    - author: Zubair Lutfullah Kakakhel
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Zubair Lutfullah Kakakhel <zubair@balena.io>
+- commits:
+    - subject: "Dockerfile: bump node, cli and etcher versions"
+- commits:
+    - body: |-
+        Can't build the old ones anymore due to a dependency that wasn't tagged
+        to a specific version.
+- version: 0.0.10
+- date: 2019-04-24T12:24:46Z
+- commits:
+    - hash: f9d639cc3e2fd4645d3744c8571a1884ecd57b60
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia@balena.io>
+- commits:
+    - subject: Get journal logs from device
+- commits:
+    - body: null
+- version: 0.0.9
+- date: 2019-03-28T12:11:17Z
+- commits:
+    - hash: 2d87bbf90a1e79af245e237e66662fc6dda18d0d
+- commits:
+    - author: Zubair Lutfullah Kakakhel
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        changelog-entry: Bump dockerfile base from jessie to stretch
+- commits:
+    - footers:
+        signed-off-by: Zubair Lutfullah Kakakhel <zubair@balena.io>
+- commits:
+    - subject: "Dockerfile: Change base image to use stretch"
+- commits:
+    - body: |-
+        jessie apt source urls have changed to archive.debian.org
+        https://lists.debian.org/debian-devel-announce/2019/03/msg00006.html
+        Bump the base image to use stretch.
+        Need to remove pip upgrade due to hitting
+        https://github.com/pypa/pip/issues/5599
+        Fixes #113
+- version: 0.0.8
+- date: 2019-03-04T16:46:42Z
+- commits:
+    - hash: 287f986e6a401eb7edf9b589ce8c0ea909a38788
+- commits:
+    - author: Michael Angelos Simos
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Michael Angelos Simos <michalis@balena.io>
+- commits:
+    - subject: "ci: Publish to balena/autohat docker repo"
+- commits:
+    - body: null
+- version: 0.0.7
+- date: 2019-02-26T15:41:18Z
+- commits:
+    - hash: 60b434bad5151f0540bdcb0f4af9934af150a970
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia@balena.io>
+- commits:
+    - subject: Bump resin-cli to balena-cli@9.12.6
+- commits:
+    - body: >-
+        * Add functionality to check or remove configuration variables
+
+        * r/resinos.robot: Modified test to disable RESIN_SUPERVISOR_DELTA rather
+
+        than removing the configuration variable.
+- version: 0.0.6
+- date: 2019-01-14T11:24:14Z
+- commits:
+    - hash: 3755375f37f584a8feb6525e369533bc3327168e
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "r/resinos.robot: Fix minicom command not send twice root command"
+- commits:
+    - body: "* get rid of the garbage in the output by waiting for the prompt"
+- version: 0.0.5
+- date: 2018-10-18T15:29:53Z
+- commits:
+    - hash: 395b73ee409a6e33df82f853b3fe6fa92e6c467d
+- commits:
+    - author: Andrei Gherzan
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Andrei Gherzan <andrei@balena.io>
+- commits:
+    - subject: "resincli.robot: Fix version test after balenaOS rename"
+- commits:
+    - body: null
+- commits:
+    - hash: d0feae8822f108b50ccab3c474a8ce3276a9f872
+- commits:
+    - author: Kostas Lekkas
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Kostas Lekkas <kostas@balena.io>
+- commits:
+    - subject: Add RESINRC_PROXY_URL
+- commits:
+    - body: null
+- version: 0.0.4
+- date: 2018-10-17T14:26:15Z
+- commits:
+    - hash: af3fe2ee4c81249d5ba5db173630811774b526b3
+- commits:
+    - author: Kostas Lekkas
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Kostas Lekkas <kostas@balena.io>
+- commits:
+    - subject: Bump resin-cli to 7.10.6
+- commits:
+    - body: null
+- version: 0.0.3
+- date: 2018-09-27T11:18:46Z
+- commits:
+    - hash: 07a51eb22f8f808ae35a69fa6cecaa2528c60e48
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Increase timeout of minicom script
+- commits:
+    - body: null
+- version: 0.0.2
+- date: 2018-09-26T08:50:30Z
+- commits:
+    - hash: 52d112b94344ea9e2b63a8bdf9374aeb27e7bf9d
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Initial resinci config
+- commits:
+    - body: null
+- commits:
+    - hash: e5c9df6451a378ea53be94b72b7ef45ea3887e7b
+- commits:
+    - author: Giovanni Garufi
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Giovanni Garufi <giovanni@resin.io>
+- commits:
+    - subject: "versionbot: Add versionbot files and config"
+- commits:
+    - body: null
+- version: 0.0.1
+- date: 2018-08-15T16:05:15Z
+- commits:
+    - hash: c7d320182e9076b59dac8da0043048b0c815ed91
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Change on device repo to point to autohat-ondevice and add support for
+        pushing a specific branch to the git command
+- commits:
+    - body: null
+- commits:
+    - hash: 90ad2342363bca2abc887ab67fc3cbf4ded08744
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Update ignored files
+- commits:
+    - body: null
+- commits:
+    - hash: 76b2b554d7d7ab127139ca9fe23ab9924538955a
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Add keywords to check fingerprint of the host OS
+- commits:
+    - body: |-
+        * added resinos.robot file
+        * keywords to set up loop device and mount it
+        * keyword to compare md5sum of the host OS to fingerprint file
+        * keywords to unmount file system and detach loop device
+- commits:
+    - hash: ca24dcadd5f7218f62414c6e36dc8266f581d4d3
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Add test case to check fingerprint of the host OS
+- commits:
+    - body: null
+- commits:
+    - hash: 75c7412098cc04619c65912d3d4e1678bfd8cfb3
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Update CHANGELOG.md
+- commits:
+    - body: "* Added the new docker command in README.md"
+- commits:
+    - hash: 1c604699ce42ec1b3725094f322777e248006310
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Update Dockerfile
+- commits:
+    - body: "* Changed resin-cli version to latest"
+- commits:
+    - hash: 1ded6b7efacb7c351587a00444cedb6f58da79fa
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Add keyword for checking host OS version is same through resin cli
+- commits:
+    - body: null
+- commits:
+    - hash: c73593138cc5dfd6d78022381c31764e721bf470
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Add test case to verify that host OS version of the image is same
+        through resin cli
+- commits:
+    - body: null
+- commits:
+    - hash: 9972933d08cb349d00f4d990e32ce4a7177430db
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Update env.list.example with os_version as a required variable
+- commits:
+    - body: null
+- commits:
+    - hash: b2f0b69a6a8e24fd25ad5a96f4a356b20dca40fc
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Update CHANGELOG.md
+- commits:
+    - body: null
+- commits:
+    - hash: 90e633a62073254eb129400a8c513a7270d91cea
+- commits:
+    - author: Tomás Villaseca
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Add testcase for checking that loading a random kernel module works in
+        a container
+- commits:
+    - body: null
+- commits:
+    - hash: 932d5a07b76382b79cb5f5bbb949ffa01aefba87
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Add ENV variable test to the test suite
+- commits:
+    - body: null
+- commits:
+    - hash: da7db796f2419e18cd6dfe33dc2221213e13dbcd
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Add keywords to check test ENV variable
+- commits:
+    - body: |-
+        * keyword for creating an ENV variable
+        * keyword for checking that ENV variable exists
+        * keyword for checking the value of ENV variable
+        * keyword for removing ENV variable
+- commits:
+    - hash: 12937e6fc80202885e77baf315e7896c51b8276f
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Update CHANGELOG.md
+- commits:
+    - body: null
+- commits:
+    - hash: 85c66892a158d479cf262ab23da88bd28eea70ee
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Fix CLI version
+- commits:
+    - body: null
+- commits:
+    - hash: 0ed14d6c1b2c090b2b1d7ae5081d745433c6944d
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Update CHANGELOG
+- commits:
+    - body: null
+- commits:
+    - hash: 1d94011492c5c4e20ebcfbbebc7c76cefe200eca
+- commits:
+    - author: Tomás Villaseca
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Add support for devices without KVM virtualization
+- commits:
+    - body: null
+- commits:
+    - hash: 6257539399dd0174b823e3c1fa8ed1eb0b7fbf25
+- commits:
+    - author: Tomás Villaseca
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Add CHANGELOG.md
+- commits:
+    - body: null
+- commits:
+    - hash: 18425752c21709fa5874d2a1b9294f15cc236f63
+- commits:
+    - author: Tomás Villaseca
+- commits:
+    - subject: Add name of contributor to CHANGELOG.md
+- commits:
+    - body: null
+- commits:
+    - hash: 02d11652f6f7fde8250c49aaa41b44e1757e645b
+- commits:
+    - author: Praneeth
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Update Readme.md
+- commits:
+    - body: Fix typos in readme and other cosmetic changes.
+- commits:
+    - hash: 3bd5f12cde179fdf73b713d60ab010d45931ddc3
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Match env.list.example with Readme volume paths
+- commits:
+    - body: null
+- commits:
+    - hash: a9b30e4a69ac615219f31a773553d9efc72654db
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "r/resinos.robot: Fix keyword that checks if kernel module is working
+        on device"
+- commits:
+    - body: null
+- commits:
+    - hash: 376ab76595a15da732f2498ff10dbb052b789492
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "qemu.robot: Enable resin sync test"
+- commits:
+    - body: null
+- commits:
+    - hash: 9618834ad48ebb948ddcfd455e0ed395c64596b9
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "raspberrypi3.robot: Enable resin sync test"
+- commits:
+    - body: null
+- commits:
+    - hash: 5364005f0f73405ad6c4fc682152cd2d04f703a7
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "CHANGELOG.md: Enable test that verifies if resin sync works"
+- commits:
+    - body: "[Connects to resin-io/autohat#30]"
+- commits:
+    - hash: 6b6c0f11709ef9828f5b464b8268cecbfa1a7f17
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "r/resinos.robot: Changing keyword to be able to check OS fingerprint
+        of boot partition too."
+- commits:
+    - body: null
+- commits:
+    - hash: eb9ff878fdb6c5a781294cc120e9c24d85ae61c4
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "qemu.robot: Adding test case for checking OS fingerprint on resin-boot
+        partition."
+- commits:
+    - body: null
+- commits:
+    - hash: 16b98d728a4226f15d75b45fc7efc70c95e8dd6d
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "CHANGELOG.md: Test case that verifies the OS fingerprint file on
+        resin-boot partition"
+- commits:
+    - body: "[Connects to resin-io/autohat#75]"
+- commits:
+    - hash: 7e321c5636510de6911915407141016295add155
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "r/resinos.robot: Fix keyword for not checking correctly if a service
+        was active"
+- commits:
+    - body: "Type: Bug"
+- commits:
+    - hash: 3bfdd7b0d78673cbfa173e9fa2a5417fd2c766d8
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "CHANGELOG.md: Fix keyword for not checking correctly if service was
+        active"
+- commits:
+    - body: "[Connects to resin-io/autohat#79]"
+- commits:
+    - hash: fa715802d10d892671040c42f442140a91e43d74
+- commits:
+    - author: Will Newton
+- commits:
+    - footers:
+        signed-off-by: Will Newton <willn@resin.io>
+- commits:
+    - subject: "qemu.robot: Remove test for resin-info service starting"
+- commits:
+    - body: This service is no longer started in production builds.
+- commits:
+    - hash: 38d2875d808511be8cdc8f4e775022fe606e4c9f
+- commits:
+    - author: Will Newton
+- commits:
+    - footers:
+        signed-off-by: Will Newton <willn@resin.io>
+- commits:
+    - subject: "CHANGELOG.md: Update for resin-info change"
+- commits:
+    - body: null
+- commits:
+    - hash: 4e3ef8e2cf7d9b869e562d9f7af13884243e0907
+- commits:
+    - author: Praneeth
+- commits:
+    - subject: Fix Host OS version to be agnostic to keywords appened after the OS
+        version
+- commits:
+    - body: null
+- commits:
+    - hash: 9f8a3972bcb4ad1a2965f15bf28ddf57ec535c53
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "Dockerfile: Changing resin-cli to v.5.2.4 version"
+- commits:
+    - body: null
+- commits:
+    - hash: e81cfaa928456eb4e323226a97df3ef352fca611
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "CHANGELOG.md: Adding entry for changing resin-cli version to v.5.2.4"
+- commits:
+    - body: "[Connects to #72]"
+- commits:
+    - hash: 65d2576107dad1c0b5910fc7ac1446f8822d52d5
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Fix Host OS Fingerprint test to work with both Resin OS 1.0 and 2.0
+- commits:
+    - body: null
+- commits:
+    - hash: f3f8b8d7b8a3b04352099023f9b5faa786830065
+- commits:
+    - author: Andrei Gherzan
+- commits:
+    - footers:
+        signed-off-by: Andrei Gherzan <andrei@resin.io>
+- commits:
+    - subject: Various fixed due to OS changes
+- commits:
+    - body: null
+- commits:
+    - hash: bb657fd41c4d33979d51b835e6bb7a27a5c620e7
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Modify losetup process in resinos.robot to prevent race conditions and
+        add devtmpfs mounts when run with systemd
+- commits:
+    - body: null
+- commits:
+    - hash: 6d04923c6d93a1877329e8a83dc880cf9ec51ffe
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Add udevd rules for enabling sd card reader symlink by board serial
+        number
+- commits:
+    - body: null
+- commits:
+    - hash: b3c98dae50586792c86b7b65d753a46388653cdf
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Bump etcher to v1.0.0-beta-18
+- commits:
+    - body: null
+- commits:
+    - hash: 28d688dcf40bc4768f4919a7d341c74d22b6b2ad
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "r/resincli.robot: Fixing keyword to delete duplicate names in resin
+        keys."
+- commits:
+    - body: null
+- commits:
+    - hash: c5d2488e4a32d0258779f1e1fd0bbe58b70e290c
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "README.md: Added disclaimer warning that the test suite will delete
+        and recreate any existing application and key of the same name."
+- commits:
+    - body: null
+- commits:
+    - hash: 5b0a33b2a89c2071aa77dd2d26a71743fc2c2080
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "CHANGELOG.md: Add entry for fixing keyword that fails if duplicate
+        names are found in resin keys."
+- commits:
+    - body: "[Connects to #62]"
+- commits:
+    - hash: 66d796777e2cb526159244d7a91404be9d480c77
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "r/resincli.robot: Fix issue where keyword that checks enabling delta
+        didn't push the correct commit"
+- commits:
+    - body: >-
+        * Adapting keyword that adds console output to make sure that the output
+        is printed
+
+        [Connects to #31]
+- commits:
+    - hash: 05cddb01af437e12691ea38ff3bfd7869ccc77f4
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "CHANGELOG.md: Add entry for fixing keyword that verifies delta to a
+        running supervisor"
+- commits:
+    - body: "[Connects to #31]"
+- commits:
+    - hash: f873907ab5222514c63545ad2f9527ed2b30bcf2
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "r/resincli.robot: Add fix for pushing the correct commit"
+- commits:
+    - body: "[Connects to #59]"
+- commits:
+    - hash: 089e1184742d56ca99f815e047cbbc8f808e3174
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "qemu.robot: Update application_commit variable"
+- commits:
+    - body: "[Connects to #59]"
+- commits:
+    - hash: f71528987039b08de5865e8f5ee7d6b050fbcddb
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "CHANGELOG.md: Add entry for fixing keyword that"
+- commits:
+    - body: |-
+        didn't push the correct commit
+        [Connects to #59]
+- commits:
+    - hash: e7cb4a2c0ab3289747483330face2e001e672938
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "qemu.robot: Test case should fail properly if application_name
+        variable is not provided"
+- commits:
+    - body: null
+- commits:
+    - hash: 2b0ef5899e6e34df486dce20f3a27c91a550f30f
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "r/resincli.robot: Test case should fail properly if credentials are
+        not provided"
+- commits:
+    - body: >-
+        * Resolving an issue where test case would fail if they are keys with
+        almost
+
+        the same name in resin keys by selecting only those lines containing matches
+
+        that form whole words.
+- commits:
+    - hash: 7851677407703104077600880ac7edcfb3581b51
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "CHANGELOG.md: Add entry for fixing tests to fail properly if
+        environment variables are not provided"
+- commits:
+    - body: null
+- commits:
+    - hash: 32d0bfcec1feb54efec75b0386e596bef33510de
+- commits:
+    - author: Praneeth
+- commits:
+    - subject: Disable resin sync and resin delta tests from example QEMU and
+        RaspberryPi test cases until they are fixed in Resin 2.0
+- commits:
+    - body: null
+- commits:
+    - hash: 6dfb1b32ba8cbf1431bede214fbac9e95f0c6cc2
+- commits:
+    - author: Praneeth
+- commits:
+    - subject: Pin version of Base image in Dockerfile and python libraries installed
+        with pip
+- commits:
+    - body: null
+- commits:
+    - hash: 0bc7ce44f5b5fa2122b2f7bf4d3526c953f0bab1
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Unify instructions for QEMU 64bit and 32bit images
+- commits:
+    - body: "* Renamed test suite and resource file properly"
+- commits:
+    - hash: 7678c670fc076c7285ae79243870f8ddcf8814dc
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Update README
+- commits:
+    - body: null
+- commits:
+    - hash: 639548bf386675086c6a8e8dc8e1dcb5c004ad83
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Update CHANGELOG
+- commits:
+    - body: null
+- commits:
+    - hash: 75c2caa9fe09126e9efab78542d31530337c0df3
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "r/resinos.robot: Add keyword that gets the IP address from Resin OS"
+- commits:
+    - body: >-
+        * Remove console socket created by the second running image that
+        interfered with the first socket created
+
+        * Change to 30 minutes for delta downloading
+
+        * Add Run Buffered Process keyword only where is necessary because of performance issues
+- commits:
+    - hash: d231b58d32a761cd12e073ae3a8243a8d2590844
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "r/resincli.robot: Added keyword that checks an interface IP address is
+        not in the IP address field returned by the device."
+- commits:
+    - body: >-
+        * Changing the way to get information from resin-cli comamnds: "resin apps
+        <application_name>" and "resin device <device_uuid>" for reusability.
+
+        * Add timeout argument in Run Process parameters
+
+        * Add Run Buffered Process keyword only where is necessary because of performance issues regarding timeout
+- commits:
+    - hash: 593fc9ad72307c78083f5ac802a7be7a1f854f33
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "qemu.robot: Added test case that checks the device does not return the
+        resin-vpn IP address."
+- commits:
+    - body: "* Added test timeout to 30 minutes"
+- commits:
+    - hash: f6f4a9c892182e301ac7998eaf504309ce8284aa
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "CHANGELOG.md: Added entry for checking the device does not return the
+        resin-vpn IP address."
+- commits:
+    - body: "[Connects to resin-io/autohat#36]"
+- commits:
+    - hash: dc5c26fedb830c28322d64fc298b71cba387ad4a
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "r/resincli.robot: Removing unused keyword"
+- commits:
+    - body: null
+- commits:
+    - hash: 60dbfce0a3d654aa840f9b9c042b4566b59d94d1
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "qemu.robot & raspberrypi3.robot: Rewrite test cases to keep
+        consistency of its names"
+- commits:
+    - body: null
+- commits:
+    - hash: d40ae1ee22e6a752a0adb61f393417994cd49720
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "CHANGELOG.md: Add entry for rewriting test cases names for consistency"
+- commits:
+    - body: null
+- commits:
+    - hash: c837c176b618cd6e73a7fbdb6d69a97696905e94
+- commits:
+    - author: Trong Nghia Nguyen
+- commits:
+    - subject: Update etcher to v1.0.0-beta.16.
+- commits:
+    - body: etcher v1.0.0-beta.13 cannot be installed in non-mac machine
+- commits:
+    - hash: 877a7b1a4c881ed0fa65a7bd50b4ac526dc65927
+- commits:
+    - author: Trong Nghia Nguyen
+- commits:
+    - subject: Update node version to 6.9.1
+- commits:
+    - body: null
+- commits:
+    - hash: 3101dee9ac6814fc240dc0c93abdaea4a41baff4
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Adding test cases to raspberrypi3.robot
+- commits:
+    - body: null
+- commits:
+    - hash: 2d277b224eab5ee274bfbc95e93874d9dc636e87
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "r/resinos.robot: Modified keyword to make a copy"
+- commits:
+    - body: >-
+        of the image before running the qemu device and run it.
+
+        * Resolving an issue where qemu wouldn't start the right image provided in the keyword as an argument
+
+        [Connects to resin-io/autohat#32]
+- commits:
+    - hash: 481ec6c5d0a2c3124a7f355bf08bf83e0d076624
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "r/resinos.robot: Adding keyword that runs the image"
+- commits:
+    - body: |-
+        to the application with delta already enabled.
+        [Connects to resin-io/autohat#32]
+- commits:
+    - hash: 2865727a805932a9cbbaa37492a1eeaf4901d819
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "qemu.robot: Adding test case that provides a device"
+- commits:
+    - body: |-
+        to the application with delta already enabled.
+        * Removing the copy of the images in suite teardown.
+        [Connects to resin-io/autohat#32]
+- commits:
+    - hash: f0c96af383c09d2c83cf5d38668d5775787b1762
+- commits:
+    - author: Horia Delicoti
+- commits:
+    - footers:
+        signed-off-by: Horia Delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: "CHANGELOG.md: Adding test case that provides a device"
+- commits:
+    - body: |-
+        to the application that already has delta enabled.
+        [Connects to resin-io/autohat#32]
+- commits:
+    - hash: ec5320cbdec6f2ce2a132b1d7313c012e14e8a78
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Add CREATE_APPLICATION to enable/disable application tests in
+        qemux86-64.robot
+- commits:
+    - body: null
+- commits:
+    - hash: 9d5e5348cfdb836a45325e26de0fdaf10c380883
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Move test:Check host OS fingerprint file into resinos.robot
+- commits:
+    - body: null
+- commits:
+    - hash: a0af0b43d45f16f2033b18012637df98c42b8c58
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Cleanup extra spaces from keywords
+- commits:
+    - body: null
+- commits:
+    - hash: 5840e9be18d280ced8a91de3fcd29c301394f157
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Move test:Get host OS version into resinos.robot
+- commits:
+    - body: null
+- commits:
+    - hash: 5bfe37e64ae35d20a4562a55ad0784f4a47b4c00
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Move test:Enable getty service into resinos.robot
+- commits:
+    - body: null
+- commits:
+    - hash: 150a391fb4efe9d54d916f938f038ab7088402b6
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Make the minicom socket variable configurable and allow configuration
+        of serial port for the qemu run script
+- commits:
+    - body: null
+- commits:
+    - hash: d651ab76df63e07538c83208dcccd5b7d7ba0b8d
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: "Move test: Check that backup files are not found into
+        resources/resinos.robot"
+- commits:
+    - body: null
+- commits:
+    - hash: 2b052da9047af932073692114fa762e94babf78d
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: "Move test: Move kernel module loading test into resources/resinos.robot"
+- commits:
+    - body: null
+- commits:
+    - hash: ed241e5dc841c1ae3684c4549d48666a85cf92e4
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Fix keywords to follow the same quoting pattern as in other keywords
+- commits:
+    - body: null
+- commits:
+    - hash: a438e4ed7b976fbc6b00753b94f3cb89e5f8e86e
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Remove properly word from kernel module keyword
+- commits:
+    - body: null
+- commits:
+    - hash: c1228d974789c3c533a11f99fd84c7e65766ca65
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: "Move test: Move resin sync test to resources resincli.robot"
+- commits:
+    - body: null
+- commits:
+    - hash: 94ab550b2948271133507562590329233076f68e
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Remove unused comments and variables
+- commits:
+    - body: null
+- commits:
+    - hash: 259a54ffd8a12d1f9ef1ee5c7dfda668dcb230c5
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: "Move test: Move ENV variable test to resources/resincli.robot"
+- commits:
+    - body: null
+- commits:
+    - hash: 86231708c3bb50fc958acae8625ac46a867d984e
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Ensure consistency of the quotes in all keywords
+- commits:
+    - body: null
+- commits:
+    - hash: 3b238e965e1d090a34b9c2bab62d14ff08777d92
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: "resources/resincli.robot: Correct spelling of synchronize"
+- commits:
+    - body: null
+- commits:
+    - hash: 5667e2918ae6b213f61cef925882decdafb0bf4d
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Update Changelog
+- commits:
+    - body: null
+- commits:
+    - hash: 901d68bb1ff53cfc1763bad3eac210972a73d8d2
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Fix keyword to clone repo in different directory
+- commits:
+    - body: null
+- commits:
+    - hash: 5570b44fc647475a06a174ecfa49b4813974bd1d
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Moving test that checks the backup files are not found in the image
+        after killing qemu instance
+- commits:
+    - body: null
+- commits:
+    - hash: 0736fcb08f3f00ac1dddf1a5b6f50a3bb16aaaa8
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Refactor keywords that checked if settings environment variables worked
+        on application
+- commits:
+    - body: null
+- commits:
+    - hash: eecd574ff4efebfe280ea4dca44c395c7c58c063
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Test case to verify delta to a running supervisor
+- commits:
+    - body: null
+- commits:
+    - hash: 7949bdea1775260544bff80eecfe2333180e950b
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Update resin-cli used to 5.2.0
+- commits:
+    - body: null
+- commits:
+    - hash: 488619f81f1dcba70e5d9b4b145de4cbaa6c9f0d
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Added keyword to shutdown device
+- commits:
+    - body: null
+- commits:
+    - hash: ea0b92c9a8f89bb40ce59747e95fa897a0d81b71
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Added keyword to check if device is offline
+- commits:
+    - body: null
+- commits:
+    - hash: a68b008f13cd7a6f523ee2099d8ab35607baae3f
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Update CHANGELOG.md
+- commits:
+    - body: null
+- commits:
+    - hash: d4d30d0b30ce0ad63b8cad3480f6d6239a53d912
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Ensure that resin sync works
+- commits:
+    - body: |-
+        * Update CHANGELOG.md
+        * Dependency added to Dockerfile
+        * Test case added to verify if resin sync works
+- commits:
+    - hash: 03cdae20852db5ff3d5c5c73fd004834c320d757
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Add test case to verify if resin-info service is active
+- commits:
+    - body: >-
+        * Update CHANGELOG.md
+
+        * Added minicom and updated resin-cli to 5.0.0 in Dockerfile
+
+        * Added test cases that enables getty service and verifies resin-info service is active on the image
+
+        * Added socket connection when the images runs
+- commits:
+    - hash: 1f2df0031aa23c5e86bbcda476d310ae20f6961f
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Added test teardown that cleans up mounts even if one of the keywords
+        fails
+- commits:
+    - body: |-
+        * Added standard error output to "Process ${result}"
+        * Refactor keywords
+- commits:
+    - hash: fe2f1e8b0909a38a483d5f38197f94cfc30586cd
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Upgrade resin-cli used to 4.5.0
+- commits:
+    - body: null
+- commits:
+    - hash: b2eacb1146b0c08e70034e16b1841a29013a6006
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Add support for Autohat Rig and add example RaspberryPi3 test file
+- commits:
+    - body: null
+- commits:
+    - hash: cf2ae3bbddbe38c6fe89bd20bfecb5e3816d5d23
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Switch to nuc-node as base image and add support for AutoHat rig to be
+        run via the Dockerfile as a resin application
+- commits:
+    - body: null
+- commits:
+    - hash: 557944bd26facffc2df0f7515a1788362480e02d
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Set Suite Teardown to power down the device under test.
+- commits:
+    - body: null
+- commits:
+    - hash: a99375df19e55979100d14912ece90986831a6ed
+- commits:
+    - author: Praneeth Bodduluri
+- commits:
+    - subject: Update Readme with instructions for using the RIG
+- commits:
+    - body: null
+- commits:
+    - hash: a14def3a90b6f0be8c88313b195c606536da9c24
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Add keyword to verify that backup files does not exist on the image
+- commits:
+    - body: null
+- commits:
+    - hash: e02246580445b4b600010eea922520b37a092e76
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Add test case to check backup files does not exist on the image
+- commits:
+    - body: null
+- commits:
+    - hash: 2640ecd6f20e96e1d16c68376a56b234d56ff523
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Refactoring to make arguments stand out from the rest of the keyword.
+- commits:
+    - body: "* Changed suite to test variable where possible"
+- commits:
+    - hash: 40d3f507aa92bb4956fdcd5862488b9788f2632a
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Update CHANGELOG.md
+- commits:
+    - body: null
+- commits:
+    - hash: ab0773d2db9a00793c7472328ba42616c885a6d8
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Added keyword that gets the host OS version of the image
+- commits:
+    - body: null
+- commits:
+    - hash: 11f901b53a1e2fcfebee327e2550db28b9a90eca
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Add test case that gets the host OS version of the image
+- commits:
+    - body: null
+- commits:
+    - hash: b632629cc0ee867591fdd4f1aebaf0e998b636ba
+- commits:
+    - author: horia-delicoti
+- commits:
+    - footers:
+        signed-off-by: horia-delicoti <horia.delicoti@gmail.com>
+- commits:
+    - subject: Update CHANGELOG.md
+- commits:
+    - body: null
+- commits:
+    - hash: cbac4033d903c5f1f5ab02d895d527e9a6332d64
+- commits:
+    - hash: 9e0ea6ae5b850f4183d74f0e45f2d164cc683123
+- commits:
+    - hash: 169d70bf1d43e0a37b2fe1c2757129ea4febd068
+- commits:
+    - hash: a86229340b8f2c5e47af87d653dd047abc6b6044
+- commits:
+    - hash: f2581caae31c45217e1dc078a7c22f77d06e6b38
+- commits:
+    - hash: 77e5e4f50665fab2e354a0996d8872bcfbd48070
+- commits:
+    - hash: d586121add67922c7645d226e81b4571009f436f
+- commits:
+    - hash: 6d95a8c88534a565222d5365b3d53398661c43f2
+- commits:
+    - hash: 5ca04954e20fa971db18795182b1ef9cec979252
+- commits:
+    - hash: ab600dceef12ac4fb72a1fe2c4ec3fd6a3cbde19
+- commits:
+    - hash: 19194ca2e30abe75ba6bffbc3585a47c7875a340
+- commits:
+    - hash: 2b014b9f0ec8c6fc92450d671707d0e25949b16d
+- commits:
+    - hash: 31fd009a8f45e7624be0cefe32c7e0d5c3839556
+- commits:
+    - hash: 632c80eadad89a0018a233f2b8e1f9d161d3c027
+- commits:
+    - hash: 3f17d29d8052c1554ae79624f59981cbe0cb82f7
+- commits:
+    - hash: d718ceec81f28a97028fd9795a18929ce5fbb2ee
+- commits:
+    - hash: 5691474add7c648db1728a1fe1ff918b332c99e1
+- commits:
+    - hash: 459fcdad4f86f0fff26a237d126afb26dbdf3b10
+- commits:
+    - hash: f4038b00bbb767491e6e847714925a3149870834
+- commits:
+    - hash: d6f1fc2a4f5fc6d9abb0d2728ab1a12c8c04d6dc
+- commits:
+    - hash: 9d5e433eaf13693e09568ff5b4b0f0f0699304b5
