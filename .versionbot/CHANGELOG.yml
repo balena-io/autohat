@@ -1,4 +1,18 @@
 - commits:
+    - subject: Update dependency robotframework to 6.0.2
+      hash: 2be5cabb85d6599fcb86fafe1e851d607480ebdb
+      body: |
+        Update robotframework to 6.0.2
+
+        Update robotframework from 6.0.1 to 6.0.2
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Renovate Bot
+  version: 0.4.3
+  title: ""
+  date: 2023-01-08T20:51:48.662Z
+- commits:
     - subject: Migrate to Flowzone
       hash: b19621bfddcd6ea3e23609b40affb8b949aee0a5
       body: ""
