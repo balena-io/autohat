@@ -1,4 +1,18 @@
 - commits:
+    - subject: Update dependency requests to 2.28.2
+      hash: 9fe5cae3945601206845403e3a104da7b239643d
+      body: |
+        Update requests to 2.28.2
+
+        Update requests from 2.28.1 to 2.28.2
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Renovate Bot
+  version: 0.4.4
+  title: ""
+  date: 2023-01-17T17:19:42.192Z
+- commits:
     - subject: Update dependency robotframework to 6.0.2
       hash: 2be5cabb85d6599fcb86fafe1e851d607480ebdb
       body: |
