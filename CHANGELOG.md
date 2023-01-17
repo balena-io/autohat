@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.5.0 - 2023-01-17
+
+* Update balenalib/amd64-node Docker tag to v19 [Renovate Bot]
+
 ## v0.4.4 - 2023-01-17
 
 * Update dependency requests to 2.28.2 [Renovate Bot]

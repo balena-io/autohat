@@ -1,4 +1,18 @@
 - commits:
+    - subject: Update balenalib/amd64-node Docker tag to v19
+      hash: 57e4524056ab75abb168f65c54b40c084d567e35
+      body: |
+        Update balenalib/amd64-node to 19
+
+        Update balenalib/amd64-node from 18 to 19
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Renovate Bot
+  version: 0.5.0
+  title: ""
+  date: 2023-01-17T18:03:11.634Z
+- commits:
     - subject: Update dependency requests to 2.28.2
       hash: 9fe5cae3945601206845403e3a104da7b239643d
       body: |
