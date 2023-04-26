@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update dependency requests to v2.29.0
+      hash: 521e92806251481dfe92b97eac10521e736d124e
+      body: |
+        Update requests from 2.28.2 to 2.29.0
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Renovate Bot
+  version: 0.6.0
+  title: ""
+  date: 2023-04-26T16:17:17.433Z
+- commits:
     - subject: Update balenalib/amd64-node Docker tag to v19
       hash: 57e4524056ab75abb168f65c54b40c084d567e35
       body: |
@@ -1555,8 +1567,9 @@
         not in the IP address field returned by the device."
 - commits:
     - body: >-
-        * Changing the way to get information from resin-cli comamnds: "resin apps
-        <application_name>" and "resin device <device_uuid>" for reusability.
+        * Changing the way to get information from resin-cli comamnds: "resin
+        apps <application_name>" and "resin device <device_uuid>" for
+        reusability.
 
         * Add timeout argument in Run Process parameters
 
