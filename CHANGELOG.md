@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.7.0 - 2023-05-03
+
+* Update dependency requests to v2.30.0 [Renovate Bot]
+
 ## v0.6.0 - 2023-04-26
 
 * Update dependency requests to v2.29.0 [Renovate Bot]
