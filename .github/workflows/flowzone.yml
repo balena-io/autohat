@@ -19,5 +19,4 @@ jobs:
     with:
       repo_config: true
       repo_description: "balenaCloud end-to-end tests (autohat)."
-      docker_images: |
-        balena/autohat
+      docker_images: balena/autohat

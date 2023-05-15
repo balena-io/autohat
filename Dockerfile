@@ -3,7 +3,7 @@ ARG ARCH=amd64
 
 FROM balenalib/${ARCH}-node:19-bullseye-build AS cli-build
 
-ARG BALENA_CLI_VERSION=14.5.15
+ARG BALENA_CLI_VERSION=15.2.0
 
 WORKDIR /opt
 
