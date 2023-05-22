@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update dependency requests to v2.31.0
+      hash: 283b7c9d819881b83f905227e7507ffa3588827e
+      body: |
+        Update requests from 2.30.0 to 2.31.0
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Renovate Bot
+  version: 0.8.0
+  title: ""
+  date: 2023-05-22T16:26:59.393Z
+- commits:
     - subject: Update dependency requests to v2.30.0
       hash: d45151a3468a55a99d8cb5e28d3822e77c7ced2c
       body: |
