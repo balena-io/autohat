@@ -1,4 +1,19 @@
 - commits:
+    - subject: update qemu-system command for generic-amd64 image
+      hash: 6466e4f09fca421c0a1f0dd0d3cb5b93121452da
+      body: |
+        * update balena-cli
+        * deprecate git push
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ryan Cooke <ryan@balena.io>
+        signed-off-by: Ryan Cooke <ryan@balena.io>
+      author: ab77
+  version: 0.8.1
+  title: ""
+  date: 2023-05-24T03:41:28.040Z
+- commits:
     - subject: Update dependency requests to v2.31.0
       hash: 283b7c9d819881b83f905227e7507ffa3588827e
       body: |

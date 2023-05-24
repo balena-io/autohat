@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.8.1 - 2023-05-24
+
+* Update qemu-system command for generic-amd64 image [ab77]
+
 ## v0.8.0 - 2023-05-22
 
 * Update dependency requests to v2.31.0 [Renovate Bot]
