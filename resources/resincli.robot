@@ -58,11 +58,14 @@ Git push "${directory}" to application "${application_name}"
     ${result} =  Run Buffered Process    git push balena HEAD:refs/heads/master    shell=yes    cwd=${directory}
     Process ${result}
 
-Configure "${image}" with "${application_name}"
-    File Should Exist     ${image}  msg="Provided image file does not exist"
+Balena push "${directory}" to application "${application_name}"
+    ${result} =  Run Buffered Process    balena push ${application_name}    shell=yes    cwd=${directory}
+    Process ${result}
+
+Configure "${image}" version "${os_version}" with "${application_name}"
     ${result_register} =  Run Process    balena device register ${application_name} | grep ${application_name} | cut -d ' ' -f 4    shell=yes
     Process ${result_register}
-    ${result} =  Run Process    echo -ne '\n' | balena os configure ${image} --device ${result_register.stdout}    shell=yes
+    ${result} =  Run Process    balena os configure ${image} --device ${result_register.stdout} --version ${os_version} --config-network ethernet --dev    shell=yes
     Process ${result}
     Return From Keyword    ${result_register.stdout}
 

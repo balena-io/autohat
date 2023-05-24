@@ -3,7 +3,7 @@ ARG ARCH=amd64
 
 FROM balenalib/${ARCH}-node:19-bullseye-build AS cli-build
 
-ARG BALENA_CLI_VERSION=14.5.15
+ARG BALENA_CLI_VERSION=15.2.0
 
 WORKDIR /opt
 
@@ -68,6 +68,7 @@ RUN install_packages \
     libjpeg62-turbo \
     libglib2.0-0 \
     libfdt1 \
+    ovmf \
     zlib1g
 
 COPY --from=cli-build /opt/balena-cli /opt/balena-cli
@@ -77,7 +78,7 @@ COPY --from=qemu-build /opt/venv /opt/venv
 COPY --from=qemu-build /usr/lib/python3 /usr/lib/python3
 COPY --from=qemu-build /usr/local /usr/local
 
-COPY *.robot /opt
+COPY *.robot /opt/
 
 COPY resources/* /opt/resources/
 
