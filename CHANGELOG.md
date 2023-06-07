@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.9.0 - 2023-06-07
+
+* Update dependency robotframework-requests to v0.9.5 [Self-hosted Renovate Bot]
+
 ## v0.8.1 - 2023-05-24
 
 * Update qemu-system command for generic-amd64 image [ab77]
