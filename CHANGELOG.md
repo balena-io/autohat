@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v0.10.0 - 2023-06-12
+
+* Update dependency robotframework to v6.1 [Self-hosted Renovate Bot]
+
 ## v0.9.0 - 2023-06-07
 
 * Update dependency robotframework-requests to v0.9.5 [Self-hosted Renovate Bot]

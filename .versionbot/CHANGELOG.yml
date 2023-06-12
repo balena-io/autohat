@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update dependency robotframework to v6.1
+      hash: d5f1bb90ee7d5f5756694f61744f2e224729cc02
+      body: |
+        Update robotframework from 6.0.2 to 6.1
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Self-hosted Renovate Bot
+  version: 0.10.0
+  title: ""
+  date: 2023-06-12T09:59:45.988Z
+- commits:
     - subject: Update dependency robotframework-requests to v0.9.5
       hash: e8705ce56ff5d3c31275cc8a4f291227e7bccbf3
       body: |
