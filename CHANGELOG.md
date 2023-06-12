@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.0.0 - 2023-06-12
+
+* Update dependency pylibftdi to v0.21.0 [Self-hosted Renovate Bot]
+
 ## v0.10.0 - 2023-06-12
 
 * Update dependency robotframework to v6.1 [Self-hosted Renovate Bot]

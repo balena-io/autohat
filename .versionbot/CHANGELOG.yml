@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update dependency pylibftdi to v0.21.0
+      hash: 2077b9a534c795f90af957ba5b8efd4147a477cf
+      body: |
+        Update pylibftdi from 0.20.0 to 0.21.0
+      footer:
+        Change-type: major
+        change-type: major
+      author: Self-hosted Renovate Bot
+  version: 1.0.0
+  title: ""
+  date: 2023-06-12T15:02:17.048Z
+- commits:
     - subject: Update dependency robotframework to v6.1
       hash: d5f1bb90ee7d5f5756694f61744f2e224729cc02
       body: |
