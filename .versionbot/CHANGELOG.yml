@@ -1,4 +1,26 @@
 - commits:
+    - subject: Configures the test image with a custom DNS server.
+      hash: c74ca3cf3be1df92ee32fa5f74c1201f30731878
+      body: |
+        This change allows users to set a custom DNS server
+        in the config.json of the test device. The
+        DNS server is only set if the environment variable
+        DNS_SERVER is set to a non-zero value.
+
+        This is needed to test with a balenaCloud instance
+        whose address can only be resolved using a custom
+        name server. This is a common setup for balenaMachine
+        deployments in air-gapped networks.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Carlo Miguel F. Cruz <carloc@balena.io>
+        signed-off-by: Carlo Miguel F. Cruz <carloc@balena.io>
+      author: Carlo Miguel F. Cruz
+  version: 1.0.1
+  title: ""
+  date: 2023-07-20T08:26:47.430Z
+- commits:
     - subject: Update dependency pylibftdi to v0.21.0
       hash: 2077b9a534c795f90af957ba5b8efd4147a477cf
       body: |

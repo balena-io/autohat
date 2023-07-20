@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.0.1 - 2023-07-20
+
+* Configures the test image with a custom DNS server. [Carlo Miguel F. Cruz]
+
 ## v1.0.0 - 2023-06-12
 
 * Update dependency pylibftdi to v0.21.0 [Self-hosted Renovate Bot]
