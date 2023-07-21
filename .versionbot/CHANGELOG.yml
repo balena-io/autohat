@@ -1,4 +1,19 @@
 - commits:
+    - subject: Fix to make the DNS_SERVER env var optional.
+      hash: ae8a3e6c634c7c02dad4477f0fcdccba9a487274
+      body: |
+        This fix allows the script to run even if the variable
+        is not defined in the environment.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Carlo Miguel F. Cruz <carloc@balena.io>
+        signed-off-by: Carlo Miguel F. Cruz <carloc@balena.io>
+      author: Carlo Miguel F. Cruz
+  version: 1.0.2
+  title: ""
+  date: 2023-07-21T15:02:30.387Z
+- commits:
     - subject: Configures the test image with a custom DNS server.
       hash: c74ca3cf3be1df92ee32fa5f74c1201f30731878
       body: |

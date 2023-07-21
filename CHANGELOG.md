@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.0.2 - 2023-07-21
+
+* Fix to make the DNS_SERVER env var optional. [Carlo Miguel F. Cruz]
+
 ## v1.0.1 - 2023-07-20
 
 * Configures the test image with a custom DNS server. [Carlo Miguel F. Cruz]
