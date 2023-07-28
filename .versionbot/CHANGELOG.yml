@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update dependency robotframework to v6.1.1
+      hash: acc1391a9b839eee699a40f9dcde8eb04cab532b
+      body: |
+        Update robotframework from 6.1 to 6.1.1
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Self-hosted Renovate Bot
+  version: 1.0.3
+  title: ""
+  date: 2023-07-28T19:57:42.273Z
+- commits:
     - subject: Fix to make the DNS_SERVER env var optional.
       hash: ae8a3e6c634c7c02dad4477f0fcdccba9a487274
       body: |

@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.0.3 - 2023-07-28
+
+* Update dependency robotframework to v6.1.1 [Self-hosted Renovate Bot]
+
 ## v1.0.2 - 2023-07-21
 
 * Fix to make the DNS_SERVER env var optional. [Carlo Miguel F. Cruz]
