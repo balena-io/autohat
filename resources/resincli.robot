@@ -67,9 +67,9 @@ Configure "${image}" version "${os_version}" with "${application_name}"
     Process ${result_register}
     ${result} =  Run Process    balena os configure ${image} --device ${result_register.stdout} --version ${os_version} --config-network ethernet --dev    shell=yes
     Process ${result}
-    ${DNS_SERVER} =   Get Environment Variable    DNS_SERVER    default=True
-    ${result_dns} =   Run Keyword If    '${DNS_SERVER}' != ''    Run Process    balena config write --drive "${image}" dnsServers "${DNS_SERVER}"   shell=yes
-    Process ${result_dns}
+    ${dns_server} =    Get Environment Variable    DNS_SERVER    default=empty
+    ${dns_config} =    Run Keyword If    '${dns_server}' != 'empty'    Run Process    balena config write --drive "${image}" dnsServers "${dns_server}"    shell=yes
+    Run Keyword If    '${dns_server}' != 'empty'    Process ${dns_config}
     Return From Keyword    ${result_register.stdout}
 
 Get "${device_info}" of device "${device_uuid}"
