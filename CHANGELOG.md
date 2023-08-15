@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.0.4 - 2023-08-15
+
+* Sets a placeholder value for dnsServers when none is provided. [Carlo Miguel F. Cruz]
+
 ## v1.0.3 - 2023-07-28
 
 * Update dependency robotframework to v6.1.1 [Self-hosted Renovate Bot]

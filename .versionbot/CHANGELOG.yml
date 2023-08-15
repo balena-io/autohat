@@ -1,4 +1,19 @@
 - commits:
+    - subject: Sets a placeholder value for dnsServers when none is provided.
+      hash: e7a09f17d1ed0520cfd365f7c1cffba6d83fc841
+      body: |
+        The image will not be configured with a custom DNS server
+        if the variable is found to contain the placeholder value.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Carlo Miguel F. Cruz <carloc@balena.io>
+        signed-off-by: Carlo Miguel F. Cruz <carloc@balena.io>
+      author: Carlo Miguel F. Cruz
+  version: 1.0.4
+  title: ""
+  date: 2023-08-15T01:42:25.115Z
+- commits:
     - subject: Update dependency robotframework to v6.1.1
       hash: acc1391a9b839eee699a40f9dcde8eb04cab532b
       body: |
