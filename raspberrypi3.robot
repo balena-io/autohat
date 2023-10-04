@@ -13,7 +13,7 @@ Preparing test environment
   Set Suite Variable    ${proxy_ssh_port}    %{proxy_ssh_port}
   Set Suite Variable    ${application_name}    %{application_name}
   Set Suite Variable    ${device_type}    %{device_type}
-  Set Suite Variable    ${BALENARC_RESIN_URL}    %{BALENARC_RESIN_URL}
+  Set Suite Variable    ${BALENARC_BALENA_URL}    %{BALENARC_BALENA_URL}
   Set Suite Variable    ${BALENARC_PROXY_URL}    %{BALENARC_PROXY_URL}
   Set Suite Variable    ${image}    %{image}
   File Should Exist     ${image}  msg="Provided images file does not exist"
