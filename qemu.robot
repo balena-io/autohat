@@ -16,7 +16,7 @@ Preparing test environment
   Set Suite Variable    ${application_name}    %{application_name}
   Should Not Be Empty   ${application_name}    msg=application_name variable cannot be blank
   Set Suite Variable    ${device_type}    %{device_type}
-  Set Suite Variable    ${BALENARC_RESIN_URL}    %{BALENARC_RESIN_URL}
+  Set Suite Variable    ${BALENARC_BALENA_URL}    %{BALENARC_BALENA_URL}
   Set Suite Variable    ${BALENARC_PROXY_URL}    %{BALENARC_PROXY_URL}
   Set Suite Variable    ${image}    %{image}
   File Should Exist     ${image}  msg="Provided images file does not exist"
