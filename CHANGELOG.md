@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.0.5 - 2023-10-05
+
+* Rename RESIN.. => BALENARC_PROXY_URL [Anton Belodedenko]
+
 ## v1.0.4 - 2023-08-15
 
 * Sets a placeholder value for dnsServers when none is provided. [Carlo Miguel F. Cruz]

@@ -1,4 +1,14 @@
 - commits:
+    - subject: rename RESIN.. => BALENARC_PROXY_URL
+      hash: d0e3c4642796fe1bd93d5b57d488e8e43ff8f1ce
+      body: ""
+      footer:
+        change-type: patch
+      author: Anton Belodedenko
+  version: 1.0.5
+  title: ""
+  date: 2023-10-05T00:33:53.153Z
+- commits:
     - subject: Sets a placeholder value for dnsServers when none is provided.
       hash: e7a09f17d1ed0520cfd365f7c1cffba6d83fc841
       body: |
