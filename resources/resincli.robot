@@ -84,11 +84,28 @@ Get "${device_info}" of device "${device_uuid}"
    Process ${result}
    [Return]    ${result.stdout}
 
-Get "${application_info}" from application "${application_name}"
+Get "${application_info}" from fleet "${application_name}"
     [Documentation]    Available values for argument ${application_info} are:
     ...                ID, APP_NAME, DEVICE_TYPE, ONLINE_DEVICES, DEVICES_LENGTH
-    &{dictionary} =  Create Dictionary    ID=1    APP_NAME=2    DEVICE_TYPE=3    ONLINE_DEVICES=4    DEVICES_LENGTH=5
-    ${result} =  Run Process    balena apps | grep -w "${application_name}" | awk '{print $${dictionary.${application_info}}}'    shell=yes
+    &{dictionary} =  Create Dictionary    ID=1    APP_NAME=2    SLUG=3    DEVICE_TYPE=4    DEVICES_LENGTH=5    ONLINE_DEVICES=6
+    ${result} =  Run Process    balena fleets | grep -w "${application_name}" | awk '{print $${dictionary.${application_info}}}'    shell=yes
+    Process ${result}
+    [Return]    ${result.stdout}
+
+# FIXME: needs to select STATUS=success and IS FINAL=true
+Get latest release from fleet "${application_name}"
+    ${result} =  Run Process    balena releases "${application_name}" | head -n 2 | tail -n 1 | awk '{print $2}'    shell=yes
+    Process ${result}
+    [Return]    ${result.stdout}
+
+# FIXME: needs to select STATUS=success and IS FINAL=true
+Get previous release from fleet "${application_name}"
+    ${result} =  Run Process    balena releases "${application_name}" | head -n 3 | tail -n 2 | tail -n 1 | awk '{print $2}'    shell=yes
+    Process ${result}
+    [Return]    ${result.stdout}
+
+Pin device "${device_uuid}" to release "${release_uuid}"
+    ${result} =  Run Process    balena device pin "${device_uuid}" "${release_uuid}"    shell=yes
     Process ${result}
     [Return]    ${result.stdout}
 
@@ -99,6 +116,10 @@ Device "${device_uuid}" is online
 Device "${device_uuid}" is offline
     ${result} =  Get "IS ONLINE" of device "${device_uuid}"
     Should Contain    ${result}    false
+
+Device "${device_uuid}" should be running commit ${commit}
+    ${result} =  Get "COMMIT" of device "${device_uuid}"
+    Should Contain    ${result}    ${commit}
 
 Device "${device_uuid}" log should contain "${value}"
     ${result} =  Run Buffered Process    balena logs ${device_uuid}    shell=yes
