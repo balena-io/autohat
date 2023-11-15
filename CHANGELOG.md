@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.0.8 - 2023-11-15
+
+* Update dependency balena-io/balena-cli to v17.4.2 [Self-hosted Renovate Bot]
+
 ## v1.0.7 - 2023-11-15
 
 * Pin device to release [ab77]
