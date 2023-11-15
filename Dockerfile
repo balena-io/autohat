@@ -1,23 +1,32 @@
+# --- normalize image architectures
+FROM balenalib/aarch64-node:19-bullseye-build AS cli-build-arm64
+FROM balenalib/aarch64-python:3-bullseye-build AS qemu-build-arm64
+FROM balenalib/aarch64-python:3-bullseye-run AS run-arm64
+FROM balenalib/amd64-node:19-bullseye-build AS cli-build-amd64
+FROM balenalib/amd64-python:3-bullseye-build AS qemu-build-amd64
+FROM balenalib/amd64-python:3-bullseye-run AS run-amd64
+
+
 # --- build balena-cli
-ARG ARCH=amd64
+FROM cli-build-${TARGETARCH} AS cli-build
 
-FROM balenalib/${ARCH}-node:19-bullseye-build AS cli-build
+ARG TARGETARCH
 
-ARG BALENA_CLI_VERSION=15.2.0
+# renovate: datasource=github-releases depName=balena-io/balena-cli
+ARG BALENA_CLI_VERSION=v17.4.1
 
 WORKDIR /opt
 
 RUN install_packages unzip
 
-RUN wget -q "https://github.com/balena-io/balena-cli/releases/download/v${BALENA_CLI_VERSION}/balena-cli-v${BALENA_CLI_VERSION}-linux-x64-standalone.zip" \
-    && unzip -q "balena-cli-v${BALENA_CLI_VERSION}-linux-x64-standalone.zip" \
-    && rm -rf "balena-cli-v${BALENA_CLI_VERSION}-linux-x64-standalone.zip"
+RUN set -x; arch=$(echo ${TARGETARCH} | sed 's/amd/x/g') \
+    && wget -q "https://github.com/balena-io/balena-cli/releases/download/${BALENA_CLI_VERSION}/balena-cli-${BALENA_CLI_VERSION}-linux-${arch}-standalone.zip" \
+    && unzip -q "balena-cli-${BALENA_CLI_VERSION}-linux-${arch}-standalone.zip" \
+    && rm -rf "balena-cli-${BALENA_CLI_VERSION}-linux-${arch}-standalone.zip"
 
 
 # --- build QEMU and Python venv
-ARG ARCH=amd64
-
-FROM balenalib/${ARCH}-python:3-bullseye-build AS qemu-build
+FROM qemu-build-${TARGETARCH} AS qemu-build
 
 ARG QEMU_VERSION=6.2.0
 
@@ -48,9 +57,7 @@ RUN wget -q https://download.qemu.org/qemu-${QEMU_VERSION}.tar.xz \
 
 
 # --- runtime
-ARG ARCH=amd64
-
-FROM balenalib/${ARCH}-python:3-bullseye-run
+FROM run-${TARGETARCH}
 
 ENV VIRTUAL_ENV=/opt/venv
 
