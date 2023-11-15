@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.0.7 - 2023-11-15
+
+* Pin device to release [ab77]
+
 ## v1.0.6 - 2023-11-14
 
 * Update dependency robotframework-requests to v0.9.6 [Self-hosted Renovate Bot]

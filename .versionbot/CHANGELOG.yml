@@ -1,4 +1,16 @@
 - commits:
+    - subject: pin device to release
+      hash: 1775c284a5f96fe9aa0e6109f7ce5a37d6c6ede8
+      body: |
+        * build multi-arch image
+        * ghcr.io images
+      footer:
+        change-type: patch
+      author: ab77
+  version: 1.0.7
+  title: ""
+  date: 2023-11-15T01:04:16.045Z
+- commits:
     - subject: Update dependency robotframework-requests to v0.9.6
       hash: ff0298093a2516ed44f3c75e4983842a29bf5aac
       body: |
