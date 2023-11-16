@@ -1,4 +1,14 @@
 - commits:
+    - subject: escape robot control chars
+      hash: a4461d99d80592fec46c85282d4fb96c32545ec4
+      body: ""
+      footer:
+        change-type: patch
+      author: ab77
+  version: 1.1.1
+  title: ""
+  date: 2023-11-16T21:37:50.838Z
+- commits:
     - subject: QEMU 8.1.2
       hash: ad14e11fdf06d2309189ab03cd640abf026b8d5c
       body: ""

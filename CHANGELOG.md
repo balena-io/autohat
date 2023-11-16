@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.1.1 - 2023-11-16
+
+* Escape robot control chars [ab77]
+
 ## v1.1.0 - 2023-11-16
 
 * QEMU 8.1.2 [ab77]
