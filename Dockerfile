@@ -28,7 +28,7 @@ RUN set -x; arch=$(echo ${TARGETARCH} | sed 's/amd/x/g') \
 # --- build QEMU and Python venv
 FROM qemu-build-${TARGETARCH} AS qemu-build
 
-ARG QEMU_VERSION=6.2.0
+ARG QEMU_VERSION=8.1.2
 
 WORKDIR /opt
 
@@ -38,6 +38,7 @@ RUN install_packages \
     libfdt-dev \
     libglib2.0-dev \
     libpixman-1-dev \
+    libslirp-dev \
     ninja-build \
     zlib1g-dev
 
@@ -50,9 +51,9 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 RUN wget -q https://download.qemu.org/qemu-${QEMU_VERSION}.tar.xz \
-    && echo "68e15d8e45ac56326e0b9a4afa8b49a3dfe8aba3488221d098c84698bca65b45  qemu-${QEMU_VERSION}.tar.xz" | sha256sum -c - \
+    && echo "541526a764576eb494d2ff5ec46aeb253e62ea29035d1c23c0a8af4e6cd4f087  qemu-${QEMU_VERSION}.tar.xz" | sha256sum -c - \
     && tar -xf qemu-${QEMU_VERSION}.tar.xz && cd qemu-${QEMU_VERSION} \
-    && ./configure --target-list=x86_64-softmmu && make -j"$(nproc)" \
+    && ./configure --target-list=x86_64-softmmu --enable-slirp && make -j"$(nproc)" \
     && make install
 
 
@@ -65,17 +66,18 @@ ENV PATH="${VIRTUAL_ENV}/bin:/usr/local/bin:${PATH}"
 
 RUN install_packages \
     git \
-    openssh-client \
-    rsync \
-    minicom \
-    systemd \
-    libxml2 \
+    libfdt1 \
+    libglib2.0-0 \
+    libjpeg62-turbo \
     libpixman-1-0 \
     libpng16-16 \
-    libjpeg62-turbo \
-    libglib2.0-0 \
-    libfdt1 \
+    libslirp0 \
+    libxml2 \
+    minicom \
+    openssh-client \
     ovmf \
+    rsync \
+    systemd \
     zlib1g
 
 COPY --from=cli-build /opt/balena-cli /opt/balena-cli
