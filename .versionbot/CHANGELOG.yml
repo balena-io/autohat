@@ -1,4 +1,14 @@
 - commits:
+    - subject: QEMU 8.1.2
+      hash: ad14e11fdf06d2309189ab03cd640abf026b8d5c
+      body: ""
+      footer:
+        change-type: minor
+      author: ab77
+  version: 1.1.0
+  title: ""
+  date: 2023-11-16T19:59:08.799Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v17.4.2
       hash: 87830df964c5b68724d123cb1d1d4c5500fed7f9
       body: |

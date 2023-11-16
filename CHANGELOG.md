@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.1.0 - 2023-11-16
+
+* QEMU 8.1.2 [ab77]
+
 ## v1.0.8 - 2023-11-15
 
 * Update dependency balena-io/balena-cli to v17.4.2 [Self-hosted Renovate Bot]
