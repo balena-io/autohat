@@ -1,4 +1,20 @@
 - commits:
+    - subject: Remove repo config from flowzone.yml
+      hash: 6116862585738878e1a436cf1b8fa811c7cd0e91
+      body: |
+        This functionality is being deprecated in Flowzone.
+
+        See: https://github.com/product-os/flowzone/pull/833
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+  version: 1.1.6
+  title: ""
+  date: 2023-12-19T22:00:29.009Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v17.4.6
       hash: 109f1478a232b55d84ded1f0992907e2eca69739
       body: |

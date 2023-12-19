@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.1.6 - 2023-12-19
+
+* Remove repo config from flowzone.yml [Kyle Harding]
+
 ## v1.1.5 - 2023-12-08
 
 * Update dependency balena-io/balena-cli to v17.4.6 [Self-hosted Renovate Bot]
