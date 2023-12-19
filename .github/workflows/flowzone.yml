@@ -1,5 +1,4 @@
 name: Flowzone
-
 on:
   pull_request:
     types: [opened, synchronize, closed]
@@ -7,7 +6,6 @@ on:
   pull_request_target:
     types: [opened, synchronize, closed]
     branches: [main, master]
-
 jobs:
   flowzone:
     name: Flowzone
@@ -22,14 +20,13 @@ jobs:
     uses: product-os/flowzone/.github/workflows/flowzone.yml@master
     secrets: inherit
     with:
-      repo_config: true
-      repo_description: "balenaCloud end-to-end tests (autohat)."
       docker_images: |
         balena/autohat,
         ghcr.io/balena-io/autohat
-
       docker_runs_on: >
         {
+
           "linux/amd64": ["self-hosted","distro:jammy","platform:linux/amd64"],
           "linux/arm64": ["self-hosted","distro:jammy","platform:linux/arm64"]
         }
+
