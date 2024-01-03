@@ -178,6 +178,7 @@ Remove "${option}" variable "${variable_name}" from application "${application_n
 Get "${url}" with expected status "${status}"
     [Documentation]    https://docs.robotframework.org/docs/different_libraries/requests
     ${response} =  GET    ${url}  expected_status=${status}
+    [Return]    ${response}
 
 Check if SSH works on "${device_uuid}"
     ${result} =  Run Buffered Process    DEBUG=* echo "exit;" | balena ssh ${device_uuid} --port ${proxy_ssh_port}    shell=yes
