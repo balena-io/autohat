@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.1.9 - 2024-01-03
+
+* Update resincli.robot [Anton Belodedenko]
+
 ## v1.1.8 - 2024-01-03
 
 * Correct public device url tests [Anton Belodedenko]
