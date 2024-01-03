@@ -1,4 +1,14 @@
 - commits:
+    - subject: correct public device url tests
+      hash: ca9ad39dbf85cc987f2fe3e4d0c7589c278fd3b1
+      body: ""
+      footer:
+        change-type: patch
+      author: Anton Belodedenko
+  version: 1.1.8
+  title: ""
+  date: 2024-01-03T17:19:00.670Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v17.4.9
       hash: ebd8ebe9fa30a9cb5d53d9a36de1f14314be441b
       body: |

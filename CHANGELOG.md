@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.1.8 - 2024-01-03
+
+* Correct public device url tests [Anton Belodedenko]
+
 ## v1.1.7 - 2023-12-19
 
 * Update dependency balena-io/balena-cli to v17.4.9 [Self-hosted Renovate Bot]
