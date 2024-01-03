@@ -2,6 +2,7 @@
 Documentation    This resource provides access to balena commands.
 Library   Process
 Library   OperatingSystem
+Library   RequestsLibrary
 
 *** Variables ***
 
@@ -170,9 +171,13 @@ Remove "${option}" variable "${variable_name}" from application "${application_n
     Should Contain    ${list}    ${item}
     ${result} =  Run Keyword If    '${item}' == 'get'    Run Process    balena device public-url ${device_uuid}    shell=yes
     ...    ELSE
-    ...    Run Process    balena device public-url ${item} ${device_uuid}    shell=yes
+    ...    Run Process    balena device public-url ${device_uuid} --${item}    shell=yes
     Process ${result}
     [Return]    ${result.stdout}
+
+Get "${url}" with expected status "${status}"
+    [Documentation]    https://docs.robotframework.org/docs/different_libraries/requests
+    ${response} =  GET    ${url}  expected_status=${status}
 
 Check if SSH works on "${device_uuid}"
     ${result} =  Run Buffered Process    DEBUG=* echo "exit;" | balena ssh ${device_uuid} --port ${proxy_ssh_port}    shell=yes
