@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.1.10 - 2024-01-05
+
+* Update dependency balena-io/balena-cli to v17.4.11 [Self-hosted Renovate Bot]
+
 ## v1.1.9 - 2024-01-03
 
 * Update resincli.robot [Anton Belodedenko]

@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update dependency balena-io/balena-cli to v17.4.11
+      hash: 7670a5f159d36d1f08dc41e3e193c5ecceec2437
+      body: |
+        Update balena-io/balena-cli from 17.4.9 to 17.4.11
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Self-hosted Renovate Bot
+  version: 1.1.10
+  title: ""
+  date: 2024-01-05T23:53:37.531Z
+- commits:
     - subject: Update resincli.robot
       hash: 9919d2816cf45f3032edcb4fd54c3e30f53b1489
       body: |
