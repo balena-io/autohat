@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update dependency robotframework to v7
+      hash: e4e3905d44d6f92cce7fa4703c25b408c9e8fd72
+      body: |
+        Update robotframework from 6.1.1 to 7.0
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Self-hosted Renovate Bot
+  version: 1.1.11
+  title: ""
+  date: 2024-01-11T20:20:32.455Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v17.4.11
       hash: 7670a5f159d36d1f08dc41e3e193c5ecceec2437
       body: |
