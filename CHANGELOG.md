@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.1.12 - 2024-01-12
+
+* Correct syntax for robotframework v7.x [Anton Belodedenko]
+
 ## v1.1.11 - 2024-01-11
 
 * Update dependency robotframework to v7 [Self-hosted Renovate Bot]

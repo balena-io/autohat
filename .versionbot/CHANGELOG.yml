@@ -1,4 +1,14 @@
 - commits:
+    - subject: correct syntax for robotframework v7.x
+      hash: a379ec9d2c60ab95bdfb2f4bdb25f0111172f440
+      body: ""
+      footer:
+        change-type: patch
+      author: Anton Belodedenko
+  version: 1.1.12
+  title: ""
+  date: 2024-01-12T02:31:49.177Z
+- commits:
     - subject: Update dependency robotframework to v7
       hash: e4e3905d44d6f92cce7fa4703c25b408c9e8fd72
       body: |
