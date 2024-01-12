@@ -83,7 +83,7 @@ Get "${device_info}" of device "${device_uuid}"
     ...    ELSE
     ...    Run Process    balena device ${device_uuid} | grep -w "${device_info}" | cut -d ':' -f 2 | sed 's/ //g'    shell=yes
    Process ${result}
-   [Return]    ${result.stdout}
+   Return    ${result.stdout}
 
 Get "${application_info}" from fleet "${application_name}"
     [Documentation]    Available values for argument ${application_info} are:
@@ -91,24 +91,24 @@ Get "${application_info}" from fleet "${application_name}"
     &{dictionary} =  Create Dictionary    ID=1    APP_NAME=2    SLUG=3    DEVICE_TYPE=4    DEVICES_LENGTH=5    ONLINE_DEVICES=6
     ${result} =  Run Process    balena fleets | grep -w "${application_name}" | awk '{print $${dictionary.${application_info}}}'    shell=yes
     Process ${result}
-    [Return]    ${result.stdout}
+    Return    ${result.stdout}
 
 # FIXME: needs to select STATUS=success and IS FINAL=true
 Get latest release from fleet "${application_name}"
     ${result} =  Run Process    balena releases "${application_name}" | head -n 2 | tail -n 1 | awk '{print $2}'    shell=yes
     Process ${result}
-    [Return]    ${result.stdout}
+    Return    ${result.stdout}
 
 # FIXME: needs to select STATUS=success and IS FINAL=true
 Get previous release from fleet "${application_name}"
     ${result} =  Run Process    balena releases "${application_name}" | head -n 3 | tail -n 2 | tail -n 1 | awk '{print $2}'    shell=yes
     Process ${result}
-    [Return]    ${result.stdout}
+    Return    ${result.stdout}
 
 Pin device "${device_uuid}" to release "${release_uuid}"
     ${result} =  Run Process    balena device pin "${device_uuid}" "${release_uuid}"    shell=yes
     Process ${result}
-    [Return]    ${result.stdout}
+    Return    ${result.stdout}
 
 Device "${device_uuid}" is online
     ${result} =  Get "IS ONLINE" of device "${device_uuid}"
@@ -173,12 +173,12 @@ Remove "${option}" variable "${variable_name}" from application "${application_n
     ...    ELSE
     ...    Run Process    balena device public-url ${device_uuid} --${item}    shell=yes
     Process ${result}
-    [Return]    ${result.stdout}
+    Return    ${result.stdout}
 
 Get "${url}" with expected status "${status}"
     [Documentation]    https://docs.robotframework.org/docs/different_libraries/requests
     ${response} =  GET    ${url}  expected_status=${status}
-    [Return]    ${response}
+    Return    ${response}
 
 Check if SSH works on "${device_uuid}"
     ${result} =  Run Buffered Process    DEBUG=* echo "exit;" | balena ssh ${device_uuid} --port ${proxy_ssh_port}    shell=yes
@@ -219,7 +219,7 @@ Add console output "${message}" to "${directory}"
 Get the last git commit from "${directory}"
     ${result} =  Run Buffered Process    git log | grep commit | head -1 | cut -d ' ' -f 2    shell=yes    cwd=${directory}
     Process ${result}
-    [Return]    ${result.stdout}
+    Return    ${result.stdout}
 
 Check that "${device_uuid}" does not return "${interface}" IP address through API using socket "${socket}"
     ${ip_address} =    Get "${interface}" IP address using socket "${socket}"
@@ -234,7 +234,7 @@ Run Buffered Process
     [Arguments]    ${command}    ${shell}    ${cwd}=${EXECDIR}    ${timeout}=30min
     ${random} =  Evaluate    random.randint(0, sys.maxsize)    modules=random, sys
     ${result} =  Run Process    ${command}    shell=${shell}    cwd=${cwd}    timeout=${timeout}    stdout=/tmp/autohat.${random}.stdout    stderr=/tmp/autohat.${random}.stderr
-    [Return]    ${result}
+    Return    ${result}
 
 Process ${result}
     Log   all output: ${result.stdout}
