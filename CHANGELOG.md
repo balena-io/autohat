@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.1.13 - 2024-01-17
+
+* Correct RETURN syntax for new robot version [Anton Belodedenko]
+
 ## v1.1.12 - 2024-01-12
 
 * Correct syntax for robotframework v7.x [Anton Belodedenko]

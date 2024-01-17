@@ -1,4 +1,14 @@
 - commits:
+    - subject: correct RETURN syntax for new robot version
+      hash: 037bd52d9080d45dea814f34966b717d61e07a27
+      body: ""
+      footer:
+        change-type: patch
+      author: Anton Belodedenko
+  version: 1.1.13
+  title: ""
+  date: 2024-01-17T23:02:32.727Z
+- commits:
     - subject: correct syntax for robotframework v7.x
       hash: a379ec9d2c60ab95bdfb2f4bdb25f0111172f440
       body: ""
