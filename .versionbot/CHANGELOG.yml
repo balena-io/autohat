@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update dependency balena-io/balena-cli to v17.4.12
+      hash: 3ab227e3e109316e91a4aac6b4dacf7d87e23a89
+      body: |
+        Update balena-io/balena-cli from 17.4.11 to 17.4.12
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Self-hosted Renovate Bot
+  version: 1.1.14
+  title: ""
+  date: 2024-01-18T11:55:11.692Z
+- commits:
     - subject: correct RETURN syntax for new robot version
       hash: 037bd52d9080d45dea814f34966b717d61e07a27
       body: ""

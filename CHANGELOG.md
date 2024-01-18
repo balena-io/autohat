@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.1.14 - 2024-01-18
+
+* Update dependency balena-io/balena-cli to v17.4.12 [Self-hosted Renovate Bot]
+
 ## v1.1.13 - 2024-01-17
 
 * Correct RETURN syntax for new robot version [Anton Belodedenko]
