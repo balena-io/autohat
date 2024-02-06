@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update dependency balena-io/balena-cli to v18
+      hash: 6b164b6f65a0c82e94409ed577fc41d88c5ae321
+      body: |
+        Update balena-io/balena-cli from 17.5.1 to 18.0.0
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Self-hosted Renovate Bot
+  version: 1.1.17
+  title: ""
+  date: 2024-02-06T15:35:23.543Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v17.5.1
       hash: 7af728f20e9ec23442c8ab8478904694872b2f5e
       body: |
