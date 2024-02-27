@@ -140,6 +140,10 @@ Add ENV variable "${variable_name}" with value "${variable_value}" to applicatio
     ${result} =  Run Process    balena env add ${variable_name} ${variable_value} -f ${application_name}    shell=yes
     Process ${result}
 
+Add variable "${variable_name}" with value "${variable_value}" to "${type}" "${id}"
+    ${result} =  Run Process    balena env add ${variable_name} ${variable_value} --${type} ${id}    shell=yes
+    Process ${result}
+
 Check if "${option}" variable "${variable_name}" with value "${variable_value}" exists in application "${application_name}"
     [Documentation]    Available values for argument ${option} are: ENV, CONFIG
     @{list} =  Create List    ENV    CONFIG
@@ -147,6 +151,17 @@ Check if "${option}" variable "${variable_name}" with value "${variable_value}" 
     ${result_env} =  Run Keyword If    '${option}' == 'ENV'    Run Process    balena envs -f ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
     ...    ELSE
     ...    Run Process    balena envs --config -f ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
+    Process ${result_env}
+    ${result} =  Run Process    echo "${result_env.stdout}" | grep ${variable_name} | grep " ${variable_value}"    shell=yes
+    Process ${result}
+
+Check if "${option}" variable "${variable_name}" with value "${variable_value}" exists on "${type}" "${id}"
+    [Documentation]    Available values for argument ${option} are: ENV, CONFIG
+    @{list} =  Create List    ENV    CONFIG
+    Should Contain    ${list}    ${option}
+    ${result_env} =  Run Keyword If    '${option}' == 'ENV'    Run Process    balena envs --${type} ${id} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
+    ...    ELSE
+    ...    Run Process    balena envs --config --${type} ${id} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
     Process ${result_env}
     ${result} =  Run Process    echo "${result_env.stdout}" | grep ${variable_name} | grep " ${variable_value}"    shell=yes
     Process ${result}
@@ -190,21 +205,6 @@ Check if setting environment variables works on "${application_name}"
     Add ENV variable "autohat${random}" with value "RandomValue" to application "${application_name}"
     Check if "ENV" variable "autohat${random}" with value "RandomValue" exists in application "${application_name}"
     Remove "ENV" variable "autohat${random}" from application "${application_name}"
-
-Check enabling supervisor delta on "${application_name}"
-    Add ENV variable "RESIN_SUPERVISOR_DELTA" with value "1" to application "${application_name}"
-    Device "${device_uuid}" log should not contain "Killing application"
-    ${random} =  Evaluate    random.randint(0, sys.maxsize)    modules=random, sys
-    Git clone "${application_repo}" "/tmp/${random}"
-    Git checkout "${application_commit}" "/tmp/${random}"
-    Add console output "Grettings World!" to "/tmp/${random}"
-    ${last_commit} =    Get the last git commit from "/tmp/${random}"
-    Git checkout "${last_commit}" "/tmp/${random}"
-    Git push "/tmp/${random}" to application "${application_name}"
-    Wait Until Keyword Succeeds    30x    10s    Device "${device_uuid}" log should contain "Grettings World!"
-    Check if ENV variable "RESIN_SUPERVISOR_DELTA" with value "1" exists in application "${application_name}"
-    Remove ENV variable "RESIN_SUPERVISOR_DELTA" from application "${application_name}"
-    [Teardown]    Run Keyword    Remove Directory    /tmp/${random}    recursive=True
 
 Add console output "${message}" to "${directory}"
     ${result} =  Run Process    git config --global user.email "%{email}"    shell=yes    cwd=${directory}
