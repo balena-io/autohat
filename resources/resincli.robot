@@ -159,11 +159,9 @@ Check if "${option}" variable "${variable_name}" with value "${variable_value}" 
     [Documentation]    Available values for argument ${option} are: ENV, CONFIG
     @{list} =  Create List    ENV    CONFIG
     Should Contain    ${list}    ${option}
-    ${result_env} =  Run Keyword If    '${option}' == 'ENV'    Run Process    balena envs --${type} ${id} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
+    ${result} =  Run Keyword If    '${option}' == 'ENV'    Run Process    balena envs --${type} ${id} --json | jq 'any(.[]; .name \=\= "${variable_name}" and .value \=\= "${variable_value}")' | grep true    shell=yes
     ...    ELSE
-    ...    Run Process    balena envs --config --${type} ${id} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
-    Process ${result_env}
-    ${result} =  Run Process    echo "${result_env.stdout}" | grep ${variable_name} | grep " ${variable_value}"    shell=yes
+    ...    Run Process    balena envs --config --${type} ${id} --json | jq 'any(.[]; .name \=\= "${variable_name}" and .value \=\= "${variable_value}")' | grep true    shell=yes
     Process ${result}
 
 Remove "${option}" variable "${variable_name}" from application "${application_name}"
