@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.1.18 - 2024-02-29
+
+* Generalise environment setting/getting macros [Anton Belodedenko]
+
 ## v1.1.17 - 2024-02-06
 
 * Update dependency balena-io/balena-cli to v18 [Self-hosted Renovate Bot]
