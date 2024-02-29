@@ -66,6 +66,7 @@ ENV PATH="${VIRTUAL_ENV}/bin:/usr/local/bin:${PATH}"
 
 RUN install_packages \
     git \
+    jq \
     libfdt1 \
     libglib2.0-0 \
     libjpeg62-turbo \
