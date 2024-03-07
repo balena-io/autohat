@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update dependency balena-io/balena-cli to v18.0.1
+      hash: 04a57e4308a1798705a88fec191d583590b91856
+      body: |
+        Update balena-io/balena-cli from 18.0.0 to 18.0.1
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Self-hosted Renovate Bot
+  version: 1.1.19
+  title: ""
+  date: 2024-03-07T16:54:39.313Z
+- commits:
     - subject: generalise environment setting/getting macros
       hash: 0717d3654ee78c345962e8cf982d62dc83a0fff8
       body: ""
@@ -1180,7 +1192,8 @@
     - body: >-
         * Add functionality to check or remove configuration variables
 
-        * r/resinos.robot: Modified test to disable RESIN_SUPERVISOR_DELTA rather
+        * r/resinos.robot: Modified test to disable RESIN_SUPERVISOR_DELTA
+        rather
 
         than removing the configuration variable.
 - version: 0.0.6
@@ -1876,7 +1889,8 @@
         * Resolving an issue where test case would fail if they are keys with
         almost
 
-        the same name in resin keys by selecting only those lines containing matches
+        the same name in resin keys by selecting only those lines containing
+        matches
 
         that form whole words.
 - commits:
@@ -1958,7 +1972,8 @@
 
         * Change to 30 minutes for delta downloading
 
-        * Add Run Buffered Process keyword only where is necessary because of performance issues
+        * Add Run Buffered Process keyword only where is necessary because of
+        performance issues
 - commits:
     - hash: d231b58d32a761cd12e073ae3a8243a8d2590844
 - commits:
@@ -1977,7 +1992,8 @@
 
         * Add timeout argument in Run Process parameters
 
-        * Add Run Buffered Process keyword only where is necessary because of performance issues regarding timeout
+        * Add Run Buffered Process keyword only where is necessary because of
+        performance issues regarding timeout
 - commits:
     - hash: 593fc9ad72307c78083f5ac802a7be7a1f854f33
 - commits:
@@ -2076,7 +2092,8 @@
     - body: >-
         of the image before running the qemu device and run it.
 
-        * Resolving an issue where qemu wouldn't start the right image provided in the keyword as an argument
+        * Resolving an issue where qemu wouldn't start the right image provided
+        in the keyword as an argument
 
         [Connects to resin-io/autohat#32]
 - commits:
@@ -2369,7 +2386,8 @@
 
         * Added minicom and updated resin-cli to 5.0.0 in Dockerfile
 
-        * Added test cases that enables getty service and verifies resin-info service is active on the image
+        * Added test cases that enables getty service and verifies resin-info
+        service is active on the image
 
         * Added socket connection when the images runs
 - commits:
