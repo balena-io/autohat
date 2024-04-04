@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update dependency pylibftdi to v0.22.0
+      hash: 4642e723a31f0649a4db7213c60a06ef8325c146
+      body: |
+        Update pylibftdi from 0.21.0 to 0.22.0
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Self-hosted Renovate Bot
+  version: 1.1.29
+  title: ""
+  date: 2024-04-04T19:12:39.901Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v18.1.5
       hash: cccc5f35f7904b13084fd74b1f39cfcd6c9634e9
       body: |

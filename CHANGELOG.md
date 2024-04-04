@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.1.29 - 2024-04-04
+
+* Update dependency pylibftdi to v0.22.0 [Self-hosted Renovate Bot]
+
 ## v1.1.28 - 2024-03-14
 
 * Update dependency balena-io/balena-cli to v18.1.5 [Self-hosted Renovate Bot]
