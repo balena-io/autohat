@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.1.30 - 2024-04-07
+
+* Update dependency robotframework-requests to v0.9.7 [Self-hosted Renovate Bot]
+
 ## v1.1.29 - 2024-04-04
 
 * Update dependency pylibftdi to v0.22.0 [Self-hosted Renovate Bot]

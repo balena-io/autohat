@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update dependency robotframework-requests to v0.9.7
+      hash: f33bfd61bf34d34534068abf6eb81a702ad57d4b
+      body: |
+        Update robotframework-requests from 0.9.6 to 0.9.7
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Self-hosted Renovate Bot
+  version: 1.1.30
+  title: ""
+  date: 2024-04-07T23:53:47.182Z
+- commits:
     - subject: Update dependency pylibftdi to v0.22.0
       hash: 4642e723a31f0649a4db7213c60a06ef8325c146
       body: |
