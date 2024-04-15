@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update balenalib/amd64-node Docker tag to v20
+      hash: 03079190d191e3815f2ea0828a64ea0736c0e73c
+      body: |
+        Update balenalib/amd64-node from 19 to 20
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Self-hosted Renovate Bot
+  version: 1.1.35
+  title: ""
+  date: 2024-04-15T15:29:27.189Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v18.1.9
       hash: 078cb3adbcf34aa8b523cf2d43a9551d3e90ba8a
       body: |
