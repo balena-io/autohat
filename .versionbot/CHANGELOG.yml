@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update balenalib/aarch64-node Docker tag to v20
+      hash: bddf1e30a8c6f1247aacc4174881dcb3292964a0
+      body: |
+        Update balenalib/aarch64-node from 19 to 20
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Self-hosted Renovate Bot
+  version: 1.1.36
+  title: ""
+  date: 2024-04-15T15:58:58.198Z
+- commits:
     - subject: Update balenalib/amd64-node Docker tag to v20
       hash: 03079190d191e3815f2ea0828a64ea0736c0e73c
       body: |
