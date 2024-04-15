@@ -1,5 +1,5 @@
 # --- normalize image architectures
-FROM balenalib/aarch64-node:19-bullseye-build AS cli-build-arm64
+FROM balenalib/aarch64-node:20-bullseye-build AS cli-build-arm64
 FROM balenalib/aarch64-python:3-bullseye-build AS qemu-build-arm64
 FROM balenalib/aarch64-python:3-bullseye-run AS run-arm64
 FROM balenalib/amd64-node:20-bullseye-build AS cli-build-amd64
