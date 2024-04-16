@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.1.37 - 2024-04-16
+
+* Update dependency balena-io/balena-cli to v18.1.10 [Self-hosted Renovate Bot]
+
 ## v1.1.36 - 2024-04-15
 
 * Update balenalib/aarch64-node Docker tag to v20 [Self-hosted Renovate Bot]
