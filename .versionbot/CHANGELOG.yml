@@ -1,4 +1,16 @@
 - commits:
+    - subject: Allow any self-hosted runner of matching arch
+      hash: 2649766ec0e5561d23f940e57942c08710071edc
+      body: |
+        For most Docker builds the host OS variant doesn't matter.
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Kyle Harding
+  version: 1.2.1
+  title: ""
+  date: 2024-04-22T20:18:47.882Z
+- commits:
     - subject: "qemu: test for kvm device node"
       hash: 4e83cd5da5241b288c5f8083bf905e826e2adae0
       body: |

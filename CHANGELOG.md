@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.2.1 - 2024-04-22
+
+* Allow any self-hosted runner of matching arch [Kyle Harding]
+
 ## v1.2.0 - 2024-04-22
 
 * Qemu: test for kvm device node [Joseph Kogut]
