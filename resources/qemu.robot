@@ -23,7 +23,7 @@ Run "${image}" with "${memory}" MB memory "${cpus}" cpus and "${serial_port_path
 
     # https://www.qemu.org/docs/master/system/qemu-manpage.html
     # .. depending on the target architecture: kvm, xen, hvf, nvmm, whpx (default: tcg)
-    ${result} =  Run Buffered Process    grep -E '(vmx|svm)' /proc/cpuinfo    shell=yes
+    ${result} =  Run Buffered Process    test -r /dev/kvm && test -w /dev/kvm    shell=yes
     Run Keyword And Return If    ${result.rc} == 0    Run "${firmware}" image with "kvm" acceleration
     Run Keyword And Return If    ${result.rc} != 0    Run "${firmware}" image with "tcg" acceleration
 
