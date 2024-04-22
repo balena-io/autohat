@@ -1,4 +1,31 @@
 - commits:
+    - subject: "qemu: test for kvm device node"
+      hash: 4e83cd5da5241b288c5f8083bf905e826e2adae0
+      body: |
+        Before running qemu, test for the kvm device node existing and being
+        read/write for the current user.
+
+        This handles an edge case where the CPU supports hardware virtualization
+        extensions, but the KVM device node doesn't exist or the user can't
+        access it, such as from inside a container, or when disabled in the
+        kernel's configuration.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Joseph Kogut <joseph@balena.io>
+        signed-off-by: Joseph Kogut <joseph@balena.io>
+      author: Joseph Kogut
+    - subject: support for both GPT and MBR images
+      hash: ab2b9f1428a4edfb49162b8a9e281da165967dae
+      body: |
+        * QEMU v8.2.2
+      footer:
+        change-type: minor
+      author: Anton Belodedenko
+  version: 1.2.0
+  title: ""
+  date: 2024-04-22T19:19:04.341Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v18.2.0
       hash: 2a435d642bc800c984ae25ce77127a8b2dc2c2d4
       body: |

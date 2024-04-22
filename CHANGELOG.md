@@ -1,6 +1,11 @@
 Change log
 -----------
 
+## v1.2.0 - 2024-04-22
+
+* Qemu: test for kvm device node [Joseph Kogut]
+* Support for both GPT and MBR images [Anton Belodedenko]
+
 ## v1.1.38 - 2024-04-17
 
 * Update dependency balena-io/balena-cli to v18.2.0 [Self-hosted Renovate Bot]
