@@ -28,7 +28,7 @@ RUN set -x; arch=$(echo ${TARGETARCH} | sed 's/amd/x/g') \
 # --- build QEMU and Python venv
 FROM qemu-build-${TARGETARCH} AS qemu-build
 
-ARG QEMU_VERSION=8.1.2
+ARG QEMU_VERSION=8.2.2
 
 WORKDIR /opt
 
@@ -51,7 +51,7 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 RUN wget -q https://download.qemu.org/qemu-${QEMU_VERSION}.tar.xz \
-    && echo "541526a764576eb494d2ff5ec46aeb253e62ea29035d1c23c0a8af4e6cd4f087  qemu-${QEMU_VERSION}.tar.xz" | sha256sum -c - \
+    && echo "847346c1b82c1a54b2c38f6edbd85549edeb17430b7d4d3da12620e2962bc4f3  qemu-${QEMU_VERSION}.tar.xz" | sha256sum -c - \
     && tar -xf qemu-${QEMU_VERSION}.tar.xz && cd qemu-${QEMU_VERSION} \
     && ./configure --target-list=x86_64-softmmu --enable-slirp && make -j"$(nproc)" \
     && make install
@@ -65,6 +65,7 @@ ENV VIRTUAL_ENV=/opt/venv
 ENV PATH="${VIRTUAL_ENV}/bin:/usr/local/bin:${PATH}"
 
 RUN install_packages \
+    fdisk \
     git \
     jq \
     libfdt1 \

@@ -15,14 +15,24 @@ Run "${image}" with "${memory}" MB memory "${cpus}" cpus and "${serial_port_path
     ${result} =  Run Buffered Process    cp ${image} /tmp/resin${random}.img    shell=yes
     Process ${result}
     Set Test Variable    ${image_copy}    /tmp/resin${random}.img
-    ${result} =  Run Buffered Process    egrep -c '(vmx|svm)' /proc/cpuinfo    shell=yes
-    Run Keyword And Return If    '${result.stdout}' == '0'    Run image with KVM disabled
-    Run Keyword And Return If    '${result.stdout}' != '0'    Run image with KVM enabled
 
-Run image with KVM enabled
-    ${handle} =  Start Process    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image_copy},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device ide-hd,drive\=disk,bus\=ahci.0 -device virtio-net-pci,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=q35,accel\=kvm -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off -serial chardev:serial0 -bios "/usr/share/ovmf/OVMF.fd" -nodefaults \    shell=yes
+    # firmware is 'dos' (legacy x86 DTs) or 'gpt' (generic-amd64 DT)
+    ${result} =  Run Buffered Process    fdisk -l "${image}" | sed -nE 's/^Disklabel type: (\\w+)$/\\1/p'    shell=yes
+    Process ${result}
+    Set Test Variable    ${firmware}    ${result.stdout}
+
+    # https://www.qemu.org/docs/master/system/qemu-manpage.html
+    # .. depending on the target architecture: kvm, xen, hvf, nvmm, whpx (default: tcg)
+    ${result} =  Run Buffered Process    test -r /dev/kvm && test -w /dev/kvm    shell=yes
+    Run Keyword And Return If    ${result.rc} == 0    Run "${firmware}" image with "kvm" acceleration
+    Run Keyword And Return If    ${result.rc} != 0    Run "${firmware}" image with "tcg" acceleration
+
+Run "gpt" image with "${acceleration}" acceleration
+    # qemu-system-x86_64 defunct process without shell
+    ${handle} =  Start Process    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image_copy},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device ide-hd,drive\=disk,bus\=ahci.0 -device virtio-net-pci,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=q35 -accel ${acceleration} -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off -serial chardev:serial0 -bios /usr/share/ovmf/OVMF.fd -nodefaults    shell=yes
     Return From Keyword    ${handle}
 
-Run image with KVM disabled
-    ${handle} =  Start Process    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image_copy},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device ide-hd,drive\=disk,bus\=ahci.0 -device virtio-net-pci,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=q35 -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off -serial chardev:serial0 -bios "/usr/share/ovmf/OVMF.fd" -nodefaults \    shell=yes   shell=yes
+Run "dos" image with "${acceleration}" acceleration
+    # qemu-system-x86_64 defunct process without shell
+    ${handle} =  Start Process    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image_copy},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device ide-hd,drive\=disk,bus\=ahci.0 -device virtio-net-pci,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=pc -accel ${acceleration} -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off -serial chardev:serial0    shell=yes
     Return From Keyword    ${handle}
