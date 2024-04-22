@@ -25,8 +25,7 @@ jobs:
         ghcr.io/balena-io/autohat
       docker_runs_on: >
         {
-
-          "linux/amd64": ["self-hosted","distro:jammy","platform:linux/amd64"],
-          "linux/arm64": ["self-hosted","distro:jammy","platform:linux/arm64"]
+          "linux/amd64": ["self-hosted","X64"],
+          "linux/arm64": ["self-hosted","ARM64"]
         }
 
