@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.2.2 - 2024-04-23
+
+* Update dependency balena-io/balena-cli to v18.2.1 [Self-hosted Renovate Bot]
+
 ## v1.2.1 - 2024-04-22
 
 * Allow any self-hosted runner of matching arch [Kyle Harding]
