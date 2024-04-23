@@ -1,4 +1,14 @@
 - commits:
+    - subject: update base OS (GLIBC balena-cli req. >= 2.33)
+      hash: 6d1554b740c5417667457bc449e77c2e907d8697
+      body: ""
+      footer:
+        change-type: minor
+      author: Anton Belodedenko
+  version: 1.3.0
+  title: ""
+  date: 2024-04-23T17:13:29.501Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v18.2.1
       hash: 527bcbe009a8e67b5e00a7bde8eba10723e8e3f0
       body: |
