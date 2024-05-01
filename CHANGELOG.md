@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.3.2 - 2024-05-01
+
+* Run docker build and test on Actuated [Kyle Harding]
+
 ## v1.3.1 - 2024-04-30
 
 * Update dependency balena-io/balena-cli to v18.2.2 [Self-hosted Renovate Bot]

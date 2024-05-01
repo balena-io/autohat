@@ -1,4 +1,15 @@
 - commits:
+    - subject: Run docker build and test on Actuated
+      hash: 369594f00126040d6a76f50847298640ca1923eb
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Kyle Harding
+  version: 1.3.2
+  title: ""
+  date: 2024-05-01T07:42:48.784Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v18.2.2
       hash: ce715ca72bcef87e26299d23187f5998b1eac151
       body: |
