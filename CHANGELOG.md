@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.3.3 - 2024-05-20
+
+* Update dependency requests to v2.32.0 [Self-hosted Renovate Bot]
+
 ## v1.3.2 - 2024-05-01
 
 * Run docker build and test on Actuated [Kyle Harding]
