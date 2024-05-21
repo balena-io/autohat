@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.3.5 - 2024-05-21
+
+* Update dependency requests to v2.32.2 [Self-hosted Renovate Bot]
+
 ## v1.3.4 - 2024-05-20
 
 * Update dependency requests to v2.32.1 [Self-hosted Renovate Bot]
