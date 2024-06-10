@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.3.7 - 2024-06-10
+
+* Update dependency robotframework to v7.0.1 [Self-hosted Renovate Bot]
+
 ## v1.3.6 - 2024-05-30
 
 * Update dependency requests to v2.32.3 [Self-hosted Renovate Bot]

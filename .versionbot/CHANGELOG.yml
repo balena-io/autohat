@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update dependency robotframework to v7.0.1
+      hash: 820e77d07b5eb9208e4dce47021b709c4d8945fc
+      body: |
+        Update robotframework from 7.0 to 7.0.1
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Self-hosted Renovate Bot
+  version: 1.3.7
+  title: ""
+  date: 2024-06-10T20:55:34.633Z
+- commits:
     - subject: Update dependency requests to v2.32.3
       hash: e14921788d48a5ac946cda04b08557bdef36d9a8
       body: |
