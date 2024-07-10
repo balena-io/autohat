@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.3.24 - 2024-07-10
+
+* Update dependency balena-io/balena-cli to v18.2.22 [Self-hosted Renovate Bot]
+
 ## v1.3.23 - 2024-07-09
 
 * Update dependency balena-io/balena-cli to v18.2.21 [Self-hosted Renovate Bot]
