@@ -1,4 +1,14 @@
 - commits:
+    - subject: Switch to self-hosted
+      hash: eeed045b4593c18bc0538a0fafcc4d3691179387
+      body: ""
+      footer:
+        change-type: patch
+      author: Anton Belodedenko
+  version: 1.3.35
+  title: ""
+  date: 2024-07-23T18:34:08.657Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v18.2.33
       hash: 477c342862bb9427689b43a01a76088a71538c9c
       body: |
