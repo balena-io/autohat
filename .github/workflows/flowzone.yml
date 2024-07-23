@@ -25,7 +25,7 @@ jobs:
         ghcr.io/balena-io/autohat
       docker_runs_on: >
         {
-          "linux/amd64": ["actuated-4cpu-16gb"],
-          "linux/arm64": ["actuated-arm64-4cpu-16gb"]
+          "linux/amd64": ["self-hosted","X64"],
+          "linux/arm64": ["self-hosted","ARM64"]
         }
 
