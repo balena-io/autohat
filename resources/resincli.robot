@@ -28,20 +28,26 @@ Add new SSH key with name "${key_name}"
         Log   all output: ${result.stdout}
         Run Process    balena key rm ${result.stdout} -y    shell=yes
     END
-    ${result} =  Run Process    cat /root/.ssh/id_ecdsa.pub | balena key add test    shell=yes    timeout=60sec
+    ${result} =  Run Process    cat /root/.ssh/id_ecdsa.pub | balena key add "${key_name}"    shell=yes    timeout=60sec
     Process ${result}
 
-Create application "${application_name}" with device type "${device}"
-    ${result} =  Run Process    balena app create ${application_name} --type\=${device}    shell=yes
-    Process ${result}
-    Should Match    ${result.stdout}    *Application created*
-
-Delete application "${application_name}"
-    ${result} =  Run Process    balena app rm ${application_name} --yes    shell=yes
+Delete SSH key with name "${key_name}"
+    ${result} =  Run Process    balena keys | grep -w ${key_name} | cut -d ' ' -f 1 | head -1    shell=yes
+    Log   all output: ${result.stdout}
+    Run Process    balena key rm ${result.stdout} -y    shell=yes
     Process ${result}
 
-Force delete application "${application_name}"
-    Run Keyword And Ignore Error    Delete application "${application_name}"
+Create fleet "${fleet_name}" in org "${org}" with device type "${device}"
+    ${result} =  Run Process    balena fleet create ${fleet_name} ---organization\=${org} --type\=${device}    shell=yes
+    Process ${result}
+    Should Match    ${result.stdout}    *Fleet created*
+
+Delete fleet "${fleet_name}"
+    ${result} =  Run Process    balena fleet rm ${fleet_name} --yes    shell=yes
+    Process ${result}
+
+Force delete fleet "${fleet_name}"
+    Run Keyword And Ignore Error    Delete fleet "${fleet_name}"
 
 Git clone "${git_url}" "${directory}"
     Remove Directory    ${directory}    recursive=True
