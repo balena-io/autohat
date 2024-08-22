@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.3.37 - 2024-08-22
+
+* Autohat should clean up after itself [Anton Belodedenko]
+
 ## v1.3.36 - 2024-07-29
 
 * Update dependency balena-io/balena-cli to v18.2.34 [Self-hosted Renovate Bot]

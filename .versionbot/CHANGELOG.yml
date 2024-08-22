@@ -1,4 +1,16 @@
 - commits:
+    - subject: Autohat should clean up after itself
+      hash: bb2ba2bd6ec78a91aef59f82c1a52e0eaed3bca0
+      body: |
+        * add delete SSH key functionality
+        * rename apps to fleets
+      footer:
+        change-type: patch
+      author: Anton Belodedenko
+  version: 1.3.37
+  title: ""
+  date: 2024-08-22T15:23:14.442Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v18.2.34
       hash: c0ee23be5e3ce05d9d356f7a865f9d337be563dd
       body: |
