@@ -1,4 +1,4 @@
-robotframework==7.0.1
+robotframework==7.1
 requests==2.32.3
 robotframework-requests==0.9.7
 pylibftdi==0.22.0
