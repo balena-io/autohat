@@ -60,7 +60,7 @@ Git checkout "${commit_hash}" "${directory}"
 
 Git push "${directory}" to application "${application_name}"
     Set Environment Variable    RESINUSER    ${RESINUSER}
-    ${result} =  Run Process    git remote add balena $RESINUSER@git.${RESINRC_RESIN_URL}:${FLEET}.git    shell=yes    cwd=${directory}
+    ${result} =  Run Process    git remote add balena $RESINUSER@git.${BALENARC_BALENA_URL}:${FLEET}.git    shell=yes    cwd=${directory}
     Process ${result}
     ${result} =  Run Buffered Process    git push balena HEAD:refs/heads/master    shell=yes    cwd=${directory}
     Process ${result}
