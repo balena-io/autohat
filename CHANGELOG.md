@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.3.48 - 2024-09-12
+
+* Match input env var BALENARC_BALENA_URL [Anton Belodedenko]
+
 ## v1.3.47 - 2024-09-12
 
 * Update dependency balena-io/balena-cli to v19.0.9 [Self-hosted Renovate Bot]
