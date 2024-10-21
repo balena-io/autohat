@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.3.74 - 2024-10-21
+
+* Update dependency robotframework to v7.1.1 [Self-hosted Renovate Bot]
+
 ## v1.3.73 - 2024-10-21
 
 * Update dependency balena-io/balena-cli to v19.11.1 [Self-hosted Renovate Bot]
