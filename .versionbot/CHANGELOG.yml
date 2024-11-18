@@ -1,4 +1,14 @@
 - commits:
+    - subject: Explicitly set GH_TOKEN permissions
+      hash: 47112d070cc2604e455ce833675aae1cf31fa0b2
+      body: ""
+      footer:
+        change-type: patch
+      author: Anton Belodedenko
+  version: 1.3.88
+  title: ""
+  date: 2024-11-18T20:07:16.822Z
+- commits:
     - subject: Update dependency pylibftdi to v0.23.0
       hash: 7f8b33245cb549c17663ece48f8f690009add2aa
       body: |

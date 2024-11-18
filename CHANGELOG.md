@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.3.88 - 2024-11-18
+
+* Explicitly set GH_TOKEN permissions [Anton Belodedenko]
+
 ## v1.3.87 - 2024-11-14
 
 * Update dependency pylibftdi to v0.23.0 [balena-renovate[bot]]
