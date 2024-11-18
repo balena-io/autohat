@@ -18,7 +18,7 @@ permissions:
   deployments: none
   id-token: none
   issues: none
-  discussions: read
+  discussions: none
   # packages: read
   pages: none
   pull-requests: none
