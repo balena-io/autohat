@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.3.92 - 2024-12-12
+
+* Update dependency balena-io/balena-cli to v20.1.0 [balena-renovate[bot]]
+
 ## v1.3.91 - 2024-12-05
 
 * Update dependency balena-io/balena-cli to v20.0.9 [balena-renovate[bot]]
