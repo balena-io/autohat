@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.3.103 - 2025-01-15
+
+* Update dependency balena-io/balena-cli to v20.2.3 [balena-renovate[bot]]
+
 ## v1.3.102 - 2025-01-14
 
 * Update dependency robotframework to v7.2 [balena-renovate[bot]]
