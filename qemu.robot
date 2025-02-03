@@ -36,12 +36,12 @@ Checking host OS fingerprint file on resin-boot partition
 Checking host OS fingerprint file on resin-root partition
   Check host OS fingerprint file in "${image}" on "root" partition
 Getting host OS version of the image
-  ${return_os_version} =    Get host OS version of "${image}"
+  ${return_os_version} =  Wait Until Keyword Succeeds    3x    5s    Get host OS version of "${image}"
   Set Suite Variable    ${os_version}   ${return_os_version}
 Enabling getty service on the image
   Enable getty service on "${image}" for "${device_type}"
 Configuring image with application
-  ${device_uuid} =    Configure "${image}" with "${application_name}"
+  ${device_uuid} =  Wait Until Keyword Succeeds    3x    5s    Configure "${image}" with "${application_name}"
   Set Suite Variable    ${device_uuid}    ${device_uuid}
 Running image
   ${handle} =    Run "${image}" with "512" MB memory "4" cpus and "/tmp/console.sock" serial port
