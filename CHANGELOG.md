@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.3.104 - 2025-02-03
+
+* Retry critical balena-cli steps [Anton Belodedenko]
+
 ## v1.3.103 - 2025-01-15
 
 * Update dependency balena-io/balena-cli to v20.2.3 [balena-renovate[bot]]
