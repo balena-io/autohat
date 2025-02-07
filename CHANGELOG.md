@@ -1,6 +1,10 @@
 Change log
 -----------
 
+## v1.3.106 - 2025-02-07
+
+* Update dependency robotframework to v7.2.2 [balena-renovate[bot]]
+
 ## v1.3.105 - 2025-02-07
 
 * Update dependency robotframework to v7.2.1 [balena-renovate[bot]]
