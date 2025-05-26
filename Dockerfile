@@ -17,13 +17,9 @@ ARG BALENA_CLI_VERSION=v22.0.0
 
 WORKDIR /opt
 
-RUN install_packages unzip
-
+# unpacks to /opt/balena
 RUN set -x; arch=$(echo ${TARGETARCH} | sed 's/amd/x/g') \
-    && wget -q "https://github.com/balena-io/balena-cli/releases/download/${BALENA_CLI_VERSION}/balena-cli-${BALENA_CLI_VERSION}-linux-${arch}-standalone.zip" \
-    && unzip -q "balena-cli-${BALENA_CLI_VERSION}-linux-${arch}-standalone.zip" \
-    && rm -rf "balena-cli-${BALENA_CLI_VERSION}-linux-${arch}-standalone.zip"
-
+    && wget -qO- "https://github.com/balena-io/balena-cli/releases/download/${BALENA_CLI_VERSION}/balena-cli-${BALENA_CLI_VERSION}-linux-${arch}-standalone.tar.gz" | tar -xzvf -
 
 # --- build QEMU and Python venv
 FROM qemu-build-${TARGETARCH} AS qemu-build
@@ -82,8 +78,8 @@ RUN install_packages \
     systemd \
     zlib1g
 
-COPY --from=cli-build /opt/balena-cli /opt/balena-cli
-ENV PATH="/opt/balena-cli:${PATH}"
+COPY --from=cli-build /opt/balena /opt/balena-cli
+ENV PATH="/opt/balena-cli/bin:${PATH}"
 
 COPY --from=qemu-build /opt/venv /opt/venv
 COPY --from=qemu-build /usr/lib/python3 /usr/lib/python3
