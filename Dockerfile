@@ -19,7 +19,7 @@ WORKDIR /opt
 
 # unpacks to /opt/balena
 RUN set -x; arch=$(echo ${TARGETARCH} | sed 's/amd/x/g') \
-    && wget -qO- "https://github.com/balena-io/balena-cli/releases/download/${BALENA_CLI_VERSION}/balena-cli-${BALENA_CLI_VERSION}-linux-${arch}-standalone.tar.gz" | tar -xzvf -
+    && wget -qO- "https://github.com/balena-io/balena-cli/releases/download/${BALENA_CLI_VERSION}/balena-cli-${BALENA_CLI_VERSION}-linux-${arch}-standalone.tar.gz" | tar -xzf -
 
 # --- build QEMU and Python venv
 FROM qemu-build-${TARGETARCH} AS qemu-build
