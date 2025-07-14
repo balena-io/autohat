@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency balena-io/balena-cli to v22.1.2
+      hash: 3da6386a2525a1465b6223e4773fae9eb0c228a6
+      body: |
+        Update balena-io/balena-cli from 22.1.1 to 22.1.2
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 1.3.142
+  title: ""
+  date: 2025-07-14T21:06:22.284Z
+- commits:
     - subject: Update dependency robotframework to v7.3.2
       hash: 7e11152dffb90450f89eced96c99b0a0cd44a685
       body: |
