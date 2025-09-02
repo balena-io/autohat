@@ -13,7 +13,7 @@ FROM cli-build-${TARGETARCH} AS cli-build
 ARG TARGETARCH
 
 # renovate: datasource=github-releases depName=balena-io/balena-cli
-ARG BALENA_CLI_VERSION=v22.3.3
+ARG BALENA_CLI_VERSION=v22.3.4
 
 WORKDIR /opt
 
