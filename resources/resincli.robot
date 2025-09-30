@@ -200,9 +200,22 @@ Get "${url}" with expected status "${status}"
     RETURN    ${response}
 
 Check if SSH works on "${device_uuid}"
-    ${result} =  Run Buffered Process    DEBUG=* echo "exit;" | balena ssh ${device_uuid} --port ${proxy_ssh_port}    shell=yes
+    ${result} =  Run Buffered Process    DEBUG=* echo "exit;" | balena device ssh ${device_uuid} --port ${proxy_ssh_port}    shell=yes
     Process ${result}
     Should Contain    ${result.stdout}    Welcome to balenaOS
+
+Generate random TCP port
+    ${port} =   Evaluate    random.randint(49152, 65535)    modules=random
+    Return From Keyword  ${port}
+
+Start tunnel on "${device_uuid}" with local port "${port}"
+    ${handle} =  Start Process    balena device tunnel ${device_uuid} -p 22222:${port}    shell=yes
+    Return From Keyword  ${handle}
+
+Check if tunnel works on port "${port}"
+    ${result} =  Run Process    yes | curl -sf --retry 3 --max-time 5 telnet://localhost:${port}    shell=yes
+    Process ${result}
+    Should Contain    ${result.stdout}    SSH-2.0-OpenSSH_8.9
 
 Check if setting environment variables works on "${application_name}"
     ${random} =   Evaluate    random.randint(0, 10000)    modules=random
