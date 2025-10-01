@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v1.3.166
+## (2025-10-01)
+
+* patch: Missing balena tunnel tests [Anton Belodedenko]
+
 # v1.3.165
 ## (2025-09-25)
 
