@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency balena-io/balena-cli to v22.4.10
+      hash: d221e99b23ccdb7e4477456fef21e66b0dca1ef9
+      body: |
+        Update balena-io/balena-cli from 22.4.9 to 22.4.10
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 1.3.167
+  title: ""
+  date: 2025-10-09T12:05:14.503Z
+- commits:
     - subject: "patch: Missing balena tunnel tests"
       hash: 1e99adcdc43060905356bd564ce61f4611ca4762
       body: ""
