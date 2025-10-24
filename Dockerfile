@@ -61,6 +61,7 @@ ENV VIRTUAL_ENV=/opt/venv
 ENV PATH="${VIRTUAL_ENV}/bin:/usr/local/bin:${PATH}"
 
 RUN install_packages \
+    binutils \
     fdisk \
     git \
     jq \
@@ -74,6 +75,7 @@ RUN install_packages \
     minicom \
     openssh-client \
     ovmf \
+    qemu-efi-aarch64 \
     rsync \
     systemd \
     zlib1g
