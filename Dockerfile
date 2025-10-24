@@ -1,4 +1,5 @@
 # --- normalize image architectures
+# FIXME: migrate off of balenalib images and use custom udev scripts
 FROM balenalib/aarch64-node:20-bookworm-build AS cli-build-arm64
 FROM balenalib/aarch64-python:3-bookworm-build AS qemu-build-arm64
 FROM balenalib/aarch64-python:3-bookworm-run AS run-arm64
@@ -46,10 +47,11 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
+# FIXME: QEMU build is very time-consuming; consider using debian qemu-system-x86_64 and qemu-system-aarch64 packages instead
 RUN wget -q https://download.qemu.org/qemu-${QEMU_VERSION}.tar.xz \
     && echo "847346c1b82c1a54b2c38f6edbd85549edeb17430b7d4d3da12620e2962bc4f3  qemu-${QEMU_VERSION}.tar.xz" | sha256sum -c - \
     && tar -xf qemu-${QEMU_VERSION}.tar.xz && cd qemu-${QEMU_VERSION} \
-    && ./configure --target-list=x86_64-softmmu --enable-slirp && make -j"$(nproc)" \
+    && ./configure --target-list=x86_64-softmmu,aarch64-softmmu --enable-slirp && make -j"$(nproc)" \
     && make install
 
 
@@ -61,6 +63,7 @@ ENV VIRTUAL_ENV=/opt/venv
 ENV PATH="${VIRTUAL_ENV}/bin:/usr/local/bin:${PATH}"
 
 RUN install_packages \
+    binutils \
     fdisk \
     git \
     jq \
@@ -74,6 +77,7 @@ RUN install_packages \
     minicom \
     openssh-client \
     ovmf \
+    qemu-efi-aarch64 \
     rsync \
     systemd \
     zlib1g
