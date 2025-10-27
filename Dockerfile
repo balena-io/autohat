@@ -16,7 +16,7 @@ RUN set -x; arch=$(echo ${TARGETARCH} | sed 's/amd/x/g') \
     && wget -qO- "https://github.com/balena-io/balena-cli/releases/download/${BALENA_CLI_VERSION}/balena-cli-${BALENA_CLI_VERSION}-linux-${arch}-standalone.tar.gz" | tar -xzf -
 
 # --- build Python venv
-FROM python:3.12-slim-bookworm AS python-build
+FROM python:3.14-slim-trixie AS python-build
 
 WORKDIR /opt
 
@@ -31,14 +31,14 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # --- runtime
-FROM python:3.12-slim-bookworm AS runtime
+FROM python:3.14-slim-trixie AS runtime
 
 ENV VIRTUAL_ENV=/opt/venv
 
 ENV PATH="${VIRTUAL_ENV}/bin:/usr/local/bin:${PATH}"
 
-# renovate: datasource=repology depName=debian_12/qemu-utils versioning=loose
-ARG QEMU_VERSION=1:7.2+dfsg-7+deb12u16
+# renovate: datasource=repology depName=debian_13/qemu-utils versioning=loose
+ARG QEMU_VERSION=1:10.0.3+ds-0+deb13u1
 
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
