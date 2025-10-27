@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v1.4.0
+## (2025-10-27)
+
+* Add aarch64 QEMU support with UEFI firmware [Kyle Harding]
+
 # v1.3.172
 ## (2025-10-21)
 

@@ -1,4 +1,20 @@
 - commits:
+    - subject: Add aarch64 QEMU support with UEFI firmware
+      hash: d518c2740f88444bb496992740eb91e3a2c1d363
+      body: >
+        Adds qemu-system-aarch64 configuration for ARM64 testing with VirtIO
+        devices, Cortex-A72 CPU, and UEFI firmware support.
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+  version: 1.4.0
+  title: ""
+  date: 2025-10-27T01:07:43.090Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v22.4.15
       hash: 69212328d26d31e98ef5ff81047bc26765012840
       body: |
