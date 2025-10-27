@@ -37,6 +37,9 @@ ENV VIRTUAL_ENV=/opt/venv
 
 ENV PATH="${VIRTUAL_ENV}/bin:/usr/local/bin:${PATH}"
 
+# renovate: datasource=repology depName=debian_12/qemu-utils versioning=loose
+ARG QEMU_VERSION=1:7.2+dfsg-7+deb12u16
+
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
     binutils \
@@ -55,9 +58,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     openssh-client \
     ovmf \
     qemu-efi-aarch64 \
-    qemu-system-aarch64 \
-    qemu-system-x86 \
-    qemu-utils \
+    qemu-system-arm=${QEMU_VERSION} \
+    qemu-system-x86=${QEMU_VERSION} \
+    qemu-utils=${QEMU_VERSION} \
     rsync \
     systemd \
     zlib1g \
