@@ -5,6 +5,13 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v1.4.1
+## (2025-10-27)
+
+* Update to python:14, debian:trixie, and qemu:10 [Kyle Harding]
+* Replace balenalib base images with python:bookworm [Kyle Harding]
+* Replace QEMU source build with Debian packages [Kyle Harding]
+
 # v1.4.0
 ## (2025-10-27)
 

@@ -1,4 +1,49 @@
 - commits:
+    - subject: Update to python:14, debian:trixie, and qemu:10
+      hash: 453fcc7207bb68550fd5146ed01e6141c0798867
+      body: ""
+      footer:
+        CHange-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+    - subject: Replace balenalib base images with python:bookworm
+      hash: a4eb1ef4ad4a160e3c03fa58017aaebfde672b7b
+      body: |
+        balenalib base images have been discontinued and are no
+        longer maintained.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+    - subject: Replace QEMU source build with Debian packages
+      hash: 267d593fffdf8a95297947b6357d173072e83f22
+      body: >
+        Removes time-consuming QEMU build from source (qemu-8.2.7) and switches
+
+        to using pre-built Debian packages (qemu-system-x86 and
+        qemu-system-aarch64).
+
+        This significantly reduces build time while maintaining the same x86_64
+        and
+
+        aarch64 emulation functionality.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+  version: 1.4.1
+  title: ""
+  date: 2025-10-27T16:17:30.645Z
+- commits:
     - subject: Add aarch64 QEMU support with UEFI firmware
       hash: d518c2740f88444bb496992740eb91e3a2c1d363
       body: >
