@@ -25,19 +25,9 @@ RUN set -x; arch=$(echo ${TARGETARCH} | sed 's/amd/x/g') \
 # --- build QEMU and Python venv
 FROM qemu-build-${TARGETARCH} AS qemu-build
 
-ARG QEMU_VERSION=8.2.2
-
 WORKDIR /opt
 
 ENV VIRTUAL_ENV=/opt/venv
-
-RUN install_packages \
-    libfdt-dev \
-    libglib2.0-dev \
-    libpixman-1-dev \
-    libslirp-dev \
-    ninja-build \
-    zlib1g-dev
 
 RUN python3 -m venv ${VIRTUAL_ENV}
 
@@ -46,14 +36,6 @@ ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
 COPY requirements.txt .
 
 RUN pip install -r requirements.txt
-
-# FIXME: QEMU build is very time-consuming; consider using debian qemu-system-x86_64 and qemu-system-aarch64 packages instead
-RUN wget -q https://download.qemu.org/qemu-${QEMU_VERSION}.tar.xz \
-    && echo "847346c1b82c1a54b2c38f6edbd85549edeb17430b7d4d3da12620e2962bc4f3  qemu-${QEMU_VERSION}.tar.xz" | sha256sum -c - \
-    && tar -xf qemu-${QEMU_VERSION}.tar.xz && cd qemu-${QEMU_VERSION} \
-    && ./configure --target-list=x86_64-softmmu,aarch64-softmmu --enable-slirp && make -j"$(nproc)" \
-    && make install
-
 
 # --- runtime
 FROM run-${TARGETARCH}
@@ -78,6 +60,9 @@ RUN install_packages \
     openssh-client \
     ovmf \
     qemu-efi-aarch64 \
+    qemu-system-aarch64 \
+    qemu-system-x86 \
+    qemu-utils \
     rsync \
     systemd \
     zlib1g
