@@ -1,15 +1,6 @@
-# --- normalize image architectures
-# FIXME: migrate off of balenalib images and use custom udev scripts
-FROM balenalib/aarch64-node:20-bookworm-build AS cli-build-arm64
-FROM balenalib/aarch64-python:3-bookworm-build AS qemu-build-arm64
-FROM balenalib/aarch64-python:3-bookworm-run AS run-arm64
-FROM balenalib/amd64-node:20-bookworm-build AS cli-build-amd64
-FROM balenalib/amd64-python:3-bookworm-build AS qemu-build-amd64
-FROM balenalib/amd64-python:3-bookworm-run AS run-amd64
 
-
-# --- build balena-cli
-FROM cli-build-${TARGETARCH} AS cli-build
+# --- download balena-cli
+FROM alpine:3.22 AS cli-build
 
 ARG TARGETARCH
 
@@ -18,26 +9,18 @@ ARG BALENA_CLI_VERSION=v22.4.15
 
 WORKDIR /opt
 
+SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
+
 # unpacks to /opt/balena
 RUN set -x; arch=$(echo ${TARGETARCH} | sed 's/amd/x/g') \
     && wget -qO- "https://github.com/balena-io/balena-cli/releases/download/${BALENA_CLI_VERSION}/balena-cli-${BALENA_CLI_VERSION}-linux-${arch}-standalone.tar.gz" | tar -xzf -
 
-# --- build QEMU and Python venv
-FROM qemu-build-${TARGETARCH} AS qemu-build
-
-ARG QEMU_VERSION=8.2.2
+# --- build Python venv
+FROM python:3.14-slim-trixie AS python-build
 
 WORKDIR /opt
 
 ENV VIRTUAL_ENV=/opt/venv
-
-RUN install_packages \
-    libfdt-dev \
-    libglib2.0-dev \
-    libpixman-1-dev \
-    libslirp-dev \
-    ninja-build \
-    zlib1g-dev
 
 RUN python3 -m venv ${VIRTUAL_ENV}
 
@@ -45,25 +28,22 @@ ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
 
 COPY requirements.txt .
 
-RUN pip install -r requirements.txt
-
-# FIXME: QEMU build is very time-consuming; consider using debian qemu-system-x86_64 and qemu-system-aarch64 packages instead
-RUN wget -q https://download.qemu.org/qemu-${QEMU_VERSION}.tar.xz \
-    && echo "847346c1b82c1a54b2c38f6edbd85549edeb17430b7d4d3da12620e2962bc4f3  qemu-${QEMU_VERSION}.tar.xz" | sha256sum -c - \
-    && tar -xf qemu-${QEMU_VERSION}.tar.xz && cd qemu-${QEMU_VERSION} \
-    && ./configure --target-list=x86_64-softmmu,aarch64-softmmu --enable-slirp && make -j"$(nproc)" \
-    && make install
-
+RUN pip install --no-cache-dir -r requirements.txt
 
 # --- runtime
-FROM run-${TARGETARCH}
+FROM python:3.14-slim-trixie AS runtime
 
 ENV VIRTUAL_ENV=/opt/venv
 
 ENV PATH="${VIRTUAL_ENV}/bin:/usr/local/bin:${PATH}"
 
-RUN install_packages \
+# renovate: datasource=repology depName=debian_13/qemu-utils versioning=loose
+ARG QEMU_VERSION=1:10.0.3+ds-0+deb13u1
+
+# hadolint ignore=DL3008
+RUN apt-get update && apt-get install -y --no-install-recommends \
     binutils \
+    curl \
     fdisk \
     git \
     jq \
@@ -78,29 +58,31 @@ RUN install_packages \
     openssh-client \
     ovmf \
     qemu-efi-aarch64 \
+    qemu-system-arm=${QEMU_VERSION} \
+    qemu-system-x86=${QEMU_VERSION} \
+    qemu-utils=${QEMU_VERSION} \
     rsync \
     systemd \
-    zlib1g
+    zlib1g \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY --from=cli-build /opt/balena /opt/balena-cli
 ENV PATH="/opt/balena-cli/bin:${PATH}"
 
-COPY --from=qemu-build /opt/venv /opt/venv
-COPY --from=qemu-build /usr/lib/python3 /usr/lib/python3
-COPY --from=qemu-build /usr/local /usr/local
+COPY --from=python-build /opt/venv /opt/venv
 
 COPY *.robot /opt/
 
 COPY resources/* /opt/resources/
 
-ADD fixtures/ssh_config /root/.ssh/config
-
-ADD udev_rules/autohat.rules /etc/udev/rules.d/
-
-ADD services/dev2.mount /etc/systemd/system/
-
-RUN systemctl enable dev2.mount
+COPY fixtures/ssh_config /root/.ssh/config
 
 RUN chmod 400 /root/.ssh/*
+
+COPY udev_rules/autohat.rules /etc/udev/rules.d/
+
+COPY services/dev2.mount /etc/systemd/system/
+
+RUN systemctl enable dev2.mount
 
 CMD ["/bin/bash"]
