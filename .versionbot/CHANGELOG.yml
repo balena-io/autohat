@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency balena-io/balena-cli to v22.4.16
+      hash: d705a38324cb76fdde6d0384b3eb833a8995a8a7
+      body: |
+        Update balena-io/balena-cli from 22.4.15 to 22.4.16
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 1.4.2
+  title: ""
+  date: 2025-10-30T10:58:27.706Z
+- commits:
     - subject: Update to python:14, debian:trixie, and qemu:10
       hash: 453fcc7207bb68550fd5146ed01e6141c0798867
       body: ""
