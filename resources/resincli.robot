@@ -215,7 +215,7 @@ Start tunnel on "${device_uuid}" with local port "${port}"
 Check if tunnel works on port "${port}"
     ${result} =  Run Process    yes | curl -sf --retry 3 --max-time 5 telnet://localhost:${port}    shell=yes
     Process ${result}
-    Should Contain    ${result.stdout}    OpenSSH
+    Should Contain    ${result.stdout}    SSH-2.0
 
 Check if setting environment variables works on "${application_name}"
     ${random} =   Evaluate    random.randint(0, 10000)    modules=random
