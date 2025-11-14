@@ -1,4 +1,19 @@
 - commits:
+    - subject: Handle SSH-2.0-dropbear tunnel response
+      hash: 9dfed58b62a7959276ae37f0335c90bb75a96426
+      body: |
+        Also accepts SSH-2.0-OpenSSH_8.9
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+  version: 1.4.10
+  title: ""
+  date: 2025-11-14T20:29:25.895Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v22.5.5
       hash: be87a4b47a3e6c28b65f0e9a70e98cc918c4009c
       body: |

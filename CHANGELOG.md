@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v1.4.10
+## (2025-11-14)
+
+* Handle SSH-2.0-dropbear tunnel response [Kyle Harding]
+
 # v1.4.9
 ## (2025-11-14)
 
