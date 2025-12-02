@@ -164,11 +164,11 @@ Check if host OS version of device "${device_uuid}" is "${os_version}"
     Should Contain    ${result}    ${os_version}
 
 Add ENV variable "${variable_name}" with value "${variable_value}" to application "${application_name}"
-    ${result} =  Run Process    balena env add ${variable_name} ${variable_value} -f ${application_name}    shell=yes
+    ${result} =  Run Process    balena env set ${variable_name} ${variable_value} -f ${application_name}    shell=yes
     Process ${result}
 
 Add variable "${variable_name}" with value "${variable_value}" to "${type}" "${id}"
-    ${result} =  Run Process    balena env add ${variable_name} ${variable_value} --${type} ${id}    shell=yes
+    ${result} =  Run Process    balena env set ${variable_name} ${variable_value} --${type} ${id}    shell=yes
     Process ${result}
 
 Check if "${option}" variable "${variable_name}" with value "${variable_value}" exists in application "${application_name}"
