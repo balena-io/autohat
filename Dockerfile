@@ -1,6 +1,6 @@
 
 # --- download balena-cli
-FROM alpine:3.22 AS cli-build
+FROM alpine:3.23 AS cli-build
 
 ARG TARGETARCH
 
