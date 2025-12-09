@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update alpine Docker tag to v3.23
+      hash: 167f5d1c692adea8b07ab5525d3eb268a830e999
+      body: |
+        Update alpine from 3.22 to 3.23
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 1.4.12
+  title: ""
+  date: 2025-12-09T14:02:07.052Z
+- commits:
     - subject: "patch: Log stream keywords implementation"
       hash: 93f2223807d238733ac0724c663c6c8c9fe24888
       body: Stream logs using balena 'device logs --tail ..' to temp file(s) and check
