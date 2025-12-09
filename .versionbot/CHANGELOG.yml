@@ -1,4 +1,15 @@
 - commits:
+    - subject: "patch: Log stream keywords implementation"
+      hash: 93f2223807d238733ac0724c663c6c8c9fe24888
+      body: Stream logs using balena 'device logs --tail ..' to temp file(s) and check
+        output
+      footer: {}
+      author: Anton Belodedenko
+      nested: []
+  version: 1.4.11
+  title: ""
+  date: 2025-12-09T13:34:58.356Z
+- commits:
     - subject: Handle SSH-2.0-dropbear tunnel response
       hash: 9dfed58b62a7959276ae37f0335c90bb75a96426
       body: |

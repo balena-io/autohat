@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v1.4.11
+## (2025-12-09)
+
+* patch: Log stream keywords implementation [Anton Belodedenko]
+
 # v1.4.10
 ## (2025-11-14)
 
