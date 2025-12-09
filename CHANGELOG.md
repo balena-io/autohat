@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v1.4.14
+## (2025-12-09)
+
+* patch: Update balena commands in resincli.robot (v23) [Anton Belodedenko]
+
 # v1.4.13
 ## (2025-12-09)
 

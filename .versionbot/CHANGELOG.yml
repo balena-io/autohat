@@ -1,4 +1,14 @@
 - commits:
+    - subject: "patch: Update balena commands in resincli.robot (v23)"
+      hash: aa0b0af1757a521ef12d3944730854c13da5bd47
+      body: ""
+      footer: {}
+      author: Anton Belodedenko
+      nested: []
+  version: 1.4.14
+  title: ""
+  date: 2025-12-09T17:01:05.177Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v23
       hash: f049338b0b5519e06e4b44be46907d54ce95024e
       body: |
