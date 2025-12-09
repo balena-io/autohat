@@ -21,20 +21,20 @@ Add new SSH key with name "${key_name}"
     Remove File    /root/.ssh/id_ecdsa
     ${result} =  Run Process    ssh-keygen -b 521 -t ecdsa -f /root/.ssh/id_ecdsa -N ''    shell=yes
     Process ${result}
-    ${word_count} =  Run Process    balena keys |grep -w ${key_name} |cut -d ' ' -f 1 | wc -l    shell=yes
+    ${word_count} =  Run Process    balena ssh-key list | grep -w ${key_name} |cut -d ' ' -f 1 | wc -l    shell=yes
     Process ${word_count}
     FOR    ${i}    IN RANGE    ${word_count.stdout}
-        ${result} =  Run Process    balena keys |grep -w ${key_name} |cut -d ' ' -f 1 | head -1    shell=yes
+        ${result} =  Run Process    balena ssh-key list | grep -w ${key_name} |cut -d ' ' -f 1 | head -1    shell=yes
         Log   all output: ${result.stdout}
-        Run Process    balena key rm ${result.stdout} -y    shell=yes
+        Run Process    balena ssh-key rm ${result.stdout} -y    shell=yes
     END
-    ${result} =  Run Process    cat /root/.ssh/id_ecdsa.pub | balena key add "${key_name}"    shell=yes    timeout=60sec
+    ${result} =  Run Process    cat /root/.ssh/id_ecdsa.pub | balena ssh-key add "${key_name}"    shell=yes    timeout=60sec
     Process ${result}
 
 Delete SSH key with name "${key_name}"
-    ${result} =  Run Process    balena keys | grep -w ${key_name} | cut -d ' ' -f 1 | head -1    shell=yes
+    ${result} =  Run Process    balena ssh-key list | grep -w ${key_name} | cut -d ' ' -f 1 | head -1    shell=yes
     Log   all output: ${result.stdout}
-    Run Process    balena key rm ${result.stdout} -y    shell=yes
+    Run Process    balena ssh-key rm ${result.stdout} -y    shell=yes
     Process ${result}
 
 Create fleet "${fleet_name}" in org "${org}" with device type "${device}"
@@ -72,7 +72,7 @@ Balena push "${directory}" to application "${application_name}"
 Configure "${image}" version "${os_version}" with "${application_name}"
     ${result_register} =  Run Process    balena device register ${application_name} | grep ${application_name} | cut -d ' ' -f 4    shell=yes
     Process ${result_register}
-    ${result} =  Run Process    balena os configure ${image} --device ${result_register.stdout} --version ${os_version} --config-network ethernet --dev    shell=yes
+    ${result} =  Run Process    balena os configure ${image} --device ${result_register.stdout} --config-network ethernet --dev    shell=yes
     Process ${result}
     ${dns_server} =    Get Environment Variable    DNS_SERVER    default=empty
     ${dns_config} =    Run Keyword If    '${dns_server}' != 'empty'    Run Process    balena config write --drive "${image}" dnsServers "${dns_server}"    shell=yes
@@ -95,19 +95,19 @@ Get "${application_info}" from fleet "${application_name}"
     [Documentation]    Available values for argument ${application_info} are:
     ...                ID, APP_NAME, DEVICE_TYPE, ONLINE_DEVICES, DEVICES_LENGTH
     &{dictionary} =  Create Dictionary    ID=1    APP_NAME=2    SLUG=3    DEVICE_TYPE=4    DEVICES_LENGTH=5    ONLINE_DEVICES=6
-    ${result} =  Run Process    balena fleets | grep -w "${application_name}" | awk '{print $${dictionary.${application_info}}}'    shell=yes
+    ${result} =  Run Process    balena fleet list | grep -w "${application_name}" | awk '{print $${dictionary.${application_info}}}'    shell=yes
     Process ${result}
     RETURN    ${result.stdout}
 
 # FIXME: needs to select STATUS=success and IS FINAL=true
 Get latest release from fleet "${application_name}"
-    ${result} =  Run Process    balena releases "${application_name}" | head -n 2 | tail -n 1 | awk '{print $2}'    shell=yes
+    ${result} =  Run Process    balena release list "${application_name}" | head -n 2 | tail -n 1 | awk '{print $2}'    shell=yes
     Process ${result}
     RETURN    ${result.stdout}
 
 # FIXME: needs to select STATUS=success and IS FINAL=true
 Get previous release from fleet "${application_name}"
-    ${result} =  Run Process    balena releases "${application_name}" | head -n 3 | tail -n 2 | tail -n 1 | awk '{print $2}'    shell=yes
+    ${result} =  Run Process    balena release list "${application_name}" | head -n 3 | tail -n 2 | tail -n 1 | awk '{print $2}'    shell=yes
     Process ${result}
     RETURN    ${result.stdout}
 
@@ -149,13 +149,13 @@ Check if "${log_file}" does not contain "${value}"
 
 Device "${device_uuid}" log should contain "${value}"
     [Documentation]    Deprecating if favour of log Stream/Check
-    ${result} =  Run Buffered Process    balena logs ${device_uuid}    shell=yes
+    ${result} =  Run Buffered Process    balena device logs ${device_uuid}    shell=yes
     Process ${result}
     Should Contain    ${result.stdout}    ${value}
 
 Device "${device_uuid}" log should not contain "${value}"
     [Documentation]    Deprecating if favour of log Stream/Check
-    ${result} =  Run Buffered Process    balena logs ${device_uuid}    shell=yes
+    ${result} =  Run Buffered Process    balena device logs ${device_uuid}    shell=yes
     Process ${result}
     Should Not Contain    ${result.stdout}    ${value}
 
@@ -175,9 +175,9 @@ Check if "${option}" variable "${variable_name}" with value "${variable_value}" 
     [Documentation]    Available values for argument ${option} are: ENV, CONFIG
     @{list} =  Create List    ENV    CONFIG
     Should Contain    ${list}    ${option}
-    ${result_env} =  Run Keyword If    '${option}' == 'ENV'    Run Process    balena envs -f ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
+    ${result_env} =  Run Keyword If    '${option}' == 'ENV'    Run Process    balena env list -f ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
     ...    ELSE
-    ...    Run Process    balena envs --config -f ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
+    ...    Run Process    balena env list --config -f ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
     Process ${result_env}
     ${result} =  Run Process    echo "${result_env.stdout}" | grep ${variable_name} | grep " ${variable_value}"    shell=yes
     Process ${result}
@@ -186,18 +186,18 @@ Check if "${option}" variable "${variable_name}" with value "${variable_value}" 
     [Documentation]    Available values for argument ${option} are: ENV, CONFIG
     @{list} =  Create List    ENV    CONFIG
     Should Contain    ${list}    ${option}
-    ${result} =  Run Keyword If    '${option}' == 'ENV'    Run Process    balena envs --${type} ${id} --json | jq 'any(.[]; .name \=\= "${variable_name}" and .value \=\= "${variable_value}")' | grep true    shell=yes
+    ${result} =  Run Keyword If    '${option}' == 'ENV'    Run Process    balena env list --${type} ${id} --json | jq 'any(.[]; .name \=\= "${variable_name}" and .value \=\= "${variable_value}")' | grep true    shell=yes
     ...    ELSE
-    ...    Run Process    balena envs --config --${type} ${id} --json | jq 'any(.[]; .name \=\= "${variable_name}" and .value \=\= "${variable_value}")' | grep true    shell=yes
+    ...    Run Process    balena env list --config --${type} ${id} --json | jq 'any(.[]; .name \=\= "${variable_name}" and .value \=\= "${variable_value}")' | grep true    shell=yes
     Process ${result}
 
 Remove "${option}" variable "${variable_name}" from application "${application_name}"
     [Documentation]    Available values for argument ${option} are: ENV, CONFIG
     @{list} =  Create List    ENV    CONFIG
     Should Contain    ${list}    ${option}
-    ${result_vars} =  Run Keyword If    '${option}' == 'ENV'    Run Process    balena envs -f ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
+    ${result_vars} =  Run Keyword If    '${option}' == 'ENV'    Run Process    balena env list -f ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'    shell=yes
     ...    ELSE
-    ...    Run Process    balena envs --config -f ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'   shell=yes
+    ...    Run Process    balena env list --config -f ${application_name} | sed '/ID[[:space:]]*NAME[[:space:]]*VALUE/,$!d'   shell=yes
     Process ${result_vars}
     ${result_id} =  Run Process    echo "${result_vars.stdout}" | grep ${variable_name} | cut -d ' ' -f 1    shell=yes
     Process ${result_id}
