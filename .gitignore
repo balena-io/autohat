@@ -1,5 +1,6 @@
 env.list
 e2e.robot
+test**.robot
 **/logs/*
 **/*.img
 **/*.zip

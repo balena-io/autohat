@@ -128,12 +128,33 @@ Device "${device_uuid}" should be running commit ${commit}
     ${result} =  Get "COMMIT" of device "${device_uuid}"
     Should Contain    ${result}    ${commit}
 
+Stream "${device_uuid}" logs to "${log_file}"
+    [Documentation]    Device "${some_device_uuid}" log should contain "${some_value}"
+    ...                    ${process}=    Stream "${some_device_uuid}" logs to "${TEMPDIR}/${some_device_uuid}.log"
+    ...                    Wait Until Keyword Succeeds    60x    1s    Check if "${TEMPDIR}/${some_device_uuid}.log" contains "${some_value}"
+    ...                    Wait For Process    handle=${process}    timeout=1    on_timeout=terminate
+    ...                    Remove File    "${TEMPDIR}/${some_device_uuid}.log"
+    ...                    File Should Not Exist    "${TEMPDIR}/${some_device_uuid}.log"
+    ${handle}=    Start Process    balena device logs --tail ${device_uuid}    stdout=${log_file}    shell=yes
+    Wait Until Keyword Succeeds    60x    1s    File Should Exist    ${log_file}
+    Return From Keyword    ${handle}
+
+Check if "${log_file}" contains "${value}"
+    ${output_content}=    Get File    ${log_file}
+    Should Contain    ${output_content}    ${value}
+
+Check if "${log_file}" does not contain "${value}"
+    ${output_content}=    Get File    ${log_file}
+    Should Not Contain    ${output_content}    ${value}
+
 Device "${device_uuid}" log should contain "${value}"
+    [Documentation]    Deprecating if favour of log Stream/Check
     ${result} =  Run Buffered Process    balena logs ${device_uuid}    shell=yes
     Process ${result}
     Should Contain    ${result.stdout}    ${value}
 
 Device "${device_uuid}" log should not contain "${value}"
+    [Documentation]    Deprecating if favour of log Stream/Check
     ${result} =  Run Buffered Process    balena logs ${device_uuid}    shell=yes
     Process ${result}
     Should Not Contain    ${result.stdout}    ${value}
