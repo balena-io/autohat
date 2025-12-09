@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency balena-io/balena-cli to v23
+      hash: f049338b0b5519e06e4b44be46907d54ce95024e
+      body: |
+        Update balena-io/balena-cli from 22.5.5 to 23.2.2
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 1.4.13
+  title: ""
+  date: 2025-12-09T16:48:26.557Z
+- commits:
     - subject: Update alpine Docker tag to v3.23
       hash: 167f5d1c692adea8b07ab5525d3eb268a830e999
       body: |
