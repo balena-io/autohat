@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency robotframework to v7.4.1
+      hash: 4f40e7f4c0b1d44257c398338939b3406f804787
+      body: |
+        Update robotframework from 7.4 to 7.4.1
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 1.4.19
+  title: ""
+  date: 2025-12-23T17:19:59.056Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v23.2.11
       hash: ac8175a82b18ef49ed0417bc4e81968ccfe71d6b
       body: |
