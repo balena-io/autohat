@@ -1,4 +1,23 @@
 - commits:
+    - subject: "patch: Correct QEMU version in Dockerfile"
+      hash: ba9e8ed08ac2d98b8178e6874a7ab73e6abeca64
+      body: |-
+        > according to https://packages.debian.org/trixie/source/qemu latest is `qemu (1:10.0.7+ds-0+deb13u1)`
+
+        See https://github.com/balena-io/autohat/actions/runs/21077469537/job/60927110444?pr=420#step:18:767
+
+        ```
+        #32 3.139 E: Version '1:10.0.6+ds-0+deb13u2' for 'qemu-system-arm' was not found
+        #32 3.139 E: Version '1:10.0.6+ds-0+deb13u2' for 'qemu-system-x86' was not found
+        #32 3.139 E: Version '1:10.0.6+ds-0+deb13u2' for 'qemu-utils' was not found
+        ```
+      footer: {}
+      author: Anton B.
+      nested: []
+  version: 1.4.25
+  title: ""
+  date: 2026-01-24T20:17:48.716Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v23.2.16
       hash: 0881731eafbd2f52e746369b595a4f48b2579d91
       body: |

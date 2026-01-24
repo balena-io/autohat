@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v1.4.25
+## (2026-01-24)
+
+* patch: Correct QEMU version in Dockerfile [Anton B.]
+
 # v1.4.24
 ## (2026-01-09)
 
