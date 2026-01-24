@@ -37,8 +37,10 @@ ENV VIRTUAL_ENV=/opt/venv
 
 ENV PATH="${VIRTUAL_ENV}/bin:/usr/local/bin:${PATH}"
 
+# https://repology.org/project/qemu/versions
+# https://packages.debian.org/trixie/source/qemu
 # renovate: datasource=repology depName=debian_13/qemu-utils versioning=loose
-ARG QEMU_VERSION=1:10.0.6+ds-0+deb13u2
+ARG QEMU_VERSION=1:10.0.7+ds-0+deb13u1+b1
 
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
