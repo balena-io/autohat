@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency balena-io/balena-cli to v23.2.30
+      hash: ef9b1f16ca1667916336eff6826f7a5844f6137b
+      body: |
+        Update balena-io/balena-cli from 23.2.16 to 23.2.30
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 1.4.26
+  title: ""
+  date: 2026-01-24T20:57:55.443Z
+- commits:
     - subject: "patch: Correct QEMU version in Dockerfile"
       hash: ba9e8ed08ac2d98b8178e6874a7ab73e6abeca64
       body: |-
