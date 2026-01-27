@@ -77,7 +77,10 @@ Git push "${directory}" to application "${application_name}"
     ${result} =    Run Buffered Process    git push balena HEAD:refs/heads/master    shell=yes    cwd=${directory}
     ${end} =    Get Time    epoch
     ${delta} =    Evaluate    round((${end} - ${start}) / 60)
-    Log To Console    ${delta}m
+    Log
+    ...    Time taken ${delta}m
+    ...    level=INFO
+    END
     Process ${result}
 
 Balena push "${directory}" to application "${application_name}"
@@ -92,7 +95,10 @@ Balena push "${directory}" to application "${application_name}"
     END
     ${end} =    Get Time    epoch
     ${delta} =    Evaluate    round((${end} - ${start}) / 60)
-    Log To Console    ${delta}m
+    Log
+    ...    Time taken ${delta}m
+    ...    level=INFO
+    END
     Process ${result}
 
 Configure "${image}" version "${os_version}" with "${application_name}"
@@ -190,16 +196,37 @@ Pin device "${device_uuid}" to release "${release_uuid}"
     RETURN    ${result.stdout}
 
 Device "${device_uuid}" is online
+    ${start} =    Get Time    epoch
     ${result} =    Get "IS ONLINE" of device "${device_uuid}"
     Should Contain    ${result}    true
+    ${end} =    Get Time    epoch
+    ${delta} =    Evaluate    round((${end} - ${start}) / 60)
+    Log
+    ...    Time taken ${delta}m
+    ...    level=INFO
+    END
 
 Device "${device_uuid}" is offline
+    ${start} =    Get Time    epoch
     ${result} =    Get "IS ONLINE" of device "${device_uuid}"
     Should Contain    ${result}    false
+    ${end} =    Get Time    epoch
+    ${delta} =    Evaluate    round((${end} - ${start}) / 60)
+    Log
+    ...    Time taken ${delta}m
+    ...    level=INFO
+    END
 
 Device "${device_uuid}" should be running commit ${commit}
+    ${start} =    Get Time    epoch
     ${result} =    Get "COMMIT" of device "${device_uuid}"
     Should Contain    ${result}    ${commit}
+    ${end} =    Get Time    epoch
+    ${delta} =    Evaluate    round((${end} - ${start}) / 60)
+    Log
+    ...    Time taken ${delta}m
+    ...    level=INFO
+    END
 
 Stream "${device_uuid}" logs to "${log_file}"
     [Documentation]    Device "${some_device_uuid}" log should contain "${some_value}"
