@@ -175,7 +175,7 @@ Check release count in "${application_name}" fleet
     ...    shell=yes
     IF    int(${result.stdout}) > 0
         Log
-        ...    ${application_name} has ${result.stdout} releases from previous test(s)?
+        ...    ${application_name} has ${result.stdout} releases left over from previous test(s)?
         ...    level=WARN
     END
 
