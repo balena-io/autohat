@@ -157,7 +157,7 @@ Get "${application_info}" from fleet "${application_name}"
 
 Get latest release from fleet "${application_name}"
     ${result} =    Run Process
-    ...    balena release list "${application_name}" | head -n 2 | tail -n 1 | awk '{print $2}'
+    ...    balena release list "${application_name}" --json | jq -re '.[] | select(.status=="success" and .is_final==true).commit' | head -n 1
     ...    shell=yes
     Process ${result}
     RETURN    ${result.stdout}
@@ -166,7 +166,7 @@ Get latest release from fleet "${application_name}"
 
 Get previous release from fleet "${application_name}"
     ${result} =    Run Process
-    ...    balena release list "${application_name}" | head -n 3 | tail -n 2 | tail -n 1 | awk '{print $2}'
+    ...    balena release list "${application_name}" --json | jq -re '.[] | select(.status=="success" and .is_final==true).commit' | head -n 2 | tail -n 1
     ...    shell=yes
     Process ${result}
     RETURN    ${result.stdout}
