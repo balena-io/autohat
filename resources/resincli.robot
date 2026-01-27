@@ -68,15 +68,20 @@ Git checkout "${commit_hash}" "${directory}"
 
 Git push "${directory}" to application "${application_name}"
     Set Environment Variable    RESINUSER    ${RESINUSER}
+    ${start} =    Get Time    epoch
     ${result} =    Run Process
     ...    git remote add balena $RESINUSER@git.${BALENARC_BALENA_URL}:${FLEET}.git
     ...    shell=yes
     ...    cwd=${directory}
     Process ${result}
     ${result} =    Run Buffered Process    git push balena HEAD:refs/heads/master    shell=yes    cwd=${directory}
+    ${end} =    Get Time    epoch
+    ${delta} =    Evaluate    round((${end} - ${start}) / 60)
+    Log To Console    ${delta}m
     Process ${result}
 
 Balena push "${directory}" to application "${application_name}"
+    ${start} =    Get Time    epoch
     ${result} =    Run Buffered Process    balena push ${application_name} --debug    shell=yes    cwd=${directory}
     IF    ${result.rc} != 0
         Log    Retrying build with --nocache option.    level=WARN
@@ -85,6 +90,9 @@ Balena push "${directory}" to application "${application_name}"
         ...    shell=yes
         ...    cwd=${directory}
     END
+    ${end} =    Get Time    epoch
+    ${delta} =    Evaluate    round((${end} - ${start}) / 60)
+    Log To Console    ${delta}m
     Process ${result}
 
 Configure "${image}" version "${os_version}" with "${application_name}"
@@ -156,7 +164,7 @@ Check release count in "${application_name}" fleet
     ${result} =    Run Process
     ...    balena release list "${application_name}" --json | jq -re '.[] | select(.status\=\="success" and .is_final\=\=true).commit' | wc -l
     ...    shell=yes
-    IF    'int(${result.stdout})' > 2
+    IF    int(${result.stdout}) > 2
         Log
         ...    ${application_name} must have at most two (2) usable releases, you have ${result.stdout} releases.
         ...    level=WARN
