@@ -153,16 +153,12 @@ Get "${application_info}" from fleet "${application_name}"
     Process ${result}
     RETURN    ${result.stdout}
 
-# FIXME: needs to select STATUS=success and IS FINAL=true
-
 Get latest release from fleet "${application_name}"
     ${result} =    Run Process
     ...    balena release list "${application_name}" --json | jq -re '.[] | select(.status=="success" and .is_final==true).commit' | head -n 1
     ...    shell=yes
     Process ${result}
     RETURN    ${result.stdout}
-
-# FIXME: needs to select STATUS=success and IS FINAL=true
 
 Get previous release from fleet "${application_name}"
     ${result} =    Run Process
