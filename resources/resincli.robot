@@ -66,7 +66,14 @@ Git push "${directory}" to application "${application_name}"
     Process ${result}
 
 Balena push "${directory}" to application "${application_name}"
-    ${result} =  Run Buffered Process    balena push ${application_name}    shell=yes    cwd=${directory}
+    ${result} =    Run Buffered Process    balena push ${application_name} --debug    shell=yes    cwd=${directory}
+    IF    ${result.rc} != 0
+        Log To Console    "Retry with --nocache option"
+        ${result} =    Run Buffered Process
+        ...    balena push ${application_name} --debug --nocache
+        ...    shell=yes
+        ...    cwd=${directory}
+    END
     Process ${result}
 
 Configure "${image}" version "${os_version}" with "${application_name}"
