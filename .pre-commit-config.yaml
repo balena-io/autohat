@@ -30,7 +30,7 @@ repos:
     hooks:
     -   id: renovate-config-validator
 
-# FIXME: enable when ready to process 
+# FIXME: enable when ready to process
 #-   repo: https://github.com/MarketSquare/robotframework-robocop
 #    rev: v7.2.0
 #    hooks:
