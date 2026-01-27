@@ -77,10 +77,12 @@ Git push "${directory}" to application "${application_name}"
     ${result} =    Run Buffered Process    git push balena HEAD:refs/heads/master    shell=yes    cwd=${directory}
     ${end} =    Get Time    epoch
     ${delta} =    Evaluate    round((${end} - ${start}) / 60)
-    Log
-    ...    Time taken ${delta}m
-    ...    level=INFO
-    Process ${result}
+    IF    ${delta} > 1
+        Log
+        ...    Time taken ${delta}m
+        ...    level=WARN
+        Process ${result}
+    END
 
 Balena push "${directory}" to application "${application_name}"
     ${start} =    Get Time    epoch
@@ -94,9 +96,12 @@ Balena push "${directory}" to application "${application_name}"
     END
     ${end} =    Get Time    epoch
     ${delta} =    Evaluate    round((${end} - ${start}) / 60)
-    Log
-    ...    Time taken ${delta}m
-    ...    level=INFO
+    IF    ${delta} > 1
+        Log
+        ...    Time taken ${delta}m
+        ...    level=WARN
+        Process ${result}
+    END
     Process ${result}
 
 Configure "${image}" version "${os_version}" with "${application_name}"
@@ -199,9 +204,12 @@ Device "${device_uuid}" is online
     Should Contain    ${result}    true
     ${end} =    Get Time    epoch
     ${delta} =    Evaluate    round((${end} - ${start}) / 60)
-    Log
-    ...    Time taken ${delta}m
-    ...    level=INFO
+    IF    ${delta} > 1
+        Log
+        ...    Time taken ${delta}m
+        ...    level=WARN
+        Process ${result}
+    END
 
 Device "${device_uuid}" is offline
     ${start} =    Get Time    epoch
@@ -209,9 +217,12 @@ Device "${device_uuid}" is offline
     Should Contain    ${result}    false
     ${end} =    Get Time    epoch
     ${delta} =    Evaluate    round((${end} - ${start}) / 60)
-    Log
-    ...    Time taken ${delta}m
-    ...    level=INFO
+    IF    ${delta} > 1
+        Log
+        ...    Time taken ${delta}m
+        ...    level=WARN
+        Process ${result}
+    END
 
 Device "${device_uuid}" should be running commit ${commit}
     ${start} =    Get Time    epoch
@@ -219,9 +230,12 @@ Device "${device_uuid}" should be running commit ${commit}
     Should Contain    ${result}    ${commit}
     ${end} =    Get Time    epoch
     ${delta} =    Evaluate    round((${end} - ${start}) / 60)
-    Log
-    ...    Time taken ${delta}m
-    ...    level=INFO
+    IF    ${delta} > 1
+        Log
+        ...    Time taken ${delta}m
+        ...    level=WARN
+        Process ${result}
+    END
 
 Stream "${device_uuid}" logs to "${log_file}"
     [Documentation]    Device "${some_device_uuid}" log should contain "${some_value}"
