@@ -80,7 +80,6 @@ Git push "${directory}" to application "${application_name}"
     Log
     ...    Time taken ${delta}m
     ...    level=INFO
-    END
     Process ${result}
 
 Balena push "${directory}" to application "${application_name}"
@@ -98,7 +97,6 @@ Balena push "${directory}" to application "${application_name}"
     Log
     ...    Time taken ${delta}m
     ...    level=INFO
-    END
     Process ${result}
 
 Configure "${image}" version "${os_version}" with "${application_name}"
@@ -204,7 +202,6 @@ Device "${device_uuid}" is online
     Log
     ...    Time taken ${delta}m
     ...    level=INFO
-    END
 
 Device "${device_uuid}" is offline
     ${start} =    Get Time    epoch
@@ -215,7 +212,6 @@ Device "${device_uuid}" is offline
     Log
     ...    Time taken ${delta}m
     ...    level=INFO
-    END
 
 Device "${device_uuid}" should be running commit ${commit}
     ${start} =    Get Time    epoch
@@ -226,7 +222,6 @@ Device "${device_uuid}" should be running commit ${commit}
     Log
     ...    Time taken ${delta}m
     ...    level=INFO
-    END
 
 Stream "${device_uuid}" logs to "${log_file}"
     [Documentation]    Device "${some_device_uuid}" log should contain "${some_value}"
