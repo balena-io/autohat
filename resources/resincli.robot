@@ -152,7 +152,7 @@ Get "${application_info}" from fleet "${application_name}"
     Process ${result}
     RETURN    ${result.stdout}
 
-Check release count in fleet "${application_name}"
+Check release count in "${application_name}" fleet
     ${result} =    Run Process
     ...    balena release list "${application_name}" --json | jq -re '.[] | select(.status\=\="success" and .is_final\=\=true).commit' | wc -l
     ...    shell=yes
