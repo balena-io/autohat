@@ -79,7 +79,6 @@ Git push "${directory}" to application "${application_name}"
 Balena push "${directory}" to application "${application_name}"
     ${result} =    Run Buffered Process    balena push ${application_name} --debug    shell=yes    cwd=${directory}
     IF    ${result.rc} != 0
-        Log To Console    Retrying with --nocache option
         Log    Retrying build with --nocache option.    level=WARN
         ${result} =    Run Buffered Process
         ...    balena push ${application_name} --debug --nocache
@@ -153,16 +152,26 @@ Get "${application_info}" from fleet "${application_name}"
     Process ${result}
     RETURN    ${result.stdout}
 
+Check release count in fleet "${application_name}"
+    ${result} =    Run Process
+    ...    balena release list "${application_name}" --json | jq -re '.[] | select(.status\=\="success" and .is_final\=\=true).commit' | wc -l
+    ...    shell=yes
+    IF    'int(${result.stdout})' > 2
+        Log
+        ...    ${application_name} must have at most two (2) usable releases, you have ${result.stdout} releases.
+        ...    level=WARN
+    END
+
 Get latest release from fleet "${application_name}"
     ${result} =    Run Process
-    ...    balena release list "${application_name}" --json | jq -re '.[] | select(.status=="success" and .is_final==true).commit' | head -n 1
+    ...    balena release list "${application_name}" --json | jq -re '.[] | select(.status\=\="success" and .is_final\=\=true).commit' | head -n 1
     ...    shell=yes
     Process ${result}
     RETURN    ${result.stdout}
 
 Get previous release from fleet "${application_name}"
     ${result} =    Run Process
-    ...    balena release list "${application_name}" --json | jq -re '.[] | select(.status=="success" and .is_final==true).commit' | head -n 2 | tail -n 1
+    ...    balena release list "${application_name}" --json | jq -re '.[] | select(.status\=\="success" and .is_final\=\=true).commit' | head -n 2 | tail -n 1
     ...    shell=yes
     Process ${result}
     RETURN    ${result.stdout}
