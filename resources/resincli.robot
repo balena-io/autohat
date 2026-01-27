@@ -164,9 +164,9 @@ Check release count in "${application_name}" fleet
     ${result} =    Run Process
     ...    balena release list "${application_name}" --json | jq -re '.[] | select(.status\=\="success" and .is_final\=\=true).commit' | wc -l
     ...    shell=yes
-    IF    int(${result.stdout}) > 2
+    IF    int(${result.stdout}) > 0
         Log
-        ...    ${application_name} must have at most two (2) usable releases, you have ${result.stdout} releases.
+        ...    ${application_name} has ${result.stdout} releases from previous test(s)?
         ...    level=WARN
     END
 
