@@ -73,9 +73,22 @@ Run "gpt" image with "${acceleration}" acceleration
 
 Run "dos" image with "${acceleration}" acceleration
     # qemu-system-x86_64 defunct process without shell
-    ${handle} =    Start Process
-    ...    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image_copy},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device ide-hd,drive\=disk,bus\=ahci.0 -device virtio-net-pci,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=pc -accel ${acceleration} -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off -serial chardev:serial0
-    ...    shell=yes
+    ${long_cmd} =    Catenate
+    ...    SEPARATOR=\\n
+    ...    qemu-system-x86_64 \\
+    ...    -device ahci,id\=ahci \\
+    ...    -drive file\=${image_copy},media\=disk,cache\=none,format\=raw,if\=none,id\=disk \\
+    ...    -device ide-hd,drive\=disk,bus\=ahci.0 \\
+    ...    -device virtio-net-pci,netdev\=n1 \\
+    ...    -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" \\
+    ...    -m ${memory} \\
+    ...    -nographic \\
+    ...    -machine type\=pc \\
+    ...    -accel ${acceleration} \\
+    ...    -smp ${cpus} \\
+    ...    -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off \\
+    ...    -serial chardev:serial0
+    ${handle} =    Start Process    ${long_cmd}    shell=yes
     RETURN    ${handle}
 
 Run "aarch64" image with "${acceleration}" acceleration
