@@ -68,7 +68,6 @@ Git checkout "${commit_hash}" "${directory}"
 
 Git push "${directory}" to application "${application_name}"
     Set Environment Variable    RESINUSER    ${RESINUSER}
-    ${start} =    Get Time    epoch
     ${result} =    Run Process
     ...    git remote add balena $RESINUSER@git.${BALENARC_BALENA_URL}:${FLEET}.git
     ...    shell=yes
@@ -76,16 +75,8 @@ Git push "${directory}" to application "${application_name}"
     Process ${result}
     ${result} =    Run Buffered Process    git push balena HEAD:refs/heads/master    shell=yes    cwd=${directory}
     Process ${result}
-    ${end} =    Get Time    epoch
-    ${delta} =    Evaluate    round((${end} - ${start}) / 60)
-    IF    ${delta} > 1
-        Log
-        ...    Time taken ${delta}m
-        ...    level=WARN
-    END
 
 Balena push "${directory}" to application "${application_name}"
-    ${start} =    Get Time    epoch
     ${result} =    Run Buffered Process    balena push ${application_name} --debug    shell=yes    cwd=${directory}
     IF    ${result.rc} != 0
         Log    Retrying build with --nocache option.    level=WARN
@@ -93,13 +84,6 @@ Balena push "${directory}" to application "${application_name}"
         ...    balena push ${application_name} --debug --nocache
         ...    shell=yes
         ...    cwd=${directory}
-    END
-    ${end} =    Get Time    epoch
-    ${delta} =    Evaluate    round((${end} - ${start}) / 60)
-    IF    ${delta} > 1
-        Log
-        ...    Time taken ${delta}m
-        ...    level=WARN
     END
     Process ${result}
 
@@ -198,40 +182,16 @@ Pin device "${device_uuid}" to release "${release_uuid}"
     RETURN    ${result.stdout}
 
 Device "${device_uuid}" is online
-    ${start} =    Get Time    epoch
     ${result} =    Get "IS ONLINE" of device "${device_uuid}"
     Should Contain    ${result}    true
-    ${end} =    Get Time    epoch
-    ${delta} =    Evaluate    round((${end} - ${start}) / 60)
-    IF    ${delta} > 1
-        Log
-        ...    Time taken ${delta}m
-        ...    level=WARN
-    END
 
 Device "${device_uuid}" is offline
-    ${start} =    Get Time    epoch
     ${result} =    Get "IS ONLINE" of device "${device_uuid}"
     Should Contain    ${result}    false
-    ${end} =    Get Time    epoch
-    ${delta} =    Evaluate    round((${end} - ${start}) / 60)
-    IF    ${delta} > 1
-        Log
-        ...    Time taken ${delta}m
-        ...    level=WARN
-    END
 
 Device "${device_uuid}" should be running commit ${commit}
-    ${start} =    Get Time    epoch
     ${result} =    Get "COMMIT" of device "${device_uuid}"
     Should Contain    ${result}    ${commit}
-    ${end} =    Get Time    epoch
-    ${delta} =    Evaluate    round((${end} - ${start}) / 60)
-    IF    ${delta} > 1
-        Log
-        ...    Time taken ${delta}m
-        ...    level=WARN
-    END
 
 Stream "${device_uuid}" logs to "${log_file}"
     [Documentation]    Device "${some_device_uuid}" log should contain "${some_value}"
