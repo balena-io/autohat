@@ -50,10 +50,25 @@ Run aarch64 image
     Run Keyword And Return If    ${result.rc} != 0    Run "aarch64" image with "tcg" acceleration
 
 Run "gpt" image with "${acceleration}" acceleration
+    ${long_cmd} =    Catenate
+    ...    SEPARATOR=\\n
+    ...    qemu-system-x86_64 \\
+    ...    -device ahci,id\=ahci \\
+    ...    -drive file\=${image_copy},media\=disk,cache\=none,format\=raw,if\=none,id\=disk \\
+    ...    -device ide-hd,drive\=disk,bus\=ahci.0 \\
+    ...    -device virtio-net-pci,netdev\=n1 \\
+    ...    -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" \\
+    ...    -m ${memory} \\
+    ...    -nographic \\
+    ...    -machine type\=q35 \\
+    ...    -accel ${acceleration} \\
+    ...    -smp ${cpus} \\
+    ...    -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off \\
+    ...    -serial chardev:serial0 \\
+    ...    -bios /usr/share/ovmf/OVMF.fd \\
+    ...    -nodefaults
     # qemu-system-x86_64 defunct process without shell
-    ${handle} =    Start Process
-    ...    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image_copy},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device ide-hd,drive\=disk,bus\=ahci.0 -device virtio-net-pci,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=q35 -accel ${acceleration} -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off -serial chardev:serial0 -bios /usr/share/ovmf/OVMF.fd -nodefaults
-    ...    shell=yes
+    ${handle} =    Start Process    ${long_cmd}    shell=yes
     RETURN    ${handle}
 
 Run "dos" image with "${acceleration}" acceleration
@@ -64,11 +79,25 @@ Run "dos" image with "${acceleration}" acceleration
     RETURN    ${handle}
 
 Run "aarch64" image with "${acceleration}" acceleration
-    # qemu-system-aarch64 defunct process without shell
     # Resize image to 4G otherwise the data partition isn't big enough for user apps
     ${result} =    Run Buffered Process    qemu-img resize ${image_copy} 4G    shell=yes
     Process ${result}
-    ${handle} =    Start Process
-    ...    qemu-system-aarch64 -drive file\=${image_copy},media\=disk,cache\=none,format\=raw -device virtio-net-device,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=virt -accel ${acceleration} -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off -serial chardev:serial0 -cpu cortex-a72 -bios /usr/share/AAVMF/AAVMF_CODE.fd -nodefaults
-    ...    shell=yes
+    ${long_cmd} =    Catenate
+    ...    SEPARATOR=\\n
+    ...    qemu-system-aarch64 \\
+    ...    -drive file\=${image_copy},media\=disk,cache\=none,format\=raw \\
+    ...    -device virtio-net-device,netdev\=n1 \\
+    ...    -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" \\
+    ...    -m ${memory} \\
+    ...    -nographic \\
+    ...    -machine type\=virt \\
+    ...    -accel ${acceleration} \\
+    ...    -smp ${cpus} \\
+    ...    -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off \\
+    ...    -serial chardev:serial0 \\
+    ...    -cpu cortex-a72 \\
+    ...    -bios /usr/share/AAVMF/AAVMF_CODE.fd \\
+    ...    -nodefaults
+    # qemu-system-aarch64 defunct process without shell
+    ${handle} =    Start Process    ${long_cmd}    shell=yes
     RETURN    ${handle}
