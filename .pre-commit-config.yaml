@@ -25,9 +25,8 @@ repos:
     hooks:
     -   id: actionlint
 
-# FIXME: enable when ready to process
-#-   repo: https://github.com/MarketSquare/robotframework-robocop
-#    rev: v7.2.0
-#    hooks:
-#    -   id: robocop
-#    -   id: robocop-format
+-   repo: https://github.com/MarketSquare/robotframework-robocop
+    rev: v7.2.0
+    hooks:
+    -   id: robocop
+    -   id: robocop-format

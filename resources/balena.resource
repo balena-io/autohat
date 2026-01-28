@@ -1,8 +1,17 @@
+*** Comments ***
+# these are mostly cosmetic
+# robocop: off=DOC01,LEN08,NAME02,NAME18
+
+# FIXME: I have no idea what it wants...
+# https://forum.robotframework.org/t/depr05-set-suite-variable-used-instead-of-var-is-a-fool/9428/4
+# robocop: off=DEPR05,VAR05
+
+
 *** Settings ***
 Documentation       This resource provides access to balena commands.
 
-Library             Process
 Library             OperatingSystem
+Library             Process
 Library             RequestsLibrary
 
 
@@ -26,7 +35,7 @@ Add new SSH key with name "${key_name}"
     Process ${result}
     ${word_count} =    Run Process    balena ssh-key list | grep -w ${key_name} |cut -d ' ' -f 1 | wc -l    shell=yes
     Process ${word_count}
-    FOR    ${i}    IN RANGE    ${word_count.stdout}
+    FOR    ${_i}    IN RANGE    ${word_count.stdout}
         ${result} =    Run Process    balena ssh-key list | grep -w ${key_name} |cut -d ' ' -f 1 | head -1    shell=yes
         Log    all output: ${result.stdout}
         Run Process    balena ssh-key rm ${result.stdout} -y    shell=yes
@@ -66,7 +75,7 @@ Git checkout "${commit_hash}" "${directory}"
     ${result} =    Run Process    git checkout ${commit_hash}    shell=yes    cwd=${directory}
     Process ${result}
 
-Git push "${directory}" to application "${application_name}"
+Git push "${directory}" to application
     Set Environment Variable    RESINUSER    ${RESINUSER}
     ${result} =    Run Process
     ...    git remote add balena $RESINUSER@git.${BALENARC_BALENA_URL}:${FLEET}.git
@@ -78,7 +87,7 @@ Git push "${directory}" to application "${application_name}"
 
 Balena push "${directory}" to application "${application_name}"
     ${result} =    Run Buffered Process    balena push ${application_name} --debug    shell=yes    cwd=${directory}
-    IF    ${result.rc} != 0
+    IF    ${result.rc} is not 0
         Log    stdout: ${result.stdout}    level=WARN
         Log    stderr: ${result.stderr}    level=WARN
         Log    Retrying build with --nocache option.    level=WARN
@@ -89,7 +98,7 @@ Balena push "${directory}" to application "${application_name}"
     END
     Process ${result}
 
-Configure "${image}" version "${os_version}" with "${application_name}"
+Configure "${image}" with "${application_name}"
     ${result_register} =    Run Process
     ...    balena device register ${application_name} | grep ${application_name} | cut -d ' ' -f 4
     ...    shell=yes
@@ -113,7 +122,7 @@ Get "${device_info}" of device "${device_uuid}"
     [Documentation]    Available values for argument ${device_info} are:
     ...    ID, DEVICE TYPE, STATUS, IS ONLINE, IP ADDRESS, APPLICATION NAME, UUID, COMMIT,
     ...    SUPERVISOR VERSION, IS WEB ACCESSIBLE, OS VERSION
-    @{list} =    Create List
+    VAR    @{list} =
     ...    ID
     ...    DEVICE TYPE
     ...    STATUS
@@ -141,8 +150,7 @@ Get "${device_info}" of device "${device_uuid}"
 Get "${application_info}" from fleet "${application_name}"
     [Documentation]    Available values for argument ${application_info} are:
     ...    ID, APP_NAME, DEVICE_TYPE, ONLINE_DEVICES, DEVICES_LENGTH
-    &{dictionary} =    Create Dictionary
-    ...    ID=1
+    VAR    &{dictionary} =
     ...    APP_NAME=2
     ...    SLUG=3
     ...    DEVICE_TYPE=4
@@ -195,23 +203,23 @@ Device "${device_uuid}" should be running commit ${commit}
     ${result} =    Get "COMMIT" of device "${device_uuid}"
     Should Contain    ${result}    ${commit}
 
-Stream "${device_uuid}" logs to "${log_file}"
+Stream "${device_uuid}" logs to "${device_log}"
     [Documentation]    Device "${some_device_uuid}" log should contain "${some_value}"
     ...    ${process}=    Stream "${some_device_uuid}" logs to "${TEMPDIR}/${some_device_uuid}.log"
     ...    Wait Until Keyword Succeeds    60x    1s    Check if "${TEMPDIR}/${some_device_uuid}.log" contains "${some_value}"
     ...    Wait For Process    handle=${process}    timeout=1    on_timeout=terminate
     ...    Remove File    "${TEMPDIR}/${some_device_uuid}.log"
     ...    File Should Not Exist    "${TEMPDIR}/${some_device_uuid}.log"
-    ${handle} =    Start Process    balena device logs --tail ${device_uuid}    stdout=${log_file}    shell=yes
-    Wait Until Keyword Succeeds    60x    1s    File Should Exist    ${log_file}
+    ${handle} =    Start Process    balena device logs --tail ${device_uuid}    stdout=${device_log}    shell=yes
+    Wait Until Keyword Succeeds    60x    1s    File Should Exist    ${device_log}
     RETURN    ${handle}
 
-Check if "${log_file}" contains "${value}"
-    ${output_content} =    Get File    ${log_file}
+Check if "${device_log}" contains "${value}"
+    ${output_content} =    Get File    ${device_log}
     Should Contain    ${output_content}    ${value}
 
-Check if "${log_file}" does not contain "${value}"
-    ${output_content} =    Get File    ${log_file}
+Check if "${device_log}" does not contain "${value}"
+    ${output_content} =    Get File    ${device_log}
     Should Not Contain    ${output_content}    ${value}
 
 Device "${device_uuid}" log should contain "${value}"
@@ -240,7 +248,7 @@ Add variable "${variable_name}" with value "${variable_value}" to "${type}" "${i
 
 Check if "${option}" variable "${variable_name}" with value "${variable_value}" exists in application "${application_name}"
     [Documentation]    Available values for argument ${option} are: ENV, CONFIG
-    @{list} =    Create List    ENV    CONFIG
+    VAR    @{list} =    ENV    CONFIG
     Should Contain    ${list}    ${option}
     IF    '${option}' == 'ENV'
         ${result_env} =    Run Process
@@ -259,7 +267,7 @@ Check if "${option}" variable "${variable_name}" with value "${variable_value}" 
 
 Check if "${option}" variable "${variable_name}" with value "${variable_value}" exists on "${type}" "${id}"
     [Documentation]    Available values for argument ${option} are: ENV, CONFIG
-    @{list} =    Create List    ENV    CONFIG
+    VAR    @{list} =    ENV    CONFIG
     Should Contain    ${list}    ${option}
     IF    '${option}' == 'ENV'
         ${result} =    Run Process
@@ -274,7 +282,7 @@ Check if "${option}" variable "${variable_name}" with value "${variable_value}" 
 
 Remove "${option}" variable "${variable_name}" from application "${application_name}"
     [Documentation]    Available values for argument ${option} are: ENV, CONFIG
-    @{list} =    Create List    ENV    CONFIG
+    VAR    @{list} =    ENV    CONFIG
     Should Contain    ${list}    ${option}
     IF    '${option}' == 'ENV'
         ${result_vars} =    Run Process
@@ -296,7 +304,7 @@ Remove "${option}" variable "${variable_name}" from application "${application_n
 "${item}" public URL for device "${device_uuid}"
     [Documentation]    Available items for argument ${item} are:
     ...    enable, disable, status, get
-    @{list} =    Create List    enable    disable    status    get
+    VAR    @{list} =    enable    disable    status    get
     Should Contain    ${list}    ${item}
     IF    '${item}' == 'get'
         ${result} =    Run Process    balena device public-url ${device_uuid}    shell=yes
