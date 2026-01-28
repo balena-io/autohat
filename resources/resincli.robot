@@ -75,6 +75,7 @@ Git push "${directory}" to application "${application_name}"
     ...    cwd=${directory}
     Process ${result}
     ${result} =    Run Buffered Process    git push balena HEAD:refs/heads/master    shell=yes    cwd=${directory}
+    Process ${result}
     ${end} =    Get Time    epoch
     ${delta} =    Evaluate    round((${end} - ${start}) / 60)
     IF    ${delta} > 1
@@ -82,7 +83,6 @@ Git push "${directory}" to application "${application_name}"
         ...    Time taken ${delta}m
         ...    level=WARN
     END
-    Process ${result}
 
 Balena push "${directory}" to application "${application_name}"
     ${start} =    Get Time    epoch
@@ -208,7 +208,6 @@ Device "${device_uuid}" is online
         ...    Time taken ${delta}m
         ...    level=WARN
     END
-    Process ${result}
 
 Device "${device_uuid}" is offline
     ${start} =    Get Time    epoch
@@ -221,7 +220,6 @@ Device "${device_uuid}" is offline
         ...    Time taken ${delta}m
         ...    level=WARN
     END
-    Process ${result}
 
 Device "${device_uuid}" should be running commit ${commit}
     ${start} =    Get Time    epoch
@@ -234,7 +232,6 @@ Device "${device_uuid}" should be running commit ${commit}
         ...    Time taken ${delta}m
         ...    level=WARN
     END
-    Process ${result}
 
 Stream "${device_uuid}" logs to "${log_file}"
     [Documentation]    Device "${some_device_uuid}" log should contain "${some_value}"
