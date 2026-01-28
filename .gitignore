@@ -7,4 +7,3 @@ test**.robot
 **/*.xml
 **/*.html
 **/*.crdownload
-.robocop_cache

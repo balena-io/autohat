@@ -25,11 +25,6 @@ repos:
     hooks:
     -   id: actionlint
 
--   repo: https://github.com/renovatebot/pre-commit-hooks
-    rev: 42.71.4
-    hooks:
-    -   id: renovate-config-validator
-
 # FIXME: enable when ready to process
 #-   repo: https://github.com/MarketSquare/robotframework-robocop
 #    rev: v7.2.0
