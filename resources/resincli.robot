@@ -79,6 +79,8 @@ Git push "${directory}" to application "${application_name}"
 Balena push "${directory}" to application "${application_name}"
     ${result} =    Run Buffered Process    balena push ${application_name} --debug    shell=yes    cwd=${directory}
     IF    ${result.rc} != 0
+        Log    stdout: ${result.stdout}    level=WARN
+        Log    stderr: ${result.stderr}    level=WARN
         Log    Retrying build with --nocache option.    level=WARN
         ${result} =    Run Buffered Process
         ...    balena push ${application_name} --debug --nocache
