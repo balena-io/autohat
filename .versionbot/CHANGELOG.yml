@@ -1,4 +1,14 @@
 - commits:
+    - subject: "major: Remove unused assets and add linter"
+      hash: a5df8acfd0905ff238fe9830b05d6ec23a8a73bb
+      body: "* add cache bust if initial balena push fails"
+      footer: {}
+      author: Anton Belodedenko
+      nested: []
+  version: 2.0.0
+  title: ""
+  date: 2026-01-30T00:43:41.536Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v23.2.30
       hash: ef9b1f16ca1667916336eff6826f7a5844f6137b
       body: |

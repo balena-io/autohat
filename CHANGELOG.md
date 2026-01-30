@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v2.0.0
+## (2026-01-30)
+
+* major: Remove unused assets and add linter [Anton Belodedenko]
+
 # v1.4.26
 ## (2026-01-24)
 
