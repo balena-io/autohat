@@ -26,7 +26,7 @@ repos:
     -   id: actionlint
 
 -   repo: https://github.com/MarketSquare/robotframework-robocop
-    rev: v7.2.0
+    rev: v8.1.1
     hooks:
     -   id: robocop
     -   id: robocop-format
