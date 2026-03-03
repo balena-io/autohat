@@ -1,4 +1,14 @@
 - commits:
+    - subject: "major: Specify balenaOS image type"
+      hash: 08f1e45c95dcac517a6deada59b37ac1bfc4523f
+      body: developmentMode isn't required for tests, only when debugging
+      footer: {}
+      author: Anton B.
+      nested: []
+  version: 3.0.0
+  title: ""
+  date: 2026-03-03T17:37:09.828Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v23.2.32
       hash: c4eb5592189539c81116eebaf49c15c91a3bc494
       body: |
