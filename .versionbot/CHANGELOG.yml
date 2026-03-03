@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency balena-io/balena-cli to v23.2.32
+      hash: c4eb5592189539c81116eebaf49c15c91a3bc494
+      body: |
+        Update balena-io/balena-cli from 23.2.30 to 23.2.32
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 2.0.2
+  title: ""
+  date: 2026-03-03T17:14:28.388Z
+- commits:
     - subject: Update pre-commit hook MarketSquare/robotframework-robocop to v8
       hash: d8072565674672d9a61567d7700a8f6cc77181c5
       body: |
