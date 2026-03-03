@@ -4,7 +4,7 @@
 
 # FIXME: I have no idea what it wants...
 # https://forum.robotframework.org/t/depr05-set-suite-variable-used-instead-of-var-is-a-fool/9428/4
-# robocop: off=DEPR05,VAR05
+# robocop: off=DEPR05,VAR05,LEN28
 
 
 *** Settings ***
@@ -98,14 +98,20 @@ Balena push "${directory}" to application "${application_name}"
     END
     Process ${result}
 
-Configure "${image}" with "${application_name}"
+Configure "${type}" "${image}" with "${application_name}"
     ${result_register} =    Run Process
     ...    balena device register ${application_name} | grep ${application_name} | cut -d ' ' -f 4
     ...    shell=yes
     Process ${result_register}
-    ${result} =    Run Process
-    ...    balena os configure ${image} --device ${result_register.stdout} --config-network ethernet --dev
-    ...    shell=yes
+    IF    '${type}' == 'production'
+        ${result} =    Run Process
+        ...    balena os configure ${image} --device ${result_register.stdout} --config-network ethernet
+        ...    shell=yes
+    ELSE
+        ${result} =    Run Process
+        ...    balena os configure ${image} --device ${result_register.stdout} --config-network ethernet --dev
+        ...    shell=yes
+    END
     Process ${result}
     ${dns_server} =    Get Environment Variable    DNS_SERVER    default=empty
     IF    '${dns_server}' != 'empty'
