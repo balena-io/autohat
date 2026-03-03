@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v3.0.3
+## (2026-03-03)
+
+* Update pre-commit hook rhysd/actionlint to v1.7.11 [balena-renovate[bot]]
+
 # v3.0.2
 ## (2026-03-03)
 
