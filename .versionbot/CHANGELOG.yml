@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update pre-commit hook MarketSquare/robotframework-robocop to v8
+      hash: d8072565674672d9a61567d7700a8f6cc77181c5
+      body: |
+        Update MarketSquare/robotframework-robocop from 7.2.0 to 8.2.2
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 2.0.1
+  title: ""
+  date: 2026-03-03T16:26:34.328Z
+- commits:
     - subject: "major: Remove unused assets and add linter"
       hash: a5df8acfd0905ff238fe9830b05d6ec23a8a73bb
       body: "* add cache bust if initial balena push fails"
