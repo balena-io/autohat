@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency robotframework to v7.4.2
+      hash: 52db878bf3b0e4975bf8273ee2fa3e3e2e9abcdb
+      body: |
+        Update robotframework from 7.4.1 to 7.4.2
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.1
+  title: ""
+  date: 2026-03-03T18:20:59.993Z
+- commits:
     - subject: "major: Specify balenaOS image type"
       hash: 08f1e45c95dcac517a6deada59b37ac1bfc4523f
       body: developmentMode isn't required for tests, only when debugging
