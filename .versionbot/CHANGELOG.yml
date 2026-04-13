@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency requests to v2.33.0 [SECURITY]
+      hash: ab3facfda38a862ccb135075049e5ce99e57f030
+      body: |
+        Update requests from 2.32.5 to 2.33.0
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.5
+  title: ""
+  date: 2026-04-13T09:28:51.541Z
+- commits:
     - subject: "qemu: update to 1:10.0.8+ds-0+deb13u1"
       hash: 7cf21fae419331b2c7dabf9cfe588418c89c5a24
       body: |
