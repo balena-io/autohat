@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v3.0.4
+## (2026-04-13)
+
+* qemu: update to 1:10.0.8+ds-0+deb13u1 [Carlo Miguel F. Cruz]
+
 # v3.0.3
 ## (2026-03-03)
 

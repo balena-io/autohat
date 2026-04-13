@@ -1,4 +1,22 @@
 - commits:
+    - subject: "qemu: update to 1:10.0.8+ds-0+deb13u1"
+      hash: 7cf21fae419331b2c7dabf9cfe588418c89c5a24
+      body: |
+        Includes upstream stable bug fixes and security fixes for CVE-2025-14876 and CVE-2026-0665.
+
+        Complete changelog here:
+        https://metadata.ftp-master.debian.org/changelogs//main/q/qemu/qemu_10.0.8+ds-0+deb13u1_changelog
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Carlo Miguel F. Cruz <carloc@balena.io>
+        signed-off-by: Carlo Miguel F. Cruz <carloc@balena.io>
+      author: Carlo Miguel F. Cruz
+      nested: []
+  version: 3.0.4
+  title: ""
+  date: 2026-04-13T08:34:53.107Z
+- commits:
     - subject: Update pre-commit hook rhysd/actionlint to v1.7.11
       hash: ae517c0b3e61721523e2c631f78345f33cce9f7c
       body: |
