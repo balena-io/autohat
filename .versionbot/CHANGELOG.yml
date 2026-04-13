@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency pylibftdi to v0.24.0
+      hash: 80a9e7feea05e6d5d9e1e585168a896be005106d
+      body: |
+        Update pylibftdi from 0.23.0 to 0.24.0
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.8
+  title: ""
+  date: 2026-04-13T17:29:43.816Z
+- commits:
     - subject: Update dependency requests to v2.33.1
       hash: 476456b1192aa6325aa53f4ece8211aecf5d5345
       body: |

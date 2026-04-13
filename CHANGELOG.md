@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v3.0.8
+## (2026-04-13)
+
+* Update dependency pylibftdi to v0.24.0 [balena-renovate[bot]]
+
 # v3.0.7
 ## (2026-04-13)
 
