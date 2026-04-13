@@ -47,6 +47,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     binutils \
     curl \
     fdisk \
+    expect \
     git \
     jq \
     libfdt1 \
@@ -64,6 +65,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     qemu-system-x86=${QEMU_VERSION} \
     qemu-utils=${QEMU_VERSION} \
     rsync \
+    socat \
     systemd \
     zlib1g \
     && rm -rf /var/lib/apt/lists/*

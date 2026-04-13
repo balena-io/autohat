@@ -52,14 +52,14 @@ Run aarch64 image
 Run "gpt" image with "${acceleration}" acceleration
     # qemu-system-x86_64 defunct process without shell
     ${handle} =    Start Process
-    ...    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image_copy},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device ide-hd,drive\=disk,bus\=ahci.0 -device virtio-net-pci,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=q35 -accel ${acceleration} -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off -serial chardev:serial0 -bios /usr/share/ovmf/OVMF.fd -nodefaults
+    ...    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image_copy},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device virtio-blk-pci,drive\=disk -device virtio-net-pci,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -device virtio-rng-pci -m ${memory} -nographic -machine type\=q35 -accel ${acceleration} -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off -serial chardev:serial0 -bios /usr/share/ovmf/OVMF.fd -nodefaults -D /tmp/qemu.log -d guest_errors,cpu_reset
     ...    shell=yes
     RETURN    ${handle}
 
 Run "dos" image with "${acceleration}" acceleration
     # qemu-system-x86_64 defunct process without shell
     ${handle} =    Start Process
-    ...    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image_copy},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device ide-hd,drive\=disk,bus\=ahci.0 -device virtio-net-pci,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=pc -accel ${acceleration} -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off -serial chardev:serial0
+    ...    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image_copy},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device ide-hd,drive\=disk,bus\=ahci.0 -device virtio-net-pci,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=pc -accel ${acceleration} -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off -serial chardev:serial0 -D /tmp/qemu.log -d guest_errors,cpu_reset
     ...    shell=yes
     RETURN    ${handle}
 
@@ -69,6 +69,22 @@ Run "aarch64" image with "${acceleration}" acceleration
     ${result} =    Run Buffered Process    qemu-img resize ${image_copy} 4G    shell=yes
     Process ${result}
     ${handle} =    Start Process
-    ...    qemu-system-aarch64 -drive file\=${image_copy},media\=disk,cache\=none,format\=raw -device virtio-net-device,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=virt -accel ${acceleration} -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off -serial chardev:serial0 -cpu cortex-a72 -bios /usr/share/AAVMF/AAVMF_CODE.fd -nodefaults
+    ...    qemu-system-aarch64 -drive file\=${image_copy},media\=disk,cache\=none,format\=raw -device virtio-net-device,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -device virtio-rng-device -m ${memory} -nographic -machine type\=virt -accel ${acceleration} -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off -serial chardev:serial0 -cpu cortex-a72 -bios /usr/share/AAVMF/AAVMF_CODE.fd -nodefaults -D /tmp/qemu.log -d guest_errors,cpu_reset
     ...    shell=yes
     RETURN    ${handle}
+
+Stream serial console "${serial_port_path}" to "${log_path}"
+    ${cmd} =    Set Variable    socat -u UNIX-CONNECT:${serial_port_path},retry=20,interval=1 OPEN:${log_path},creat
+    ${handle} =    Start Process    ${cmd}    shell=yes
+    RETURN    ${handle}
+
+Collect QEMU Serial Logs with "${serial_port_path}" to "${log_path}"
+    [Documentation]    Retrieve journal logs from the QEMU VM via the serial console
+    ...    socket using expect/socat and save them to the given log path.
+    ${result} =    Run Process
+    ...    ${CURDIR}/collect-journal.sh    ${serial_port_path}    root    ${log_path}
+    ...    timeout=180s
+    Log    stdout: ${result.stdout}
+    Log    stderr: ${result.stderr}
+    Should Be Equal As Integers    ${result.rc}    0
+    ...    msg=Failed to collect journal logs: ${result.stderr}
