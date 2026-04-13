@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency balena-io/balena-cli to v24.1.3
+      hash: 5e385abb8cf130225ec49695a1e0666cf9375651
+      body: |
+        Update balena-io/balena-cli from 24.0.4 to 24.1.3
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.9
+  title: ""
+  date: 2026-04-13T18:22:06.061Z
+- commits:
     - subject: Update dependency pylibftdi to v0.24.0
       hash: 80a9e7feea05e6d5d9e1e585168a896be005106d
       body: |
