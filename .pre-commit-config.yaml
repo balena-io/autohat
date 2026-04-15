@@ -21,12 +21,12 @@ repos:
     -   id: shfmt-docker
 
 -   repo: https://github.com/rhysd/actionlint
-    rev: v1.7.11
+    rev: v1.7.12
     hooks:
     -   id: actionlint
 
 -   repo: https://github.com/MarketSquare/robotframework-robocop
-    rev: v8.2.2
+    rev: v8.2.7
     hooks:
     -   id: robocop
     -   id: robocop-format
