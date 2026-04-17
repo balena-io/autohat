@@ -47,14 +47,14 @@ Run aarch64 image
 Run "gpt" image with "${acceleration}" acceleration
     # qemu-system-x86_64 defunct process without shell
     ${handle} =    Start Process
-    ...    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device ide-hd,drive\=disk,bus\=ahci.0 -device virtio-net-pci,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=q35 -accel ${acceleration} -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off,logfile\=/tmp/logs/serial.log -serial chardev:serial0 -bios /usr/share/ovmf/OVMF.fd -nodefaults
+    ...    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device ide-hd,drive\=disk,bus\=ahci.0 -device virtio-net-pci,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=q35 -accel ${acceleration} -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off,logfile\=${OUTPUT DIR}/serial.log -serial chardev:serial0 -bios /usr/share/ovmf/OVMF.fd -nodefaults
     ...    shell=yes
     RETURN    ${handle}
 
 Run "dos" image with "${acceleration}" acceleration
     # qemu-system-x86_64 defunct process without shell
     ${handle} =    Start Process
-    ...    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device ide-hd,drive\=disk,bus\=ahci.0 -device virtio-net-pci,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=pc -accel ${acceleration} -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off,logfile\=/tmp/logs/serial.log -serial chardev:serial0
+    ...    qemu-system-x86_64 -device ahci,id\=ahci -drive file\=${image},media\=disk,cache\=none,format\=raw,if\=none,id\=disk -device ide-hd,drive\=disk,bus\=ahci.0 -device virtio-net-pci,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=pc -accel ${acceleration} -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off,logfile\=${OUTPUT DIR}/serial.log -serial chardev:serial0
     ...    shell=yes
     RETURN    ${handle}
 
@@ -64,6 +64,14 @@ Run "aarch64" image with "${acceleration}" acceleration
     ${result} =    Run Buffered Process    qemu-img resize ${image} 4G    shell=yes
     Process ${result}
     ${handle} =    Start Process
-    ...    qemu-system-aarch64 -drive file\=${image},media\=disk,cache\=none,format\=raw -device virtio-net-device,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=virt -accel ${acceleration} -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off,logfile\=/tmp/logs/serial.log -serial chardev:serial0 -cpu cortex-a72 -bios /usr/share/AAVMF/AAVMF_CODE.fd -nodefaults
+    ...    qemu-system-aarch64 -drive file\=${image},media\=disk,cache\=none,format\=raw -device virtio-net-device,netdev\=n1 -netdev \"user,id\=n1,dns\=127.0.0.1,guestfwd\=tcp:10.0.2.100:80-cmd:netcat haproxy 80,guestfwd\=tcp:10.0.2.100:443-cmd:netcat haproxy 443\" -m ${memory} -nographic -machine type\=virt -accel ${acceleration} -smp ${cpus} -chardev socket,id\=serial0,path\=${serial_port_path},server\=on,wait\=off,logfile\=${OUTPUT DIR}/serial.log -serial chardev:serial0 -cpu cortex-a72 -bios /usr/share/AAVMF/AAVMF_CODE.fd -nodefaults
     ...    shell=yes
     RETURN    ${handle}
+
+Extract Journald Runtime Logs From "${image}" to "${output}"
+    [Documentation]    Mount the image to get the logs from runtime.
+    ${result} =    Run Process
+    ...    extract_persistent_logs.sh "${output}" "${image}"
+    ...    shell=yes
+    ...    stderr=STDOUT
+    Log    ${result.stdout}
