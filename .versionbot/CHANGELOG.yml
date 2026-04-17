@@ -1,4 +1,14 @@
 - commits:
+    - subject: "patch: Just use the image as given, don't copy it"
+      hash: ec7eed284ddfd1bff4ac3bac21a6c58824912f07
+      body: ""
+      footer: {}
+      author: Anton B.
+      nested: []
+  version: 3.0.11
+  title: ""
+  date: 2026-04-17T00:27:17.368Z
+- commits:
     - subject: Update pre-commit hooks
       hash: 60e66971224c56aa9755afb3740241207ed0b07b
       body: |
