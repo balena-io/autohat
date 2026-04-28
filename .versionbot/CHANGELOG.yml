@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency balena-io/balena-cli to v24.1.4
+      hash: f3c808ab9c3ebafa5e5b20ed748b4230222ac0d9
+      body: |
+        Update balena-io/balena-cli from 24.1.3 to 24.1.4
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.12
+  title: ""
+  date: 2026-04-28T08:38:12.434Z
+- commits:
     - subject: "patch: Just use the image as given, don't copy it"
       hash: ec7eed284ddfd1bff4ac3bac21a6c58824912f07
       body: ""
