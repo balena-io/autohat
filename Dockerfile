@@ -5,7 +5,7 @@ FROM alpine:3.23 AS cli-build
 ARG TARGETARCH
 
 # renovate: datasource=github-releases depName=balena-io/balena-cli
-ARG BALENA_CLI_VERSION=v24.1.3
+ARG BALENA_CLI_VERSION=v24.1.4
 
 WORKDIR /opt
 
