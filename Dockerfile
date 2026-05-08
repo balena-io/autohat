@@ -73,8 +73,6 @@ ENV PATH="/opt/balena-cli/bin:${PATH}"
 
 COPY --from=python-build /opt/venv /opt/venv
 
-COPY *.robot /opt/
-
 COPY resources/* /opt/resources/
 
 COPY fixtures/ssh_config /root/.ssh/config
@@ -84,6 +82,8 @@ RUN chmod 400 /root/.ssh/*
 COPY udev_rules/autohat.rules /etc/udev/rules.d/
 
 COPY services/dev2.mount /etc/systemd/system/
+
+COPY scripts/extract_persistent_logs.sh /usr/local/bin/
 
 RUN systemctl enable dev2.mount
 
