@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v3.0.17
+## (2026-05-08)
+
+* patch: Move logs extraction to autohat [Anton Belodedenko]
+
 # v3.0.16
 ## (2026-05-05)
 
