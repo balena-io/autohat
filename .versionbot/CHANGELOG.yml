@@ -1,4 +1,17 @@
 - commits:
+    - subject: Pin dependencies
+      hash: 5057e955324d682322ce30de7396c1e6a4b8a567
+      body: |
+        Update alpine
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.18
+  title: ""
+  date: 2026-05-12T17:35:09.274Z
+- commits:
     - subject: "patch: Move logs extraction to autohat"
       hash: 131e9d61d2bd86de3cc42561435ec5476400c572
       body: ""
