@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency requests to v2.34.0
+      hash: fb600bda2e8be5e704caa6d93dfde85aadab4bce
+      body: |
+        Update requests from 2.33.1 to 2.34.0
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.19
+  title: ""
+  date: 2026-05-12T18:32:45.155Z
+- commits:
     - subject: Pin dependencies
       hash: 5057e955324d682322ce30de7396c1e6a4b8a567
       body: |
