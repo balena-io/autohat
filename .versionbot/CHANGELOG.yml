@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency requests to v2.34.1
+      hash: 768e367159b885c818605e6a3e609d815e49440d
+      body: |
+        Update requests from 2.34.0 to 2.34.1
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.21
+  title: ""
+  date: 2026-05-13T20:29:49.056Z
+- commits:
     - subject: Pin QEMU CPU model to Nehalem for x86_64 guests
       hash: a113616d440c9de90eea7a497d6bfdb4b1ed8163
       body: |
