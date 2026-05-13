@@ -1,4 +1,26 @@
 - commits:
+    - subject: Pin QEMU CPU model to Nehalem for x86_64 guests
+      hash: a113616d440c9de90eea7a497d6bfdb4b1ed8163
+      body: |
+        Without an explicit -cpu, qemu-system-x86_64 defaults to the very
+        conservative qemu64 model under TCG. Scarthgap's toolchain now emits
+        instructions (SSSE3/SSE4) that qemu64 does not implement, producing
+        "trap invalid opcode" SIGILLs in udevd and random userspace binaries
+        during boot. Nehalem is old enough to remain broadly emulatable while
+        covering the modern baseline. The aarch64 path already pinned
+        cortex-a72; this brings the two x86_64 paths in line so all three
+        QEMU invocations specify a CPU model.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+  version: 3.0.20
+  title: ""
+  date: 2026-05-13T10:48:47.162Z
+- commits:
     - subject: Update dependency requests to v2.34.0
       hash: fb600bda2e8be5e704caa6d93dfde85aadab4bce
       body: |

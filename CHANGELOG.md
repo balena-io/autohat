@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v3.0.20
+## (2026-05-13)
+
+* Pin QEMU CPU model to Nehalem for x86_64 guests [Kyle Harding]
+
 # v3.0.19
 ## (2026-05-12)
 
