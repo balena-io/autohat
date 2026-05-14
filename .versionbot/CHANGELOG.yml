@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency requests to v2.34.2
+      hash: bb188278516436846aae8407a8a784253b89b236
+      body: |
+        Update requests from 2.34.1 to 2.34.2
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.25
+  title: ""
+  date: 2026-05-14T20:18:55.909Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v25.1.5
       hash: b9dee20c405e74627ea3f392de0d3037adfc0422
       body: |
