@@ -16,7 +16,7 @@ RUN set -x; arch=$(echo ${TARGETARCH} | sed 's/amd/x/g') \
     && wget -qO- "https://github.com/balena-io/balena-cli/releases/download/${BALENA_CLI_VERSION}/balena-cli-${BALENA_CLI_VERSION}-linux-${arch}-standalone.tar.gz" | tar -xzf -
 
 # --- build Python venv
-FROM python:3.14-slim-trixie@sha256:7a500125bc50693f2214e842a621440a1b1b9cbb2188f74ab045d29ed2ea5856 AS python-build
+FROM python:3.14-slim-trixie@sha256:cea0e6040540fb2b965b6e7fb5ffa00871e632eef63719f0ea54bca189ce14a6 AS python-build
 
 WORKDIR /opt
 
@@ -31,16 +31,15 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # --- runtime
-FROM python:3.14-slim-trixie@sha256:7a500125bc50693f2214e842a621440a1b1b9cbb2188f74ab045d29ed2ea5856 AS runtime
+FROM python:3.14-slim-trixie@sha256:cea0e6040540fb2b965b6e7fb5ffa00871e632eef63719f0ea54bca189ce14a6 AS runtime
 
 ENV VIRTUAL_ENV=/opt/venv
 
 ENV PATH="${VIRTUAL_ENV}/bin:/usr/local/bin:${PATH}"
 
-# https://repology.org/project/qemu/versions
-# https://packages.debian.org/trixie/source/qemu
-# renovate: datasource=repology depName=debian_13/qemu-utils versioning=loose
-ARG QEMU_VERSION=1:10.0.8+ds-0+deb13u1+b1
+# https://packages.debian.org/trixie/qemu-utils
+# renovate: suite=trixie depName=qemu-utils
+ARG QEMU_VERSION=1:10.0.11+ds-0+deb13u1
 
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
