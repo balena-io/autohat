@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency robotframework to v7.5
+      hash: 787d3cfa717d25ca656d344553fb3a9a5db6433c
+      body: |
+        Update robotframework from 7.4.2 to 7.5
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.35
+  title: ""
+  date: 2026-10-21T21:58:15.211Z
+- commits:
     - subject: Update python Docker tag to v3.15
       hash: 28d72c01dd8c1de22d2b895f56893f4919ad9fe6
       body: |
