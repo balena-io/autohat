@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v3.0.36
+## (2026-10-21)
+
+* Update python:3.15-slim-trixie Docker digest to 490c346 [balena-renovate[bot]]
+
 # v3.0.35
 ## (2026-10-21)
 
