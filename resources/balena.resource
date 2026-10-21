@@ -8,11 +8,11 @@
 
 
 *** Settings ***
-Documentation       This resource provides access to balena commands.
+Documentation    This resource provides access to balena commands.
 
-Library             OperatingSystem
-Library             Process
-Library             RequestsLibrary
+Library          OperatingSystem
+Library          Process
+Library          RequestsLibrary
 
 
 *** Keywords ***

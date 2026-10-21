@@ -8,10 +8,10 @@
 
 
 *** Settings ***
-Documentation       This resource provides access to QEMU specific Keywords.
+Documentation    This resource provides access to QEMU specific Keywords.
 
-Library             OperatingSystem
-Library             Process
+Library          OperatingSystem
+Library          Process
 
 
 *** Keywords ***
