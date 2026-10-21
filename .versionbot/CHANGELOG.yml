@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update alpine Docker tag to v3.24
+      hash: 68a732b02218318b38a4cd37236dba136062f51e
+      body: |
+        Update alpine from 3.23 to 3.24
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.29
+  title: ""
+  date: 2026-10-21T16:02:02.944Z
+- commits:
     - subject: Update python:3.14-slim-trixie Docker digest to fbecd46
       hash: d32802fdaac57dbd021aa653a60f5a6b3dd4e946
       body: |
