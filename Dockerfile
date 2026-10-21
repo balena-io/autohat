@@ -16,7 +16,7 @@ RUN set -x; arch=$(echo ${TARGETARCH} | sed 's/amd/x/g') \
     && wget -qO- "https://github.com/balena-io/balena-cli/releases/download/${BALENA_CLI_VERSION}/balena-cli-${BALENA_CLI_VERSION}-linux-${arch}-standalone.tar.gz" | tar -xzf -
 
 # --- build Python venv
-FROM python:3.15-slim-trixie@sha256:f5b92f2a669a4c347044f29367f31983280b648250ca94dea66f98c53bc87e58 AS python-build
+FROM python:3.15-slim-trixie@sha256:490c3463f3766091067a01528e6be3208104eebcca11a306beab5de9672ee893 AS python-build
 
 WORKDIR /opt
 
@@ -31,7 +31,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # --- runtime
-FROM python:3.15-slim-trixie@sha256:f5b92f2a669a4c347044f29367f31983280b648250ca94dea66f98c53bc87e58 AS runtime
+FROM python:3.15-slim-trixie@sha256:490c3463f3766091067a01528e6be3208104eebcca11a306beab5de9672ee893 AS runtime
 
 ENV VIRTUAL_ENV=/opt/venv
 
