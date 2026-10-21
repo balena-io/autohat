@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update python:3.14-slim-trixie Docker digest to fbecd46
+      hash: d32802fdaac57dbd021aa653a60f5a6b3dd4e946
+      body: |
+        Update python
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.28
+  title: ""
+  date: 2026-10-21T14:58:47.219Z
+- commits:
     - subject: Unpin Debian qemu packages
       hash: 697384c21796bce68f1bf76fc30c31b2b32ab008
       body: |
