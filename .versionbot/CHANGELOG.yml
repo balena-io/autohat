@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency flowzonify to v0.4.21
+      hash: d23d9891f736e4a1ad3064ac5c01a1d3523879d6
+      body: |
+        Update flowzonify from 0.0.0 to 0.4.21
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.33
+  title: ""
+  date: 2026-10-21T19:57:00.124Z
+- commits:
     - subject: Update pre-commit hook MarketSquare/robotframework-robocop to v9.1.1
       hash: 1ca4e09c973e7cdbdbd135cafbfdfaacf05c3c1d
       body: |

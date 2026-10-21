@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v3.0.33
+## (2026-10-21)
+
+* Update dependency flowzonify to v0.4.21 [balena-renovate[bot]]
+
 # v3.0.32
 ## (2026-10-21)
 
