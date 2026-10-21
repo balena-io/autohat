@@ -37,10 +37,13 @@ ENV VIRTUAL_ENV=/opt/venv
 
 ENV PATH="${VIRTUAL_ENV}/bin:/usr/local/bin:${PATH}"
 
-# https://repology.org/project/qemu/versions
-# https://packages.debian.org/trixie/source/qemu
-# renovate: datasource=repology depName=debian_13/qemu-utils versioning=loose
-ARG QEMU_VERSION=1:10.0.8+ds-0+deb13u1+b1
+# Debian keeps only the latest version per suite, so exact apt pins break on
+# every point release. The trixie base image bounds qemu to 10.0.x.
+# https://packages.debian.org/trixie/qemu-utils
+# Fail the build if a base-image change moves qemu to a new major version.
+ARG QEMU_MAJOR=10
+
+SHELL ["/bin/bash", "-eo", "pipefail", "-c"]
 
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -60,13 +63,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     openssh-client \
     ovmf \
     qemu-efi-aarch64 \
-    qemu-system-arm=${QEMU_VERSION} \
-    qemu-system-x86=${QEMU_VERSION} \
-    qemu-utils=${QEMU_VERSION} \
+    qemu-system-arm \
+    qemu-system-x86 \
+    qemu-utils \
     rsync \
     systemd \
     zlib1g \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && qemu-system-x86_64 --version | grep "version ${QEMU_MAJOR}\." >/dev/null
 
 COPY --from=cli-build /opt/balena /opt/balena-cli
 ENV PATH="/opt/balena-cli/bin:${PATH}"
