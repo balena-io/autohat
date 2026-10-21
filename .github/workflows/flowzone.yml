@@ -3,8 +3,7 @@ on:
   pull_request:
     types: [opened, synchronize, closed]
     branches: [main, master]
-  pull_request_target:
-    types: [opened, synchronize, closed]
+  push:
     branches: [main, master]
 
 # Base permissions required by Flowzone
@@ -32,15 +31,7 @@ permissions:
 jobs:
   flowzone:
     name: Flowzone
-    if: |
-      (
-        github.event.pull_request.head.repo.full_name == github.repository &&
-        github.event_name == 'pull_request'
-      ) || (
-        github.event.pull_request.head.repo.full_name != github.repository &&
-        github.event_name == 'pull_request_target'
-      )
-    uses: product-os/flowzone/.github/workflows/flowzone.yml@master
+    uses: product-os/flowzone/.github/workflows/flowzone.yml@master # flowzonify 0.4.21
     secrets: inherit
     with:
       docker_images: |
