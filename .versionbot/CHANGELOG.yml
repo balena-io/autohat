@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update pre-commit hook MarketSquare/robotframework-robocop to v9.1.1
+      hash: 1ca4e09c973e7cdbdbd135cafbfdfaacf05c3c1d
+      body: |
+        Update MarketSquare/robotframework-robocop from 9.1.0 to 9.1.1
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.32
+  title: ""
+  date: 2026-10-21T19:01:51.714Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v25.2.7
       hash: 94be3fc3c53d477bfb967ef35a3470040368d56a
       body: |
