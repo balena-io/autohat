@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v3.0.34
+## (2026-10-21)
+
+* Update python Docker tag to v3.15 [balena-renovate[bot]]
+
 # v3.0.33
 ## (2026-10-21)
 

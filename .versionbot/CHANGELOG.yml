@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update python Docker tag to v3.15
+      hash: 28d72c01dd8c1de22d2b895f56893f4919ad9fe6
+      body: |
+        Update python from 3.14 to 3.15
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.34
+  title: ""
+  date: 2026-10-21T21:01:00.039Z
+- commits:
     - subject: Update dependency flowzonify to v0.4.21
       hash: d23d9891f736e4a1ad3064ac5c01a1d3523879d6
       body: |
