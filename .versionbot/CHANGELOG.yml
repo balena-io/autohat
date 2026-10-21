@@ -1,4 +1,25 @@
 - commits:
+    - subject: Unpin Debian qemu packages
+      hash: 697384c21796bce68f1bf76fc30c31b2b32ab008
+      body: |
+        Debian keeps only the latest version per suite, so the exact pin broke
+        the build on every trixie point release (1:10.0.8+b1 is gone, 10.0.13
+        is current). The digest-pinned trixie base image already bounds qemu to
+        10.0.x.
+
+        A build-time check on qemu-system-x86_64 --version fails the build if a
+        base image change moves qemu off major version QEMU_MAJOR.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+  version: 3.0.27
+  title: ""
+  date: 2026-10-21T14:13:05.942Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v25.1.6
       hash: 36307f8fce097cb3d66de9b08f8a58b5dfa31a94
       body: |

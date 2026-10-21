@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v3.0.27
+## (2026-10-21)
+
+* Unpin Debian qemu packages [Kyle Harding]
+
 # v3.0.26
 ## (2026-05-15)
 
