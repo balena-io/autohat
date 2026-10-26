@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update python:3.15-slim-trixie Docker digest to 2fb2248
+      hash: 46cf82975d6021e2e1fe06a1b7024f70ee5995c5
+      body: |
+        Update python
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.43
+  title: ""
+  date: 2026-10-26T23:57:03.386Z
+- commits:
     - subject: Update dependency pylibftdi to v0.24.2
       hash: 0b5e8117825a5b0d8739fce292c505d990386e2c
       body: |
