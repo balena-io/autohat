@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update python:3.15-slim-trixie Docker digest to 94d3426
+      hash: 05b67c713e62e61ba9819f5d7f2ae63d620ea42e
+      body: |
+        Update python
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.46
+  title: ""
+  date: 2026-10-28T08:58:12.728Z
+- commits:
     - subject: Update python:3.15-slim-trixie Docker digest to 80cd828
       hash: 0177037bde5e69fb0c391b6eb4c0c7de7bbc7726
       body: |
