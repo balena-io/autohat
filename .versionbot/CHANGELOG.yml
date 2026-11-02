@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency balena-io/balena-cli to v25.2.8
+      hash: 8a0e20fc0457d137af07364d2d6a17c58784e138
+      body: |
+        Update balena-io/balena-cli from 25.2.7 to 25.2.8
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.49
+  title: ""
+  date: 2026-11-02T23:35:34.122Z
+- commits:
     - subject: Update dependency robotframework to v7.5.1
       hash: 5649c9ef0d51d96cb92c48203b2d6380ac68a61a
       body: |
