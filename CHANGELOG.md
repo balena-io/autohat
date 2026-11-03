@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v3.0.50
+## (2026-11-03)
+
+* Update dependency balena-io/balena-cli to v25.2.9 [balena-renovate[bot]]
+
 # v3.0.49
 ## (2026-11-02)
 
