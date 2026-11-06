@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v3.0.54
+## (2026-11-06)
+
+* Update alpine:3.24 Docker digest to 3f4d6b3 [balena-renovate[bot]]
+
 # v3.0.53
 ## (2026-11-05)
 
