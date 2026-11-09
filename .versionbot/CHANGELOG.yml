@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency balena-io/balena-cli to v25.2.11
+      hash: 3861efbeef7c03bc6423be2638619f64ba817835
+      body: |
+        Update balena-io/balena-cli from 25.2.9 to 25.2.11
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.57
+  title: ""
+  date: 2026-11-09T20:55:17.864Z
+- commits:
     - subject: Update alpine:3.24 Docker digest to f59abe6
       hash: f5b11afc47635c6ff2790d7b451e51c7e7cb9f11
       body: |
