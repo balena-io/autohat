@@ -5,7 +5,7 @@ FROM alpine:3.24@sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5
 ARG TARGETARCH
 
 # renovate: datasource=github-releases depName=balena-io/balena-cli
-ARG BALENA_CLI_VERSION=v25.2.12
+ARG BALENA_CLI_VERSION=v25.2.13
 
 WORKDIR /opt
 
