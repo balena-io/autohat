@@ -5,6 +5,11 @@ Change log
 
 * Update dependency balena-io/balena-cli to v22 [balena-renovate[bot]]
 
+# v3.0.62
+## (2026-11-15)
+
+* Update pre-commit hook MarketSquare/robotframework-robocop to v9.1.2 [balena-renovate[bot]]
+
 # v3.0.61
 ## (2026-11-13)
 
