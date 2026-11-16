@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency balena-io/balena-cli to v25.2.16
+      hash: efd465e9641e06663d9fac2c0c21179fa289cf16
+      body: |
+        Update balena-io/balena-cli from 25.2.15 to 25.2.16
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.64
+  title: ""
+  date: 2026-11-16T14:15:10.235Z
+- commits:
     - subject: Update pre-commit hook MarketSquare/robotframework-robocop to v9.4.0
       hash: faa194eaae9c6a29a8d7d347e81e3bed5e65a356
       body: |
