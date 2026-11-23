@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update dependency balena-io/balena-cli to v25.2.38
+      hash: e2ed1e3c75edb0f63da625f303a1a0a695adab98
+      body: |
+        Update balena-io/balena-cli from 25.2.37 to 25.2.38
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.86
+  title: ""
+  date: 2026-11-23T18:55:03.290Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v25.2.37
       hash: 63fa9f3a1331be32e521b9a7a87619497f58dfd1
       body: |
