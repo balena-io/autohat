@@ -1,4 +1,17 @@
 - commits:
+    - subject: Update python:3.15-slim-trixie Docker digest to 08a4c22
+      hash: c7f5ddaaa1edaae928b5b5640a11f365f97cb2c9
+      body: |
+        Update python
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: balena-renovate[bot]
+      nested: []
+  version: 3.0.95
+  title: ""
+  date: 2026-11-28T00:05:46.869Z
+- commits:
     - subject: Update dependency balena-io/balena-cli to v25.2.45
       hash: 9b943a949472389d57e2dc1797db2ac72fd98935
       body: |
